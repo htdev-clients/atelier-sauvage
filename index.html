@@ -46,7 +46,22 @@
 
   <body>
     <header>
-      <div>
+      <img
+        src="images/facade-2000.jpg"
+        srcset="
+          images/facade-480.jpg 480w,
+          images/facade-800.jpg 800w,
+          images/facade-2000.jpg 2000w
+        "
+        sizes="
+          (max-width: 480px) 100vw,
+          (max-width: 768px) 100vw,
+          100vw"
+        alt="Atelier Sauvage"
+        class="header-img"
+      />
+      <div class="header-overlay"></div>
+      <div class="header-content">
         <h1>Atelier Sauvage</h1>
         <p>Objets vintage, design & esprit atelier à Heusy</p>
       </div>

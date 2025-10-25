@@ -1,283 +1,290 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap");
 
 body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    color: #2e2e2e;
-    background-color: #faf9f6;
-    line-height: 1.6;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  color: #2e2e2e;
+  background-color: #faf9f6;
+  line-height: 1.6;
 }
 
 header {
-    background: url('images/IMG_8723R.JPG') center/cover no-repeat;
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-    position: relative;
+  position: relative;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
 }
 
-header::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+.header-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* keeps the same cover effect */
+  z-index: -2; /* behind everything */
 }
 
-header div {
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-    padding: 20px;
+.header-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1; /* above image, below text */
+}
+
+.header-content {
+  position: relative;
+  z-index: 1; /* above overlay */
+  max-width: 800px;
+  padding: 20px;
 }
 
 h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3em;
-    margin-bottom: 0.3em;
+  font-family: "Playfair Display", serif;
+  font-size: 3em;
+  margin-bottom: 0.3em;
 }
 
 h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
-    margin-bottom: 0.5em;
+  font-family: "Playfair Display", serif;
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
 }
 
 p {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 .section {
-    padding: 0px 20px;
-    max-width: 1100px;
-    margin: 150px auto;
+  padding: 0px 20px;
+  max-width: 1100px;
+  margin: 150px auto;
 }
 
 .intro {
-    text-align: center;
+  text-align: center;
 }
 
 .intro p {
-    max-width: 700px;
-    margin: 20px auto;
-    font-size: 1.1em;
+  max-width: 700px;
+  margin: 20px auto;
+  font-size: 1.1em;
 }
 
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .gallery img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 6px;
-    cursor: zoom-in;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: zoom-in;
 }
 
 .visit {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
 }
 
 .visit-info {
-    flex: 1 1 300px;
+  flex: 1 1 300px;
 }
 
 .horaire-list {
-    list-style: none;
-    margin: 0;
-    padding-left: 30px;
+  list-style: none;
+  margin: 0;
+  padding-left: 30px;
 }
 
 .horaire-list li::before {
-    content: "• ";
-    color: #555;
+  content: "• ";
+  color: #555;
 }
 
 .map {
-    flex: 1 1 400px;
-    height: 300px;
-    border-radius: 6px;
-    overflow: hidden;
+  flex: 1 1 400px;
+  height: 300px;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .map iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 footer {
-    background-color: #222;
-    color: #ccc;
-    padding: 20px 40px;
-    font-size: 0.9em;
+  background-color: #222;
+  color: #ccc;
+  padding: 20px 40px;
+  font-size: 0.9em;
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .footer-left {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .footer-left a {
-    color: #ccc;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.2s ease;
+  color: #ccc;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
 }
 
 .footer-left a:hover {
-    color: #fff;
+  color: #fff;
 }
 
 .footer-left a svg path {
-    fill: #ccc;
-    transition: fill 0.2s ease;
+  fill: #ccc;
+  transition: fill 0.2s ease;
 }
 
 .footer-left a:hover svg path {
-    fill: #fff;
+  fill: #fff;
 }
 
-
 .footer-right p {
-    margin: 0;
-    font-size: 0.9em;
-    color: #888;
+  margin: 0;
+  font-size: 0.9em;
+  color: #888;
 }
 
 .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    object-fit: contain;
-    cursor: zoom-out;
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+  cursor: zoom-out;
 }
 
 .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: color 0.2s ease;
-    z-index: 1001;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  z-index: 1001;
 }
 
 .close-btn:hover {
-    color: #ccc;
+  color: #ccc;
 }
 
 .nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 0.2em 0.4em;
-    line-height: 1;
-    transition: color 0.2s ease, transform 0.1s ease;
-    z-index: 1001;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.2em 0.4em;
+  line-height: 1;
+  transition: color 0.2s ease, transform 0.1s ease;
+  z-index: 1001;
 }
 
 .nav-btn:hover {
-    color: #ccc;
-    transform: translateY(-50%) scale(1.1);
+  color: #ccc;
+  transform: translateY(-50%) scale(1.1);
 }
 
 .nav-btn.prev {
-    left: 25px;
+  left: 25px;
 }
 
 .nav-btn.next {
-    right: 25px;
+  right: 25px;
 }
 
 @media (max-width: 768px) {
+  /* tablets */
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+  }
 
-    /* tablets */
-    .gallery {
-        grid-template-columns: 1fr 1fr;
-    }
+  .visit-info,
+  .map {
+    flex: 1 1 100%;
+    height: auto;
+    /* map adjusts automatically */
+  }
 
-    .visit-info,
-    .map {
-        flex: 1 1 100%;
-        height: auto;
-        /* map adjusts automatically */
-    }
-
-    .map {
-        height: 250px;
-        /* smaller on phones */
-    }
+  .map {
+    height: 250px;
+    /* smaller on phones */
+  }
 }
 
 @media (max-width: 480px) {
+  /* phones */
+  .gallery {
+    grid-template-columns: 1fr;
+  }
 
-    /* phones */
-    .gallery {
-        grid-template-columns: 1fr;
-    }
+  .gallery img {
+    height: auto;
+    /* keep aspect ratio */
+  }
 
-    .gallery img {
-        height: auto;
-        /* keep aspect ratio */
-    }
+  header {
+    height: 60vh;
+    padding: 0 10px;
+  }
 
-    header {
-        height: 60vh;
-        padding: 0 10px;
-    }
+  h1 {
+    font-size: 2em;
+  }
 
-    h1 {
-        font-size: 2em;
-    }
+  h2 {
+    font-size: 1.4em;
+  }
 
-    h2 {
-        font-size: 1.4em;
-    }
-
-    .footer-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
 }
