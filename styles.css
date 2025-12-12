@@ -282,6 +282,12 @@ footer {
   right: 25px;
 }
 
+/* --- Ajout pour les sous-pages (Mentions légales) --- */
+.subpage-header {
+  height: 40vh; /* Hauteur réduite par rapport aux 90vh de l'accueil */
+  min-height: 300px;
+}
+
 @media (max-width: 768px) {
   /* tablets */
   .gallery {
