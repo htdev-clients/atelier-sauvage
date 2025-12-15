@@ -382,3 +382,122 @@ footer {
 .holiday-break p {
   margin: 5px 0;
 }
+
+
+/* --- Instagram Card Styles --- */
+.insta-card {
+  background: white;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  width: 100%;
+  max-width: 470px;
+  margin: 0 auto; /* Centered */
+  display: none; /* Hidden until loaded */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  text-align: left; /* Ensure text inside card is left-aligned */
+}
+
+.insta-header {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #efefef;
+}
+.profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 1px solid #dbdbdb;
+}
+.username {
+  font-weight: 600;
+  font-size: 14px;
+  color: #262626;
+  text-decoration: none;
+}
+.username:hover { text-decoration: underline; }
+
+.media-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.insta-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Specific nav buttons for Instagram card */
+.media-container .nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s;
+  color: #262626; /* Reset color from main site style */
+  font-size: 16px;
+  padding: 0;
+}
+.media-container .nav-btn:hover { background: rgba(255, 255, 255, 1); transform: translateY(-50%); }
+.nav-prev { left: 10px; }
+.nav-next { right: 10px; }
+
+.dots-container {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  z-index: 2;
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%;
+}
+.dot.active { background: white; }
+
+.insta-footer { padding: 12px; }
+.icons { display: flex; gap: 16px; margin-bottom: 8px; }
+.icon { width: 24px; height: 24px; cursor: pointer; }
+.icon:hover { opacity: 0.6; }
+
+.likes-count {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.caption-section { font-size: 14px; line-height: 1.4; }
+.caption-username { font-weight: 600; margin-right: 5px; }
+
+.timestamp {
+  color: #8e8e8e;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-top: 8px;
+}
