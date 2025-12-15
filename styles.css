@@ -479,16 +479,6 @@ footer {
 .dot.active { background: white; }
 
 .insta-footer { padding: 12px; }
-.icons { display: flex; gap: 16px; margin-bottom: 8px; }
-.icon { width: 24px; height: 24px; cursor: pointer; }
-.icon:hover { opacity: 0.6; }
-
-.likes-count {
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 8px;
-  display: block;
-}
 
 .caption-section { font-size: 14px; line-height: 1.4; }
 .caption-username { font-weight: 600; margin-right: 5px; }
@@ -500,4 +490,78 @@ footer {
   letter-spacing: 0.5px;
   display: block;
   margin-top: 8px;
+}
+
+/* --- 1. Layout Improvements --- */
+.instagram-feed {
+    background-color: #faf9f6; /* Off-white/Vintage paper tone */
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.insta-section-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.insta-section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-family: serif; /* Matches your vintage vibe */
+}
+
+.insta-section-header p {
+    color: #666;
+    font-style: italic;
+}
+
+/* --- 2. The Card Shadow & Look --- */
+.insta-card {
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    /* Soft shadow to lift it off the page */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+}
+
+/* --- 3. Smooth Transition Logic --- */
+.media-container {
+    position: relative;
+    overflow: hidden;
+    background: #f0f0f0; /* Placeholder color while loading */
+    min-height: 300px; /* Prevents collapse */
+}
+
+.insta-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* The magic happens here: */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* JS will toggle this class to create the fade effect */
+.insta-image.hidden {
+    opacity: 0.4; /* Or 0 for full fade out */
+}
+
+/* --- 4. Bottom Button --- */
+.insta-link .btn-instagram {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #333;
+    padding-bottom: 2px;
+    font-size: 0.9rem;
+    transition: opacity 0.3s;
+}
+.insta-link .btn-instagram:hover {
+    opacity: 0.6;
 }

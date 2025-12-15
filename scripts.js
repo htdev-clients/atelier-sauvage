@@ -3,7 +3,7 @@
 /* --- LIGHTBOX LOGIC --- */
 document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById("lightbox");
-    if (!lightbox) return; // Guard clause in case elements are missing
+    if (!lightbox) return;
 
     const lightboxImg = lightbox.querySelector("img");
     const closeBtn = lightbox.querySelector(".close-btn");
@@ -69,8 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!instaCard) return;
 
         try {
-            // UPDATED URL: Now fetches from /instagram instead of /api/instagram
-            const response = await fetch('/instagram');
+            const response = await fetch('/instagram'); // Calls your Cloudflare Function
             if (!response.ok) throw new Error("API Error");
             
             const data = await response.json();
@@ -80,15 +79,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (err) {
             console.error("Insta Feed Error:", err);
+            // Hide the card if loading fails so it doesn't look broken
+            instaCard.style.display = 'none';
         }
     }
 
     function renderCard(user, post) {
-        document.getElementById('user-pic').src = user.profile_picture_url || 'https://via.placeholder.com/32';
-        document.getElementById('user-name').innerText = user.username;
-        document.getElementById('user-name').href = `https://instagram.com/${user.username}`;
-        document.getElementById('caption-username').innerText = user.username;
+        // User Info
+        const userPic = document.getElementById('user-pic');
+        // Basic API doesn't return profile pic, so we use placeholder
+        if(userPic) userPic.src = 'https://via.placeholder.com/32';
+        
+        const userNameLink = document.getElementById('user-name');
+        if(userNameLink) {
+            userNameLink.innerText = user.username;
+            userNameLink.href = `https://instagram.com/${user.username}`;
+        }
 
+        const captionUser = document.getElementById('caption-username');
+        if(captionUser) captionUser.innerText = user.username;
+
+        // Album Logic
         currentAlbum = [];
         if (post.media_type === 'CAROUSEL_ALBUM' && post.children) {
             post.children.data.forEach(child => {
@@ -98,22 +109,30 @@ document.addEventListener('DOMContentLoaded', () => {
             currentAlbum.push(post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url);
         }
 
+        // Reset index and render
         currentIndex = 0;
-        updateImageDisplay();
+        updateImageDisplay(false);
 
-        document.getElementById('post-link').href = post.permalink;
-        document.getElementById('like-count').innerText = `${post.like_count || 0} likes`;
-        document.getElementById('caption-text').innerText = post.caption || "";
+        // Footer Info
+        const postLink = document.getElementById('post-link');
+        if(postLink) postLink.href = post.permalink;
 
-        const date = new Date(post.timestamp);
-        const now = new Date();
-        const diffDays = Math.floor(Math.abs(now - date) / (1000 * 60 * 60 * 24));
-        document.getElementById('timestamp').innerText = diffDays > 0 ? `${diffDays} DAYS AGO` : "TODAY";
+        const captionText = document.getElementById('caption-text');
+        if(captionText) captionText.innerText = post.caption || "";
+
+        // Timestamp
+        const timestampEl = document.getElementById('timestamp');
+        if(timestampEl) {
+            const date = new Date(post.timestamp);
+            const now = new Date();
+            const diffDays = Math.floor(Math.abs(now - date) / (1000 * 60 * 60 * 24));
+            timestampEl.innerText = diffDays > 0 ? `${diffDays} DAYS AGO` : "TODAY";
+        }
         
-        document.getElementById('insta-card').style.display = 'block';
+        instaCard.style.display = 'block';
     }
 
-    function updateImageDisplay() {
+    function updateImageDisplay(useTransition = true) {
         const imgElement = document.getElementById('current-img');
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
@@ -121,24 +140,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if(!imgElement) return;
 
-        imgElement.src = currentAlbum[currentIndex];
+        const performUpdate = () => {
+            if (currentAlbum.length > 1) {
+                btnPrev.style.opacity = currentIndex > 0 ? '1' : '0';
+                btnPrev.style.pointerEvents = currentIndex > 0 ? 'auto' : 'none';
 
-        if (currentAlbum.length > 1) {
-            btnPrev.style.opacity = currentIndex > 0 ? '1' : '0';
-            btnPrev.style.pointerEvents = currentIndex > 0 ? 'auto' : 'none';
+                btnNext.style.opacity = currentIndex < currentAlbum.length - 1 ? '1' : '0';
+                btnNext.style.pointerEvents = currentIndex < currentAlbum.length - 1 ? 'auto' : 'none';
 
-            btnNext.style.opacity = currentIndex < currentAlbum.length - 1 ? '1' : '0';
-            btnNext.style.pointerEvents = currentIndex < currentAlbum.length - 1 ? 'auto' : 'none';
-
-            let dotsHtml = '';
-            for (let i = 0; i < currentAlbum.length; i++) {
-                dotsHtml += `<div class="dot ${i === currentIndex ? 'active' : ''}"></div>`;
+                let dotsHtml = '';
+                for (let i = 0; i < currentAlbum.length; i++) {
+                    dotsHtml += `<div class="dot ${i === currentIndex ? 'active' : ''}"></div>`;
+                }
+                dotsContainer.innerHTML = dotsHtml;
+            } else {
+                btnPrev.style.opacity = '0';
+                btnNext.style.opacity = '0';
+                dotsContainer.innerHTML = '';
             }
-            dotsContainer.innerHTML = dotsHtml;
+        };
+
+        if (useTransition) {
+            imgElement.classList.add('hidden');
+            setTimeout(() => {
+                imgElement.src = currentAlbum[currentIndex];
+                performUpdate();
+                imgElement.onload = () => {
+                    imgElement.classList.remove('hidden');
+                };
+                setTimeout(() => { imgElement.classList.remove('hidden'); }, 50);
+            }, 300);
         } else {
-            btnPrev.style.opacity = '0';
-            btnNext.style.opacity = '0';
-            dotsContainer.innerHTML = '';
+            imgElement.src = currentAlbum[currentIndex];
+            imgElement.classList.remove('hidden');
+            performUpdate();
         }
     }
 
@@ -147,13 +182,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnPrev) {
         btnPrev.addEventListener('click', () => {
-            if (currentIndex > 0) { currentIndex--; updateImageDisplay(); }
+            if (currentIndex > 0) { 
+                currentIndex--; 
+                updateImageDisplay(true); 
+            }
         });
     }
 
     if (btnNext) {
         btnNext.addEventListener('click', () => {
-            if (currentIndex < currentAlbum.length - 1) { currentIndex++; updateImageDisplay(); }
+            if (currentIndex < currentAlbum.length - 1) { 
+                currentIndex++; 
+                updateImageDisplay(true); 
+            }
         });
     }
 
