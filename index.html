@@ -51,8 +51,8 @@
         "email": "ateliersauvageheusy@gmail.com",
         "url": "https://ateliersauvageheusy.be/",
         "openingHours": [
-          "Thu 10:00-18:00",
-          "Fri 10:00-18:00",
+          "Thu 13:30-17:30",
+          "Fri 13:30-17:30",
           "Sat 10:00-17:00"
         ],
         "sameAs": ["https://www.instagram.com/ateliersauvage_heusy/"]
@@ -240,42 +240,40 @@
     </section>
 
     <section class="section instagram-feed">
+      <div class="insta-section-header">
+        <h2>L'Atelier sur Instagram</h2>
+        <p>Suivez nos arrivages et inspirations au quotidien</p>
+      </div>
 
       <div class="insta-card" id="insta-card">
         <div class="insta-header">
-            <img id="user-pic" class="profile-pic" src="" alt="Profile">
-            <a id="user-name" class="username" href="#" target="_blank">...</a>
+          <img id="user-pic" class="profile-pic" src="" alt="Profile">
+          <a id="user-name" class="username" href="#" target="_blank">...</a>
         </div>
 
         <div class="media-container">
-            <button class="nav-btn nav-prev" id="btn-prev" aria-label="Previous image">❮</button>
-            
-            <a id="post-link" href="#" target="_blank">
-                <img id="current-img" class="insta-image" src="" alt="Post">
-            </a>
+          <button class="nav-btn nav-prev" id="btn-prev" aria-label="Previous image">❮</button>
 
-            <button class="nav-btn nav-next" id="btn-next" aria-label="Next image">❯</button>
-            
-            <div class="dots-container" id="dots-container"></div>
+          <a id="post-link" href="#" target="_blank">
+            <img id="current-img" class="insta-image fade-element" src="" alt="Post">
+          </a>
+
+          <button class="nav-btn nav-next" id="btn-next" aria-label="Next image">❯</button>
+          <div class="dots-container" id="dots-container"></div>
         </div>
 
         <div class="insta-footer">
-            <div class="icons">
-                <svg class="icon" aria-label="Like" fill="#262626" viewBox="0 0 48 48"><path d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 15.1-17.8 21.6l-2.3 1.2-2.3-1.2C10.7 32.7 3 24.5 3 17.6c0-6.3 4.7-11.5 10.4-11.5 3.3 0 6.4 1.7 8.5 4.7a10.2 10.2 0 0 1 8.5-4.7z" stroke="#262626" stroke-width="3" fill="none"/></svg>
-                <svg class="icon" aria-label="Comment" fill="#262626" viewBox="0 0 48 48"><path clip-rule="evenodd" d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z" fill-rule="evenodd"/></svg>
-                <svg class="icon" aria-label="Share Post" fill="#262626" viewBox="0 0 48 48"><path d="M47.8 3.8c-.3-.5-.8-.8-1.3-.8h-45C.9 3.1.3 3.5.1 4S0 5.2.4 5.7l15.9 15.6 5.5 22.6c.1.6.6 1 1.2 1.1h.2c.5 0 1-.3 1.3-.7l23.2-39c.4-.4.4-1 .1-1.5zM5.2 6.1h35.5L18 18.7 5.2 6.1zm18.7 33.6l-4.4-18.4L42.4 8.6 23.9 39.7z"></path></svg>
-            </div>
-
-            <span class="likes-count" id="like-count">0 likes</span>
-
-            <div class="caption-section">
-                <span class="caption-username" id="caption-username">...</span>
-                <span id="caption-text"></span>
-            </div>
-            
-            <span class="timestamp" id="timestamp">JUST NOW</span>
+          <div class="caption-section">
+            <span class="caption-username" id="caption-username">...</span>
+            <span id="caption-text"></span>
+          </div>
+          <span class="timestamp" id="timestamp">JUST NOW</span>
         </div>
-        <div id="error-msg" style="color:red; display:none; text-align:center; padding:10px;"></div>
+      </div>
+
+      <div class="insta-link">
+        <a href="https://www.instagram.com/ateliersauvage_heusy/" target="_blank" class="btn-instagram">Voir tout le
+          feed →</a>
       </div>
     </section>
   </main>
