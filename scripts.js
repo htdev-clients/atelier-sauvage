@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
 
     async function loadLatestPost() {
-        // If the element doesn't exist on this page, stop immediately
         if (!instaCard) return;
 
         try {
@@ -81,15 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (err) {
             console.error("Insta Feed Error:", err);
-            // Now this works because 'instaCard' is in the shared scope
             instaCard.style.display = 'none';
         }
     }
 
     function renderCard(user, post) {
         // User Info
-        const userPic = document.getElementById('user-pic');
-        if(userPic) userPic.src = 'https://via.placeholder.com/32';
+        // Note: We removed the code that overwrites 'user-pic' here.
+        // The image is now controlled entirely by your index.html
         
         const userNameLink = document.getElementById('user-name');
         if(userNameLink) {
@@ -130,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timestampEl.innerText = diffDays > 0 ? `${diffDays} DAYS AGO` : "TODAY";
         }
         
-        // This is where it was crashing before! Now it works.
         instaCard.style.display = 'block';
     }
 
