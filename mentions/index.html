@@ -11,11 +11,14 @@
 
   <body>
     <header class="subpage-header">
-      <img
-        src="/images/facade-2000.jpg"
-        alt="Atelier Sauvage"
-        class="header-img"
-      />
+      <img src="images/facade-2000.jpg" srcset="
+          images/facade-480.jpg   480w,
+          images/facade-800.jpg   800w,
+          images/facade-2000.jpg 2000w
+        " sizes="
+          (max-width: 480px) 100vw,
+          (max-width: 768px) 100vw,
+          100vw" alt="Façade du magasin Atelier Sauvage" class="header-img" fetchpriority="high" />
       <div class="header-overlay"></div>
       <div class="header-content">
         <h1>Mentions Légales</h1>
@@ -45,11 +48,11 @@
         <h2>2. Hébergement</h2>
         <p>
           Ce site est hébergé par :<br />
-          <strong>Netlify Inc.</strong><br />
-          510 Townsend Street<br />
-          San Francisco, CA 94103<br />
+          <strong>Cloudflare, Inc.</strong><br />
+          101 Townsend St.<br />
+          San Francisco, CA 94107<br />
           États-Unis<br />
-          <a href="https://www.netlify.com" target="_blank">https://www.netlify.com</a>
+          <a href="https://www.cloudflare.com" target="_blank">https://www.cloudflare.com</a>
         </p>
 
         <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ddd;">
