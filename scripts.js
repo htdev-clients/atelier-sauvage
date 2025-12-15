@@ -61,15 +61,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* --- INSTAGRAM INTEGRATION --- */
 (function() {
+    // 1. Define these at the top so ALL functions can see them
+    const instaCard = document.getElementById('insta-card');
     let currentAlbum = [];
     let currentIndex = 0;
 
     async function loadLatestPost() {
-        const instaCard = document.getElementById('insta-card');
+        // If the element doesn't exist on this page, stop immediately
         if (!instaCard) return;
 
         try {
-            const response = await fetch('/instagram'); // Calls your Cloudflare Function
+            const response = await fetch('/instagram'); 
             if (!response.ok) throw new Error("API Error");
             
             const data = await response.json();
@@ -79,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (err) {
             console.error("Insta Feed Error:", err);
-            // Hide the card if loading fails so it doesn't look broken
+            // Now this works because 'instaCard' is in the shared scope
             instaCard.style.display = 'none';
         }
     }
@@ -87,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCard(user, post) {
         // User Info
         const userPic = document.getElementById('user-pic');
-        // Basic API doesn't return profile pic, so we use placeholder
         if(userPic) userPic.src = 'https://via.placeholder.com/32';
         
         const userNameLink = document.getElementById('user-name');
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timestampEl.innerText = diffDays > 0 ? `${diffDays} DAYS AGO` : "TODAY";
         }
         
+        // This is where it was crashing before! Now it works.
         instaCard.style.display = 'block';
     }
 
