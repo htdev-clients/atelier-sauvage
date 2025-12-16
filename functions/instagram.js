@@ -1,8 +1,9 @@
 // functions/instagram.js
 
 export async function onRequest(context) {
-    const token = context.env.INSTAGRAM_TOKEN; // Set this in Cloudflare Pages settings
-    
+    // const token = context.env.INSTAGRAM_TOKEN;
+    let token = await context.env.ATELIER_STORE.get("INSTAGRAM_TOKEN");
+
     if (!token) {
         return new Response(JSON.stringify({ error: "Token not configured" }), { status: 500 });
     }
