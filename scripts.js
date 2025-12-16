@@ -9,50 +9,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = lightbox.querySelector(".close-btn");
     const prevBtn = lightbox.querySelector(".prev");
     const nextBtn = lightbox.querySelector(".next");
-    const images = Array.from(document.querySelectorAll(".gallery img"));
+    
+    let currentGroupImages = []; 
     let currentIndex = 0;
 
-    const openLightbox = (index) => {
-        currentIndex = index;
-        lightboxImg.src = images[currentIndex].src;
-        // Tailwind/Custom class toggle for display
+    // Helper: Find all gallery sections
+    const gallerySections = document.querySelectorAll('.gallery');
+    
+    gallerySections.forEach(section => {
+        const rawImgs = Array.from(section.querySelectorAll('img'));
+        
+        rawImgs.forEach((img) => {
+            img.addEventListener("click", (e) => {
+                // 1. Calculate visual positions
+                const positionedImages = rawImgs.map(image => {
+                    const rect = image.getBoundingClientRect();
+                    return { image, rect };
+                });
+
+                // 2. Sort visually: Top-to-bottom, then Left-to-right
+                positionedImages.sort((a, b) => {
+                    const tolerance = 15;
+                    const diffY = a.rect.top - b.rect.top;
+                    if (Math.abs(diffY) > tolerance) return diffY;
+                    return a.rect.left - b.rect.left;
+                });
+
+                // 3. Update group and index
+                currentGroupImages = positionedImages.map(p => p.image);
+                currentIndex = currentGroupImages.indexOf(img);
+
+                openLightbox();
+            });
+        });
+    });
+
+    const openLightbox = () => {
+        if (currentIndex < 0 || currentIndex >= currentGroupImages.length) return;
+        lightboxImg.src = currentGroupImages[currentIndex].src;
         lightbox.classList.add('active'); 
     };
 
     const showPrev = () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        lightboxImg.src = images[currentIndex].src;
+        if (currentGroupImages.length === 0) return;
+        currentIndex = (currentIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
+        lightboxImg.src = currentGroupImages[currentIndex].src;
     };
 
     const showNext = () => {
-        currentIndex = (currentIndex + 1) % images.length;
-        lightboxImg.src = images[currentIndex].src;
+        if (currentGroupImages.length === 0) return;
+        currentIndex = (currentIndex + 1) % currentGroupImages.length;
+        lightboxImg.src = currentGroupImages[currentIndex].src;
     };
 
-    images.forEach((img, index) => {
-        img.addEventListener("click", () => openLightbox(index));
-    });
-
-    closeBtn.addEventListener("click", () => {
-        lightbox.classList.remove('active');
-    });
-
+    closeBtn.addEventListener("click", () => lightbox.classList.remove('active'));
     lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) lightbox.classList.remove('active');
     });
-
-    prevBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        showPrev();
-    });
-
-    nextBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        showNext();
-    });
+    prevBtn.addEventListener("click", (e) => { e.stopPropagation(); showPrev(); });
+    nextBtn.addEventListener("click", (e) => { e.stopPropagation(); showNext(); });
 
     document.addEventListener("keydown", (e) => {
-        // Check if lightbox is active using the class we defined in CSS
         if (lightbox.classList.contains('active')) {
             if (e.key === "Escape") lightbox.classList.remove('active');
             if (e.key === "ArrowLeft") showPrev();
@@ -66,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const instaCard = document.getElementById('insta-card');
     let currentAlbum = [];
     let currentIndex = 0;
-    let isAnimating = false; // Prevent double clicks during transition
+    let isAnimating = false;
 
     async function loadLatestPost() {
         if (!instaCard) return;
@@ -74,9 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/instagram'); 
             if (!response.ok) throw new Error("API Error");
-            
             const data = await response.json();
-            
             if (data.user && data.post) {
                 renderCard(data.user, data.post);
             }
@@ -87,17 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderCard(user, post) {
-        // User Info logic
+        // SECURITY: Add rel="noopener noreferrer"
         const userNameLink = document.getElementById('user-name');
         if(userNameLink) {
             userNameLink.innerText = user.username;
             userNameLink.href = `https://instagram.com/${user.username}`;
+            userNameLink.rel = "noopener noreferrer"; 
         }
 
         const captionUser = document.getElementById('caption-username');
         if(captionUser) captionUser.innerText = user.username;
 
-        // Album Logic
         currentAlbum = [];
         if (post.media_type === 'CAROUSEL_ALBUM' && post.children) {
             post.children.data.forEach(child => {
@@ -107,20 +122,22 @@ document.addEventListener('DOMContentLoaded', () => {
             currentAlbum.push(post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url);
         }
 
-        // Reset index and render initial state
         currentIndex = 0;
         updateUIControls();
         
-        // Initial Image Load (No transition)
         const imgElement = document.getElementById('current-img');
         if(imgElement && currentAlbum.length > 0) {
             imgElement.src = currentAlbum[0];
+            // PERFORMANCE: Add async decoding
+            imgElement.decoding = "async"; 
             imgElement.classList.remove('hidden');
         }
 
-        // Footer Info
         const postLink = document.getElementById('post-link');
-        if(postLink) postLink.href = post.permalink;
+        if(postLink) {
+            postLink.href = post.permalink;
+            postLink.rel = "noopener noreferrer";
+        }
 
         const captionText = document.getElementById('caption-text');
         if(captionText) captionText.innerText = post.caption || "";
@@ -161,53 +178,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function switchImage(direction) {
-        if(isAnimating) return; // Prevent spam clicking
-
+        if(isAnimating) return;
         const imgElement = document.getElementById('current-img');
         if(!imgElement) return;
 
-        // Calculate next index
         const nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
-        
-        // Boundary check
         if(nextIndex < 0 || nextIndex >= currentAlbum.length) return;
 
         isAnimating = true;
 
-        // 1. PRELOAD the next image
         const loader = new Image();
         loader.src = currentAlbum[nextIndex];
         
         loader.onload = () => {
-            // 2. Only fade out once the new image is ready in browser cache
-            imgElement.classList.add('hidden'); // This matches CSS .fade-element.hidden { opacity: 0 }
-
+            imgElement.classList.add('hidden');
             setTimeout(() => {
-                // 3. Swap src instantly while invisible
                 imgElement.src = currentAlbum[nextIndex];
                 currentIndex = nextIndex;
                 updateUIControls();
-
-                // 4. Fade back in
                 imgElement.classList.remove('hidden');
-                
-                // Reset lock after transition is done
                 setTimeout(() => { isAnimating = false; }, 200); 
-            }, 200); // 200ms matches the CSS transition time
+            }, 200);
         };
     }
 
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
 
-    if (btnPrev) {
-        btnPrev.addEventListener('click', () => switchImage('prev'));
-    }
+    if (btnPrev) { btnPrev.addEventListener('click', () => switchImage('prev')); }
+    if (btnNext) { btnNext.addEventListener('click', () => switchImage('next')); }
 
-    if (btnNext) {
-        btnNext.addEventListener('click', () => switchImage('next'));
-    }
-
-    // Initialize
     loadLatestPost();
 })();
