@@ -63,10 +63,10 @@
     /* Instagram fade effect logic */
     .fade-element {
       opacity: 1;
-      transition: opacity 0.3s ease-in-out;
+      transition: opacity 0.2s ease-in-out; /* Made faster (0.2s) for better responsiveness */
     }
     .fade-element.hidden {
-      opacity: 0.4;
+      opacity: 0; /* Fully invisible during swap */
     }
 
     /* Active dot for instagram */
@@ -224,7 +224,7 @@
         </div>
 
         <div class="order-1 md:order-2 flex justify-center md:justify-end">
-          <div class="insta-card bg-white border border-stone-200 rounded-sm shadow-2xl w-full max-w-sm hidden" id="insta-card">
+          <div class="insta-card bg-white border border-stone-200 rounded-sm shadow-2xl w-full max-w-lg hidden" id="insta-card">
             
             <div class="insta-header flex items-center p-3 border-b border-stone-100">
               <img id="user-pic" class="profile-pic w-8 h-8 rounded-full border border-stone-200 mr-3" src="profile.jpg" alt="Profile">
