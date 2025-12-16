@@ -11,7 +11,7 @@
   <meta name="keywords"
     content="Atelier Sauvage, Heusy, Verviers, objets vintage, mobilier design, galerie d'art, décoration, brocante, Liège, boutique, design intérieur" />
   <meta name="author" content="Atelier Sauvage" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="noindex, nofollow" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Atelier Sauvage – Objets vintage, design et galerie à Verviers" />
@@ -52,63 +52,37 @@
   </script>
 
   <style>
-    /* 1. ACCESSIBILITY & UX TWEAKS */
-    
-    /* Visible focus styles for keyboard navigation */
+    /* Accessibility & UX Shared Styles */
     a:focus-visible, button:focus-visible {
-      outline: 2px solid #2e2e2e; /* Using your stone-800 color */
+      outline: 2px solid #2e2e2e;
       outline-offset: 3px;
       border-radius: 4px;
     }
-
-    /* Prevent text selection on images */
     img, svg {
       user-select: none;
       -webkit-user-select: none;
     }
-
-    /* Remove blue tap overlay on mobile */
     a, button {
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* 2. HOVER LOGIC */
-    
-    /* Only apply hover effects on devices that actually hover (mouse) */
+    /* Hover Logic */
     @media (hover: hover) {
       .gallery-item:hover {
         opacity: 0.95;
         transition: opacity 0.3s ease;
       }
-      /* Optional: slight scale effect for interior images if you want */
       .interior-item:hover {
         transform: scale(1.02);
       }
     }
 
-    /* 3. FUNCTIONAL CLASSES */
-    
-    /* Lightbox */
-    #lightbox {
-      display: none;
-    }
-    #lightbox.active {
-      display: flex;
-    }
-    
-    /* Instagram fade */
-    .fade-element {
-      opacity: 1;
-      transition: opacity 0.2s ease-in-out;
-    }
-    .fade-element.hidden {
-      opacity: 0;
-    }
-
-    /* Active dot */
-    .dot.active {
-      background-color: white;
-    }
+    /* Lightbox & Insta Styles */
+    #lightbox { display: none; }
+    #lightbox.active { display: flex; }
+    .fade-element { opacity: 1; transition: opacity 0.2s ease-in-out; }
+    .fade-element.hidden { opacity: 0; }
+    .dot.active { background-color: white; }
   </style>
 
   <script type="application/ld+json">
@@ -204,37 +178,8 @@
     </section>
 
     <section class="gallery px-4 max-w-7xl mx-auto mb-28">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
-          <img src="images/2000/IMG_7248-2000.jpeg" srcset="
-              images/480/IMG_7248-480.jpeg    480w,
-              images/800/IMG_7248-800.jpeg    800w,
-              images/2000/IMG_7248-2000.jpeg 2000w
-            " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Intérieur de la boutique avec objets et meubles vintage"
-            class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
+      <div id="interior-gallery" class="grid grid-cols-1 md:grid-cols-3 gap-6">
         </div>
-
-        <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
-          <img src="images/2000/IMG_7242-2000.jpeg" srcset="
-              images/480/IMG_7242-480.jpeg    480w,
-              images/800/IMG_7242-800.jpeg    800w,
-              images/2000/IMG_7242-2000.jpeg 2000w
-            " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Endroit où il fait bon s'arrêter"
-            class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
-        </div>
-
-        <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
-          <img src="images/2000/IMG_7244-2000.jpeg" srcset="
-              images/480/IMG_7244-480.jpeg    480w,
-              images/800/IMG_7244-800.jpeg    800w,
-              images/2000/IMG_7244-2000.jpeg 2000w
-            " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Plantes, livres et mobilier vintage"
-            class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
-        </div>
-      </div>
     </section>
 
     <section class="section instagram-feed max-w-7xl mx-auto px-6 mb-28">
@@ -297,88 +242,8 @@
         <div class="w-12 h-0.5 bg-stone-300 mx-auto mt-4"></div>
       </div>
 
-      <div class="gallery columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7245-2000.jpeg" srcset="
-                images/480/IMG_7245-480.jpeg    480w,
-                images/800/IMG_7245-800.jpeg    800w,
-                images/2000/IMG_7245-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Vase Murano et lampe design 70s" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
+      <div id="main-gallery" class="gallery columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
         </div>
-
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7247-2000.jpeg" srcset="
-                images/480/IMG_7247-480.jpeg    480w,
-                images/800/IMG_7247-800.jpeg    800w,
-                images/2000/IMG_7247-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Coin lecture avec ses bouquins" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
-        </div>
-
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7258-2000.jpeg" srcset="
-                images/480/IMG_7258-480.jpeg    480w,
-                images/800/IMG_7258-800.jpeg    800w,
-                images/2000/IMG_7258-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Console fer forgé italienne" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
-        </div>
-
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7259-2000.jpeg" srcset="
-                images/480/IMG_7259-480.jpeg    480w,
-                images/800/IMG_7259-800.jpeg    800w,
-                images/2000/IMG_7259-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Portrait huile sur toile" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
-        </div>
-
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7252-2000.jpeg" srcset="
-                images/480/IMG_7252-480.jpeg    480w,
-                images/800/IMG_7252-800.jpeg    800w,
-                images/2000/IMG_7252-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Peinture gouache sur enfilade" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
-        </div>
-
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7253-2000.jpeg" srcset="
-                images/480/IMG_7253-480.jpeg    480w,
-                images/800/IMG_7253-800.jpeg    800w,
-                images/2000/IMG_7253-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Faience de Rouen" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
-        </div>
-
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7260-2000.jpeg" srcset="
-                images/480/IMG_7260-480.jpeg    480w,
-                images/800/IMG_7260-800.jpeg    800w,
-                images/2000/IMG_7260-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Table guéridon bois" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
-        </div>
-
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7254-2000.jpeg" srcset="
-                images/480/IMG_7254-480.jpeg    480w,
-                images/800/IMG_7254-800.jpeg    800w,
-                images/2000/IMG_7254-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Applique lumineuse années 50s" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
-        </div>
-
-        <div class="break-inside-avoid shadow-sm rounded-sm overflow-hidden">
-          <img src="images/2000/IMG_7257-2000.jpeg" srcset="
-                images/480/IMG_7257-480.jpeg    480w,
-                images/800/IMG_7257-800.jpeg    800w,
-                images/2000/IMG_7257-2000.jpeg 2000w
-              " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async" width="2000" height="1500"
-            alt="Bibelots et objets déco kitsch" class="gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto" />
-        </div>
-      </div>
     </section>
 
     <section class="section visit bg-white border-t border-stone-200">
@@ -451,7 +316,9 @@
     <button class="nav-btn next absolute right-4 md:right-8 text-white text-4xl p-4 hover:scale-110 transition-transform z-[60]" aria-label="Image suivante">❯</button>
   </div>
 
-  <script src="scripts.js"></script>
+  <script src="gallery-loader.js"></script>
+  <script src="lightbox.js"></script>
+  <script src="instagram-integration.js"></script>
 </body>
 
 </html>
