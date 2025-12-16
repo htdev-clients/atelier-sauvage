@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const openLightbox = (index) => {
         currentIndex = index;
         lightboxImg.src = images[currentIndex].src;
-        lightbox.style.display = "flex";
+        // Tailwind/Custom class toggle for display
+        lightbox.classList.add('active'); 
     };
 
     const showPrev = () => {
@@ -33,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     closeBtn.addEventListener("click", () => {
-        lightbox.style.display = "none";
+        lightbox.classList.remove('active');
     });
 
     lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) lightbox.style.display = "none";
+        if (e.target === lightbox) lightbox.classList.remove('active');
     });
 
     prevBtn.addEventListener("click", (e) => {
@@ -51,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener("keydown", (e) => {
-        if (lightbox.style.display === "flex") {
-            if (e.key === "Escape") lightbox.style.display = "none";
+        // Check if lightbox is active using the class we defined in CSS
+        if (lightbox.classList.contains('active')) {
+            if (e.key === "Escape") lightbox.classList.remove('active');
             if (e.key === "ArrowLeft") showPrev();
             if (e.key === "ArrowRight") showNext();
         }
@@ -61,10 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* --- INSTAGRAM INTEGRATION --- */
 (function() {
-    // 1. Define these at the top so ALL functions can see them
     const instaCard = document.getElementById('insta-card');
     let currentAlbum = [];
     let currentIndex = 0;
+    let isAnimating = false; // Prevent double clicks during transition
 
     async function loadLatestPost() {
         if (!instaCard) return;
@@ -85,10 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderCard(user, post) {
-        // User Info
-        // Note: We removed the code that overwrites 'user-pic' here.
-        // The image is now controlled entirely by your index.html
-        
+        // User Info logic
         const userNameLink = document.getElementById('user-name');
         if(userNameLink) {
             userNameLink.innerText = user.username;
@@ -108,9 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
             currentAlbum.push(post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url);
         }
 
-        // Reset index and render
+        // Reset index and render initial state
         currentIndex = 0;
-        updateImageDisplay(false);
+        updateUIControls();
+        
+        // Initial Image Load (No transition)
+        const imgElement = document.getElementById('current-img');
+        if(imgElement && currentAlbum.length > 0) {
+            imgElement.src = currentAlbum[0];
+            imgElement.classList.remove('hidden');
+        }
 
         // Footer Info
         const postLink = document.getElementById('post-link');
@@ -119,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const captionText = document.getElementById('caption-text');
         if(captionText) captionText.innerText = post.caption || "";
 
-        // Timestamp
         const timestampEl = document.getElementById('timestamp');
         if(timestampEl) {
             const date = new Date(post.timestamp);
@@ -131,70 +136,76 @@ document.addEventListener('DOMContentLoaded', () => {
         instaCard.style.display = 'block';
     }
 
-    function updateImageDisplay(useTransition = true) {
-        const imgElement = document.getElementById('current-img');
+    function updateUIControls() {
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         const dotsContainer = document.getElementById('dots-container');
 
+        if (currentAlbum.length > 1) {
+            btnPrev.style.opacity = currentIndex > 0 ? '1' : '0';
+            btnPrev.style.pointerEvents = currentIndex > 0 ? 'auto' : 'none';
+
+            btnNext.style.opacity = currentIndex < currentAlbum.length - 1 ? '1' : '0';
+            btnNext.style.pointerEvents = currentIndex < currentAlbum.length - 1 ? 'auto' : 'none';
+
+            let dotsHtml = '';
+            for (let i = 0; i < currentAlbum.length; i++) {
+                dotsHtml += `<div class="dot ${i === currentIndex ? 'active' : ''}"></div>`;
+            }
+            dotsContainer.innerHTML = dotsHtml;
+        } else {
+            btnPrev.style.opacity = '0';
+            btnNext.style.opacity = '0';
+            dotsContainer.innerHTML = '';
+        }
+    }
+
+    function switchImage(direction) {
+        if(isAnimating) return; // Prevent spam clicking
+
+        const imgElement = document.getElementById('current-img');
         if(!imgElement) return;
 
-        const performUpdate = () => {
-            if (currentAlbum.length > 1) {
-                btnPrev.style.opacity = currentIndex > 0 ? '1' : '0';
-                btnPrev.style.pointerEvents = currentIndex > 0 ? 'auto' : 'none';
+        // Calculate next index
+        const nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+        
+        // Boundary check
+        if(nextIndex < 0 || nextIndex >= currentAlbum.length) return;
 
-                btnNext.style.opacity = currentIndex < currentAlbum.length - 1 ? '1' : '0';
-                btnNext.style.pointerEvents = currentIndex < currentAlbum.length - 1 ? 'auto' : 'none';
+        isAnimating = true;
 
-                let dotsHtml = '';
-                for (let i = 0; i < currentAlbum.length; i++) {
-                    dotsHtml += `<div class="dot ${i === currentIndex ? 'active' : ''}"></div>`;
-                }
-                dotsContainer.innerHTML = dotsHtml;
-            } else {
-                btnPrev.style.opacity = '0';
-                btnNext.style.opacity = '0';
-                dotsContainer.innerHTML = '';
-            }
-        };
+        // 1. PRELOAD the next image
+        const loader = new Image();
+        loader.src = currentAlbum[nextIndex];
+        
+        loader.onload = () => {
+            // 2. Only fade out once the new image is ready in browser cache
+            imgElement.classList.add('hidden'); // This matches CSS .fade-element.hidden { opacity: 0 }
 
-        if (useTransition) {
-            imgElement.classList.add('hidden');
             setTimeout(() => {
-                imgElement.src = currentAlbum[currentIndex];
-                performUpdate();
-                imgElement.onload = () => {
-                    imgElement.classList.remove('hidden');
-                };
-                setTimeout(() => { imgElement.classList.remove('hidden'); }, 50);
-            }, 300);
-        } else {
-            imgElement.src = currentAlbum[currentIndex];
-            imgElement.classList.remove('hidden');
-            performUpdate();
-        }
+                // 3. Swap src instantly while invisible
+                imgElement.src = currentAlbum[nextIndex];
+                currentIndex = nextIndex;
+                updateUIControls();
+
+                // 4. Fade back in
+                imgElement.classList.remove('hidden');
+                
+                // Reset lock after transition is done
+                setTimeout(() => { isAnimating = false; }, 200); 
+            }, 200); // 200ms matches the CSS transition time
+        };
     }
 
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
 
     if (btnPrev) {
-        btnPrev.addEventListener('click', () => {
-            if (currentIndex > 0) { 
-                currentIndex--; 
-                updateImageDisplay(true); 
-            }
-        });
+        btnPrev.addEventListener('click', () => switchImage('prev'));
     }
 
     if (btnNext) {
-        btnNext.addEventListener('click', () => {
-            if (currentIndex < currentAlbum.length - 1) { 
-                currentIndex++; 
-                updateImageDisplay(true); 
-            }
-        });
+        btnNext.addEventListener('click', () => switchImage('next'));
     }
 
     // Initialize
