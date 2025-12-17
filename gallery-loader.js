@@ -41,25 +41,34 @@ const mainGalleryImages = [
   { id: "img-30", alt: "" },
 ];
 
-// 2. LOGIC
+// 2. CONFIG
+const IMG_WIDTH = 2000;
+const IMG_HEIGHT = 2667;
+
+// 3. LOGIC
 document.addEventListener("DOMContentLoaded", () => {
-  // Helper: Generate HTML for a single image
   function generateHTML(image, type, index) {
     const isInterior = type === "interior";
 
+    // Main Gallery: Changed 'md:min-w-0' to 'sm:min-w-0'
     const wrapperClass = isInterior
       ? "relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96"
-      : "gallery-item-wrapper min-w-full snap-center snap-always md:min-w-0 break-inside-avoid shadow-sm rounded-sm overflow-hidden md:mb-6";
+      : "gallery-item-wrapper min-w-full snap-center snap-always sm:min-w-0 shadow-sm rounded-sm overflow-hidden relative";
 
+    // Main Gallery: Changed 'md:pointer-events-auto' to 'sm:pointer-events-auto'
     const imgClass = isInterior
       ? "interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto"
-      : "gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto";
+      : "gallery-item w-full h-full object-cover cursor-zoom-in transition-opacity pointer-events-none sm:pointer-events-auto";
 
     const interiorSizes = "(max-width: 768px) 100vw, 33vw";
-    const mainSizes = "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw";
+    
+    // Updated mainSizes to reflect the new SM (640px) break
+    const mainSizes = "(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw";
+
+    const ratioStyle = isInterior ? "" : `style="aspect-ratio: ${IMG_WIDTH} / ${IMG_HEIGHT};"`;
 
     return `
-            <div class="${wrapperClass}" data-index="${index}">
+            <div class="${wrapperClass}" data-index="${index}" ${ratioStyle}>
                 <img src="images/2000/${image.id}-2000.jpeg" 
                      srcset="
                         images/480/${image.id}-480.jpeg 480w,
@@ -75,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
   }
 
-  // Helper: Inject images
   function renderGallery(containerId, images, type) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -86,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
     container.innerHTML = html;
   }
 
-  // Helper: Handle Counter Logic (e.g. "1 / 30")
   function setupMobileCounter() {
     const container = document.getElementById("main-gallery");
     const counter = document.getElementById("gallery-counter");
@@ -98,16 +105,13 @@ document.addEventListener("DOMContentLoaded", () => {
       container.scrollLeft = 0;
     }
 
-    // Initialize counter
     const total = items.length;
     counter.textContent = `1 / ${total}`;
 
-    // Setup Intersection Observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // +1 because index starts at 0
             const index = parseInt(entry.target.getAttribute("data-index")) + 1;
             counter.textContent = `${index} / ${total}`;
           }
@@ -119,10 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
     items.forEach((item) => observer.observe(item));
   }
 
-  // 3. EXECUTION
+  // 4. EXECUTION
   renderGallery("interior-gallery", interiorImages, "interior");
   renderGallery("main-gallery", mainGalleryImages, "gallery");
 
-  // Initialize counter
   setupMobileCounter();
 });
