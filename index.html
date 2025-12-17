@@ -127,6 +127,79 @@
 
 <body class="bg-stone-50 text-stone-800 font-sans antialiased selection:bg-stone-300 selection:text-stone-900">
 
+  <nav id="navbar"
+    class="fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-in-out h-20 flex items-center bg-transparent text-white">
+    <div class="w-full px-6 md:px-12 flex justify-between items-center">
+
+      <a href="#" class="z-50 relative block">
+        <img id="nav-logo" src="logos/logo.svg" alt="Atelier Sauvage"
+          class="h-10 w-auto object-contain transition-all duration-300">
+      </a>
+
+      <ul class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium">
+        <li><a href="#" class="hover:opacity-70 transition-opacity">Accueil</a></li>
+        <li><a href="#atelier" class="hover:opacity-70 transition-opacity">L'Atelier</a></li>
+        <li><a href="#gallery" class="hover:opacity-70 transition-opacity">Galerie</a></li>
+        <li><a href="#contact" class="hover:opacity-70 transition-opacity">Contact</a></li>
+      </ul>
+
+      <button id="mobile-menu-btn" class="md:hidden z-50 relative focus:outline-none text-current p-1"
+        aria-label="Ouvrir le menu">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-8 h-8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-menu"
+    class="fixed inset-0 z-[60] bg-stone-50 text-stone-900 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-center items-center">
+
+    <button id="close-menu-btn"
+      class="absolute top-4 right-6 p-2 text-3xl font-light hover:text-stone-600 focus:outline-none"
+      aria-label="Fermer le menu">
+      &times;
+    </button>
+
+    <div class="absolute top-6 left-6 opacity-50">
+      <img src="logos/logo.svg" alt="" class="h-8 w-auto">
+    </div>
+
+    <ul class="flex flex-col gap-8 text-center">
+      <li>
+        <a href="#"
+          class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
+          Accueil
+        </a>
+      </li>
+      <li>
+        <a href="#atelier"
+          class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
+          L'Atelier
+        </a>
+      </li>
+      <li>
+        <a href="#gallery"
+          class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
+          Galerie
+        </a>
+      </li>
+      <li>
+        <a href="#contact"
+          class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <div class="w-12 h-px bg-stone-300 mt-12 mb-8"></div>
+
+    <div class="text-sm text-stone-500 uppercase tracking-widest font-medium">
+      Atelier Sauvage
+    </div>
+  </div>
+
   <header class="relative h-[85svh] w-full flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
       <img src="images/2000/facade-2000.jpg" srcset="
@@ -134,15 +207,20 @@
             images/800/facade-800.jpg   800w,
             images/2000/facade-2000.jpg 2000w
           " sizes="100vw" alt="Façade du magasin Atelier Sauvage" class="w-full h-full object-cover"
-        fetchpriority="high"/>
+        fetchpriority="high" />
       <div class="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
     </div>
 
-    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white space-y-6">
-      <h1 class="font-serif text-5xl md:text-7xl font-light tracking-wide drop-shadow-lg">
-        Atelier Sauvage
-      </h1>
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white space-y-8">
+
+      <h1 class="sr-only">Atelier Sauvage</h1>
+
+      <div class="w-full max-w-[250px] sm:max-w-xs 2xl:max-w-sm mx-auto drop-shadow-lg">
+        <img src="logos/name.svg" alt="Logo Atelier Sauvage" class="w-full h-auto">
+      </div>
+
       <div class="w-24 h-px bg-white/80 mx-auto"></div>
+
       <p class="text-lg md:text-xl font-light tracking-wider uppercase text-white/90">
         Objets vintage, design & esprit atelier à Heusy
       </p>
@@ -150,7 +228,7 @@
   </header>
 
   <main>
-    <section class="section holiday-news relative z-20 -mt-16 px-4 mb-20">
+    <section class="section holiday-news relative z-20 -mt-16 px-4 mb-16">
       <div
         class="holiday-content bg-[#f8f5f0] border border-stone-200 shadow-xl max-w-2xl mx-auto p-6 md:p-10 rounded-sm text-center">
         <h2 class="font-serif text-3xl mb-6 text-stone-900">🎄 Horaires de Fêtes</h2>
@@ -175,24 +253,28 @@
       </div>
     </section>
 
-    <section class="section intro px-6 max-w-3xl mx-auto text-center py-12 md:py-20">
-      <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-8 italic">
-        "Un lieu de vie, entre galerie et atelier"
-      </h2>
-      <p class="text-lg md:text-xl leading-relaxed text-stone-600 font-light">
-        L’Atelier Sauvage est un espace unique où l’authenticité du passé
-        rencontre la créativité du présent. On y découvre une sélection de
-        mobilier, luminaires et objets chinés avec soin — une invitation à
-        flâner, à discuter, à s’inspirer.
-      </p>
-    </section>
+    <section id="atelier" class="section gallery py-24">
 
-    <section class="gallery px-4 max-w-7xl mx-auto mb-28">
-      <div id="interior-gallery" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="intro px-6 max-w-3xl mx-auto text-center mb-16">
+        <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-8 italic">
+          "Un lieu de vie, entre galerie et atelier"
+        </h2>
+        <p class="text-lg md:text-xl leading-relaxed text-stone-600 font-light">
+          L’Atelier Sauvage est un espace unique où l’authenticité du passé
+          rencontre la créativité du présent. On y découvre une sélection de
+          mobilier, luminaires et objets chinés avec soin — une invitation à
+          flâner, à discuter, à s’inspirer.
+        </p>
       </div>
+
+      <div class="px-4 max-w-7xl mx-auto">
+        <div id="interior-gallery" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        </div>
+      </div>
+
     </section>
 
-    <section class="section instagram-feed max-w-7xl mx-auto px-6 mb-28">
+    <section class="section instagram-feed max-w-7xl mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
         <div class="text-left">
@@ -221,19 +303,20 @@
             id="insta-card">
 
             <div class="insta-header flex items-center p-3 border-b border-stone-100">
-              <img id="user-pic" class="profile-pic w-8 h-8 rounded-full border border-stone-200 mr-3" src="profile.jpg"
-                alt="Profile">
+              <img id="user-pic" class="profile-pic w-8 h-8 rounded-full border border-stone-200 mr-3"
+                src="logos/profile.jpg" alt="Profile">
               <a id="user-name" class="username font-bold text-sm text-stone-900 hover:underline" href="#"
                 target="_blank">...</a>
             </div>
 
-            <div class="media-container relative bg-stone-100 aspect-square overflow-hidden group">
+            <div class="media-container relative bg-stone-100 min-h-[300px] overflow-hidden group">
               <button
                 class="nav-btn nav-prev absolute top-1/2 -translate-y-1/2 left-3 bg-white/80 w-8 h-8 rounded-full shadow flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-white"
                 id="btn-prev" aria-label="Previous image">❮</button>
 
-              <a id="post-link" href="#" target="_blank" class="block w-full h-full">
-                <img id="current-img" class="insta-image w-full h-full object-cover fade-element" src="" alt="Post" loading="lazy" decoding="async">
+              <a id="post-link" href="#" target="_blank" class="block w-full">
+                <img id="current-img" class="insta-image w-full h-auto block fade-element" src="" alt="Post"
+                  loading="lazy" decoding="async">
               </a>
 
               <button
@@ -256,7 +339,7 @@
       </div>
     </section>
 
-    <section class="section gallery px-0 sm:px-4 max-w-7xl mx-auto mb-24 relative group">
+    <section id="gallery" class="section gallery px-0 sm:px-4 max-w-7xl mx-auto py-24 relative group">
 
       <div class="text-center mb-12 px-4">
         <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-2">Quelques photos</h2>
@@ -275,7 +358,7 @@
 
     </section>
 
-    <section class="section visit bg-white border-t border-stone-200">
+    <section id="contact" class="section visit bg-white border-t border-stone-200 scroll-mt-20">
       <div class="flex flex-col md:flex-row h-auto md:min-h-[500px]">
 
         <div class="visit-info md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
@@ -315,12 +398,20 @@
   <footer class="bg-stone-900 text-stone-400 py-12 px-6 border-t border-stone-800">
     <div class="footer-container max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
 
-      <div class="footer-left flex flex-col md:flex-row items-center gap-4 md:gap-8 text-sm">
-        <a href="mailto:ateliersauvageheusy@gmail.com"
-          class="hover:text-white transition-colors">ateliersauvageheusy@gmail.com</a>
-        <span class="hidden md:inline">•</span>
-        <a href="tel:+32456921799" class="hover:text-white transition-colors">+32 456 92 17 99</a>
-        <span class="hidden md:inline">•</span>
+      <div class="footer-left flex flex-col lg:flex-row items-center gap-4 lg:gap-8 text-sm">
+
+        <a href="mailto:ateliersauvageheusy@gmail.com" class="hover:text-white transition-colors">
+          ateliersauvageheusy@gmail.com
+        </a>
+
+        <span class="hidden lg:inline">•</span>
+
+        <a href="tel:+32456921799" class="hover:text-white transition-colors">
+          +32 456 92 17 99
+        </a>
+
+        <span class="hidden lg:inline">•</span>
+
         <a href="https://www.instagram.com/ateliersauvage_heusy/" target="_blank" rel="noopener noreferrer"
           aria-label="Instagram" class="flex items-center gap-2 hover:text-white transition-colors fill-current">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="fill-current">
@@ -354,6 +445,7 @@
 
   <script src="gallery-loader.js"></script>
   <script src="lightbox.js"></script>
+  <script src="navbar.js"></script>
   <script src="instagram-integration.js" defer></script>
 </body>
 

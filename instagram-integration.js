@@ -50,7 +50,9 @@
             imgElement.src = currentAlbum[0];
             // PERFORMANCE: Add async decoding
             imgElement.decoding = "async"; 
-            imgElement.classList.remove('hidden');
+            
+            // FIX: Use opacity-0 instead of hidden to prevent layout collapse
+            imgElement.classList.remove('opacity-0', 'hidden'); 
         }
 
         const postLink = document.getElementById('post-link');
@@ -111,12 +113,17 @@
         loader.src = currentAlbum[nextIndex];
         
         loader.onload = () => {
-            imgElement.classList.add('hidden');
+            // FIX: Use 'opacity-0' to fade out without removing element from DOM flow
+            imgElement.classList.add('opacity-0');
+            
             setTimeout(() => {
                 imgElement.src = currentAlbum[nextIndex];
                 currentIndex = nextIndex;
                 updateUIControls();
-                imgElement.classList.remove('hidden');
+                
+                // Fade back in
+                imgElement.classList.remove('opacity-0');
+                
                 setTimeout(() => { isAnimating = false; }, 200); 
             }, 200);
         };
