@@ -4,7 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLogo = document.getElementById("nav-logo");
 
   const TOP_STATE = ["bg-transparent", "text-white", "shadow-none"];
-  const SCROLLED_STATE = ["bg-stone-50/95", "backdrop-blur-md", "text-stone-900", "shadow-sm"];
+  const SCROLLED_STATE = [
+    "bg-stone-50/95",
+    "backdrop-blur-md",
+    "text-stone-900",
+    "shadow-sm",
+  ];
 
   function handleScroll() {
     if (window.scrollY > 50) {
@@ -19,8 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   handleScroll();
-  window.addEventListener("scroll", handleScroll);
-
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        handleScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
 
   // --- PART 2: MOBILE MENU LOGIC ---
   const menuBtn = document.getElementById("mobile-menu-btn");
@@ -49,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (closeBtn) closeBtn.addEventListener("click", closeMenu);
 
   // Close menu automatically when clicking a link
-  mobileLinks.forEach(link => {
+  mobileLinks.forEach((link) => {
     link.addEventListener("click", closeMenu);
   });
 });
