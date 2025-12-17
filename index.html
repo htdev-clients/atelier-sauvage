@@ -24,11 +24,6 @@
   <link rel="icon" type="image/png" href="atelier-favicon.ico" />
   <link rel="canonical" href="https://ateliersauvageheusy.be/" />
 
-  <link rel="preload" as="image" href="images/480/img-3-480.jpeg">
-  <link rel="preload" as="image" href="images/480/img-4-480.jpeg">
-  <link rel="preload" as="image" href="images/480/img-5-480.jpeg">
-  <link rel="preload" as="image" href="images/480/img-6-480.jpeg">
-
   <link href="./style.css" rel="stylesheet">
 
   <style>
@@ -139,7 +134,7 @@
             images/800/facade-800.jpg   800w,
             images/2000/facade-2000.jpg 2000w
           " sizes="100vw" alt="Façade du magasin Atelier Sauvage" class="w-full h-full object-cover"
-        fetchpriority="high" decoding="async" />
+        fetchpriority="high"/>
       <div class="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
     </div>
 
@@ -351,7 +346,7 @@
     <button
       class="nav-btn prev absolute left-4 md:left-8 text-white text-4xl p-4 hover:scale-110 transition-transform z-[60]"
       aria-label="Image précédente">❮</button>
-    <img src="" alt="Image agrandie" class="max-w-full max-h-[90vh] rounded shadow-2xl object-contain" />
+    <img src="" alt="Image agrandie" class="max-h-[90%] max-w-[80%] w-auto h-auto rounded shadow-2xl object-contain" />
     <button
       class="nav-btn next absolute right-4 md:right-8 text-white text-4xl p-4 hover:scale-110 transition-transform z-[60]"
       aria-label="Image suivante">❯</button>

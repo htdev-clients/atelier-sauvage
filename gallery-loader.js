@@ -47,8 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function generateHTML(image, type, index) {
     const isInterior = type === "interior";
 
-    const loadingStrategy = index < 4 ? "eager" : "lazy";
-
     const wrapperClass = isInterior
       ? "relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96"
       : "gallery-item-wrapper min-w-full snap-center snap-always md:min-w-0 break-inside-avoid shadow-sm rounded-sm overflow-hidden md:mb-6";
@@ -56,6 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const imgClass = isInterior
       ? "interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto"
       : "gallery-item w-full h-auto cursor-zoom-in transition-opacity pointer-events-none md:pointer-events-auto";
+
+    const interiorSizes = "(max-width: 768px) 100vw, 33vw";
+    const mainSizes = "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw";
 
     return `
             <div class="${wrapperClass}" data-index="${index}">
@@ -65,12 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         images/800/${image.id}-800.jpeg 800w,
                         images/2000/${image.id}-2000.jpeg 2000w
                      " 
-                     sizes="${
-                       isInterior
-                         ? "(max-width: 768px) 100vw, 33vw"
-                         : "(max-width: 768px) 100vw, 33vw"
-                     }"
-                     loading="${loadingStrategy}" 
+                     sizes="${isInterior ? interiorSizes : mainSizes}"
+                     loading="lazy" 
                      decoding="async"
                      alt="${image.alt}" 
                      class="${imgClass}" />
