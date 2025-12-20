@@ -17,7 +17,7 @@
   <meta property="og:title" content="Atelier Sauvage – Objets vintage, design et galerie à Verviers" />
   <meta property="og:description"
     content="Découvrez Atelier Sauvage à Heusy : un lieu unique entre boutique, galerie et atelier, dédié aux objets vintage et au design." />
-  <meta property="og:image" content="https://ateliersauvageheusy.be/images/facade-2000.jpg" />
+  <meta property="og:image" content="https://ateliersauvageheusy.be/images/general/facade-2000.jpg" />
   <meta property="og:url" content="https://ateliersauvageheusy.be/" />
   <meta property="og:locale" content="fr_BE" />
 
@@ -104,7 +104,7 @@
         "@context": "https://schema.org",
         "@type": "Store",
         "name": "Atelier Sauvage",
-        "image": "https://ateliersauvageheusy.be/images/facade-2000.jpg",
+        "image": "https://ateliersauvageheusy.be/images/general/facade-2000.jpg",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Chaussée de Theux 59, Heusy",
@@ -189,10 +189,10 @@
 
   <header class="relative h-[85svh] w-full flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-      <img src="images/2000/facade-2000.jpg" srcset="
-            images/480/facade-480.jpg   480w,
-            images/800/facade-800.jpg   800w,
-            images/2000/facade-2000.jpg 2000w
+      <img src="images/general/2000/facade-2000.jpg" srcset="
+            images/general/480/facade-480.jpg   480w,
+            images/general/800/facade-800.jpg   800w,
+            images/general/2000/facade-2000.jpg 2000w
           " sizes="100vw" alt="Façade du magasin Atelier Sauvage" class="w-full h-full object-cover"
         fetchpriority="high" />
       <div class="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
@@ -255,7 +255,48 @@
       </div>
 
       <div class="px-4 max-w-7xl mx-auto">
-        <div id="interior-gallery" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
+                <img src="images/general/2000/interior-3-2000.jpeg" 
+                     srcset="
+                        images/general/480/interior-3-480.jpeg 480w,
+                        images/general/800/interior-3-800.jpeg 800w,
+                        images/general/2000/interior-3-2000.jpeg 2000w
+                     " 
+                     sizes="(max-width: 768px) 100vw, 33vw"
+                     loading="lazy" 
+                     decoding="async"
+                     alt="Intérieur de la boutique avec objets et meubles vintage" 
+                     class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
+            </div>
+
+            <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
+                <img src="images/general/2000/interior-1-2000.jpeg" 
+                     srcset="
+                        images/general/480/interior-1-480.jpeg 480w,
+                        images/general/800/interior-1-800.jpeg 800w,
+                        images/general/2000/interior-1-2000.jpeg 2000w
+                     " 
+                     sizes="(max-width: 768px) 100vw, 33vw"
+                     loading="lazy" 
+                     decoding="async"
+                     alt="Endroit où il fait bon s'arrêter" 
+                     class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
+            </div>
+
+            <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
+                <img src="images/general/2000/interior-2-2000.jpeg" 
+                     srcset="
+                        images/general/480/interior-2-480.jpeg 480w,
+                        images/general/800/interior-2-800.jpeg 800w,
+                        images/general/2000/interior-2-2000.jpeg 2000w
+                     " 
+                     sizes="(max-width: 768px) 100vw, 33vw"
+                     loading="lazy" 
+                     decoding="async"
+                     alt="Plantes, livres et mobilier vintage" 
+                     class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
+            </div>
         </div>
       </div>
 
