@@ -96,4 +96,37 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "ArrowRight") showNext();
     }
   });
+
+  // --- SWIPE SUPPORT ---
+  
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const minSwipeDistance = 50; // Minimum pixel distance to count as a swipe
+
+  lightbox.addEventListener('touchstart', (e) => {
+    // Record where the touch started
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', (e) => {
+    // Record where the touch ended
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    // Calculate the difference
+    const diff = touchStartX - touchEndX;
+
+    // If swipe distance is too small, ignore it (it was likely a tap or scroll attempt)
+    if (Math.abs(diff) < minSwipeDistance) return;
+
+    if (diff > 0) {
+      // Swiped Left -> Go to Next Image
+      showNext();
+    } else {
+      // Swiped Right -> Go to Previous Image
+      showPrev();
+    }
+  }
 });
