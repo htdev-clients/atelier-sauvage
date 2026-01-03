@@ -1,0 +1,15 @@
+title: Atelier Sauvage
+description: Objets vintage, design et galerie à Verviers
+url: "https://ateliersauvageheusy.be"
+baseurl: ""
+
+# Tell Jekyll to exclude these from the final build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package.json
+  - package-lock.json
+  - tailwind.config.js
+  - input.css
+  - README.md

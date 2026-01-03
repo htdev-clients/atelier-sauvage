@@ -1,480 +1,282 @@
-<!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+---
+layout: default
+title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
+---
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Atelier Sauvage – Objets vintage, design et galerie à Verviers</title>
-  <meta name="description"
-    content="L’Atelier Sauvage est un lieu unique à Heusy, à mi-chemin entre boutique, galerie et atelier. On y découvre des objets vintage, du mobilier design et des œuvres d’artistes dans une ambiance authentique et conviviale, à deux pas de Liège." />
-  <meta name="keywords"
-    content="Atelier Sauvage, Heusy, Verviers, objets vintage, mobilier design, galerie d'art, décoration, brocante, Liège, boutique, design intérieur" />
-  <meta name="author" content="Atelier Sauvage" />
-  <meta name="robots" content="index, follow" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Atelier Sauvage – Objets vintage, design et galerie à Verviers" />
-  <meta property="og:description"
-    content="Découvrez Atelier Sauvage à Heusy : un lieu unique entre boutique, galerie et atelier, dédié aux objets vintage et au design." />
-  <meta property="og:image" content="https://ateliersauvageheusy.be/images/general/facade-2000.jpg" />
-  <meta property="og:url" content="https://ateliersauvageheusy.be/" />
-  <meta property="og:locale" content="fr_BE" />
-
-  <link rel="icon" type="image/png" href="atelier-favicon.ico" />
-  <link rel="canonical" href="https://ateliersauvageheusy.be/" />
-
-  <link href="./style.css" rel="stylesheet">
-
-  <style>
-    html {
-      touch-action: manipulation;
-    }
-
-    /* Accessibility & UX Shared Styles */
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid #2e2e2e;
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    img,
-    svg,
-    button {
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    a,
-    button {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Hover Logic */
-    @media (hover: hover) {
-      .gallery-item:hover {
-        opacity: 0.95;
-        transition: opacity 0.3s ease;
-      }
-
-      .interior-item:hover {
-        transform: scale(1.02);
-      }
-    }
-
-    /* Lightbox & Insta Styles */
-    #lightbox {
-      display: none;
-    }
-
-    #lightbox.active {
-      display: flex;
-    }
-
-    .fade-element {
-      opacity: 1;
-      transition: opacity 0.2s ease-in-out;
-    }
-
-    .fade-element.hidden {
-      opacity: 0;
-    }
-
-    .dot.active {
-      background-color: white;
-    }
-
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      /* IE and Edge */
-      scrollbar-width: none;
-      /* Firefox */
-    }
-  </style>
-
-  <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Store",
-        "name": "Atelier Sauvage",
-        "image": "https://ateliersauvageheusy.be/images/general/facade-2000.jpg",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Chaussée de Theux 59, Heusy",
-          "addressLocality": "Verviers",
-          "postalCode": "4802",
-          "addressCountry": "BE"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 50.57917,
-          "longitude": 5.86585
-        },
-        "telephone": "+32456921799",
-        "email": "ateliersauvageheusy@gmail.com",
-        "url": "https://ateliersauvageheusy.be/",
-        "openingHours": [
-          "Thu 13:30-17:30",
-          "Fri 13:30-17:30",
-          "Sat 10:00-17:00"
-        ],
-        "sameAs": ["https://www.instagram.com/ateliersauvage_heusy/"]
-      }
-    </script>
-</head>
-
-<body class="bg-stone-50 text-stone-800 font-sans antialiased selection:bg-stone-300 selection:text-stone-900">
-
-  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-in-out h-20 flex items-center bg-transparent text-white">
-    <div class="w-full px-6 md:px-12 flex justify-end items-center">
-      
-      <ul class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium">
-        <li><a href="#" class="hover:opacity-70 transition-opacity">Accueil</a></li>
-        <li><a href="#atelier" class="hover:opacity-70 transition-opacity">L'Atelier</a></li>
-        <li><a href="#gallery" class="hover:opacity-70 transition-opacity">Galerie</a></li>
-        <li><a href="#contact" class="hover:opacity-70 transition-opacity">Contact</a></li>
-      </ul>
-
-      <button id="mobile-menu-btn" class="md:hidden z-50 relative focus:outline-none text-current p-1" aria-label="Ouvrir le menu">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <div id="mobile-menu" 
-       class="fixed inset-0 z-[60] bg-stone-50 text-stone-900 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-center items-center">
-    
-    <button id="close-menu-btn" class="absolute top-4 right-6 p-2 text-3xl font-light hover:text-stone-600 focus:outline-none" aria-label="Fermer le menu">
-      ×
-    </button>
-
-    <ul class="flex flex-col gap-8 text-center">
-      <li>
-        <a href="#" class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-          Accueil
-        </a>
-      </li>
-      <li>
-        <a href="#atelier" class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-          L'Atelier
-        </a>
-      </li>
-      <li>
-        <a href="#gallery" class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-          Galerie
-        </a>
-      </li>
-      <li>
-        <a href="#contact" class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-          Contact
-        </a>
-      </li>
-    </ul>
-
-    <div class="w-12 h-px bg-stone-300 mt-12 mb-8"></div>
-
-    <div class="text-sm text-stone-500 uppercase tracking-widest font-medium">
-      Atelier Sauvage
-    </div>
+<header class="relative h-[85svh] w-full flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="/assets/img/general/2000/facade-2000.jpg" srcset="
+            /assets/img/general/480/facade-480.jpg   480w,
+            /assets/img/general/2000/facade-2000.jpg 2000w
+          " sizes="100vw" alt="Façade du magasin Atelier Sauvage" class="w-full h-full object-cover"
+      fetchpriority="high" />
+    <div class="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
   </div>
 
-  <header class="relative h-[85svh] w-full flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img src="images/general/2000/facade-2000.jpg" srcset="
-            images/general/480/facade-480.jpg   480w,
-            images/general/800/facade-800.jpg   800w,
-            images/general/2000/facade-2000.jpg 2000w
-          " sizes="100vw" alt="Façade du magasin Atelier Sauvage" class="w-full h-full object-cover"
-        fetchpriority="high" />
-      <div class="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white space-y-8">
+
+    <h1 class="sr-only">Atelier Sauvage</h1>
+
+    <div class="w-full max-w-[250px] sm:max-w-xs 2xl:max-w-sm mx-auto drop-shadow-lg">
+      <img src="/assets/logos/name.svg" alt="Logo Atelier Sauvage" class="w-full h-auto">
     </div>
 
-    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white space-y-8">
+    <div class="w-24 h-px bg-white/80 mx-auto"></div>
 
-      <h1 class="sr-only">Atelier Sauvage</h1>
+    <p class="text-lg md:text-xl font-light tracking-wider uppercase text-white/90">
+      Objets vintage, design & esprit atelier à Heusy
+    </p>
+  </div>
+</header>
 
-      <div class="w-full max-w-[250px] sm:max-w-xs 2xl:max-w-sm mx-auto drop-shadow-lg">
-        <img src="logos/name.svg" alt="Logo Atelier Sauvage" class="w-full h-auto">
+<main>
+  <section class="section holiday-news relative z-20 -mt-16 px-4 mb-16">
+    <div
+      class="holiday-content bg-[#f8f5f0] border border-stone-200 shadow-xl max-w-2xl mx-auto p-6 md:p-10 rounded-sm text-center">
+      <h2 class="font-serif text-3xl mb-6 text-stone-900">🎄 Horaires de Fêtes</h2>
+      <p class="mb-6 text-stone-600">Pour vos cadeaux de fin d'année, l'atelier sera ouvert exceptionnellement :</p>
+      <ul
+        class="holiday-list inline-block text-left mx-auto space-y-2 mb-8 font-medium text-sm md:text-base w-full md:w-auto">
+        <li class="flex justify-between w-full md:w-64 border-b border-stone-300 pb-1">
+          <span>Dimanche 21/12</span> <span>13h - 17h</span>
+        </li>
+        <li class="flex justify-between w-full md:w-64 border-b border-stone-300 pb-1">
+          <span>Mardi 23/12</span> <span>13h - 17h</span>
+        </li>
+        <li class="flex justify-between w-full md:w-64 border-b border-stone-300 pb-1">
+          <span>Mercredi 24/12</span> <span>13h - 16h</span>
+        </li>
+      </ul>
+      <div class="holiday-break pt-6 border-t border-stone-300 border-dashed text-stone-600 space-y-2">
+        <p>L'atelier prendra ensuite une petite pause d'hiver.</p>
+        <p class="font-bold text-stone-800">Fermé du 25/12 au 07/01 inclus.</p>
+        <p>Nous aurons le plaisir de vous retrouver dès le <strong>08 janvier</strong> !</p>
       </div>
+    </div>
+  </section>
 
-      <div class="w-24 h-px bg-white/80 mx-auto"></div>
+  <section id="atelier" class="section gallery py-16 md:py-24">
 
-      <p class="text-lg md:text-xl font-light tracking-wider uppercase text-white/90">
-        Objets vintage, design & esprit atelier à Heusy
+    <div class="intro px-6 max-w-3xl mx-auto text-center mb-16">
+      <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-8 italic">
+        "Un lieu de vie, entre galerie et atelier"
+      </h2>
+      <p class="text-lg md:text-xl leading-relaxed text-stone-600 font-light">
+        L’Atelier Sauvage est un espace unique où l’authenticité du passé
+        rencontre la créativité du présent. On y découvre une sélection de
+        mobilier, luminaires et objets chinés avec soin — une invitation à
+        flâner, à discuter, à s’inspirer.
       </p>
     </div>
-  </header>
 
-  <main>
-    <section class="section holiday-news relative z-20 -mt-16 px-4 mb-16">
-      <div
-        class="holiday-content bg-[#f8f5f0] border border-stone-200 shadow-xl max-w-2xl mx-auto p-6 md:p-10 rounded-sm text-center">
-        <h2 class="font-serif text-3xl mb-6 text-stone-900">🎄 Horaires de Fêtes</h2>
-        <p class="mb-6 text-stone-600">Pour vos cadeaux de fin d'année, l'atelier sera ouvert exceptionnellement :</p>
-        <ul
-          class="holiday-list inline-block text-left mx-auto space-y-2 mb-8 font-medium text-sm md:text-base w-full md:w-auto">
-          <li class="flex justify-between w-full md:w-64 border-b border-stone-300 pb-1">
-            <span>Dimanche 21/12</span> <span>13h - 17h</span>
-          </li>
-          <li class="flex justify-between w-full md:w-64 border-b border-stone-300 pb-1">
-            <span>Mardi 23/12</span> <span>13h - 17h</span>
-          </li>
-          <li class="flex justify-between w-full md:w-64 border-b border-stone-300 pb-1">
-            <span>Mercredi 24/12</span> <span>13h - 16h</span>
-          </li>
-        </ul>
-        <div class="holiday-break pt-6 border-t border-stone-300 border-dashed text-stone-600 space-y-2">
-          <p>L'atelier prendra ensuite une petite pause d'hiver.</p>
-          <p class="font-bold text-stone-800">Fermé du 25/12 au 07/01 inclus.</p>
-          <p>Nous aurons le plaisir de vous retrouver dès le <strong>08 janvier</strong> !</p>
-        </div>
-      </div>
-    </section>
+    <div class="px-4 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    <section id="atelier" class="section gallery py-24">
-
-      <div class="intro px-6 max-w-3xl mx-auto text-center mb-16">
-        <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-8 italic">
-          "Un lieu de vie, entre galerie et atelier"
-        </h2>
-        <p class="text-lg md:text-xl leading-relaxed text-stone-600 font-light">
-          L’Atelier Sauvage est un espace unique où l’authenticité du passé
-          rencontre la créativité du présent. On y découvre une sélection de
-          mobilier, luminaires et objets chinés avec soin — une invitation à
-          flâner, à discuter, à s’inspirer.
-        </p>
-      </div>
-
-      <div class="px-4 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
-                <img src="images/general/2000/interior-3-2000.jpeg" 
-                     srcset="
-                        images/general/480/interior-3-480.jpeg 480w,
-                        images/general/800/interior-3-800.jpeg 800w,
-                        images/general/2000/interior-3-2000.jpeg 2000w
-                     " 
-                     sizes="(max-width: 768px) 100vw, 33vw"
-                     loading="lazy" 
-                     decoding="async"
-                     alt="Intérieur de la boutique avec objets et meubles vintage" 
-                     class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
-            </div>
-
-            <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
-                <img src="images/general/2000/interior-1-2000.jpeg" 
-                     srcset="
-                        images/general/480/interior-1-480.jpeg 480w,
-                        images/general/800/interior-1-800.jpeg 800w,
-                        images/general/2000/interior-1-2000.jpeg 2000w
-                     " 
-                     sizes="(max-width: 768px) 100vw, 33vw"
-                     loading="lazy" 
-                     decoding="async"
-                     alt="Endroit où il fait bon s'arrêter" 
-                     class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
-            </div>
-
-            <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96">
-                <img src="images/general/2000/interior-2-2000.jpeg" 
-                     srcset="
-                        images/general/480/interior-2-480.jpeg 480w,
-                        images/general/800/interior-2-800.jpeg 800w,
-                        images/general/2000/interior-2-2000.jpeg 2000w
-                     " 
-                     sizes="(max-width: 768px) 100vw, 33vw"
-                     loading="lazy" 
-                     decoding="async"
-                     alt="Plantes, livres et mobilier vintage" 
-                     class="interior-item w-full h-full object-cover cursor-zoom-in transition-transform duration-300 pointer-events-none md:pointer-events-auto" />
-            </div>
-        </div>
-      </div>
-
-    </section>
-
-    <section class="section instagram-feed max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-        <div class="text-left">
-          <h2 class="font-serif text-3xl md:text-4xl mb-6 text-stone-900 leading-tight">
-            L'actualité de l'Atelier
-          </h2>
-          <div class="space-y-4 text-stone-600 text-lg font-light leading-relaxed">
-            <p>
-              C'est sur Instagram que l'Atelier vit au quotidien. Nous y partageons nos derniers arrivages en
-              avant-première, nos coups de cœur et les coulisses de la boutique.
-            </p>
-            <p>
-              Même si vous n'avez pas de compte, vous pouvez découvrir notre dernière publication ci-contre.
-            </p>
-          </div>
-          <div class="mt-8">
-            <a href="https://www.instagram.com/ateliersauvage_heusy/" target="_blank" rel="noopener noreferrer"
-              class="inline-block border border-stone-800 text-stone-800 px-8 py-3 hover:bg-stone-800 hover:text-stone-50 transition-colors uppercase text-xs tracking-widest font-bold">
-              Nous suivre sur Instagram
-            </a>
-          </div>
+        <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96 group">
+          <img src="/assets/img/general/2000/interior-3-2000.jpeg" srcset="
+                        /assets/img/general/480/interior-3-480.jpeg 480w,
+                        /assets/img/general/800/interior-3-800.jpeg 800w,
+                        /assets/img/general/2000/interior-3-2000.jpeg 2000w
+                     " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async"
+            alt="Intérieur de la boutique avec objets et meubles vintage"
+            class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 ease-in-out group-hover:scale-105 pointer-events-none md:pointer-events-auto" />
         </div>
 
-        <div class="flex justify-center md:justify-end">
-          <div class="insta-card bg-white border border-stone-200 rounded-sm shadow-2xl w-full max-w-lg hidden"
-            id="insta-card">
-
-            <div class="insta-header flex items-center p-3 border-b border-stone-100">
-              <img id="user-pic" class="profile-pic w-8 h-8 rounded-full border border-stone-200 mr-3"
-                src="logos/profile.jpg" alt="Profile">
-              <a id="user-name" class="username font-bold text-sm text-stone-900 hover:underline" href="#"
-                target="_blank">...</a>
-            </div>
-
-            <div class="media-container relative bg-stone-100 min-h-[300px] overflow-hidden group">
-              <button
-                class="nav-btn nav-prev absolute top-1/2 -translate-y-1/2 left-3 bg-white/80 w-8 h-8 rounded-full shadow flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-white"
-                id="btn-prev" aria-label="Previous image">❮</button>
-
-              <a id="post-link" href="#" target="_blank" class="block w-full">
-                <img id="current-img" class="insta-image w-full h-auto block fade-element" src="" alt="Post"
-                  loading="lazy" decoding="async">
-              </a>
-
-              <button
-                class="nav-btn nav-next absolute top-1/2 -translate-y-1/2 right-3 bg-white/80 w-8 h-8 rounded-full shadow flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-white"
-                id="btn-next" aria-label="Next image">❯</button>
-              <div class="dots-container absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10"
-                id="dots-container"></div>
-            </div>
-
-            <div class="insta-footer p-4">
-              <div class="caption-section text-sm text-stone-800 leading-snug mb-2">
-                <span class="caption-username font-bold mr-1" id="caption-username">...</span>
-                <span id="caption-text" class="text-stone-600"></span>
-              </div>
-              <span class="timestamp text-[10px] uppercase text-stone-400 tracking-wider" id="timestamp">JUST NOW</span>
-            </div>
-          </div>
+        <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96 group">
+          <img src="/assets/img/general/2000/interior-1-2000.jpeg" srcset="
+                        /assets/img/general/480/interior-1-480.jpeg 480w,
+                        /assets/img/general/800/interior-1-800.jpeg 800w,
+                        /assets/img/general/2000/interior-1-2000.jpeg 2000w
+                     " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async"
+            alt="Endroit où il fait bon s'arrêter"
+            class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 ease-in-out group-hover:scale-105 pointer-events-none md:pointer-events-auto" />
         </div>
 
-      </div>
-    </section>
-
-    <section id="gallery" class="section gallery px-0 sm:px-4 max-w-7xl mx-auto pt-24 relative group">
-
-      <div class="text-center mb-12 px-4">
-        <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-2">Quelques photos</h2>
-        <div class="w-12 h-0.5 bg-stone-300 mx-auto mt-4"></div>
-      </div>
-
-      <div id="main-gallery" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth 
-              sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
-              gap-6 scrollbar-hide">
-      </div>
-
-      <div id="gallery-counter"
-        class="absolute bottom-4 right-4 bg-black/60 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md pointer-events-none md:hidden transition-opacity duration-300">
-        1 / 30
-      </div>
-
-    </section>
-
-    <section id="contact" class="section visit bg-white border-t border-stone-200 mt-24 scroll-mt-20">
-      <div class="flex flex-col md:flex-row h-auto md:min-h-[500px]">
-
-        <div class="visit-info md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
-          <h2 class="font-serif text-3xl md:text-4xl mb-6 text-stone-900">Nous rendre visite</h2>
-
-          <div class="mb-8 flex items-start gap-3 text-stone-700">
-            <span class="text-xl">📍</span>
-            <span class="text-lg">Chaussée de Theux 59,<br>4802 Heusy</span>
-          </div>
-
-          <div class="mb-8">
-            <div class="flex items-center gap-2 mb-3 text-stone-800 font-bold tracking-wide uppercase text-sm">
-              <span>⏰</span> Ouverture
-            </div>
-            <ul class="horaire-list space-y-2 text-stone-600 pl-4 border-l-2 border-stone-200">
-              <li>Jeudi : 13h30 - 17h30</li>
-              <li>Vendredi : 13h30 - 17h30</li>
-              <li>Samedi : 10h00 - 17h00</li>
-            </ul>
-          </div>
-
-          <p class="text-stone-500 italic">
-            Venez découvrir nos trouvailles, prendre un café, ou simplement discuter autour de beaux objets.
-          </p>
+        <div class="relative overflow-hidden rounded-sm shadow-sm aspect-[4/3] md:aspect-auto md:h-96 group">
+          <img src="/assets/img/general/2000/interior-2-2000.jpeg" srcset="
+                        /assets/img/general/480/interior-2-480.jpeg 480w,
+                        /assets/img/general/800/interior-2-800.jpeg 800w,
+                        /assets/img/general/2000/interior-2-2000.jpeg 2000w
+                     " sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" decoding="async"
+            alt="Plantes, livres et mobilier vintage"
+            class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 ease-in-out group-hover:scale-105 pointer-events-none md:pointer-events-auto" />
         </div>
-
-        <div class="map md:w-1/2 h-80 md:h-auto bg-stone-200 relative">
-          <iframe title="Localisation de l'Atelier Sauvage sur Google Maps"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6813.019924593809!2d5.857206384653098!3d50.57806912504362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c08b7d4bb2e013%3A0x6c6c24b0fe43b121!2sAtelier%20Sauvage!5e0!3m2!1sen!2sch!4v1760961389110!5m2!1sen!2sch"
-            class="w-full h-full absolute inset-0" style="border: 0" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-stone-900 text-stone-400 py-12 px-6 border-t border-stone-800">
-    <div class="footer-container max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-
-      <div class="footer-left flex flex-col lg:flex-row items-center gap-4 lg:gap-8 text-sm">
-
-        <a href="mailto:ateliersauvageheusy@gmail.com" class="hover:text-white transition-colors">
-          ateliersauvageheusy@gmail.com
-        </a>
-
-        <span class="hidden lg:inline">•</span>
-
-        <a href="tel:+32456921799" class="hover:text-white transition-colors">
-          +32 456 92 17 99
-        </a>
-
-        <span class="hidden lg:inline">•</span>
-
-        <a href="https://www.instagram.com/ateliersauvage_heusy/" target="_blank" rel="noopener noreferrer"
-          aria-label="Instagram" class="flex items-center gap-2 hover:text-white transition-colors fill-current">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="fill-current">
-            <path
-              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-          </svg>
-          <span>ateliersauvage_heusy</span>
-        </a>
-      </div>
-
-      <div class="footer-right">
-        <p class="text-xs text-stone-400">
-          © 2025 Atelier Sauvage —
-          <a href="mentions/" class="hover:text-stone-300">Mentions légales</a>
-        </p>
       </div>
     </div>
-  </footer>
 
-  <div class="lightbox fixed inset-0 z-50 bg-black/90 items-center justify-center p-4 backdrop-blur-sm" id="lightbox">
-    <button class="close-btn absolute top-6 right-6 text-white text-4xl hover:text-stone-300 transition-colors z-[60]"
-      aria-label="Fermer">×</button>
-    <button
-      class="nav-btn prev absolute left-4 md:left-8 text-white text-4xl p-4 hover:scale-110 transition-transform z-[60]"
-      aria-label="Image précédente">❮</button>
-    <img src="" alt="Image agrandie" class="max-h-[90%] max-w-[80%] w-auto h-auto rounded shadow-2xl object-contain" />
-    <button
-      class="nav-btn next absolute right-4 md:right-8 text-white text-4xl p-4 hover:scale-110 transition-transform z-[60]"
-      aria-label="Image suivante">❯</button>
-  </div>
+  </section>
 
-  <script src="gallery-loader.js"></script>
-  <script src="lightbox.js"></script>
-  <script src="navbar.js"></script>
-  <script src="instagram-integration.js" defer></script>
-</body>
+  <section class="section catalog-preview gallery py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4">
 
-</html>
+      <div class="text-center mb-16">
+        <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-4">
+          La Sélection du Moment
+        </h2>
+        <p class="text-stone-600 font-light italic">
+          Aperçu des dernières trouvailles disponibles à l'atelier
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-16">
+
+        {% assign available_items = "" | split: "" %}
+        {% for item in site.data.catalog %}
+        {% assign status_cleaned = item.statut | downcase | strip %}
+        {% unless status_cleaned == 'vendu' %}
+        {% assign available_items = available_items | push: item %}
+        {% endunless %}
+        {% endfor %}
+
+        {% assign random_items = available_items | sample: 4 %}
+
+        {% for item in random_items %}
+
+        <div class="gallery-item-wrapper relative group {% if forloop.index == 4 %}block md:hidden lg:block{% endif %}">
+
+          <div class="aspect-[3/4] overflow-hidden rounded-sm shadow-sm bg-stone-200 relative">
+
+            <img src="/assets/img/catalog/2000/{{ item.number }}-2000.jpeg" srcset="
+                      /assets/img/catalog/480/{{ item.number }}-480.jpeg 480w,
+                      /assets/img/catalog/800/{{ item.number }}-800.jpeg 800w,
+                      /assets/img/catalog/2000/{{ item.number }}-2000.jpeg 2000w
+            " sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" loading="lazy" decoding="async"
+              alt="{{ item.description | escape }}" data-item-number="{{ item.number }}"
+              data-image-count="{{ item.images | default: 1 }}"
+              class="gallery-item w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 cursor-zoom-in" />
+
+            {% assign status_cleaned = item.statut | downcase | strip %}
+            {% if status_cleaned == 'vendu' %}
+            <div class="absolute top-3 right-3 z-10 pointer-events-none">
+              <span
+                class="bg-red-700 text-white border border-white/50 text-[10px] sm:text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-full shadow-md">
+                Vendu
+              </span>
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="mt-3 flex justify-between items-start text-sm text-stone-800">
+            <p class="font-medium line-clamp-2 pr-2">{{ item.description }}</p>
+
+            {% if item.prix %}
+            <span class="whitespace-nowrap font-bold text-stone-600">{{ item.prix }} €</span>
+            {% endif %}
+          </div>
+
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <div class="text-center">
+        <a href="/catalogue/"
+          class="inline-block border border-stone-800 text-stone-800 px-8 py-3 hover:bg-stone-800 hover:text-stone-50 transition-colors uppercase text-xs tracking-widest font-bold">
+          Voir tout le catalogue
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section instagram-feed max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+      <div class="text-left">
+        <h2 class="font-serif text-3xl md:text-4xl mb-6 text-stone-900 leading-tight">
+          L'actualité de l'Atelier
+        </h2>
+        <div class="space-y-4 text-stone-600 text-lg font-light leading-relaxed">
+          <p>
+            C'est sur Instagram que l'Atelier vit au quotidien. Nous y partageons nos derniers arrivages en
+            avant-première, nos coups de cœur et les coulisses de la boutique.
+          </p>
+          <p>
+            Même si vous n'avez pas de compte, vous pouvez découvrir notre dernière publication ci-contre.
+          </p>
+        </div>
+        <div class="mt-8">
+          <a href="https://www.instagram.com/ateliersauvage_heusy/" target="_blank" rel="noopener noreferrer"
+            class="inline-block border border-stone-800 text-stone-800 px-8 py-3 hover:bg-stone-800 hover:text-stone-50 transition-colors uppercase text-xs tracking-widest font-bold">
+            Nous suivre sur Instagram
+          </a>
+        </div>
+      </div>
+
+      <div class="flex justify-center md:justify-end">
+        <div class="insta-card bg-white border border-stone-200 rounded-sm shadow-2xl w-full max-w-lg hidden"
+          id="insta-card">
+
+          <div class="insta-header flex items-center p-3 border-b border-stone-100">
+            <img id="user-pic" class="profile-pic w-8 h-8 rounded-full border border-stone-200 mr-3"
+              src="/assets/logos/profile.jpg" alt="Profile">
+            <a id="user-name" class="username font-bold text-sm text-stone-900 hover:underline" href="#"
+              target="_blank">...</a>
+          </div>
+
+          <div class="media-container relative bg-stone-100 min-h-[300px] overflow-hidden group">
+            <button
+              class="nav-btn nav-prev absolute top-1/2 -translate-y-1/2 left-3 bg-white/80 w-8 h-8 rounded-full shadow flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-white"
+              id="btn-prev" aria-label="Previous image">❮</button>
+
+            <a id="post-link" href="#" target="_blank" class="block w-full">
+              <img id="current-img" class="insta-image w-full h-auto block fade-element" src="" alt="Post"
+                loading="lazy" decoding="async">
+            </a>
+
+            <button
+              class="nav-btn nav-next absolute top-1/2 -translate-y-1/2 right-3 bg-white/80 w-8 h-8 rounded-full shadow flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-white"
+              id="btn-next" aria-label="Next image">❯</button>
+            <div class="dots-container absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10"
+              id="dots-container"></div>
+          </div>
+
+          <div class="insta-footer p-4">
+            <div class="caption-section text-sm text-stone-800 leading-snug mb-2">
+              <span class="caption-username font-bold mr-1" id="caption-username">...</span>
+              <span id="caption-text" class="text-stone-600"></span>
+            </div>
+            <span class="timestamp text-[10px] uppercase text-stone-400 tracking-wider" id="timestamp">JUST NOW</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact" class="section visit bg-white border-t border-stone-200 scroll-mt-20">
+    <div class="flex flex-col md:flex-row h-auto md:min-h-[500px]">
+
+      <div class="visit-info md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
+        <h2 class="font-serif text-3xl md:text-4xl mb-6 text-stone-900">Nous rendre visite</h2>
+
+        <div class="mb-8 flex items-start gap-3 text-stone-700">
+          <span class="text-xl">📍</span>
+          <span class="text-lg">Chaussée de Theux 59,<br>4802 Heusy</span>
+        </div>
+
+        <div class="mb-8">
+          <div class="flex items-center gap-2 mb-3 text-stone-800 font-bold tracking-wide uppercase text-sm">
+            <span>⏰</span> Ouverture
+          </div>
+          <ul class="horaire-list space-y-2 text-stone-600 pl-4 border-l-2 border-stone-200">
+            <li>Jeudi : 13h30 - 17h30</li>
+            <li>Vendredi : 13h30 - 17h30</li>
+            <li>Samedi : 10h00 - 17h00</li>
+          </ul>
+        </div>
+
+        <p class="text-stone-500 italic">
+          Venez découvrir nos trouvailles, prendre un café, ou simplement discuter autour de beaux objets.
+        </p>
+      </div>
+
+      <div class="map md:w-1/2 h-80 md:h-auto bg-stone-200 relative">
+        <iframe title="Localisation de l'Atelier Sauvage sur Google Maps"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6813.019924593809!2d5.857206384653098!3d50.57806912504362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c08b7d4bb2e013%3A0x6c6c24b0fe43b121!2sAtelier%20Sauvage!5e0!3m2!1sen!2sch!4v1760961389110!5m2!1sen!2sch"
+          class="w-full h-full absolute inset-0" style="border: 0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
