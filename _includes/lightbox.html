@@ -1,19 +1,19 @@
 <div class="lightbox fixed inset-0 z-50 bg-black/95 flex items-center justify-center backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="lightbox">
     
-  <button class="close-btn absolute top-4 right-4 md:top-6 md:right-6 w-14 h-14 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/80 text-stone-400 hover:text-white transition-all z-[60] focus:outline-none" aria-label="Fermer">
-    <span class="w-8 h-8 flex items-center justify-center stroke-2">
+  <button class="close-btn absolute top-4 right-4 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-stone-300 hover:text-white transition-all active:scale-90 z-[70] focus:outline-none" aria-label="Fermer">
+    <span class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center stroke-2">
       {% include icons/x.svg %}
     </span>
   </button>
   
-  <button class="nav-btn prev absolute left-2 md:left-8 w-14 h-14 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/80 text-stone-400 hover:text-white transition-all z-[60] focus:outline-none" aria-label="Précédent">
-    <span class="w-8 h-8 flex items-center justify-center stroke-2">
+  <button class="nav-btn prev absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-stone-300 hover:text-white transition-all active:scale-90 z-[60] focus:outline-none" aria-label="Précédent">
+    <span class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center stroke-2">
       {% include icons/chevron-left.svg %}
     </span>
   </button>
 
-  <button class="nav-btn next absolute right-2 md:right-8 w-14 h-14 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/80 text-stone-400 hover:text-white transition-all z-[60] focus:outline-none" aria-label="Suivant">
-    <span class="w-8 h-8 flex items-center justify-center stroke-2">
+  <button class="nav-btn next absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-stone-300 hover:text-white transition-all active:scale-90 z-[60] focus:outline-none" aria-label="Suivant">
+    <span class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center stroke-2">
       {% include icons/chevron-right.svg %}
     </span>
   </button>
@@ -23,19 +23,18 @@
       <div class="w-full flex items-center justify-center">
           
           <div class="relative inline-flex">
-              
-              <div id="lightbox-counter" class="absolute top-3 right-3 text-white text-xs font-bold bg-black/60 backdrop-blur-[2px] px-3 py-1 rounded-full hidden z-10 pointer-events-none border border-white/10 shadow-sm">
+              <div id="lightbox-counter" class="absolute top-3 left-3 text-white text-xs md:text-sm font-bold bg-black/60 backdrop-blur-md px-3 py-1 rounded-full hidden z-10 pointer-events-none border border-white/10 shadow-sm">
                 1 / 1
               </div>
 
               <img id="lightbox-img" src="" alt="Image agrandie" 
-                   class="w-auto h-auto max-w-full shadow-2xl transition-all duration-300" />
+                   class="w-auto h-auto max-w-full max-h-[85vh] object-contain shadow-2xl transition-all duration-300" />
           </div>
 
       </div>
 
       <div id="lightbox-caption" 
-           class="flex-none text-stone-100 text-center mt-3 max-w-2xl text-sm md:text-base font-normal tracking-wide hidden">
+           class="flex-none text-stone-100 text-center mt-2 max-w-2xl text-sm md:text-base font-light tracking-wide hidden">
       </div>
   </div>
 </div>
