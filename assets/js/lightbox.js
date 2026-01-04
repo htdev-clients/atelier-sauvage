@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentGroupImages = [];
   let currentIndex = 0;
+  
+  // [NEW] Variable to store where the user was on the page
+  let storedScrollY = 0;
 
   // --- 1. CLICK HANDLER ---
   document.addEventListener("click", (e) => {
@@ -83,29 +86,39 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- 3. LAYOUT CALCULATION ---
   const updateLayout = () => {
     if (!lightbox.classList.contains("active")) return;
-
-    // Reset height to measure natural size
     lightboxImg.style.maxHeight = ''; 
 
     const windowHeight = window.innerHeight;
-    
-    // Check mode
     const isCatalog = !lightboxCaption.classList.contains("hidden");
     
-    // Logic: 
-    // Catalog = 32px padding + Caption Height
-    // Interior = 0px padding + 0 Caption Height
     let padding = 0;
     let captionHeight = 0;
 
     if (isCatalog) {
-      padding = 32; // 2rem (p-4 top + bottom)
-      captionHeight = lightboxCaption.offsetHeight + 12; // +12 for mt-3
+      padding = 32; 
+      captionHeight = lightboxCaption.offsetHeight + 12; 
     }
 
     const availableHeight = windowHeight - padding - captionHeight;
-    
     lightboxImg.style.maxHeight = `${availableHeight}px`;
+  };
+
+  // --- [NEW] SCROLL LOCKING FUNCTIONS ---
+  // This is the "Nuclear Option" that physically pins the body
+  const lockBodyScroll = () => {
+    storedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${storedScrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+  };
+
+  const unlockBodyScroll = () => {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, storedScrollY);
   };
 
   // --- 4. LIGHTBOX DISPLAY ---
@@ -119,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
     lightboxImg.srcset = imgData.srcset;
     lightboxImg.alt = imgData.alt;
 
-    // A. ARROWS
     if (total > 1) {
       prevBtn.classList.remove("hidden");
       nextBtn.classList.remove("hidden");
@@ -128,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.classList.add("hidden");
     }
 
-    // B. COUNTER
     if (imgData.isCatalog && total > 1) {
       lightboxCounter.textContent = `${currentIndex + 1} / ${total}`;
       lightboxCounter.classList.remove("hidden");
@@ -136,38 +147,31 @@ document.addEventListener("DOMContentLoaded", () => {
       lightboxCounter.classList.add("hidden");
     }
 
-    // C. MODE SETUP
     lightboxImg.classList.remove("rounded-md");
-
     if (imgData.isCatalog) {
-      // CATALOG MODE
       lightboxCaption.textContent = imgData.alt;
       lightboxCaption.classList.remove("hidden");
-      
       contentContainer.classList.add("p-4");
       lightboxImg.classList.add("rounded-md");
     } else {
-      // INTERIOR MODE
       lightboxCaption.classList.add("hidden");
       contentContainer.classList.remove("p-4");
     }
 
     lightbox.classList.add("active");
     
-    // [NEW] LOCK BODY SCROLL
-    document.body.classList.add("overflow-hidden");
-    
-    // Wait for DOM update
+    // Lock the body immediately
+    lockBodyScroll();
+
     requestAnimationFrame(() => {
         updateLayout();
     });
   };
 
-  // [NEW] CENTRALIZED CLOSE FUNCTION
   const closeLightbox = () => {
     lightbox.classList.remove("active");
-    // [NEW] UNLOCK BODY SCROLL
-    document.body.classList.remove("overflow-hidden");
+    // Unlock the body and restore position
+    unlockBodyScroll();
   };
 
   // --- NAVIGATION ---
@@ -203,9 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  window.addEventListener("resize", () => {
-    updateLayout();
-  });
+  window.addEventListener("resize", updateLayout);
 
   let touchStartX = 0;
   const minSwipeDistance = 50;
