@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lightboxImg.style.maxHeight = `${availableHeight}px`;
   };
 
-  // --- SCROLL LOCKING (THE FIX) ---
+  // --- SCROLL LOCKING FUNCTIONS ---
   const lockBodyScroll = () => {
     // 1. Guard Clause: If body is already fixed, DO NOT update storedScrollY.
     if (document.body.style.position === 'fixed') return;
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lightbox.classList.add("active");
     
-    // Lock body (with logic to prevent bugs)
+    // Lock body
     lockBodyScroll();
 
     requestAnimationFrame(() => {
@@ -190,10 +190,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // [UPDATED] CLOSE FUNCTION WITH CLEANUP
   const closeLightbox = () => {
     lightbox.classList.remove("active");
-    // Unlock body (with logic to prevent smooth scroll animation)
+    // Unlock body
     unlockBodyScroll();
+
+    // Clear image after 300ms (matching transition duration)
+    // This prevents the "ghost" of the previous image appearing on next open
+    setTimeout(() => {
+      lightboxImg.src = "";
+      lightboxImg.srcset = "";
+    }, 300);
   };
 
   // --- NAVIGATION ---
@@ -212,22 +220,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- EVENTS ---
   closeBtn.addEventListener("click", closeLightbox);
   
-  // UPDATED: "Exclusion" Logic
-  // Instead of checking what we clicked, we check what we DIDN'T click.
+  // "Click Outside" Exclusion Logic
   lightbox.addEventListener("click", (e) => {
     const target = e.target;
-    
-    // 1. Check if the click is inside the "Image Wrapper" (the box holding the image & counter)
     const isClickInsideImage = target.closest(".relative.inline-flex");
-    
-    // 2. Check if the click is on the "Caption"
     const isClickOnCaption = target.closest("#lightbox-caption");
-    
-    // 3. Check if the click is on a "Button" (Nav or Close)
-    // (We include this to prevent double-firing closeLightbox if the close button is clicked)
     const isClickOnButton = target.closest("button");
 
-    // If we didn't click any of the above, we must have clicked the background (Curtain, Wrapper, or Padding)
     if (!isClickInsideImage && !isClickOnCaption && !isClickOnButton) {
       closeLightbox();
     }
