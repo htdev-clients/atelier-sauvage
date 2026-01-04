@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentGroupImages = [];
   let currentIndex = 0;
+  
+  // Variable to store the exact pixel position
   let storedScrollY = 0;
 
   // --- 1. CLICK HANDLER ---
@@ -101,25 +103,44 @@ document.addEventListener("DOMContentLoaded", () => {
     lightboxImg.style.maxHeight = `${availableHeight}px`;
   };
 
-  // --- SCROLL LOCKING FUNCTIONS ---
+  // --- SCROLL LOCKING (THE FIX) ---
   const lockBodyScroll = () => {
-    // [FIX] Guard clause: If body is already fixed, exit immediately.
-    // This prevents overwriting 'storedScrollY' with 0 during navigation.
+    // 1. Guard Clause: If body is already fixed, DO NOT update storedScrollY.
     if (document.body.style.position === 'fixed') return;
 
     storedScrollY = window.scrollY;
+    
+    // 2. Prevent Layout Shift (calculate scrollbar width)
+    const scrollbarWidth = window.innerWidth - document.body.clientWidth;
+    
     document.body.style.position = 'fixed';
     document.body.style.top = `-${storedScrollY}px`;
     document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
+    
+    // Add padding to body so content doesn't shift when scrollbar disappears
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
   };
 
   const unlockBodyScroll = () => {
+    // 3. FORCE INSTANT SCROLL (Disable smooth scrolling temporarily)
+    document.documentElement.style.scrollBehavior = 'auto';
+
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
     document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+
+    // Restore position instantly
     window.scrollTo(0, storedScrollY);
+
+    // 4. Re-enable smooth scrolling after the jump is done
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = '';
+    }, 10);
   };
 
   // --- 4. LIGHTBOX DISPLAY ---
@@ -160,6 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     lightbox.classList.add("active");
+    
+    // Lock body (with logic to prevent bugs)
     lockBodyScroll();
 
     requestAnimationFrame(() => {
@@ -169,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const closeLightbox = () => {
     lightbox.classList.remove("active");
+    // Unlock body (with logic to prevent smooth scroll animation)
     unlockBodyScroll();
   };
 
@@ -188,8 +212,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- EVENTS ---
   closeBtn.addEventListener("click", closeLightbox);
   
+  // UPDATED: "Exclusion" Logic
+  // Instead of checking what we clicked, we check what we DIDN'T click.
   lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox || e.target.closest(".lightbox-content") === e.target) {
+    const target = e.target;
+    
+    // 1. Check if the click is inside the "Image Wrapper" (the box holding the image & counter)
+    const isClickInsideImage = target.closest(".relative.inline-flex");
+    
+    // 2. Check if the click is on the "Caption"
+    const isClickOnCaption = target.closest("#lightbox-caption");
+    
+    // 3. Check if the click is on a "Button" (Nav or Close)
+    // (We include this to prevent double-firing closeLightbox if the close button is clicked)
+    const isClickOnButton = target.closest("button");
+
+    // If we didn't click any of the above, we must have clicked the background (Curtain, Wrapper, or Padding)
+    if (!isClickInsideImage && !isClickOnCaption && !isClickOnButton) {
       closeLightbox();
     }
   });
