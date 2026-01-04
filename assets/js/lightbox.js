@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentGroupImages = [];
   let currentIndex = 0;
-  
-  // [NEW] Variable to store where the user was on the page
   let storedScrollY = 0;
 
   // --- 1. CLICK HANDLER ---
@@ -103,9 +101,12 @@ document.addEventListener("DOMContentLoaded", () => {
     lightboxImg.style.maxHeight = `${availableHeight}px`;
   };
 
-  // --- [NEW] SCROLL LOCKING FUNCTIONS ---
-  // This is the "Nuclear Option" that physically pins the body
+  // --- SCROLL LOCKING FUNCTIONS ---
   const lockBodyScroll = () => {
+    // [FIX] Guard clause: If body is already fixed, exit immediately.
+    // This prevents overwriting 'storedScrollY' with 0 during navigation.
+    if (document.body.style.position === 'fixed') return;
+
     storedScrollY = window.scrollY;
     document.body.style.position = 'fixed';
     document.body.style.top = `-${storedScrollY}px`;
@@ -159,8 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     lightbox.classList.add("active");
-    
-    // Lock the body immediately
     lockBodyScroll();
 
     requestAnimationFrame(() => {
@@ -170,7 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const closeLightbox = () => {
     lightbox.classList.remove("active");
-    // Unlock the body and restore position
     unlockBodyScroll();
   };
 
