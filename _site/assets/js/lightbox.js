@@ -154,10 +154,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lightbox.classList.add("active");
     
+    // [NEW] LOCK BODY SCROLL
+    document.body.classList.add("overflow-hidden");
+    
     // Wait for DOM update
     requestAnimationFrame(() => {
         updateLayout();
     });
+  };
+
+  // [NEW] CENTRALIZED CLOSE FUNCTION
+  const closeLightbox = () => {
+    lightbox.classList.remove("active");
+    // [NEW] UNLOCK BODY SCROLL
+    document.body.classList.remove("overflow-hidden");
   };
 
   // --- NAVIGATION ---
@@ -174,18 +184,20 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // --- EVENTS ---
-  closeBtn.addEventListener("click", () => lightbox.classList.remove("active"));
+  closeBtn.addEventListener("click", closeLightbox);
+  
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox || e.target.closest(".lightbox-content") === e.target) {
-      lightbox.classList.remove("active");
+      closeLightbox();
     }
   });
+  
   prevBtn.addEventListener("click", (e) => { e.stopPropagation(); showPrev(); });
   nextBtn.addEventListener("click", (e) => { e.stopPropagation(); showNext(); });
 
   document.addEventListener("keydown", (e) => {
     if (lightbox.classList.contains("active")) {
-      if (e.key === "Escape") lightbox.classList.remove("active");
+      if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowLeft") showPrev();
       if (e.key === "ArrowRight") showNext();
     }
