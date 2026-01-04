@@ -4,7 +4,10 @@ module.exports = {
     "./_layouts/**/*.html",
     "./_includes/**/*.html",
     "./assets/js/**/*.js"
-  ], 
+  ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       fontFamily: {
