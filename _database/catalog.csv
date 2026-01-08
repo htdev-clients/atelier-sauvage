@@ -12,7 +12,7 @@
 24j;Décoration;Petit pot cruchon à lait polychrome faïence Rouen;15;
 24k;Décoration;Petit pot pot carré avec couvercle polychrome faïence Rouen;15;
 25;Meuble;"Table basse de salon carré, vintage, à pavés céramique - signée ADRI (souvent associé à Belarti) ""Coffee table"" - 1960-1970s - 77 x 77 cm";325;
-26;Décoration;"Vase céramique orange à décor bas-relief - ""Fat Lava"" - West Germany - Mid-century";30;pending
+26;Décoration;"Vase céramique orange à décor bas-relief - ""Fat Lava"" - West Germany - Mid-century";30;
 30;Décoration;Vase en opaline rose;18;
 31a;Décoration;Porcelaine asiatique - Petit pot avec couvercle - Motifs écaille or et liséré rouge orangé;40;
 31b;Décoration;Porcelaine asiatique - Vase à décor asiatique ;35;
@@ -21,8 +21,8 @@
 33;Meuble;Meuble bar vintage en palissandre - Poignées en céramique ;520;
 40;Meuble;"Meuble Bar ""oriental"" probablement en noyer, nacre et bois tourné ";250;
 41;Meuble;Table basse de salon, vintage, en teck et pavés de céramique vernissée - Probablement origine scandinave - 1970's - 92 x 52 cm;375;
-45;Décoration;Plat Coupe rose opaline sur pied blanc - 1960's - Origine italienne probable (Empoli);35;pending
-46;Décoration;Vase céramique dessus assymétrique flammé tons rouges et blancs - Origine allemande Bay Keramik - Mid-century;15;pending
+45;Décoration;Plat Coupe rose opaline sur pied blanc - 1960's - Origine italienne probable (Empoli);35;
+46;Décoration;Vase céramique dessus assymétrique flammé tons rouges et blancs - Origine allemande Bay Keramik - Mid-century;15;
 53;Luminaire;Applique en laiton doré et porcelaine à décor de fleurs, à quatre feux - Ht 60 cm ;110;
 54;Luminaire;Lampe Girandole en verre moulé à 3 bras - Ht 49 cm;180;
 55a;Décoration;Pot en céramique texturisée et striée, de forme bulbeuse, avec couvercle - Brutaliste;80;
@@ -30,7 +30,7 @@
 56a;Décoration;Petit vase céramique bleu avec anse;25;
 56b;Décoration;Petit vase céramique brun (anse) ;20;
 56c;Décoration;Petit vase rose et fleurs avec liserés dorés (2 anses) ;25;
-56d;Décoration;Petit vase vert rose et jaune - Origine allemande (Scheurich?) - 1950's;15;pending
+56d;Décoration;Petit vase vert rose et jaune - Origine allemande - 1950's;15;
 56e;Décoration;Céramique petite amphore vintage - Glaçure coulante multicolore et base terracotta;20;
 58;Luminaire;Suspension en verre fumé et métal chromé - Fontana Arte - Ht 80cm;275;
 62;Décoration;Vase céramique Accolay signé;90;
@@ -54,9 +54,9 @@
 98;Décoration;Vase Thulin vert et brun - Ht 11 cm;15;
 101a;Luminaire;Lampe à poser - Pied cylindrique à 2 étages et base chromée - Circa 1970s;195;
 106;Décoration;Service à café vintage orange et vert 34 pièces;215;
-107;Luminaire;Lampe à poser vintage, pied noir et chrome - Circa 1970s - Ht 61cm;150;
-108b;Décoration;Vase vert/brun 2 anses (amphore) West Germany (GDR pottery?) - Ht 22cm ;30;pending
-108f;Décoration;Petit pot Vert/brun West Germany;9;pending
+107;Luminaire;Lampe à poser vintage, pied noir et chrome - Circa 1970s - Ht 61cm;150;Vendu
+108b;Décoration;Vase vert/brun 2 anses (amphore) West Germany - Ht 22cm ;30;
+108f;Décoration;Petit pot Vert/brun West Germany;9;
 110;Meuble;Meuble Console en fer forgé, patine vert de gris, dessus marbre - Fin 19e - Ht 95 x 65 x 30cm;400;
 113;Meuble;Table basse en fer forgé et carreaux de céramique - Ht 56 x 99 x 69 cm ;220;
 114;Décoration;Linogravure Tons oranges Philippe Sadzot Fifi - 50 x 35 cm;90;
@@ -158,7 +158,7 @@
 38;Décoration;Vase en verre Venise, teinté et bullé, travaillé à chaud, à décor appliqué et poudré or rouge - Ht 32 cm;250;
 52;Décoration;Vase en faïence de Desvres à décor japonisant, couvert, en porcelaine polychrome - Ht 23 cm;90;
 57;Luminaire;Suspension épis en métal doré - Maison Boulanger Belgique - Diam 65 cm;210;
-64;Meuble;Petite table d'appojnt ronde de type desserte, roulante, chromée avec 2 plateaux verre;140;
+64;Meuble;Petite table d'appoint ronde de type desserte, roulante, chromée avec 2 plateaux verre;140;
 69b;Décoration;Petit miroir carré vintage style Vasarely;50;
 73;Décoration;Plat à décor floral orangé - Petrus REGOUT Maastricht Flora ;50;
 75;Luminaire;Applique/plafonnier Maison Baguès, vers 1970, fleurs en verre taillé clair et de couleur ambre - 3 feux - Diam 40 cm ;350;
@@ -182,7 +182,6 @@
 200;Luminaire;Paire d'appliques vintage en plexi blanc et rouge - Ht 26 cm;95 ;
 205;Décoration;"Tableau Gouache, Georges WASTERLAIN (1889-1963) ""Le mineur"" - 23 x 16 cm";325;
 207;Décoration;Vase Keralux en céramique verte - Ht 40 cm;160;
-208;Décoration;Huile sur toile - Nature morte à la cafetière - Signée DE HERTOG SYL - 60 x 70 cm;500;
 214;Décoration;Paire de vases asiatiques, en porcelaine chinoise à décor de fleurs et d'oiseaux - Marque apocryphe Da Qing Tongzhi Nian Zhi 3e quart XXe Siècle - Ht 31cm;400;
 216e;Décoration;Vase en céramique, à petit col, turquoise flammé de brun - Ht 18 cm ;45;
 219a;Décoration;Vase à décor d'oiseaux stylisés peints, dans le style Boch Keramis - 1930s - Ht 30 cm ;70;
@@ -191,12 +190,12 @@
 254;Décoration;Vase en grès vernissé, orange et brun - 1970s - Fat Lava - Glaçage dégradé - Scheurich West Germany - Ht 38 cm ;195;
 257a;Décoration;Vase en verre Murano à motifs mouchetés et gradient de couleur - rose, bleu - Ht 35 cm;165;
 257b;Décoration;Vase en cristal à décor floral, gravé à l'acide - Signé Leonard - Ht 20 cm ;130;
-258;Décoration;Tableau DESMET JEAN-LEON Composition - Technique mixte sur board - Signé et daté 1986 au dos.;;pending
-259;Décoration;Tableau BOERI F.J. Jeune femme et homme à la flûte - Lithographie en couleurs - Signé et numéroté 5/10;;pending
+258;Décoration;Tableau DESMET JEAN-LEON Composition - Technique mixte sur board - Signé et daté 1986 au dos.;400;
+259;Décoration;Tableau BOERI F.J. Jeune femme et homme à la flûte - Lithographie en couleurs - Signé et numéroté 5/10;400;
 261;Décoration;"Huile sur papier ""Paysage de campagne"", signée Pierre FIEVET - 62 x 85 cm";530;
 264a;Meuble;Table de salon piètement en chrome et 2 plateaux en verre fumé - 110 x 58 x 37 cm;400;
 264b;Meuble;Ensemble de 3 tables gigognes, piètement en chrome et tablettes en verre fumé;300;
-268;Meuble;Porte manteau fer forgé vintage 1950;;pending
+268;Meuble;Porte manteau fer forgé vintage 1950;170;
 286;Décoration;Huile sur toile - Forêt ensoleillée - Signée Nizet ;300;
 24g;Décoration;Petit pot polychrome faïence Rouen, 2 anses et couvercle, type sucrier ;50;
 173a;Décoration;Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert clair - Signé sous la base ;45;
