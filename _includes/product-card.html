@@ -1,0 +1,43 @@
+<div class="gallery-item-wrapper relative group {{ include.extra_classes }}" 
+     {% if include.show_category %}data-category="{{ include.item.category | strip | escape }}"{% endif %}>
+
+  <div class="aspect-[3/4] overflow-hidden rounded-sm shadow-sm bg-stone-200 relative">
+
+    <img src="/assets/img/catalog/2000/{{ include.item.number }}-2000.jpeg" srcset="
+              /assets/img/catalog/480/{{ include.item.number }}-480.jpeg 480w,
+              /assets/img/catalog/800/{{ include.item.number }}-800.jpeg 800w,
+              /assets/img/catalog/2000/{{ include.item.number }}-2000.jpeg 2000w
+      " sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" loading="lazy" decoding="async"
+      alt="{{ include.item.description | escape }}" data-item-number="{{ include.item.number }}"
+      data-image-count="{{ include.item.images | default: 1 }}"
+      class="gallery-item w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 cursor-zoom-in" />
+
+    {% if include.item.images > 1 %}
+    <div class="absolute top-3 left-3 z-10 pointer-events-none">
+      <span class="flex items-center justify-center bg-black/40 backdrop-blur-sm text-white/90 p-2 rounded-full border border-white/20 shadow-sm">
+        <span class="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full stroke-2">
+          {% include icons/images.svg %}
+        </span>
+      </span>
+    </div>
+    {% endif %}
+
+    {% assign status_cleaned = include.item.statut | downcase | strip %}
+    {% if status_cleaned == 'vendu' %}
+    <div class="absolute top-3 right-3 z-10 pointer-events-none">
+      <span class="bg-red-700 text-white border border-white/50 text-[10px] sm:text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-full shadow-md">
+        Vendu
+      </span>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="mt-3 flex justify-between items-start text-sm text-stone-800">
+    <p class="font-medium line-clamp-2 pr-2">{{ include.item.description }}</p>
+
+    {% unless status_cleaned == 'vendu' %}
+    <span class="whitespace-nowrap font-bold text-stone-600">{{ include.item.prix }}&nbsp;€</span>
+    {% endunless %}
+  </div>
+
+</div>
