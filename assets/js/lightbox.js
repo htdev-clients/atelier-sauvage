@@ -245,14 +245,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("resize", updateLayout);
 
+  // --- TOUCH GESTURES (SWIPE) ---
   let touchStartX = 0;
+  let touchStartY = 0;
   const minSwipeDistance = 50;
-  lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+
+  lightbox.addEventListener('touchstart', (e) => { 
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
   lightbox.addEventListener('touchend', (e) => {
     const touchEndX = e.changedTouches[0].screenX;
-    if (Math.abs(touchStartX - touchEndX) > minSwipeDistance) {
-      if (touchStartX - touchEndX > 0) showNext();
-      else showPrev();
+    const touchEndY = e.changedTouches[0].screenY;
+    
+    // Calculate differences
+    const diffX = touchStartX - touchEndX; // > 0 means Swipe Left (Next)
+    const diffY = touchEndY - touchStartY; // > 0 means Swipe Down (Close)
+
+    // Check which direction is dominant (Vertical vs Horizontal)
+    if (Math.abs(diffY) > Math.abs(diffX)) {
+      // VERTICAL SWIPE DETECTED
+      // Only close if swiping DOWN (diffY > 0) and enough distance
+      if (diffY > minSwipeDistance) {
+        closeLightbox();
+      }
+    } else {
+      // HORIZONTAL SWIPE DETECTED (Existing Logic)
+      if (Math.abs(diffX) > minSwipeDistance) {
+        if (diffX > 0) showNext();
+        else showPrev();
+      }
     }
   }, { passive: true });
 });
