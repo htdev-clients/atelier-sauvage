@@ -21,7 +21,6 @@ module Jekyll
           ).map do |row|
             row_hash = row.to_hash
             
-            # --- NEW: FILTER PENDING ITEMS ---
             # Check the 'statut' column. If it is 'pending', we skip this item entirely.
             current_status = row_hash['statut'].to_s.downcase.strip
             if current_status == 'pending'
@@ -30,6 +29,7 @@ module Jekyll
             # ---------------------------------
             
             # --- AUTO-DISCOVERY IMAGE LOGIC ---
+            row_hash['number'] = row_hash['number'].to_s.strip
             number = row_hash['number']
             
             # 1. Start with 1 (Main image always exists)
