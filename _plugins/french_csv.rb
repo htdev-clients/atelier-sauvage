@@ -32,6 +32,8 @@ module Jekyll
             row_hash['number'] = row_hash['number'].to_s.strip
             number = row_hash['number']
             
+            row_hash['category'] = row_hash['category'].to_s.strip
+
             # 1. Start with 1 (Main image always exists)
             count = 1
             
