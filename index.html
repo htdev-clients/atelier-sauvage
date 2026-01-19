@@ -95,19 +95,11 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
 
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-16">
 
-        {% assign available_items = "" | split: "" %}
-        {% for item in site.data.catalog %}
-        {% assign status_cleaned = item.statut | downcase | strip %}
-        {% unless status_cleaned == 'vendu' %}
-        {% assign available_items = available_items | push: item %}
-        {% endunless %}
-        {% endfor %}
+        {% assign latest_items = site.data.catalog | reverse | slice: 0, 4 %}
 
-        {% assign random_items = available_items | sample: 4 %}
-
-        {% for item in random_items %}
-          {% capture responsive_classes %}{% if forloop.index == 4 %}block md:hidden lg:block{% endif %}{% endcapture %}
-          {% include product-card.html item=item extra_classes=responsive_classes %}
+        {% for item in latest_items %}
+        {% capture responsive_classes %}{% if forloop.index == 4 %}block md:hidden lg:block{% endif %}{% endcapture %}
+        {% include product-card.html item=item extra_classes=responsive_classes %}
         {% endfor %}
 
       </div>
@@ -202,10 +194,16 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
           <div class="flex items-center gap-2 mb-3 text-stone-800 font-bold tracking-wide uppercase text-sm">
             <span>⏰</span> Ouverture
           </div>
-          <ul class="horaire-list space-y-2 text-stone-600 pl-4 border-l-2 border-stone-200">
-            <li>Jeudi : 13h30 - 17h30</li>
-            <li>Vendredi : 13h30 - 17h30</li>
-            <li>Samedi : 10h00 - 17h00</li>
+          <ul class="space-y-3 pl-4 border-l-2 border-stone-200">
+            <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
+              <span>Jeudi</span> <span>14h - 17h</span>
+            </li>
+            <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
+              <span>Vendredi</span> <span>14h - 17h</span>
+            </li>
+            <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
+              <span>Samedi</span> <span>14h - 17h</span>
+            </li>
           </ul>
         </div>
 

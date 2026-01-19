@@ -31,9 +31,10 @@ permalink: /catalogue/
 
   <section class="section gallery py-8 sm:py-12 px-4 max-w-7xl mx-auto">
 
-    <div class="mb-8 sm:mb-10 flex flex-nowrap items-center justify-between sm:justify-start w-full gap-2 sm:gap-8 border-b border-stone-300 pb-4">
-      
-      <button 
+    <div
+      class="mb-8 sm:mb-10 flex flex-nowrap items-center justify-between sm:justify-start w-full gap-2 sm:gap-8 border-b border-stone-300 pb-4">
+
+      <button
         class="filter-btn text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest text-stone-900 font-bold transition-colors"
         data-filter="all">
         Tout
@@ -41,27 +42,26 @@ permalink: /catalogue/
 
       {% comment %} Generate Categories {% endcomment %}
       {% assign categories = site.data.catalog | map: 'category' | uniq | sort %}
-      
+
       {% for category in categories %}
-        {% assign cat_clean = category | strip %}
-        {% if cat_clean != empty %}
-        <button 
-          class="filter-btn text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest text-stone-400 font-normal transition-colors hover:text-stone-600"
-          data-filter="{{ cat_clean | escape }}">
-          {{ cat_clean }}
-        </button>
-        {% endif %}
+      {% assign cat_clean = category | strip %}
+      {% if cat_clean != empty %}
+      <button
+        class="filter-btn text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest text-stone-400 font-normal transition-colors hover:text-stone-600"
+        data-filter="{{ cat_clean | escape }}">
+        {{ cat_clean }}
+      </button>
+      {% endif %}
       {% endfor %}
 
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
 
-      {% assign catalog_size = site.data.catalog.size %}
-      {% assign shuffled_items = site.data.catalog | sample: catalog_size %}
+      {% assign reversed_items = site.data.catalog | reverse %}
 
-      {% for item in shuffled_items %}
-        {% include product-card.html item=item show_category=true %}
+      {% for item in reversed_items %}
+      {% include product-card.html item=item show_category=true %}
       {% endfor %}
 
     </div>
@@ -81,13 +81,13 @@ permalink: /catalogue/
 
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          
+
           // 1. Update Styles (Minimalist: Bold/Black vs Normal/Grey)
           filterBtns.forEach(b => {
             b.classList.remove('text-stone-900', 'font-bold');
             b.classList.add('text-stone-400', 'font-normal');
           });
-          
+
           btn.classList.remove('text-stone-400', 'font-normal');
           btn.classList.add('text-stone-900', 'font-bold');
 
@@ -96,7 +96,7 @@ permalink: /catalogue/
 
           items.forEach(item => {
             const itemCategory = item.getAttribute('data-category');
-            
+
             if (filterValue === 'all' || itemCategory === filterValue) {
               item.classList.remove('hidden');
               item.classList.add('animate-in', 'fade-in', 'duration-500');
