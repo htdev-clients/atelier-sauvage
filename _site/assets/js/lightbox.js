@@ -223,41 +223,71 @@ document.addEventListener("DOMContentLoaded", () => {
     const exitClass = direction === 1 ? "-translate-x-20" : "translate-x-20";
     const enterClass = direction === 1 ? "translate-x-20" : "-translate-x-20";
 
+    // 1. Slide OUT
     lightboxImg.classList.add("opacity-0", exitClass);
 
     setTimeout(() => {
-      // [ADD THIS]: Stop if the lightbox was closed during the exit animation
+      // Safety check: if user closed lightbox while fading out
       if (!lightbox.classList.contains("active")) {
         isAnimating = false;
-        lightboxImg.classList.remove("opacity-0", exitClass); // Cleanup
+        lightboxImg.classList.remove("opacity-0", exitClass);
         return;
       }
 
-      // ... existing swap logic ...
+      // Update Index Logic
       if (direction === 1) {
         currentIndex = (currentIndex + 1) % currentGroupImages.length;
       } else {
-        currentIndex =
-          (currentIndex - 1 + currentGroupImages.length) %
-          currentGroupImages.length;
+        currentIndex = (currentIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
       }
 
+      // --- NEW LOGIC STARTS HERE ---
+      
+      // Define the "Reveal" function
+      const showNewImage = () => {
+        updateLayout();
+
+        // 1. Teleport to start position (while still invisible)
+        lightboxImg.style.transition = "none";
+        lightboxImg.classList.remove(exitClass);
+        lightboxImg.classList.add(enterClass);
+        
+        // 2. Force Browser Reflow (Crucial)
+        void lightboxImg.offsetWidth; 
+
+        // 3. Slide IN (Only now do we reveal it)
+        lightboxImg.style.transition = "";
+        lightboxImg.classList.remove("opacity-0", enterClass);
+
+        // 4. Finish Animation
+        setTimeout(() => {
+          isAnimating = false;
+        }, 300);
+      };
+
+      // Set up the listener *BEFORE* changing the src
+      lightboxImg.onload = () => {
+        showNewImage();
+        lightboxImg.onload = null; // Cleanup listener
+      };
+
+      // Fallback in case of error (prevents getting stuck)
+      lightboxImg.onerror = () => {
+        showNewImage();
+        lightboxImg.onload = null;
+      };
+
+      // Change the source (This triggers the load)
       updateImageContent();
-      updateLayout();
 
-      lightboxImg.style.transition = "none";
-      lightboxImg.classList.remove(exitClass);
-      lightboxImg.classList.add(enterClass);
+      // Handle case where image is already cached/instant
+      if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
+        // Triggers manually if the browser didn't fire the event
+        // (Rare but possible with some caching strategies)
+        lightboxImg.onload(); 
+      }
 
-      void lightboxImg.offsetWidth;
-
-      lightboxImg.style.transition = "";
-      lightboxImg.classList.remove("opacity-0", enterClass);
-
-      setTimeout(() => {
-        isAnimating = false;
-      }, 300);
-    }, 300);
+    }, 300); // Wait for exit animation
   };
 
   // [UPDATED] CLOSE FUNCTION WITH CLEANUP
