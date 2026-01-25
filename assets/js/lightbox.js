@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentGroupImages = [];
   let currentIndex = 0;
-  
+
   // Variable to store the exact pixel position
   let storedScrollY = 0;
 
@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const img = e.target;
     if (img.tagName === "IMG" && img.closest(".gallery")) {
-      const isCatalog = img.src.includes("/catalog/") || img.hasAttribute("data-image-count");
+      const isCatalog =
+        img.src.includes("/catalog/") || img.hasAttribute("data-image-count");
       if (isCatalog) {
         setupCatalogGroup(img);
       } else {
@@ -47,56 +48,70 @@ document.addEventListener("DOMContentLoaded", () => {
       src: p.image.src,
       srcset: p.image.srcset,
       alt: p.image.alt,
-      isCatalog: false
+      isCatalog: false,
     }));
     currentIndex = rawImgs.indexOf(img);
     if (currentIndex !== -1) openLightbox();
   };
 
   const setupCatalogGroup = (img) => {
-    const itemNumber = img.dataset.itemNumber; 
-    const count = parseInt(img.dataset.imageCount || 1); 
-    currentGroupImages = [{
-      src: img.src,
-      srcset: img.srcset,
-      alt: img.alt,
-      isCatalog: true
-    }];
+    const itemNumber = img.dataset.itemNumber;
+    const count = parseInt(img.dataset.imageCount || 1);
+    currentGroupImages = [
+      {
+        src: img.src,
+        srcset: img.srcset,
+        alt: img.alt,
+        isCatalog: true,
+      },
+    ];
 
     if (itemNumber && count > 1) {
       for (let i = 1; i < count; i++) {
-        const newSrc = img.src.replace(`${itemNumber}-2000.jpeg`, `${itemNumber}-${i}-2000.jpeg`);
+        const newSrc = img.src.replace(
+          `${itemNumber}-2000.jpeg`,
+          `${itemNumber}-${i}-2000.jpeg`,
+        );
         const newSrcset = img.srcset
-          .replace(new RegExp(`${itemNumber}-480.jpeg`, 'g'), `${itemNumber}-${i}-480.jpeg`)
-          .replace(new RegExp(`${itemNumber}-800.jpeg`, 'g'), `${itemNumber}-${i}-800.jpeg`)
-          .replace(new RegExp(`${itemNumber}-2000.jpeg`, 'g'), `${itemNumber}-${i}-2000.jpeg`);
-        
+          .replace(
+            new RegExp(`${itemNumber}-480.jpeg`, "g"),
+            `${itemNumber}-${i}-480.jpeg`,
+          )
+          .replace(
+            new RegExp(`${itemNumber}-800.jpeg`, "g"),
+            `${itemNumber}-${i}-800.jpeg`,
+          )
+          .replace(
+            new RegExp(`${itemNumber}-2000.jpeg`, "g"),
+            `${itemNumber}-${i}-2000.jpeg`,
+          );
+
         currentGroupImages.push({
           src: newSrc,
           srcset: newSrcset,
           alt: img.alt,
-          isCatalog: true
+          isCatalog: true,
         });
       }
     }
-    currentIndex = 0; 
+    currentIndex = 0;
     openLightbox();
   };
 
   // --- 3. LAYOUT CALCULATION ---
   const updateLayout = () => {
     if (!lightbox.classList.contains("active")) return;
-    lightboxImg.style.maxHeight = ''; 
+    lightboxImg.style.maxHeight = "";
 
     const windowHeight = window.innerHeight;
     const isCatalog = !lightboxCaption.classList.contains("hidden");
-    
+
     let padding = 0;
     let captionHeight = 0;
 
     if (isCatalog) {
-      padding = 32; 
-      captionHeight = lightboxCaption.offsetHeight + 12; 
+      padding = 32;
+      captionHeight = lightboxCaption.offsetHeight + 12;
     }
 
     const availableHeight = windowHeight - padding - captionHeight;
@@ -106,18 +121,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- SCROLL LOCKING FUNCTIONS ---
   const lockBodyScroll = () => {
     // 1. Guard Clause: If body is already fixed, DO NOT update storedScrollY.
-    if (document.body.style.position === 'fixed') return;
+    if (document.body.style.position === "fixed") return;
 
     storedScrollY = window.scrollY;
-    
+
     // 2. Prevent Layout Shift (calculate scrollbar width)
     const scrollbarWidth = window.innerWidth - document.body.clientWidth;
-    
-    document.body.style.position = 'fixed';
+
+    document.body.style.position = "fixed";
     document.body.style.top = `-${storedScrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
-    
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+
     // Add padding to body so content doesn't shift when scrollbar disappears
     if (scrollbarWidth > 0) {
       document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -126,34 +141,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const unlockBodyScroll = () => {
     // 3. FORCE INSTANT SCROLL (Disable smooth scrolling temporarily)
-    document.documentElement.style.scrollBehavior = 'auto';
+    document.documentElement.style.scrollBehavior = "auto";
 
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
 
     // Restore position instantly
     window.scrollTo(0, storedScrollY);
 
     // 4. Re-enable smooth scrolling after the jump is done
     setTimeout(() => {
-      document.documentElement.style.scrollBehavior = '';
+      document.documentElement.style.scrollBehavior = "";
     }, 10);
   };
 
   // --- 4. LIGHTBOX DISPLAY ---
-  const openLightbox = () => {
+  // Helper: Updates the image and caption without animation logic
+  const updateImageContent = () => {
     if (!currentGroupImages[currentIndex]) return;
 
     const imgData = currentGroupImages[currentIndex];
     const total = currentGroupImages.length;
-    
+
     lightboxImg.src = imgData.src;
     lightboxImg.srcset = imgData.srcset;
     lightboxImg.alt = imgData.alt;
 
+    // Button visibility
     if (total > 1) {
       prevBtn.classList.remove("hidden");
       nextBtn.classList.remove("hidden");
@@ -162,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.classList.add("hidden");
     }
 
+    // Counter
     if (imgData.isCatalog && total > 1) {
       lightboxCounter.textContent = `${currentIndex + 1} / ${total}`;
       lightboxCounter.classList.remove("hidden");
@@ -169,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
       lightboxCounter.classList.add("hidden");
     }
 
+    // Caption & Styles
     lightboxImg.classList.remove("rounded-md");
     if (imgData.isCatalog) {
       lightboxCaption.textContent = imgData.alt;
@@ -179,15 +198,66 @@ document.addEventListener("DOMContentLoaded", () => {
       lightboxCaption.classList.add("hidden");
       contentContainer.classList.remove("p-4");
     }
+  };
+
+  const openLightbox = () => {
+    // Initial load: Update content immediately without slide animation
+    updateImageContent();
 
     lightbox.classList.add("active");
-    
+
     // Lock body
     lockBodyScroll();
 
     requestAnimationFrame(() => {
-        updateLayout();
+      updateLayout();
     });
+  };
+
+  let isAnimating = false;
+
+  const animateSlide = (direction) => {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const exitClass = direction === 1 ? "-translate-x-20" : "translate-x-20";
+    const enterClass = direction === 1 ? "translate-x-20" : "-translate-x-20";
+
+    lightboxImg.classList.add("opacity-0", exitClass);
+
+    setTimeout(() => {
+      // [ADD THIS]: Stop if the lightbox was closed during the exit animation
+      if (!lightbox.classList.contains("active")) {
+        isAnimating = false;
+        lightboxImg.classList.remove("opacity-0", exitClass); // Cleanup
+        return;
+      }
+
+      // ... existing swap logic ...
+      if (direction === 1) {
+        currentIndex = (currentIndex + 1) % currentGroupImages.length;
+      } else {
+        currentIndex =
+          (currentIndex - 1 + currentGroupImages.length) %
+          currentGroupImages.length;
+      }
+
+      updateImageContent();
+      updateLayout();
+
+      lightboxImg.style.transition = "none";
+      lightboxImg.classList.remove(exitClass);
+      lightboxImg.classList.add(enterClass);
+
+      void lightboxImg.offsetWidth;
+
+      lightboxImg.style.transition = "";
+      lightboxImg.classList.remove("opacity-0", enterClass);
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 300);
+    }, 300);
   };
 
   // [UPDATED] CLOSE FUNCTION WITH CLEANUP
@@ -206,20 +276,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- NAVIGATION ---
   const showPrev = () => {
-    if (currentGroupImages.length <= 1) return; 
-    currentIndex = (currentIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
-    openLightbox();
+    if (currentGroupImages.length <= 1) return;
+    animateSlide(-1); // -1 for previous
   };
 
   const showNext = () => {
-    if (currentGroupImages.length <= 1) return; 
-    currentIndex = (currentIndex + 1) % currentGroupImages.length;
-    openLightbox();
+    if (currentGroupImages.length <= 1) return;
+    animateSlide(1); // 1 for next
   };
 
   // --- EVENTS ---
   closeBtn.addEventListener("click", closeLightbox);
-  
+
   // "Click Outside" Exclusion Logic
   lightbox.addEventListener("click", (e) => {
     const target = e.target;
@@ -231,9 +299,15 @@ document.addEventListener("DOMContentLoaded", () => {
       closeLightbox();
     }
   });
-  
-  prevBtn.addEventListener("click", (e) => { e.stopPropagation(); showPrev(); });
-  nextBtn.addEventListener("click", (e) => { e.stopPropagation(); showNext(); });
+
+  prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPrev();
+  });
+  nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showNext();
+  });
 
   document.addEventListener("keydown", (e) => {
     if (lightbox.classList.contains("active")) {
@@ -250,32 +324,40 @@ document.addEventListener("DOMContentLoaded", () => {
   let touchStartY = 0;
   const minSwipeDistance = 50;
 
-  lightbox.addEventListener('touchstart', (e) => { 
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-  }, { passive: true });
+  lightbox.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    },
+    { passive: true },
+  );
 
-  lightbox.addEventListener('touchend', (e) => {
-    const touchEndX = e.changedTouches[0].screenX;
-    const touchEndY = e.changedTouches[0].screenY;
-    
-    // Calculate differences
-    const diffX = touchStartX - touchEndX; // > 0 means Swipe Left (Next)
-    const diffY = touchEndY - touchStartY; // > 0 means Swipe Down (Close)
+  lightbox.addEventListener(
+    "touchend",
+    (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
 
-    // Check which direction is dominant (Vertical vs Horizontal)
-    if (Math.abs(diffY) > Math.abs(diffX)) {
-      // VERTICAL SWIPE DETECTED
-      // Only close if swiping DOWN (diffY > 0) and enough distance
-      if (diffY > minSwipeDistance) {
-        closeLightbox();
+      // Calculate differences
+      const diffX = touchStartX - touchEndX; // > 0 means Swipe Left (Next)
+      const diffY = touchEndY - touchStartY; // > 0 means Swipe Down (Close)
+
+      // Check which direction is dominant (Vertical vs Horizontal)
+      if (Math.abs(diffY) > Math.abs(diffX)) {
+        // VERTICAL SWIPE DETECTED
+        // Only close if swiping DOWN (diffY > 0) and enough distance
+        if (diffY > minSwipeDistance) {
+          closeLightbox();
+        }
+      } else {
+        // HORIZONTAL SWIPE DETECTED (Existing Logic)
+        if (Math.abs(diffX) > minSwipeDistance) {
+          if (diffX > 0) showNext();
+          else showPrev();
+        }
       }
-    } else {
-      // HORIZONTAL SWIPE DETECTED (Existing Logic)
-      if (Math.abs(diffX) > minSwipeDistance) {
-        if (diffX > 0) showNext();
-        else showPrev();
-      }
-    }
-  }, { passive: true });
+    },
+    { passive: true },
+  );
 });
