@@ -387,18 +387,32 @@ document.addEventListener("DOMContentLoaded", () => {
       const touchEndY = e.changedTouches[0].screenY;
 
       // Calculate differences
-      const diffX = touchStartX - touchEndX; // > 0 means Swipe Left (Next)
-      const diffY = touchEndY - touchStartY; // > 0 means Swipe Down (Close)
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchEndY - touchStartY;
 
-      // Check which direction is dominant (Vertical vs Horizontal)
+      // Check dominant direction
       if (Math.abs(diffY) > Math.abs(diffX)) {
-        // VERTICAL SWIPE DETECTED
-        // Only close if swiping DOWN (diffY > 0) and enough distance
+        // VERTICAL SWIPE (Down)
         if (diffY > minSwipeDistance) {
-          closeLightbox();
+          // --- NEW ANIMATION LOGIC ---
+          // 1. Slide down and Fade out
+          lightboxImg.classList.add("translate-y-24", "opacity-0");
+          if (lightboxCaption) lightboxCaption.classList.add("opacity-0");
+          if (lightboxCounter) lightboxCounter.classList.add("opacity-0");
+
+          // 2. Wait for animation, then close
+          setTimeout(() => {
+            closeLightbox();
+
+            // 3. Cleanup the "slide down" class so it doesn't affect the next open
+            setTimeout(() => {
+              lightboxImg.classList.remove("translate-y-24");
+            }, 300);
+          }, 300); // Match CSS duration
+          // ---------------------------
         }
       } else {
-        // HORIZONTAL SWIPE DETECTED (Existing Logic)
+        // HORIZONTAL SWIPE (Next/Prev)
         if (Math.abs(diffX) > minSwipeDistance) {
           if (diffX > 0) showNext();
           else showPrev();

@@ -5,6 +5,13 @@ module.exports = {
     "./_includes/**/*.html",
     "./assets/js/**/*.js"
   ],
+  safelist: [
+    'translate-y-24',
+    'translate-x-20',
+    '-translate-x-20',
+    'opacity-0',
+    'transition-opacity'
+  ],
   future: {
     hoverOnlyWhenSupported: true,
   },
