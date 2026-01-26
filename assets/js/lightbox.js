@@ -201,17 +201,45 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const openLightbox = () => {
-    // Initial load: Update content immediately without slide animation
+    // 1. Set the data (src, text, etc.)
     updateImageContent();
 
-    lightbox.classList.add("active");
+    // 2. Hide content immediately so it doesn't show prematurely
+    lightboxImg.classList.add("opacity-0");
+    if (typeof lightboxCaption !== "undefined") {
+      lightboxCaption.classList.add("opacity-0");
+    }
 
-    // Lock body
+    // 3. Open the modal (starts the background dark fade-in)
+    lightbox.classList.add("active");
     lockBodyScroll();
 
-    requestAnimationFrame(() => {
+    // 4. Define the reveal logic
+    const revealContent = () => {
       updateLayout();
-    });
+      lightboxImg.classList.remove("opacity-0");
+      if (typeof lightboxCaption !== "undefined") {
+        lightboxCaption.classList.remove("opacity-0");
+      }
+    };
+
+    // 5. Wait for the image to load before revealing content
+    if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
+      // If cached, show immediately
+      revealContent();
+    } else {
+      // If loading, wait for the event
+      lightboxImg.onload = () => {
+        revealContent();
+        lightboxImg.onload = null;
+      };
+
+      // Fallback (prevents empty screen if image breaks)
+      lightboxImg.onerror = () => {
+        revealContent();
+        lightboxImg.onload = null;
+      };
+    }
   };
 
   let isAnimating = false;
@@ -238,11 +266,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (direction === 1) {
         currentIndex = (currentIndex + 1) % currentGroupImages.length;
       } else {
-        currentIndex = (currentIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
+        currentIndex =
+          (currentIndex - 1 + currentGroupImages.length) %
+          currentGroupImages.length;
       }
 
       // --- NEW LOGIC STARTS HERE ---
-      
+
       // Define the "Reveal" function
       const showNewImage = () => {
         updateLayout();
@@ -251,9 +281,9 @@ document.addEventListener("DOMContentLoaded", () => {
         lightboxImg.style.transition = "none";
         lightboxImg.classList.remove(exitClass);
         lightboxImg.classList.add(enterClass);
-        
+
         // 2. Force Browser Reflow (Crucial)
-        void lightboxImg.offsetWidth; 
+        void lightboxImg.offsetWidth;
 
         // 3. Slide IN (Only now do we reveal it)
         lightboxImg.style.transition = "";
@@ -284,9 +314,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
         // Triggers manually if the browser didn't fire the event
         // (Rare but possible with some caching strategies)
-        lightboxImg.onload(); 
+        lightboxImg.onload();
       }
-
     }, 300); // Wait for exit animation
   };
 
