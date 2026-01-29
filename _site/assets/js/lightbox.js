@@ -201,17 +201,42 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const openLightbox = () => {
-    // Initial load: Update content immediately without slide animation
+    // 1. Prepare data
     updateImageContent();
 
-    lightbox.classList.add("active");
+    // 2. Set initial state to INVISIBLE
+    // Add counter to the list
+    lightboxImg.classList.add("opacity-0");
+    if (lightboxCaption) lightboxCaption.classList.add("opacity-0");
+    if (lightboxCounter) lightboxCounter.classList.add("opacity-0"); // <--- NEW
 
-    // Lock body
+    // 3. Open Modal
+    lightbox.classList.add("active");
     lockBodyScroll();
 
-    requestAnimationFrame(() => {
+    // Helper: Reveals content
+    const revealContent = () => {
       updateLayout();
-    });
+      requestAnimationFrame(() => {
+        lightboxImg.classList.remove("opacity-0");
+        if (lightboxCaption) lightboxCaption.classList.remove("opacity-0");
+        if (lightboxCounter) lightboxCounter.classList.remove("opacity-0"); // <--- NEW
+      });
+    };
+
+    // 4. Loading Logic
+    if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
+      setTimeout(revealContent, 50);
+    } else {
+      lightboxImg.onload = () => {
+        revealContent();
+        lightboxImg.onload = null;
+      };
+      lightboxImg.onerror = () => {
+        revealContent();
+        lightboxImg.onload = null;
+      };
+    }
   };
 
   let isAnimating = false;
@@ -223,71 +248,63 @@ document.addEventListener("DOMContentLoaded", () => {
     const exitClass = direction === 1 ? "-translate-x-20" : "translate-x-20";
     const enterClass = direction === 1 ? "translate-x-20" : "-translate-x-20";
 
-    // 1. Slide OUT
+    // 1. Slide OUT (Fade out Image AND Counter)
     lightboxImg.classList.add("opacity-0", exitClass);
+    if (lightboxCounter) lightboxCounter.classList.add("opacity-0"); // <--- NEW
 
     setTimeout(() => {
-      // Safety check: if user closed lightbox while fading out
       if (!lightbox.classList.contains("active")) {
         isAnimating = false;
         lightboxImg.classList.remove("opacity-0", exitClass);
+        if (lightboxCounter) lightboxCounter.classList.remove("opacity-0"); // Cleanup
         return;
       }
 
-      // Update Index Logic
       if (direction === 1) {
         currentIndex = (currentIndex + 1) % currentGroupImages.length;
       } else {
-        currentIndex = (currentIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
+        currentIndex =
+          (currentIndex - 1 + currentGroupImages.length) %
+          currentGroupImages.length;
       }
 
-      // --- NEW LOGIC STARTS HERE ---
-      
-      // Define the "Reveal" function
       const showNewImage = () => {
         updateLayout();
 
-        // 1. Teleport to start position (while still invisible)
+        // Teleport
         lightboxImg.style.transition = "none";
         lightboxImg.classList.remove(exitClass);
         lightboxImg.classList.add(enterClass);
-        
-        // 2. Force Browser Reflow (Crucial)
-        void lightboxImg.offsetWidth; 
 
-        // 3. Slide IN (Only now do we reveal it)
+        void lightboxImg.offsetWidth;
+
+        // Slide IN (Reveal Image AND Counter)
         lightboxImg.style.transition = "";
         lightboxImg.classList.remove("opacity-0", enterClass);
+        if (lightboxCounter) lightboxCounter.classList.remove("opacity-0"); // <--- NEW
 
-        // 4. Finish Animation
         setTimeout(() => {
           isAnimating = false;
         }, 300);
       };
 
-      // Set up the listener *BEFORE* changing the src
       lightboxImg.onload = () => {
         showNewImage();
-        lightboxImg.onload = null; // Cleanup listener
+        lightboxImg.onload = null;
       };
 
-      // Fallback in case of error (prevents getting stuck)
       lightboxImg.onerror = () => {
         showNewImage();
         lightboxImg.onload = null;
       };
 
-      // Change the source (This triggers the load)
+      // The text actually updates HERE, while hidden
       updateImageContent();
 
-      // Handle case where image is already cached/instant
       if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
-        // Triggers manually if the browser didn't fire the event
-        // (Rare but possible with some caching strategies)
-        lightboxImg.onload(); 
+        lightboxImg.onload();
       }
-
-    }, 300); // Wait for exit animation
+    }, 300);
   };
 
   // [UPDATED] CLOSE FUNCTION WITH CLEANUP
@@ -370,18 +387,32 @@ document.addEventListener("DOMContentLoaded", () => {
       const touchEndY = e.changedTouches[0].screenY;
 
       // Calculate differences
-      const diffX = touchStartX - touchEndX; // > 0 means Swipe Left (Next)
-      const diffY = touchEndY - touchStartY; // > 0 means Swipe Down (Close)
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchEndY - touchStartY;
 
-      // Check which direction is dominant (Vertical vs Horizontal)
+      // Check dominant direction
       if (Math.abs(diffY) > Math.abs(diffX)) {
-        // VERTICAL SWIPE DETECTED
-        // Only close if swiping DOWN (diffY > 0) and enough distance
+        // VERTICAL SWIPE (Down)
         if (diffY > minSwipeDistance) {
-          closeLightbox();
+          // --- NEW ANIMATION LOGIC ---
+          // 1. Slide down and Fade out
+          lightboxImg.classList.add("translate-y-24", "opacity-0");
+          if (lightboxCaption) lightboxCaption.classList.add("opacity-0");
+          if (lightboxCounter) lightboxCounter.classList.add("opacity-0");
+
+          // 2. Wait for animation, then close
+          setTimeout(() => {
+            closeLightbox();
+
+            // 3. Cleanup the "slide down" class so it doesn't affect the next open
+            setTimeout(() => {
+              lightboxImg.classList.remove("translate-y-24");
+            }, 300);
+          }, 300); // Match CSS duration
+          // ---------------------------
         }
       } else {
-        // HORIZONTAL SWIPE DETECTED (Existing Logic)
+        // HORIZONTAL SWIPE (Next/Prev)
         if (Math.abs(diffX) > minSwipeDistance) {
           if (diffX > 0) showNext();
           else showPrev();
