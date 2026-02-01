@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- 2. SETUP FUNCTIONS ---
   const setupInteriorGroup = (img) => {
+    if (window.innerWidth < 768) return;
     const section = img.closest(".gallery");
     const rawImgs = Array.from(section.querySelectorAll("img"));
     const positionedImages = rawImgs.map((image) => {
