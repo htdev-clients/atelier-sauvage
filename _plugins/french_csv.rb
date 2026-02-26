@@ -8,7 +8,7 @@ module Jekyll
 
       csv_path = File.join(site.source, '_database', 'catalog.csv')
       # Path to your images (Source of Truth)
-      img_dir = File.join(site.source, 'assets', 'img', 'catalog', '2000')
+      img_dir = File.join(site.source, 'assets', 'img', 'catalog', '1400')
 
       if File.exist?(csv_path)
         csv_text = File.read(csv_path, encoding: 'bom|utf-8')
@@ -40,7 +40,7 @@ module Jekyll
             # 2. Check for extras: {number}-1, {number}-2...
             loop do
               # Strictly checking for .jpeg only
-              next_name = "#{number}-#{count}-2000.jpeg"
+              next_name = "#{number}-#{count}-1400.webp"
               path = File.join(img_dir, next_name)
               
               if File.exist?(path)

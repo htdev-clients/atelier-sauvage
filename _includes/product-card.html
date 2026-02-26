@@ -3,10 +3,10 @@
 
   <div class="aspect-[3/4] overflow-hidden rounded-sm shadow-sm bg-stone-200 relative">
 
-    <img src="/assets/img/catalog/2000/{{ include.item.number }}-2000.jpeg" srcset="
-              /assets/img/catalog/480/{{ include.item.number }}-480.jpeg 480w,
-              /assets/img/catalog/800/{{ include.item.number }}-800.jpeg 800w,
-              /assets/img/catalog/2000/{{ include.item.number }}-2000.jpeg 2000w
+    <img src="/assets/img/catalog/1400/{{ include.item.number }}-1400.webp" srcset="
+              /assets/img/catalog/480/{{ include.item.number }}-480.webp 480w,
+              /assets/img/catalog/800/{{ include.item.number }}-800.webp 800w,
+              /assets/img/catalog/1400/{{ include.item.number }}-1400.webp 1400w
       " sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" loading="lazy" decoding="async"
       alt="{{ include.item.description | escape }}" data-item-number="{{ include.item.number }}"
       data-image-count="{{ include.item.images | default: 1 }}"
