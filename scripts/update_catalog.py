@@ -107,13 +107,20 @@ def parse_drive_filename(name: str):
 def item_number_from_webp(filename: str) -> str:
     """
     '100-1400.webp'    → '100'
+    '100-480.webp'     → '100'
     '100-1-1400.webp'  → '100'
-    '155a-1-1400.webp' → '155a'
+    '100-1-480.webp'   → '100'
+    '155a-1-800.webp'  → '155a'
     """
-    stem = filename.replace("-1400.webp", "")
+    stem = Path(filename).stem  # strip .webp
+    # strip trailing size (-480, -800, -1400)
     parts = stem.rsplit("-", 1)
     if len(parts) == 2 and parts[1].isdigit():
-        return parts[0]
+        stem = parts[0]
+    # strip optional index (-1, -2, ...)
+    parts = stem.rsplit("-", 1)
+    if len(parts) == 2 and parts[1].isdigit():
+        stem = parts[0]
     return stem
 
 
