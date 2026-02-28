@@ -1,6 +1,12 @@
 {
   "status": "success",
-  "message": "232 articles mis à jour, 0 image(s) supprimée(s).",
-  "missing_items": [],
-  "timestamp": "2026-02-27T19:07:24.626082+00:00"
+  "total_lots": 231,
+  "new_lots": [],
+  "removed_lots": [
+    "296"
+  ],
+  "photos_downloaded": 0,
+  "photos_added_to_existing": [],
+  "orphaned_images_deleted": 0,
+  "timestamp": "2026-02-28T00:26:54.605357+00:00"
 }
