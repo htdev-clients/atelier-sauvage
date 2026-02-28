@@ -154,12 +154,10 @@ def process_image(data: bytes, item_number: str, index):
 def download_photos(drive, existing_items: set[str]):
     """
     Download and process all photos from the Drive folder.
-    Returns (new_lots, updated_lots, drive_files, total) where:
+    Returns (new_lots, updated_lots, total) where:
       - new_lots: sorted list of item numbers not in existing_items
       - updated_lots: sorted list of existing item numbers that received new photos
-      - drive_files: raw Drive file dicts (for deletion after validation)
       - total: number of files processed
-    Drive files are NOT deleted here — deletion happens after validation passes.
     """
     results = (
         drive.files()
@@ -192,20 +190,7 @@ def download_photos(drive, existing_items: set[str]):
         else:
             new_lots.add(item_number)
 
-    return sorted(new_lots), sorted(updated_lots), files, len(files)
-
-
-def delete_drive_files(drive, files: list):
-    """Delete processed files from the Drive folder."""
-    if not files:
-        return
-    print(f"\nDeleting {len(files)} file(s) from Drive folder...")
-    for f in files:
-        try:
-            drive.files().delete(fileId=f["id"]).execute()
-            print(f"  Deleted: {f['name']}")
-        except Exception as e:
-            print(f"  Warning: could not delete {f['name']}: {e}")
+    return sorted(new_lots), sorted(updated_lots), len(files)
 
 # ── Validation ────────────────────────────────────────────────────────────────
 
@@ -269,7 +254,7 @@ def main():
 
     # 3. Download new photos (must happen before validation)
     print("\nDownloading photos from Drive...")
-    new_photo_lots, updated_photo_lots, drive_files, total_downloaded = download_photos(
+    new_photo_lots, updated_photo_lots, total_downloaded = download_photos(
         drive, existing_items
     )
 
@@ -293,15 +278,12 @@ def main():
 
     print(f"  All {len(sheet_items)} lots have images.")
 
-    # 5. Delete Drive files now that validation passed
-    delete_drive_files(drive, drive_files)
-
-    # 6. Delete images for items removed from the sheet
+    # 5. Delete images for items removed from the sheet
     print("\nCleaning up orphaned images...")
     deleted_files = cleanup_orphans(sheet_items)
     print(f"  {deleted_files} file(s) deleted." if deleted_files else "  Nothing to clean up.")
 
-    # 7. Update CSV
+    # 6. Update CSV
     print("\nUpdating CSV...")
     update_csv(sheets)
 
