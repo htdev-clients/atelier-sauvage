@@ -1,12 +1,8 @@
 {
-  "status": "success",
-  "total_lots": 231,
-  "new_lots": [],
-  "removed_lots": [
+  "status": "failure",
+  "message": "1 lot(s) sans image dans le Drive.",
+  "missing_lots": [
     "296"
   ],
-  "photos_downloaded": 0,
-  "photos_added_to_existing": [],
-  "orphaned_images_deleted": 0,
-  "timestamp": "2026-02-28T00:26:54.605357+00:00"
+  "timestamp": "2026-02-28T00:30:49.758675+00:00"
 }
