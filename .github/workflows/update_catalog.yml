@@ -36,6 +36,11 @@ jobs:
           if git diff --staged --quiet; then
             echo "Nothing changed, skipping commit."
           else
-            git commit -m "catalog update [automated]"
+            if [ "${{ job.status }}" = "success" ]; then
+              MSG="catalog update [automated]"
+            else
+              MSG="catalog update status [automated] [skip ci]"
+            fi
+            git commit -m "$MSG"
             git push
           fi
