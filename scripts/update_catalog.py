@@ -178,13 +178,17 @@ def download_photos(drive, existing_items: set[str]):
         name = f["name"]
         item_number, index = parse_drive_filename(name)
         print(f"Processing {name} ...")
-        request = drive.files().get_media(fileId=f["id"])
-        buf = io.BytesIO()
-        dl = MediaIoBaseDownload(buf, request)
-        done = False
-        while not done:
-            _, done = dl.next_chunk()
-        process_image(buf.getvalue(), item_number, index)
+        try:
+            request = drive.files().get_media(fileId=f["id"])
+            buf = io.BytesIO()
+            dl = MediaIoBaseDownload(buf, request)
+            done = False
+            while not done:
+                _, done = dl.next_chunk()
+            process_image(buf.getvalue(), item_number, index)
+        except Exception as e:
+            print(f"  ERROR processing {name}: {e}")
+            continue
         if item_number in existing_items:
             updated_lots.add(item_number)
         else:
@@ -239,6 +243,20 @@ def write_last_run(payload: dict):
 
 def main():
     print("=== Atelier Sauvage catalog update ===")
+    try:
+        _run()
+    except SystemExit:
+        raise
+    except Exception as e:
+        print(f"\n❌ Unexpected error: {e}")
+        try:
+            write_last_run({"status": "failure", "message": str(e)})
+        except Exception:
+            pass
+        sys.exit(1)
+
+
+def _run():
     sheets, drive = get_services()
 
     # 1. Load existing items before any changes

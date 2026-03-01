@@ -3,6 +3,10 @@ name: Update Catalog
 on:
   workflow_dispatch:
 
+concurrency:
+  group: catalog-update
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
