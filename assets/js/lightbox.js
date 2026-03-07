@@ -70,21 +70,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (itemNumber && count > 1) {
       for (let i = 1; i < count; i++) {
         const newSrc = img.src.replace(
-          `${itemNumber}-2000.jpeg`,
-          `${itemNumber}-${i}-2000.jpeg`,
+          `${itemNumber}-1400.webp`,
+          `${itemNumber}-${i}-1400.webp`,
         );
         const newSrcset = img.srcset
           .replace(
-            new RegExp(`${itemNumber}-480.jpeg`, "g"),
-            `${itemNumber}-${i}-480.jpeg`,
+            new RegExp(`${itemNumber}-480.webp`, "g"),
+            `${itemNumber}-${i}-480.webp`,
           )
           .replace(
-            new RegExp(`${itemNumber}-800.jpeg`, "g"),
-            `${itemNumber}-${i}-800.jpeg`,
+            new RegExp(`${itemNumber}-800.webp`, "g"),
+            `${itemNumber}-${i}-800.webp`,
           )
           .replace(
-            new RegExp(`${itemNumber}-2000.jpeg`, "g"),
-            `${itemNumber}-${i}-2000.jpeg`,
+            new RegExp(`${itemNumber}-1400.webp`, "g"),
+            `${itemNumber}-${i}-1400.webp`,
           );
 
         currentGroupImages.push({
