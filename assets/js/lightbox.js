@@ -58,41 +58,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const setupCatalogGroup = (img) => {
     const itemNumber = img.dataset.itemNumber;
     const count = parseInt(img.dataset.imageCount || 1);
-    currentGroupImages = [
-      {
-        src: img.src,
-        srcset: img.srcset,
-        alt: img.alt,
-        isCatalog: true,
-      },
-    ];
+
+    const makeImageData = (suffix) => ({
+      src: `/assets/img/catalog/1400/${itemNumber}${suffix}-1400.webp`,
+      srcset: [
+        `/assets/img/catalog/480/${itemNumber}${suffix}-480.webp 480w`,
+        `/assets/img/catalog/800/${itemNumber}${suffix}-800.webp 800w`,
+        `/assets/img/catalog/1400/${itemNumber}${suffix}-1400.webp 1400w`,
+      ].join(", "),
+      alt: img.alt,
+      isCatalog: true,
+    });
+
+    currentGroupImages = [makeImageData("")];
 
     if (itemNumber && count > 1) {
       for (let i = 1; i < count; i++) {
-        const newSrc = img.src.replace(
-          `${itemNumber}-1400.webp`,
-          `${itemNumber}-${i}-1400.webp`,
-        );
-        const newSrcset = img.srcset
-          .replace(
-            new RegExp(`${itemNumber}-480.webp`, "g"),
-            `${itemNumber}-${i}-480.webp`,
-          )
-          .replace(
-            new RegExp(`${itemNumber}-800.webp`, "g"),
-            `${itemNumber}-${i}-800.webp`,
-          )
-          .replace(
-            new RegExp(`${itemNumber}-1400.webp`, "g"),
-            `${itemNumber}-${i}-1400.webp`,
-          );
-
-        currentGroupImages.push({
-          src: newSrc,
-          srcset: newSrcset,
-          alt: img.alt,
-          isCatalog: true,
-        });
+        currentGroupImages.push(makeImageData(`-${i}`));
       }
     }
     currentIndex = 0;
