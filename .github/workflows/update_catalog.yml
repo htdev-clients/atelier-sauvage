@@ -3,6 +3,11 @@ name: Update Catalog
 on:
   workflow_dispatch:
 
+concurrency:
+  group: catalog-update
+  cancel-in-progress: false
+
+
 permissions:
   contents: write
 
@@ -32,10 +37,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add scripts/.last_run.json _database/catalog.csv assets/img/catalog/
+          if [ "${{ job.status }}" = "success" ]; then
+            git add scripts/.last_run.json _database/catalog.csv assets/img/catalog/
+            MSG="catalog update [automated]"
+          else
+            git add scripts/.last_run.json
+            MSG="catalog update status [automated] [skip ci]"
+          fi
           if git diff --staged --quiet; then
             echo "Nothing changed, skipping commit."
           else
-            git commit -m "catalog update [automated]"
+            git commit -m "$MSG"
             git push
           fi
