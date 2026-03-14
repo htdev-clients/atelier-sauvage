@@ -1,12 +1,12 @@
 {
   "status": "success",
   "total_lots": 234,
-  "new_lots": [
-    "104"
-  ],
+  "new_lots": [],
   "removed_lots": [],
   "photos_downloaded": 5,
-  "photos_added_to_existing": [],
+  "photos_added_to_existing": [
+    "104"
+  ],
   "orphaned_images_deleted": 0,
-  "timestamp": "2026-03-14T17:24:55.395469+00:00"
+  "timestamp": "2026-03-14T17:31:51.699703+00:00"
 }
