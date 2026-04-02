@@ -24,9 +24,9 @@ from PIL import Image, ImageOps
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-SHEET_ID    = "SHEET_ID_REDACTED"
+SHEET_ID    = os.environ["SHEET_ID"]
 SHEET_TAB   = "Sheet1"
-FOLDER_ID   = "FOLDER_ID_REDACTED"
+FOLDER_ID   = os.environ["FOLDER_ID"]
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets.readonly",

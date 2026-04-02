@@ -30,6 +30,8 @@ jobs:
       - name: Run update script
         env:
           GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+          SHEET_ID: ${{ vars.SHEET_ID }}
+          FOLDER_ID: ${{ vars.FOLDER_ID }}
         run: python scripts/update_catalog.py
 
       - name: Commit and push changes
