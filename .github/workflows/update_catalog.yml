@@ -50,5 +50,6 @@ jobs:
             echo "Nothing changed, skipping commit."
           else
             git commit -m "$MSG"
+            git pull --rebase origin main
             git push
           fi
