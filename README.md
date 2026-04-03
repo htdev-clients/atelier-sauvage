@@ -40,39 +40,3 @@ The homepage displays the shop's latest Instagram post, fetched at request time 
 
 ### Responsive design
 Fully responsive layout built with Tailwind CSS. The navbar collapses to a burger menu on mobile. The catalog grid adapts from 1 to 3 columns depending on screen size.
-
-## Project structure
-
-```
-.
-├── _database/
-│   └── catalog.csv           # Catalog data (source of truth: Google Sheets)
-├── _includes/                # Jekyll partials (navbar, footer, product card, lightbox)
-├── _layouts/                 # Page layouts
-├── _plugins/
-│   └── catalog_generator.rb  # Reads CSV, generates catalog pages, detects image count
-├── assets/
-│   ├── css/                  # Tailwind source + compiled output
-│   ├── fonts/
-│   ├── img/catalog/          # Product images (480 / 800 / 1400px WebP)
-│   └── js/                   # Vanilla JS (lightbox, navbar, Instagram card)
-├── functions/
-│   └── instagram.js          # Cloudflare Pages Function — Instagram proxy
-├── scripts/
-│   ├── update_catalog.py     # Catalog automation script (run by GitHub Actions)
-│   ├── convert_to_webp.py    # One-time JPEG → WebP migration script
-│   └── .last_run.json        # Written on every pipeline run (success or failure)
-└── .github/workflows/
-    └── update_catalog.yml    # GitHub Actions workflow (workflow_dispatch)
-```
-
-## Environment variables
-
-The automation pipeline relies on the following variables, none of which are stored in the repository:
-
-| Name | Where | Used by |
-|---|---|---|
-| `GOOGLE_CREDENTIALS_JSON` | GitHub secret | `update_catalog.py` — Google Sheets & Drive auth |
-| `SHEET_ID` | GitHub variable | `update_catalog.py` — target spreadsheet |
-| `FOLDER_ID` | GitHub variable | `update_catalog.py` — Drive folder with photos |
-| `INSTAGRAM_TOKEN` | Cloudflare KV | `functions/instagram.js` — Instagram Graph API |
