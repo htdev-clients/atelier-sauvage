@@ -2,3 +2,6 @@
 tailwindcss
 .venv/
 _site/
+.claude/
+.vscode/
+.jekyll-cache/
