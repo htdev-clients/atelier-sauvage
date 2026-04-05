@@ -1,0 +1,109 @@
+---
+layout: default
+title: Événements – Atelier Sauvage
+description: Expositions, rencontres et ateliers à l'Atelier Sauvage à Heusy.
+---
+
+{% assign upcoming_events = site.events | where: "status", "upcoming" | sort: "start_date" %}
+{% assign past_events     = site.events | where: "status", "past"     | sort: "start_date" | reverse %}
+
+<header class="relative h-[40svh] min-h-[300px] w-full flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="/assets/img/general/2000/facade-2000.jpg" srcset="
+            /assets/img/general/480/facade-480.jpg   480w,
+            /assets/img/general/800/facade-800.jpg   800w,
+            /assets/img/general/2000/facade-2000.jpg 2000w
+          " sizes="100vw" alt="Façade du magasin Atelier Sauvage" class="w-full h-full object-cover"
+      fetchpriority="high" decoding="async" />
+    <div class="absolute inset-0 bg-black/50 mix-blend-multiply"></div>
+  </div>
+
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white space-y-4">
+    <h1 class="font-serif text-4xl sm:text-5xl font-light tracking-wide drop-shadow-lg">
+      Événements
+    </h1>
+    <div class="w-16 h-px bg-white/80 mx-auto"></div>
+    <p class="text-sm md:text-base font-light tracking-widest uppercase text-white/90">
+      Expositions, rencontres & ateliers
+    </p>
+  </div>
+</header>
+
+<main class="bg-stone-50 min-h-screen">
+  <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+
+    {% comment %}— À VENIR —{% endcomment %}
+    <section class="mb-24 md:mb-32">
+      <div class="border-t border-stone-300 pt-10 mb-24">
+        <h2 class="font-serif text-xl md:text-2xl uppercase tracking-[0.15em] text-stone-900">Événements à venir</h2>
+      </div>
+      {% if upcoming_events.size > 0 %}
+        {% for event in upcoming_events %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center{% unless forloop.last %} mb-20{% endunless %}">
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-stone-400 mb-4">{{ event.label }}</p>
+            <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-3 leading-tight">{{ event.title }}</h2>
+            <p class="text-stone-500 text-sm uppercase tracking-widest mb-8">{{ event.date_label }}</p>
+            <p class="text-stone-600 text-lg font-light leading-relaxed">{{ event.description }}</p>
+          </div>
+          <div class="relative overflow-hidden rounded-sm shadow-2xl aspect-[4/5]">
+            <img src="{{ event.cover.src }}" alt="{{ event.cover.alt }}"
+                 class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="text-stone-500 font-light italic">Aucun événement prévu pour le moment.</p>
+      {% endif %}
+    </section>
+
+    {% comment %}— ÉVÉNEMENTS PASSÉS —{% endcomment %}
+    {% if past_events.size > 0 %}
+    <section>
+      <div class="border-t border-stone-300 pt-10 mb-24">
+        <h2 class="font-serif text-xl md:text-2xl uppercase tracking-[0.15em] text-stone-900">Événements passés</h2>
+      </div>
+      {% for event in past_events %}
+      <div{% unless forloop.last %} class="mb-24 md:mb-32 pb-24 md:pb-32 border-b border-stone-200"{% endunless %}>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
+
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-stone-400 mb-4">{{ event.label }}</p>
+            <h3 class="font-serif text-3xl md:text-4xl text-stone-900 mb-3 leading-tight">{{ event.title }}</h3>
+            <p class="text-stone-500 text-sm uppercase tracking-widest mb-8">{{ event.date_label }}</p>
+            <p class="text-stone-600 text-lg font-light leading-relaxed mb-10">{{ event.description }}</p>
+
+            {% if event.gallery.size > 0 %}
+            <div class="gallery grid grid-cols-2 gap-3">
+              {% for photo in event.gallery %}
+              <div class="aspect-square overflow-hidden rounded-sm">
+                <img src="{{ photo.src }}" alt="{{ photo.alt }}"
+                     class="w-full h-full object-cover md:cursor-zoom-in hover:scale-105 transition-transform duration-500 ease-in-out"
+                     loading="lazy" decoding="async">
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="relative overflow-hidden rounded-sm shadow-xl aspect-[4/5]">
+            <img src="{{ event.cover.src }}" alt="{{ event.cover.alt }}"
+                 class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </div>
+
+        </div>
+
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if upcoming_events.size == 0 and past_events.size == 0 %}
+    <div class="text-center py-20 text-stone-500">
+      <p class="font-light italic">Aucun événement pour le moment.</p>
+    </div>
+    {% endif %}
+
+  </div>
+</main>
