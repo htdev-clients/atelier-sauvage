@@ -75,15 +75,15 @@ description: Expositions, rencontres et ateliers à l'Atelier Sauvage à Heusy.
         <h3 class="font-serif text-3xl md:text-4xl text-stone-900 mb-3 leading-tight">{{ event.title }}</h3>
         <p class="text-stone-500 text-sm uppercase tracking-widest mb-8">{{ event.date_label }}</p>
         {% if event.gallery.size > 0 %}
-        <div class="gallery grid grid-cols-5 gap-3">
+        <div class="gallery grid grid-cols-2 md:grid-cols-5 gap-3">
           {% for photo in event.gallery %}
           <div class="aspect-square overflow-hidden rounded-sm">
             <img src="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp"
                  srcset="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp 480w,
                          /assets/img/events/{{ event.slug }}/800/{{ photo.name }}-800.webp 800w"
-                 sizes="20vw"
+                 sizes="(min-width: 768px) 20vw, 50vw"
                  alt="{{ photo.alt }}"
-                 class="w-full h-full object-cover md:cursor-zoom-in hover:scale-105 transition-transform duration-500 ease-in-out"
+                 class="w-full h-full object-cover cursor-zoom-in hover:scale-105 transition-transform duration-500 ease-in-out"
                  loading="lazy" decoding="async">
           </div>
           {% endfor %}
