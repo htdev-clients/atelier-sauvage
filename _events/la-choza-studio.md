@@ -6,24 +6,24 @@ start_date: 2026-03-21
 end_date: 2026-04-04
 status: past
 gallery:
-  - src: /assets/img/events/la-choza-studio/photo-1.jpg
+  - name: photo-1
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-2.jpg
+  - name: photo-2
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-3.jpg
+  - name: photo-3
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-4.jpg
+  - name: photo-4
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-5.jpg
+  - name: photo-5
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-6.jpg
+  - name: photo-6
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-7.jpg
+  - name: photo-7
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-8.jpg
+  - name: photo-8
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-9.jpg
+  - name: photo-9
     alt: La Choza Studio à l'Atelier Sauvage
-  - src: /assets/img/events/la-choza-studio/photo-10.jpg
+  - name: photo-10
     alt: La Choza Studio à l'Atelier Sauvage
 ---

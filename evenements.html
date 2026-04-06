@@ -47,7 +47,12 @@ description: Expositions, rencontres et ateliers à l'Atelier Sauvage à Heusy.
             <p class="text-stone-600 text-lg font-light leading-relaxed">{{ event.description }}</p>
           </div>
           <div class="relative overflow-hidden rounded-sm shadow-2xl aspect-[4/5]">
-            <img src="{{ event.cover.src }}" alt="{{ event.cover.alt }}"
+            <img src="/assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp"
+                 srcset="/assets/img/events/{{ event.slug }}/480/{{ event.cover.name }}-480.webp 480w,
+                         /assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp 800w,
+                         /assets/img/events/{{ event.slug }}/1400/{{ event.cover.name }}-1400.webp 1400w"
+                 sizes="(min-width: 768px) 50vw, 100vw"
+                 alt="{{ event.cover.alt }}"
                  class="w-full h-full object-cover" loading="lazy" decoding="async">
           </div>
         </div>
@@ -73,7 +78,11 @@ description: Expositions, rencontres et ateliers à l'Atelier Sauvage à Heusy.
         <div class="gallery grid grid-cols-5 gap-3">
           {% for photo in event.gallery %}
           <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="{{ photo.src }}" alt="{{ photo.alt }}"
+            <img src="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp"
+                 srcset="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp 480w,
+                         /assets/img/events/{{ event.slug }}/800/{{ photo.name }}-800.webp 800w"
+                 sizes="20vw"
+                 alt="{{ photo.alt }}"
                  class="w-full h-full object-cover md:cursor-zoom-in hover:scale-105 transition-transform duration-500 ease-in-out"
                  loading="lazy" decoding="async">
           </div>
