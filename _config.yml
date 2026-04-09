@@ -1,4 +1,8 @@
 title: Atelier Sauvage
+
+collections:
+  events:
+    output: false
 description: Objets vintage, design et galerie à Verviers
 url: "https://ateliersauvageheusy.be"
 baseurl: ""
@@ -10,6 +14,7 @@ exclude:
   - node_modules
   - package.json
   - package-lock.json
+  - tailwindcss
   - tailwind.config.js
   - input.css
   - README.md

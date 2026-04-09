@@ -22,8 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (img.tagName === "IMG" && img.closest(".gallery")) {
       const isCatalog =
         img.src.includes("/catalog/") || img.hasAttribute("data-image-count");
+      const isEvent = img.src.includes("/events/");
       if (isCatalog) {
         setupCatalogGroup(img);
+      } else if (isEvent) {
+        setupEventGroup(img);
       } else {
         setupInteriorGroup(img);
       }
@@ -33,6 +36,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- 2. SETUP FUNCTIONS ---
   const setupInteriorGroup = (img) => {
     if (window.innerWidth < 768) return;
+    const section = img.closest(".gallery");
+    const rawImgs = Array.from(section.querySelectorAll("img"));
+    const positionedImages = rawImgs.map((image) => {
+      const rect = image.getBoundingClientRect();
+      return { image, rect };
+    });
+    positionedImages.sort((a, b) => {
+      const tolerance = 15;
+      const diffY = a.rect.top - b.rect.top;
+      if (Math.abs(diffY) > tolerance) return diffY;
+      return a.rect.left - b.rect.left;
+    });
+    currentGroupImages = positionedImages.map((p) => ({
+      src: p.image.src,
+      srcset: p.image.srcset,
+      alt: p.image.alt,
+      isCatalog: false,
+    }));
+    currentIndex = rawImgs.indexOf(img);
+    if (currentIndex !== -1) openLightbox();
+  };
+
+  const setupEventGroup = (img) => {
     const section = img.closest(".gallery");
     const rawImgs = Array.from(section.querySelectorAll("img"));
     const positionedImages = rawImgs.map((image) => {
