@@ -1,34 +1,21 @@
 {
-  "status": "failure",
-  "message": "27 lot(s) sans image dans le Drive.",
-  "missing_lots": [
+  "status": "success",
+  "total_lots": 242,
+  "new_lots": [
+    "310"
+  ],
+  "removed_lots": [],
+  "photos_downloaded": 21,
+  "photos_added_to_existing": [
+    "127",
+    "153",
     "16",
     "21",
     "55a",
     "71",
     "81",
-    "84",
-    "127",
-    "153",
-    "154",
-    "158",
-    "160",
-    "165",
-    "170h",
-    "183",
-    "195",
-    "198",
-    "204",
-    "211",
-    "235",
-    "255",
-    "281",
-    "283",
-    "284",
-    "142",
-    "264b",
-    "268",
-    "155b"
+    "84"
   ],
-  "timestamp": "2026-04-12T09:27:28.416135+00:00"
+  "orphaned_images_deleted": 0,
+  "timestamp": "2026-04-14T01:00:22.132514+00:00"
 }

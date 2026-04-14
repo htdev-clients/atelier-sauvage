@@ -18,7 +18,7 @@
 31b;Décoration;Porcelaine asiatique - Vase à décor asiatique ;35;
 31c;Décoration;Porcelaine asiatique - Petit pot carré avec couvercle à décor asiatique ;25;
 32;Meuble;Bureau Napoléon III, bois noirci - Un grand tiroir en ceinture - Quatre pieds fuselés  réunis par une entretoise - Ht 84 x 75 x 47 cm;170;
-33;Meuble;Meuble bar vintage en palissandre - Poignées en céramique ;520;
+33;Meuble;Meuble bar vintage en palissandre - Poignées en céramique ;520;Vendu
 40;Meuble;"Meuble Bar ""oriental"" probablement en noyer, nacre et bois tourné ";250;
 41;Meuble;Table basse de salon, vintage, en teck et pavés de céramique vernissée - Probablement origine scandinave - 1970's - 92 x 52 cm;375;
 45;Décoration;Plat Coupe rose opaline sur pied blanc - 1960's - Origine italienne probable (Empoli);35;
@@ -44,7 +44,7 @@
 83;Luminaire;Applique fer et pendeloques - Ht 36cm;75;
 84;Décoration;Verres Roemer (série de 9);125;Vendu
 88;Luminaire;Lampadaire à 2 points de lumière vintage - Ht 160cm;170;
-90;Décoration;Vase japonais en porcelaine Imari - Forme double gourde - Ht 24 cm;80;
+90;Décoration;Vase japonais en porcelaine Imari - Forme double gourde - Ht 24 cm;80;Vendu
 92;Décoration;Peinture sur tissu Astini signée à Bali - 40 x 30cm;80;
 94a;Décoration;Lot de 2 tasses et sous tasses à fleur bleues - Bernardaud Limoges ;18;
 94b;Décoration;Lot de 2 tasses et sous tasses bleues - Raynaud Limoges ;18;
@@ -113,7 +113,7 @@
 204;Décoration;Tableau Etude de portraits - Huile sur toile signée en bas à droite - 80 x 60 cm;220;
 206;Décoration;Jean Michel FOLON (1934-2005) Paysage surréaliste - Lithographie - 41 x 54 cm;300;
 208;Décoration;Tableau Huile sur toile - Nature morte à la cafetière DE HERTOG SYL - 60 x 70 cm;500;
-210;Meuble;Paire de fauteuils noirs, chrome et teck, bon état général, attribution possible à BERNADOTTE S (Sigvard) (1907- 2002) - 74 x 70 x 64 cm;1200;
+210;Meuble;Paire de fauteuils noirs, chrome et teck, bon état général, attribution possible à BERNADOTTE S (Sigvard) (1907- 2002) - 74 x 70 x 64 cm;1200;Vendu
 211;Luminaire;Lampe de bureau ajustable en aluminium, éditeur NEDALO - Circa 1950 - Ht 44 cm;275;
 216a;Décoration;Petit pot en céramique, brun et bleuté, de type cache-pot - Ht 10,5 x diam 12 cm ;45;
 216b;Décoration;Petit vase en céramique, type pique fleurs, estampillé SASSI MILICI - Ht 12cm ;80;
@@ -194,7 +194,7 @@
 173b;Décoration;Cendrier VAL SAINT LAMBERT en cristal rectangulaire de couleur violette (8 x 12 x 4.5cm) - Signé sous la base ;45;Vendu
 261;Décoration;"Huile sur papier ""Paysage de campagne"", signée Pierre FIEVET - 62 x 85 cm";530;
 264a;Meuble;Table de salon piètement en chrome et 2 plateaux en verre fumé - 110 x 58 x 37 cm;400;Vendu
-264b;Meuble;Ensemble de 3 tables gigognes, piètement en chrome et tablettes en verre fumé;300;
+264b;Meuble;Ensemble de 3 tables gigognes, piètement en chrome et tablettes en verre fumé;300;Vendu
 268;Meuble;Porte manteau fer forgé vintage 1950;170;
 286;Décoration;Huile sur toile - Forêt ensoleillée - Signée Nizet ;300;
 24g;Décoration;Petit pot polychrome faïence Rouen, 2 anses et couvercle, type sucrier ;50;
@@ -231,7 +231,7 @@
 100;Décoration;Service à diner et à café, vintage, en porcelaine - 56 pièces;400;
 295;Décoration;Vase fleurs vintage bleu/rose/vert;75;
 296;Décoration;Grand globe ancien en verre, avec socle bois - Diam 25 cm Ht 45 cm;115;
-279;Luminaire;Lampe à pose en métal laqué noir, base et dessus en métal type laiton - Ht 28 cm ;300;
+279;Luminaire;Lampe à pose en métal laqué noir, base et dessus en métal type laiton - Ht 28 cm ;300;Vendu
 104;Décoration;Pichet en faïence italienne à décor figuratif (majolique) et anse torsadée - Fin XIXe ou début XXe siècle  Ht 30 cm;180;
 308;Décoration;"Vase ansé en céramique vernissée, Vallauris, ""fat lava glaze"" ";115;
 303;Décoration;"Vase orange ""space Age"" - Origine scandinave probable - Mid-20th century ";80;
@@ -241,3 +241,4 @@
 301;Décoration;"Eau-forte Jos Delfosse ""Place St Denis en hiver - Signée et numérotée - 32x48 cm";135;
 300;Décoration;"Eau forte Jean Donnay ""Vieille à l'ombre portée"" - Signée et numérotée - 22 x 32 cm 
 ";110;
+310;Meuble;Table de salon de style Belgochrom - H40 x L130 x P70 cm /;550;
