@@ -14,6 +14,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -33,6 +34,20 @@ jobs:
           SHEET_ID: ${{ vars.SHEET_ID }}
           FOLDER_ID: ${{ vars.FOLDER_ID }}
         run: python scripts/update_catalog.py
+
+      - name: Write timeout status
+        if: cancelled()
+        run: |
+          python3 -c "
+import json
+from pathlib import Path
+from datetime import datetime, timezone
+Path('scripts/.last_run.json').write_text(json.dumps({
+    'status': 'failure',
+    'message': 'Le job a dépassé le délai imparti (timeout).',
+    'timestamp': datetime.now(timezone.utc).isoformat()
+}, ensure_ascii=False, indent=2))
+"
 
       - name: Commit and push changes
         if: always()
