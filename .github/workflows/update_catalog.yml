@@ -38,16 +38,8 @@ jobs:
       - name: Write timeout status
         if: cancelled()
         run: |
-          python3 -c "
-import json
-from pathlib import Path
-from datetime import datetime, timezone
-Path('scripts/.last_run.json').write_text(json.dumps({
-    'status': 'failure',
-    'message': 'Le job a dépassé le délai imparti (timeout).',
-    'timestamp': datetime.now(timezone.utc).isoformat()
-}, ensure_ascii=False, indent=2))
-"
+          printf '{"status": "failure", "message": "Le job a dépassé le délai imparti (timeout).", "timestamp": "%s"}\n' \
+            "$(date -u +%Y-%m-%dT%H:%M:%S+00:00)" > scripts/.last_run.json
 
       - name: Commit and push changes
         if: always()
