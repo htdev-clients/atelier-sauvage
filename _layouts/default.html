@@ -26,6 +26,7 @@
   <link rel="canonical" href="https://ateliersauvageheusy.be{{ page.url }}" />
 
   <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="/assets/css/photoswipe.css" rel="stylesheet">
 
   <style>
     html {
@@ -52,10 +53,19 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Lightbox Styles */
-    #lightbox.active {
-      opacity: 1;
-      pointer-events: auto;
+    /* Catalog lightbox caption */
+    .pswp__custom-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px 20px 24px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.875rem;
+      letter-spacing: 0.025em;
+      text-align: center;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+      pointer-events: none;
     }
 
     .fade-element {
@@ -121,9 +131,7 @@
 
   {% include footer.html %}
 
-  {% include lightbox.html %}
-
-  <script src="/assets/js/lightbox.js"></script>
+  <script type="module" src="/assets/js/lightbox.js"></script>
   <script src="/assets/js/navbar.js"></script>
   <script src="/assets/js/instagram-integration.js" defer></script>
 </body>
