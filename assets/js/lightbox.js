@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- HELPERS ---
 
-  // Returns srcset entries sorted largest-first: [{ url, w }, ...]
   const parseSrcset = (srcset) => {
     if (!srcset) return [];
     return srcset.split(',')
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .map((p) => p.image);
 
-  // Builds a slide from a DOM img, scaling dimensions up to the largest srcset entry.
+  // Builds a slide from a DOM img already loaded on the page.
   const imgToSlide = (image) => {
     const entries = parseSrcset(image.srcset);
     const largest = entries[0];
@@ -63,6 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
+  // Fetches an image URL and resolves with its natural dimensions.
+  // Uses a 1s timeout as a safety net; resolves null on failure.
+  const fetchDimensions = (url) =>
+    Promise.race([
+      new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
+        img.onerror = () => resolve(null);
+        img.src = url;
+      }),
+      new Promise((resolve) => setTimeout(() => resolve(null), 1000)),
+    ]);
+
   // --- OPENERS ---
 
   const openInteriorLightbox = (img) => {
@@ -76,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openPswp(imgs.map(imgToSlide), Math.max(0, imgs.indexOf(img)));
   };
 
-  const openCatalogLightbox = (img) => {
+  const openCatalogLightbox = async (img) => {
     const itemNumber = img.dataset.itemNumber;
     const count = parseInt(img.dataset.imageCount || 1);
 
@@ -87,30 +99,41 @@ document.addEventListener('DOMContentLoaded', () => {
         `/assets/img/catalog/1400/${itemNumber}${suffix}-1400.webp 1400w`,
       ].join(', ');
 
-    // First slide: dimensions derived from the thumbnail's aspect ratio at 1400px width.
+    const dimsAt1400 = (naturalW, naturalH) =>
+      naturalW > 0
+        ? { width: 1400, height: Math.round(1400 * (naturalH / naturalW)) }
+        : {};
+
     const firstSlide = {
       src: `/assets/img/catalog/1400/${itemNumber}-1400.webp`,
       srcset: makeSrcset(''),
       alt: img.alt,
       description: img.alt,
       msrc: img.src,
-      ...(img.naturalWidth > 0
-        ? {
-            width: 1400,
-            height: Math.round(1400 * (img.naturalHeight / img.naturalWidth)),
-          }
-        : {}),
+      ...dimsAt1400(img.naturalWidth, img.naturalHeight),
     };
 
-    // Subsequent slides: no dimensions — handled via contentLoad.
     const slides = [firstSlide];
-    for (let i = 1; i < count; i++) {
-      slides.push({
-        src: `/assets/img/catalog/1400/${itemNumber}-${i}-1400.webp`,
-        srcset: makeSrcset(`-${i}`),
-        alt: img.alt,
-        description: img.alt,
-      });
+
+    if (count > 1) {
+      // Preload extra images at 480px to read their aspect ratios.
+      // These are likely already cached since they appear as thumbnails on the page.
+      const extraDims = await Promise.all(
+        Array.from({ length: count - 1 }, (_, i) =>
+          fetchDimensions(`/assets/img/catalog/480/${itemNumber}-${i + 1}-480.webp`)
+        )
+      );
+
+      for (let i = 1; i < count; i++) {
+        const dim = extraDims[i - 1];
+        slides.push({
+          src: `/assets/img/catalog/1400/${itemNumber}-${i}-1400.webp`,
+          srcset: makeSrcset(`-${i}`),
+          alt: img.alt,
+          description: img.alt,
+          ...(dim ? dimsAt1400(dim.w, dim.h) : {}),
+        });
+      }
     }
 
     openPswp(slides, 0, true);
@@ -126,25 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
       spacing: 0.12,
       pinchToClose: false,
       padding: { top: 30, bottom: hasCaption ? 70 : 30, left: 15, right: 15 },
-    });
-
-    // For slides without known dimensions, load the image to determine them.
-    pswp.on('contentLoad', (e) => {
-      const { content } = e;
-      if (content.data.width && content.data.height) return;
-
-      e.preventDefault();
-      const img = document.createElement('img');
-      img.className = 'pswp__img';
-      img.onload = () => {
-        content.data.width = img.naturalWidth;
-        content.data.height = img.naturalHeight;
-        content.element = img;
-        content.onLoaded();
-      };
-      img.onerror = () => content.onError();
-      if (content.data.srcset) img.srcset = content.data.srcset;
-      img.src = content.data.src;
     });
 
     if (hasCaption) {
