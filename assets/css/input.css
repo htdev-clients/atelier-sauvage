@@ -31,6 +31,16 @@
 
 /* --- PhotoSwipe --- */
 
+/* Fix background not covering full viewport on mobile (safe area / browser chrome) */
+.pswp {
+  height: 100dvh;
+}
+
+/* Show navigation arrows on touch screens */
+.pswp--touch .pswp__button--arrow {
+  visibility: visible;
+}
+
 .pswp__custom-caption {
   position: absolute;
   bottom: 16px;
