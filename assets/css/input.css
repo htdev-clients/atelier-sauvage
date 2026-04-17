@@ -29,6 +29,22 @@
   src: url('../fonts/lato-v25-latin-700.woff2') format('woff2');
 }
 
+/* --- PhotoSwipe --- */
+
+.pswp__custom-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 560px;
+  width: max-content;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  pointer-events: none;
+}
+
 /* PLAYFAIR DISPLAY */
 @font-face {
   font-family: 'Playfair Display';

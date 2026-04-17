@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const openInteriorLightbox = (img) => {
     if (window.innerWidth < 768) return;
     const imgs = sortGalleryImgs(img.closest('.gallery'));
-    openPswp(imgs.map(imgToSlide), Math.max(0, imgs.indexOf(img)));
+    openPswp(imgs.map(imgToSlide), Math.max(0, imgs.indexOf(img)), false, { top: 0, bottom: 0, left: 0, right: 0 });
   };
 
   const openGroupLightbox = (img, section) => {
@@ -141,14 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- PHOTOSWIPE ---
 
-  const openPswp = (slides, index, hasCaption = false) => {
+  const openPswp = (slides, index, hasCaption = false, padding = null) => {
+    const defaultPadding = { top: 16, bottom: hasCaption ? 48 : 16, left: 16, right: 16 };
     const pswp = new PhotoSwipe({
       dataSource: slides,
       index,
       bgOpacity: 0.95,
       spacing: 0.12,
       pinchToClose: false,
-      padding: { top: 30, bottom: hasCaption ? 70 : 30, left: 15, right: 15 },
+      padding: padding || defaultPadding,
     });
 
     if (hasCaption) {
