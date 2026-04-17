@@ -33,7 +33,9 @@
 
 /* Fix background not covering full viewport on mobile (safe area / browser chrome) */
 .pswp {
-  height: 100dvh;
+  bottom: 0;
+  height: auto;
+  contain: layout style;
 }
 
 /* Show navigation arrows on touch screens */
