@@ -31,13 +31,6 @@
 
 /* --- PhotoSwipe --- */
 
-/* Extend PhotoSwipe past the bottom viewport edge to cover safe area / browser chrome gaps */
-.pswp {
-  bottom: -60px;
-  height: auto;
-  contain: layout style;
-}
-
 /* Show navigation arrows on touch screens */
 .pswp--touch .pswp__button--arrow {
   visibility: visible;

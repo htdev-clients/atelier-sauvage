@@ -146,11 +146,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const pswp = new PhotoSwipe({
       dataSource: slides,
       index,
-      bgOpacity: 0.95,
+      bgOpacity: 1,
       spacing: 0.12,
       pinchToClose: false,
       padding: padding || defaultPadding,
     });
+
+    pswp.on('beforeOpen', () => { document.body.style.overflow = 'hidden'; });
+    pswp.on('destroy', () => { document.body.style.overflow = ''; });
 
     if (hasCaption) {
       pswp.on('uiRegister', () => {
