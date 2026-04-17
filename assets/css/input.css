@@ -34,10 +34,10 @@
 .pswp__custom-caption {
   position: absolute;
   bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 16px;
+  right: 16px;
   max-width: 560px;
-  width: max-content;
+  margin: 0 auto;
   text-align: center;
   color: rgba(255, 255, 255, 0.9);
   font-size: 0.875rem;
