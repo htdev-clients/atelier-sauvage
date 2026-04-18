@@ -29,6 +29,13 @@
   src: url('../fonts/lato-v25-latin-700.woff2') format('woff2');
 }
 
+/* --- PhotoSwipe --- */
+
+/* Show navigation arrows on touch screens */
+.pswp--touch .pswp__button--arrow {
+  visibility: visible;
+}
+
 /* PLAYFAIR DISPLAY */
 @font-face {
   font-family: 'Playfair Display';
