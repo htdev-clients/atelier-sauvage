@@ -151,10 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
       padding: padding || defaultPadding,
     });
 
-    if (roundedCorners) {
-      pswp.on('beforeOpen', () => pswp.element.classList.add('pswp--rounded'));
-    }
-
     pswp.on('beforeOpen', () => {
       const scrollY = window.scrollY;
       document.body.dataset.pswpScrollY = scrollY;
@@ -192,5 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     pswp.init();
+    if (roundedCorners) pswp.element.classList.add('pswp--rounded');
   };
 });
