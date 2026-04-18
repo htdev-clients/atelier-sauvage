@@ -166,7 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.top = '';
       document.body.style.width = '';
       document.body.style.overscrollBehavior = '';
+      document.documentElement.style.scrollBehavior = 'auto';
       window.scrollTo(0, scrollY);
+      setTimeout(() => { document.documentElement.style.scrollBehavior = ''; }, 10);
     });
 
     if (hasCaption) {
