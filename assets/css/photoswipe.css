@@ -418,3 +418,7 @@ div.pswp__img--placeholder,
 .pswp--one-slide .pswp__counter {
   display: none;
 }
+
+.pswp--rounded .pswp__img {
+  border-radius: 8px;
+}

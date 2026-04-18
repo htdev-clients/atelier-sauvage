@@ -78,14 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- OPENERS ---
 
   const openInteriorLightbox = (img) => {
-    if (window.innerWidth < 768) return;
     const imgs = sortGalleryImgs(img.closest('.gallery'));
     openPswp(imgs.map(imgToSlide), Math.max(0, imgs.indexOf(img)), false, { top: 0, bottom: 0, left: 0, right: 0 });
   };
 
   const openGroupLightbox = (img, section) => {
     const imgs = sortGalleryImgs(section);
-    openPswp(imgs.map(imgToSlide), Math.max(0, imgs.indexOf(img)));
+    openPswp(imgs.map(imgToSlide), Math.max(0, imgs.indexOf(img)), false, { top: 0, bottom: 0, left: 0, right: 0 });
   };
 
   const openCatalogLightbox = async (img) => {
@@ -136,12 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    openPswp(slides, 0, true);
+    openPswp(slides, 0, true, null, true);
   };
 
   // --- PHOTOSWIPE ---
 
-  const openPswp = (slides, index, hasCaption = false, padding = null) => {
+  const openPswp = (slides, index, hasCaption = false, padding = null, roundedCorners = false) => {
     const defaultPadding = { top: 16, bottom: hasCaption ? 48 : 16, left: 16, right: 16 };
     const pswp = new PhotoSwipe({
       dataSource: slides,
@@ -151,6 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
       pinchToClose: false,
       padding: padding || defaultPadding,
     });
+
+    if (roundedCorners) {
+      pswp.on('beforeOpen', () => pswp.element.classList.add('pswp--rounded'));
+    }
 
     pswp.on('beforeOpen', () => {
       const scrollY = window.scrollY;
