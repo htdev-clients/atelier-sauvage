@@ -1,17 +1,61 @@
+{% assign t = site.data.translations[site.active_lang] %}
+
+{% comment %}
+  Compute current page URL stripped of any active-lang prefix.
+  Language switcher links use Polyglot's {% raw %}{% static_href %}{% endraw %} block
+  to bypass auto-rewriting (otherwise an absolute "/" or "/catalogue/" would be
+  rewritten to include the active lang prefix on non-default builds).
+{% endcomment %}
+{% assign clean_url = page.url %}
+{% if site.active_lang != site.default_lang %}
+    {% assign active_prefix = '/' | append: site.active_lang %}
+    {% assign active_prefix_slash = active_prefix | append: '/' %}
+    {% if clean_url == active_prefix or clean_url == active_prefix_slash %}
+        {% assign clean_url = '/' %}
+    {% else %}
+        {% assign clean_url = clean_url | remove_first: active_prefix %}
+    {% endif %}
+{% endif %}
+
 <nav id="navbar"
     class="fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-in-out h-20 flex items-center bg-transparent text-white">
-    <div class="w-full px-6 md:px-12 flex justify-end items-center">
+    <div class="w-full px-6 md:px-12 flex justify-between items-center gap-4">
+
+        {% comment %} Language switcher (desktop) {% endcomment %}
+        <ul class="hidden md:flex items-center gap-3 text-xs uppercase tracking-widest font-medium" aria-label="{{ t.nav.switch_language }}">
+            {% for l in site.languages %}
+                {% if l == site.default_lang %}
+                    {% assign target = clean_url %}
+                {% else %}
+                    {% if clean_url == '/' %}
+                        {% assign target = '/' | append: l | append: '/' %}
+                    {% else %}
+                        {% assign target = '/' | append: l | append: clean_url %}
+                    {% endif %}
+                {% endif %}
+                <li>
+                    {% if l == site.active_lang %}
+                        <span class="font-bold opacity-90" aria-current="true">{{ l | upcase }}</span>
+                    {% else %}
+                        <a {% static_href %}href="{{ target }}"{% endstatic_href %} class="opacity-60 hover:opacity-100 transition-opacity">{{ l | upcase }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% comment %} Spacer placeholder so menu stays right-aligned on mobile too {% endcomment %}
+        <div class="md:hidden"></div>
 
         <ul class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium">
-            <li><a href="/" class="hover:opacity-70 transition-opacity">Accueil</a></li>
-            <li><a href="/#atelier" class="hover:opacity-70 transition-opacity">L'Atelier</a></li>
-            <li><a href="/catalogue/" class="hover:opacity-70 transition-opacity">Catalogue</a></li>
-            <li><a href="/evenements/" class="hover:opacity-70 transition-opacity">Événements</a></li>
-            <li><a href="/#contact" class="hover:opacity-70 transition-opacity">Contact</a></li>
+            <li><a href="{% if site.active_lang == site.default_lang %}/{% else %}/{{ site.active_lang }}/{% endif %}" class="hover:opacity-70 transition-opacity">{{ t.nav.home }}</a></li>
+            <li><a href="{% if site.active_lang == site.default_lang %}/#atelier{% else %}/{{ site.active_lang }}/#atelier{% endif %}" class="hover:opacity-70 transition-opacity">{{ t.nav.studio }}</a></li>
+            <li><a href="{% if site.active_lang == site.default_lang %}/catalogue/{% else %}/{{ site.active_lang }}/catalogue/{% endif %}" class="hover:opacity-70 transition-opacity">{{ t.nav.catalogue }}</a></li>
+            <li><a href="{% if site.active_lang == site.default_lang %}/evenements/{% else %}/{{ site.active_lang }}/evenements/{% endif %}" class="hover:opacity-70 transition-opacity">{{ t.nav.events }}</a></li>
+            <li><a href="{% if site.active_lang == site.default_lang %}/#contact{% else %}/{{ site.active_lang }}/#contact{% endif %}" class="hover:opacity-70 transition-opacity">{{ t.nav.contact }}</a></li>
         </ul>
 
         <button id="mobile-menu-btn" class="md:hidden z-50 relative focus:outline-none text-current p-1"
-            aria-label="Ouvrir le menu">
+            aria-label="{{ t.nav.open_menu }}">
             <div class="w-8 h-8">
                 {% include icons/burger-menu.svg %}
             </div>
@@ -24,46 +68,68 @@
 
     <button id="close-menu-btn"
         class="absolute top-4 right-6 p-2 text-3xl font-light hover:text-stone-600 focus:outline-none"
-        aria-label="Fermer le menu">
+        aria-label="{{ t.nav.close_menu }}">
         ×
     </button>
 
     <ul class="flex flex-col gap-8 text-center">
         <li>
-            <a href="/"
+            <a href="{% if site.active_lang == site.default_lang %}/{% else %}/{{ site.active_lang }}/{% endif %}"
                 class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-                Accueil
+                {{ t.nav.home }}
             </a>
         </li>
         <li>
-            <a href="/#atelier"
+            <a href="{% if site.active_lang == site.default_lang %}/#atelier{% else %}/{{ site.active_lang }}/#atelier{% endif %}"
                 class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-                L'Atelier
+                {{ t.nav.studio }}
             </a>
         </li>
         <li>
-            <a href="/catalogue/"
+            <a href="{% if site.active_lang == site.default_lang %}/catalogue/{% else %}/{{ site.active_lang }}/catalogue/{% endif %}"
                 class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-                Catalogue
+                {{ t.nav.catalogue }}
             </a>
         </li>
         <li>
-            <a href="/evenements/"
+            <a href="{% if site.active_lang == site.default_lang %}/evenements/{% else %}/{{ site.active_lang }}/evenements/{% endif %}"
                 class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-                Événements
+                {{ t.nav.events }}
             </a>
         </li>
         <li>
-            <a href="/#contact"
+            <a href="{% if site.active_lang == site.default_lang %}/#contact{% else %}/{{ site.active_lang }}/#contact{% endif %}"
                 class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
-                Contact
+                {{ t.nav.contact }}
             </a>
         </li>
     </ul>
 
     <div class="w-12 h-px bg-stone-300 mt-12 mb-8"></div>
 
-    <div class="text-sm text-stone-500 uppercase tracking-widest font-medium">
+    {% comment %} Language switcher (mobile menu) {% endcomment %}
+    <ul class="flex items-center gap-4 text-sm uppercase tracking-widest font-medium" aria-label="{{ t.nav.switch_language }}">
+        {% for l in site.languages %}
+            {% if l == site.default_lang %}
+                {% assign target = clean_url %}
+            {% else %}
+                {% if clean_url == '/' %}
+                    {% assign target = '/' | append: l | append: '/' %}
+                {% else %}
+                    {% assign target = '/' | append: l | append: clean_url %}
+                {% endif %}
+            {% endif %}
+            <li>
+                {% if l == site.active_lang %}
+                    <span class="font-bold text-stone-900" aria-current="true">{{ l | upcase }}</span>
+                {% else %}
+                    <a {% static_href %}href="{{ target }}"{% endstatic_href %} class="text-stone-500 hover:text-stone-900 transition-colors">{{ l | upcase }}</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="text-sm text-stone-500 uppercase tracking-widest font-medium mt-8">
         Atelier Sauvage
     </div>
 </div>

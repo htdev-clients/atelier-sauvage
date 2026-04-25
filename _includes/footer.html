@@ -37,7 +37,7 @@
         <div class="footer-right">
             <p>
                 © {{ 'now' | date: "%Y" }} Atelier Sauvage —
-                <a href="/mentions/" class="hover:text-white">Mentions légales</a>
+                <a href="{% if site.active_lang == site.default_lang %}/mentions/{% else %}/{{ site.active_lang }}/mentions/{% endif %}" class="hover:text-white">{{ site.data.translations[site.active_lang].footer.legal }}</a>
             </p>
         </div>
     </div>

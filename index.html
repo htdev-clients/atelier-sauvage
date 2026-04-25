@@ -1,14 +1,17 @@
 ---
 layout: default
-title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
 ---
+{% assign t = site.data.translations[site.active_lang] %}
+{% assign idx = t.index %}
+{% assign catalogue_url = '/catalogue/' %}
+{% if site.active_lang != site.default_lang %}{% assign catalogue_url = '/' | append: site.active_lang | append: '/catalogue/' %}{% endif %}
 
 <header class="relative h-[85svh] w-full flex items-center justify-center overflow-hidden">
   <div class="absolute inset-0 z-0">
     <img src="/assets/img/general/2000/facade-2000.jpg" srcset="
             /assets/img/general/480/facade-480.jpg   480w,
             /assets/img/general/2000/facade-2000.jpg 2000w
-          " sizes="100vw" alt="Façade du magasin Atelier Sauvage" class="w-full h-full object-cover"
+          " sizes="100vw" alt="{{ idx.alts.facade }}" class="w-full h-full object-cover"
       fetchpriority="high" />
     <div class="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
   </div>
@@ -18,13 +21,13 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
     <h1 class="sr-only">Atelier Sauvage</h1>
 
     <div class="w-full max-w-[250px] sm:max-w-xs 2xl:max-w-sm mx-auto drop-shadow-lg">
-      <img src="/assets/logos/name.svg" alt="Logo Atelier Sauvage" class="w-full h-auto">
+      <img src="/assets/logos/name.svg" alt="{{ idx.alts.logo }}" class="w-full h-auto">
     </div>
 
     <div class="w-24 h-px bg-white/80 mx-auto"></div>
 
     <p class="text-lg md:text-xl font-light tracking-wider uppercase text-white/90">
-      Objets vintage, design & esprit atelier à Heusy
+      {{ idx.hero_tagline }}
     </p>
   </div>
 </header>
@@ -68,13 +71,10 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
 
     <div class="intro px-6 max-w-3xl mx-auto text-center mb-16 md:mb-24">
       <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-8 italic">
-        "Un lieu de vie, entre galerie et atelier"
+        {{ idx.studio_quote }}
       </h2>
       <p class="text-lg md:text-xl leading-relaxed text-stone-600 font-light">
-        L’Atelier Sauvage est un espace unique où l’authenticité du passé
-        rencontre la créativité du présent. On y découvre une sélection de
-        mobilier, luminaires et objets chinés avec soin — une invitation à
-        flâner, à discuter, à s’inspirer.
+        {{ idx.studio_text }}
       </p>
     </div>
 
@@ -87,7 +87,7 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
             /assets/img/general/800/interior-1-800.jpeg 800w,
             /assets/img/general/2000/interior-1-2000.jpeg 2000w
           " sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" decoding="async"
-            alt="Endroit où il fait bon s'arrêter"
+            alt="{{ idx.alts.interior_1 }}"
             class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 ease-in-out group-hover:scale-105" />
         </div>
 
@@ -97,7 +97,7 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
             /assets/img/general/800/interior-2-800.jpeg 800w,
             /assets/img/general/2000/interior-2-2000.jpeg 2000w
           " sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" decoding="async"
-            alt="Plantes, livres et mobilier vintage"
+            alt="{{ idx.alts.interior_2 }}"
             class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 ease-in-out group-hover:scale-105" />
         </div>
 
@@ -107,7 +107,7 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
             /assets/img/general/800/interior-3-800.jpeg 800w,
             /assets/img/general/2000/interior-3-2000.jpeg 2000w
           " sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" decoding="async"
-            alt="Intérieur de la boutique avec objets et meubles vintage"
+            alt="{{ idx.alts.interior_3 }}"
             class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 ease-in-out group-hover:scale-105" />
         </div>
 
@@ -117,7 +117,7 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
             /assets/img/general/800/interior-4-800.jpeg 800w,
             /assets/img/general/2000/interior-4-2000.jpeg 2000w
           " sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" decoding="async"
-            alt="La vitrine du magasin Atelier Sauvage vue depuis la rue"
+            alt="{{ idx.alts.interior_4 }}"
             class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 ease-in-out group-hover:scale-105" />
         </div>
 
@@ -131,10 +131,10 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
 
       <div class="text-center mb-16">
         <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-4">
-          La Sélection du Moment
+          {{ idx.selection_title }}
         </h2>
         <p class="text-stone-600 font-light italic">
-          Aperçu des dernières trouvailles disponibles à l'atelier
+          {{ idx.selection_subtitle }}
         </p>
       </div>
 
@@ -150,9 +150,9 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
       </div>
 
       <div class="text-center">
-        <a href="/catalogue/"
+        <a href="{{ catalogue_url }}"
           class="inline-block border border-stone-800 text-stone-800 px-8 py-3 hover:bg-stone-800 hover:text-stone-50 transition-colors uppercase text-xs tracking-widest font-bold">
-          Voir tout le catalogue
+          {{ idx.selection_cta }}
         </a>
       </div>
 
@@ -164,21 +164,16 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
 
       <div class="text-left">
         <h2 class="font-serif text-3xl md:text-4xl mb-6 text-stone-900 leading-tight">
-          L'actualité de l'Atelier
+          {{ idx.instagram_title }}
         </h2>
         <div class="space-y-4 text-stone-600 text-lg font-light leading-relaxed">
-          <p>
-            C'est sur Instagram que l'Atelier vit au quotidien. Nous y partageons nos derniers arrivages en
-            avant-première, nos coups de cœur et les coulisses de la boutique.
-          </p>
-          <p>
-            Même si vous n'avez pas de compte, vous pouvez découvrir notre dernière publication ci-contre.
-          </p>
+          <p>{{ idx.instagram_p1 }}</p>
+          <p>{{ idx.instagram_p2 }}</p>
         </div>
         <div class="mt-8">
           <a href="https://www.instagram.com/ateliersauvage_heusy/" target="_blank" rel="noopener noreferrer"
             class="inline-block border border-stone-800 text-stone-800 px-8 py-3 hover:bg-stone-800 hover:text-stone-50 transition-colors uppercase text-xs tracking-widest font-bold">
-            Nous suivre sur Instagram
+            {{ idx.instagram_cta }}
           </a>
         </div>
       </div>
@@ -197,7 +192,7 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
           <div class="media-container relative bg-stone-100 min-h-[300px] overflow-hidden group">
             <button
               class="nav-btn nav-prev absolute top-1/2 -translate-y-1/2 left-3 bg-white/80 w-8 h-8 rounded-full shadow flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-white"
-              id="btn-prev" aria-label="Previous image">❮</button>
+              id="btn-prev" aria-label="{{ t.lightbox.previous }}">❮</button>
 
             <a id="post-link" href="#" target="_blank" class="block w-full">
               <img id="current-img" class="insta-image w-full h-auto block fade-element" src="" alt="Post"
@@ -206,7 +201,7 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
 
             <button
               class="nav-btn nav-next absolute top-1/2 -translate-y-1/2 right-3 bg-white/80 w-8 h-8 rounded-full shadow flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-white"
-              id="btn-next" aria-label="Next image">❯</button>
+              id="btn-next" aria-label="{{ t.lightbox.next }}">❯</button>
             <div class="dots-container absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10"
               id="dots-container"></div>
           </div>
@@ -228,7 +223,7 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
     <div class="flex flex-col md:flex-row h-auto md:min-h-[500px]">
 
       <div class="visit-info md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
-        <h2 class="font-serif text-3xl md:text-4xl mb-6 text-stone-900">Nous rendre visite</h2>
+        <h2 class="font-serif text-3xl md:text-4xl mb-6 text-stone-900">{{ idx.visit_title }}</h2>
 
         <div class="mb-8 flex items-start gap-3 text-stone-700">
           <span class="text-xl">📍</span>
@@ -237,28 +232,28 @@ title: Atelier Sauvage – Objets vintage, design et galerie à Verviers
 
         <div class="mb-8">
           <div class="flex items-center gap-2 mb-3 text-stone-800 font-bold tracking-wide uppercase text-sm">
-            <span>⏰</span> Ouverture
+            <span>⏰</span> {{ idx.visit_hours }}
           </div>
           <ul class="space-y-3 pl-4 border-l-2 border-stone-200">
             <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
-              <span>Jeudi</span> <span>14h - 17h</span>
+              <span>{{ idx.days.thursday }}</span> <span>14h - 17h</span>
             </li>
             <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
-              <span>Vendredi</span> <span>14h - 17h</span>
+              <span>{{ idx.days.friday }}</span> <span>14h - 17h</span>
             </li>
             <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
-              <span>Samedi</span> <span>14h - 17h</span>
+              <span>{{ idx.days.saturday }}</span> <span>14h - 17h</span>
             </li>
           </ul>
         </div>
 
         <p class="text-stone-500 italic">
-          Venez découvrir la sélection, prendre un café, ou simplement discuter autour de beaux objets.
+          {{ idx.visit_outro }}
         </p>
       </div>
 
       <div class="map md:w-1/2 h-80 md:h-auto bg-stone-200 relative">
-        <iframe title="Localisation de l'Atelier Sauvage sur Google Maps"
+        <iframe title="{{ idx.alts.map }}"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6813.019924593809!2d5.857206384653098!3d50.57806912504362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c08b7d4bb2e013%3A0x6c6c24b0fe43b121!2sAtelier%20Sauvage!5e0!3m2!1sen!2sch!4v1760961389110!5m2!1sen!2sch"
           class="w-full h-full absolute inset-0" style="border: 0" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"></iframe>

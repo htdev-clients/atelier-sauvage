@@ -7,6 +7,15 @@ description: Objets vintage, design et galerie à Verviers
 url: "https://ateliersauvageheusy.be"
 baseurl: ""
 
+plugins:
+  - jekyll-polyglot
+
+languages: ["fr", "en", "nl", "de"]
+default_lang: "fr"
+exclude_from_localization: ["assets", "functions", "robots.txt", "sitemap.xml", "atelier-favicon.ico", "atelier-favicon-white.ico", "scripts"]
+parallel_localization: true
+lang_from_path: true
+
 # Tell Jekyll to exclude these from the final build
 exclude:
   - Gemfile

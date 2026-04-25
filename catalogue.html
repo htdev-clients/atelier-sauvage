@@ -1,9 +1,10 @@
 ---
 layout: default
-title: Catalogue – Atelier Sauvage
-description: Découvrez l'ensemble de nos objets vintage et mobilier design disponibles à l'atelier.
 permalink: /catalogue/
+i18n_key: catalogue
 ---
+{% assign t = site.data.translations[site.active_lang] %}
+{% assign cat = t.catalogue %}
 
 <header class="relative h-[40svh] min-h-[300px] w-full flex items-center justify-center overflow-hidden">
   <div class="absolute inset-0 z-0">
@@ -11,18 +12,18 @@ permalink: /catalogue/
             /assets/img/general/480/facade-480.jpg   480w,
             /assets/img/general/800/facade-800.jpg   800w,
             /assets/img/general/2000/facade-2000.jpg 2000w
-          " sizes="100vw" alt="Façade du magasin Atelier Sauvage" class="w-full h-full object-cover"
+          " sizes="100vw" alt="{{ t.index.alts.facade }}" class="w-full h-full object-cover"
       fetchpriority="high" decoding="async" />
     <div class="absolute inset-0 bg-black/50 mix-blend-multiply"></div>
   </div>
 
   <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white space-y-4">
     <h1 class="font-serif text-4xl sm:text-5xl font-light tracking-wide drop-shadow-lg">
-      Le Catalogue
+      {{ cat.heading }}
     </h1>
     <div class="w-16 h-px bg-white/80 mx-auto"></div>
     <p class="text-sm md:text-base font-light tracking-widest uppercase text-white/90">
-      En ce moment à l'Atelier
+      {{ cat.subheading }}
     </p>
   </div>
 </header>
@@ -37,10 +38,10 @@ permalink: /catalogue/
       <button
         class="filter-btn text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest text-stone-900 font-bold transition-colors"
         data-filter="all">
-        Tout
+        {{ cat.filter_all }}
       </button>
 
-      {% comment %} Generate Categories {% endcomment %}
+      {% comment %} Generate Categories — labels stay in French (per single source of truth in CSV) {% endcomment %}
       {% assign categories = site.data.catalog | map: 'category' | uniq | sort %}
 
       {% for category in categories %}
@@ -68,7 +69,7 @@ permalink: /catalogue/
 
     {% if site.data.catalog.size == 0 %}
     <div class="text-center py-20 text-stone-500">
-      <p>Le catalogue est en cours de mise à jour...</p>
+      <p>{{ cat.empty }}</p>
     </div>
     {% endif %}
 

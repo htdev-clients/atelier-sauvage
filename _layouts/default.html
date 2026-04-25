@@ -1,13 +1,21 @@
+{% assign t = site.data.translations[site.active_lang] %}
+{% if page.i18n_key %}
+  {% assign page_t = t[page.i18n_key] %}
+  {% assign computed_title = page_t.page_title | default: t.meta.site_title %}
+  {% assign computed_desc = page_t.page_description | default: t.meta.site_description %}
+{% else %}
+  {% assign computed_title = t.meta.site_title %}
+  {% assign computed_desc = t.meta.site_description %}
+{% endif %}
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="{{ site.active_lang }}" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <title>{{ page.title | default: "Atelier Sauvage – Objets vintage, design et galerie à Verviers" }}</title>
-  <meta name="description"
-    content="{{ page.description | default: "L’Atelier Sauvage est un lieu unique à Heusy, à mi-chemin entre boutique, galerie et atelier. On y découvre des objets vintage, du mobilier design et des œuvres d’artistes." }}" />
+  <title>{{ computed_title }}</title>
+  <meta name="description" content="{{ computed_desc }}" />
 
   <meta name="keywords"
     content="Atelier Sauvage, Heusy, Verviers, objets vintage, mobilier design, galerie d'art, décoration, brocante, Liège, boutique, design intérieur" />
@@ -15,16 +23,16 @@
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="{{ page.title | default: "Atelier Sauvage – Objets vintage, design et galerie à Verviers" }}" />
-  <meta property="og:description"
-    content="{{ page.description | default: "Découvrez Atelier Sauvage à Heusy : un lieu unique entre boutique, galerie et atelier, dédié aux objets vintage et au design." }}" />
+  <meta property="og:title" content="{{ computed_title }}" />
+  <meta property="og:description" content="{{ computed_desc }}" />
   <meta property="og:image" content="https://ateliersauvageheusy.be/assets/img/general/2000/facade-2000.jpg" />
-  <meta property="og:url" content="https://ateliersauvageheusy.be{{ page.url }}" />
-  <meta property="og:locale" content="fr_BE" />
+  {% capture og_path %}{% if site.active_lang == site.default_lang %}{{ page.url }}{% else %}/{{ site.active_lang }}{{ page.url }}{% endif %}{% endcapture %}
+  <meta property="og:url" content="https://ateliersauvageheusy.be{{ og_path | replace: '//', '/' }}" />
+  <meta property="og:locale" content="{{ t.locale }}" />
 
   <link rel="icon" type="image/x-icon" href="/atelier-favicon.ico" />
   <link rel="icon" type="image/x-icon" href="/atelier-favicon-white.ico" media="(prefers-color-scheme: dark)" />
-  <link rel="canonical" href="https://ateliersauvageheusy.be{{ page.url }}" />
+  {% I18n_Headers %}
 
   <link href="/assets/css/photoswipe.css" rel="stylesheet">
   <link href="/assets/css/style.css" rel="stylesheet">
