@@ -1,44 +1,91 @@
-<footer class="bg-stone-900 text-stone-300 py-12 px-8 md:px-12 border-t border-stone-800 text-sm">
-    <div class="footer-container w-full mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+{% assign t = site.data.translations[site.active_lang] %}
+{% assign idx = t.index %}
 
-        <div class="footer-left flex flex-col xl:flex-row items-start xl:items-center gap-4 xl:gap-8">
+{% assign clean_url = page.url %}
+{% if site.active_lang != site.default_lang %}
+    {% assign active_prefix = '/' | append: site.active_lang %}
+    {% assign active_prefix_slash = active_prefix | append: '/' %}
+    {% if clean_url == active_prefix or clean_url == active_prefix_slash %}
+        {% assign clean_url = '/' %}
+    {% else %}
+        {% assign clean_url = clean_url | remove_first: active_prefix %}
+    {% endif %}
+{% endif %}
 
-            <a href="mailto:ateliersauvageheusy@gmail.com" class="hover:text-white transition-colors">
-                ateliersauvageheusy@gmail.com
+<footer class="bg-stone-900 text-stone-300 border-t border-stone-800">
+
+    <div class="px-8 md:px-12 py-12 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+
+        <div class="flex flex-col gap-5">
+            <a href="{% if site.active_lang == site.default_lang %}/{% else %}/{{ site.active_lang }}/{% endif %}" aria-label="{{ idx.alts.logo }}" class="mt-4">
+                <img src="/assets/logos/name.svg" alt="{{ idx.alts.logo }}" class="h-20 md:h-24 w-auto">
             </a>
-
-            <span class="hidden xl:inline text-stone-300">•</span>
-
-            <a href="tel:+32456921799" class="hover:text-white transition-colors">
-                +32 456 92 17 99
-            </a>
-
-            <span class="hidden xl:inline text-stone-300">•</span>
-
-            <a href="https://wa.me/32456921799" target="_blank" rel="noopener noreferrer"
-               aria-label="WhatsApp" class="flex items-center gap-2 hover:text-white transition-colors">
-                <div class="w-[18px] h-[18px]">
-                    {% include icons/whatsapp.svg %}
-                </div>
-                <span>WhatsApp</span>
-            </a>
-
-            <span class="hidden xl:inline text-stone-300">•</span>
-
-            <a href="https://www.instagram.com/ateliersauvage_heusy/" target="_blank" rel="noopener noreferrer"
-                aria-label="Instagram" class="flex items-center gap-2 hover:text-white transition-colors">
-                <div class="w-[18px] h-[18px]">
-                    {% include icons/instagram.svg %}
-                </div>
-                <span>Instagram</span>
-            </a>
+            <p class="text-sm text-stone-400 leading-relaxed">{{ idx.hero_tagline }}</p>
         </div>
 
-        <div class="footer-right">
-            <p>
-                © {{ 'now' | date: "%Y" }} Atelier Sauvage —
-                <a href="{% if site.active_lang == site.default_lang %}/mentions/{% else %}/{{ site.active_lang }}/mentions/{% endif %}" class="hover:text-white">{{ site.data.translations[site.active_lang].footer.legal }}</a>
-            </p>
+        <div class="flex flex-col gap-4">
+            <h3 class="font-serif italic text-white text-lg">{{ idx.visit_title }}</h3>
+            <address class="not-italic text-sm text-stone-400 leading-relaxed">
+                Chaussée de Theux 59<br>
+                4802 Heusy, Verviers
+            </address>
+            <dl class="flex flex-col gap-0.5 text-sm text-stone-400">
+                <div class="flex gap-4">
+                    <dt class="w-20">{{ idx.days.thursday }}</dt><dd>14h – 17h</dd>
+                </div>
+                <div class="flex gap-4">
+                    <dt class="w-20">{{ idx.days.friday }}</dt><dd>14h – 17h</dd>
+                </div>
+                <div class="flex gap-4">
+                    <dt class="w-20">{{ idx.days.saturday }}</dt><dd>14h – 17h</dd>
+                </div>
+            </dl>
         </div>
+
+        <div class="flex flex-col gap-4">
+            <h3 class="font-serif italic text-white text-lg">{{ t.nav.contact }}</h3>
+            <div class="flex flex-col gap-3 text-sm">
+                <a href="https://www.instagram.com/ateliersauvage_heusy/" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-stone-400 hover:text-white transition-colors">
+                    <div class="w-[18px] h-[18px]">{% include icons/instagram.svg %}</div>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://wa.me/32456921799" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-stone-400 hover:text-white transition-colors">
+                    <div class="w-[18px] h-[18px]">{% include icons/whatsapp.svg %}</div>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="tel:+32456921799" class="text-stone-400 hover:text-white transition-colors">+32 456 92 17 99</a>
+                <a href="mailto:ateliersauvageheusy@gmail.com" class="text-stone-400 hover:text-white transition-colors">ateliersauvageheusy@gmail.com</a>
+            </div>
+        </div>
+
     </div>
+
+    <div class="border-t border-stone-800 px-8 md:px-12 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-stone-500">
+        <p>© {{ 'now' | date: "%Y" }} Atelier Sauvage</p>
+        <a href="{% if site.active_lang == site.default_lang %}/mentions/{% else %}/{{ site.active_lang }}/mentions/{% endif %}"
+           class="hover:text-white transition-colors">{{ t.footer.legal }}</a>
+        <ul class="flex items-center gap-3 uppercase tracking-widest font-medium" aria-label="{{ t.nav.switch_language }}">
+            {% for l in site.languages %}
+                {% if l == site.default_lang %}
+                    {% assign target = clean_url %}
+                {% else %}
+                    {% if clean_url == '/' %}
+                        {% assign target = '/' | append: l | append: '/' %}
+                    {% else %}
+                        {% assign target = '/' | append: l | append: clean_url %}
+                    {% endif %}
+                {% endif %}
+                <li>
+                    {% if l == site.active_lang %}
+                        <span class="text-white font-bold" aria-current="true">{{ l | upcase }}</span>
+                    {% else %}
+                        <a {% static_href %}href="{{ target }}"{% endstatic_href %} class="hover:text-white transition-colors">{{ l | upcase }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
 </footer>

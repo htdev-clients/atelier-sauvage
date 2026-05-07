@@ -12,8 +12,9 @@ plugins:
 
 languages: ["fr", "en", "nl", "de"]
 default_lang: "fr"
-exclude_from_localization: ["assets", "functions", "robots.txt", "sitemap.xml", "atelier-favicon.ico", "atelier-favicon-white.ico", "scripts"]
+exclude_from_localization: ["assets", "functions", "robots.txt", "sitemap.xml", "scripts"]
 parallel_localization: true
+disable_disk_cache: true
 lang_from_path: true
 
 # Tell Jekyll to exclude these from the final build
