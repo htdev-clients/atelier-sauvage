@@ -18,7 +18,7 @@ fr:
     switch_language: "Changer de langue"
   footer:
     legal: "Mentions légales"
-    cookies: "Cookies"
+    cookies: "Gérer les cookies"
   consent:
     title: "Cookies & confidentialité"
     message: "Ce site utilise des cookies de mesure publicitaire (Meta Pixel) pour améliorer nos campagnes. Vous êtes libre d'accepter ou de refuser ; votre choix peut être modifié à tout moment."
@@ -113,7 +113,7 @@ en:
     switch_language: "Change language"
   footer:
     legal: "Legal notice"
-    cookies: "Cookies"
+    cookies: "Manage cookies"
   consent:
     title: "Cookies & privacy"
     message: "This site uses advertising-measurement cookies (Meta Pixel) to improve our campaigns. You are free to accept or decline; you can change your choice at any time."
@@ -208,7 +208,7 @@ nl:
     switch_language: "Taal wijzigen"
   footer:
     legal: "Wettelijke vermeldingen"
-    cookies: "Cookies"
+    cookies: "Cookies beheren"
   consent:
     title: "Cookies & privacy"
     message: "Deze site gebruikt cookies voor advertentiemeting (Meta Pixel) om onze campagnes te verbeteren. Je bent vrij om te aanvaarden of te weigeren; je keuze kan op elk moment worden gewijzigd."
@@ -303,7 +303,7 @@ de:
     switch_language: "Sprache ändern"
   footer:
     legal: "Impressum"
-    cookies: "Cookies"
+    cookies: "Cookies verwalten"
   consent:
     title: "Cookies & Datenschutz"
     message: "Diese Website verwendet Cookies zur Werbemessung (Meta Pixel), um unsere Kampagnen zu verbessern. Sie können frei zustimmen oder ablehnen; Ihre Wahl kann jederzeit geändert werden."
