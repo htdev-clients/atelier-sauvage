@@ -64,8 +64,12 @@
 
     <div class="border-t border-stone-800 px-8 md:px-12 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-stone-500">
         <p>© {{ 'now' | date: "%Y" }} Atelier Sauvage</p>
-        <a href="{% if site.active_lang == site.default_lang %}/mentions/{% else %}/{{ site.active_lang }}/mentions/{% endif %}"
-           class="hover:text-white transition-colors">{{ t.footer.legal }}</a>
+        <div class="flex items-center gap-4">
+            <a href="{% if site.active_lang == site.default_lang %}/mentions/{% else %}/{{ site.active_lang }}/mentions/{% endif %}"
+               class="hover:text-white transition-colors">{{ t.footer.legal }}</a>
+            <button type="button" data-cookie-reopen
+                class="hover:text-white transition-colors">{{ t.footer.cookies }}</button>
+        </div>
         <ul class="flex items-center gap-3 uppercase tracking-widest font-medium" aria-label="{{ t.nav.switch_language }}">
             {% for l in site.languages %}
                 {% if l == site.default_lang %}

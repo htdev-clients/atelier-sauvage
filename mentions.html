@@ -80,11 +80,22 @@ i18n_key: mentions
       <p>{{ m.s3_body }}</p>
     </div>
 
-    <div>
+    <div class="mb-12">
       <h2 class="font-serif text-2xl text-stone-900 mb-4 pb-2 border-b border-stone-200">
         {{ m.s4_title }}
       </h2>
       <p>{{ m.s4_body }}</p>
+    </div>
+
+    <div>
+      <h2 class="font-serif text-2xl text-stone-900 mb-4 pb-2 border-b border-stone-200">
+        {{ m.s5_title }}
+      </h2>
+      <p>
+        {{ m.s5_body }}
+        <button type="button" data-cookie-reopen
+          class="ml-1 underline underline-offset-2 hover:text-stone-900">{{ t.footer.cookies }}</button>
+      </p>
     </div>
 
   </section>
