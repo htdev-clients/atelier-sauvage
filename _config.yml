@@ -7,6 +7,9 @@ description: Objets vintage, design et galerie à Verviers
 url: "https://ateliersauvageheusy.be"
 baseurl: ""
 
+# Meta (Facebook) Pixel — loaded only after cookie consent (assets/js/cookie-consent.js).
+meta_pixel_id: "1719009352576992"
+
 plugins:
   - jekyll-polyglot
 

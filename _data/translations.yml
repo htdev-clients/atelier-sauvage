@@ -18,6 +18,13 @@ fr:
     switch_language: "Changer de langue"
   footer:
     legal: "Mentions légales"
+    cookies: "Cookies"
+  consent:
+    title: "Cookies & confidentialité"
+    message: "Ce site utilise des cookies de mesure publicitaire (Meta Pixel) pour améliorer nos campagnes. Vous êtes libre d'accepter ou de refuser ; votre choix peut être modifié à tout moment."
+    accept: "Accepter"
+    reject: "Refuser"
+    learn_more: "En savoir plus"
   index:
     hero_tagline: "Objets vintage, design & esprit atelier à Heusy"
     studio_quote: "« Un lieu de vie, entre galerie et atelier »"
@@ -79,6 +86,8 @@ fr:
     s3_body: "L’ensemble de ce site relève de la législation belge et internationale sur le droit d’auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés. La reproduction de tout ou partie de ce site est formellement interdite sauf autorisation expresse."
     s4_title: "4. Données personnelles"
     s4_body: "Les informations recueillies sont uniquement utilisées pour répondre à vos demandes et ne sont jamais cédées à des tiers. Conformément à la loi, vous disposez d'un droit d'accès et de rectification aux données vous concernant."
+    s5_title: "5. Cookies et mesure publicitaire"
+    s5_body: "Avec votre consentement préalable, ce site dépose des cookies via le Meta Pixel (Meta Platforms Ireland Ltd.) afin de mesurer l'efficacité de nos campagnes publicitaires et d'en améliorer le ciblage. Aucun cookie de ce type n'est déposé sans votre accord, recueilli via notre bandeau de consentement. Vous pouvez accepter, refuser ou modifier votre choix à tout moment via le lien « Cookies » en bas de page."
   product:
     sold: "Vendu"
   lightbox:
@@ -104,6 +113,13 @@ en:
     switch_language: "Change language"
   footer:
     legal: "Legal notice"
+    cookies: "Cookies"
+  consent:
+    title: "Cookies & privacy"
+    message: "This site uses advertising-measurement cookies (Meta Pixel) to improve our campaigns. You are free to accept or decline; you can change your choice at any time."
+    accept: "Accept"
+    reject: "Decline"
+    learn_more: "Learn more"
   index:
     hero_tagline: "Vintage objects, design & studio spirit in Heusy"
     studio_quote: "“A place to live, between gallery and studio”"
@@ -165,6 +181,8 @@ en:
     s3_body: "This entire site is subject to Belgian and international copyright and intellectual property law. All reproduction rights are reserved. Reproducing all or part of this site is strictly forbidden without express authorisation."
     s4_title: "4. Personal data"
     s4_body: "Information collected is used solely to respond to your requests and is never passed on to third parties. In accordance with the law, you have the right to access and rectify your personal data."
+    s5_title: "5. Cookies and advertising measurement"
+    s5_body: "With your prior consent, this site sets cookies via the Meta Pixel (Meta Platforms Ireland Ltd.) in order to measure the effectiveness of our advertising campaigns and improve their targeting. No such cookie is set without your agreement, obtained through our consent banner. You may accept, decline or change your choice at any time via the \"Cookies\" link in the footer."
   product:
     sold: "Sold"
   lightbox:
@@ -190,6 +208,13 @@ nl:
     switch_language: "Taal wijzigen"
   footer:
     legal: "Wettelijke vermeldingen"
+    cookies: "Cookies"
+  consent:
+    title: "Cookies & privacy"
+    message: "Deze site gebruikt cookies voor advertentiemeting (Meta Pixel) om onze campagnes te verbeteren. Je bent vrij om te aanvaarden of te weigeren; je keuze kan op elk moment worden gewijzigd."
+    accept: "Aanvaarden"
+    reject: "Weigeren"
+    learn_more: "Meer info"
   index:
     hero_tagline: "Vintage objecten, design & ateliersfeer in Heusy"
     studio_quote: "“Een plek om te leven, tussen galerie en atelier”"
@@ -251,6 +276,8 @@ nl:
     s3_body: "Deze volledige website valt onder de Belgische en internationale wetgeving inzake auteursrecht en intellectueel eigendom. Alle reproductierechten zijn voorbehouden. Het geheel of gedeeltelijk reproduceren van deze website is strikt verboden zonder uitdrukkelijke toestemming."
     s4_title: "4. Persoonsgegevens"
     s4_body: "De verzamelde gegevens worden uitsluitend gebruikt om op je vragen te antwoorden en worden nooit aan derden doorgegeven. Conform de wet heb je recht op inzage en correctie van je persoonsgegevens."
+    s5_title: "5. Cookies en advertentiemeting"
+    s5_body: "Met je voorafgaande toestemming plaatst deze site cookies via de Meta Pixel (Meta Platforms Ireland Ltd.) om de doeltreffendheid van onze advertentiecampagnes te meten en de targeting te verbeteren. Zonder jouw akkoord, verkregen via onze toestemmingsbanner, wordt geen enkele dergelijke cookie geplaatst. Je kan je keuze op elk moment aanvaarden, weigeren of wijzigen via de link « Cookies » onderaan de pagina."
   product:
     sold: "Verkocht"
   lightbox:
@@ -276,6 +303,13 @@ de:
     switch_language: "Sprache ändern"
   footer:
     legal: "Impressum"
+    cookies: "Cookies"
+  consent:
+    title: "Cookies & Datenschutz"
+    message: "Diese Website verwendet Cookies zur Werbemessung (Meta Pixel), um unsere Kampagnen zu verbessern. Sie können frei zustimmen oder ablehnen; Ihre Wahl kann jederzeit geändert werden."
+    accept: "Akzeptieren"
+    reject: "Ablehnen"
+    learn_more: "Mehr erfahren"
   index:
     hero_tagline: "Vintage-Objekte, Design & Atelier-Geist in Heusy"
     studio_quote: "„Ein Ort des Lebens, zwischen Galerie und Atelier“"
@@ -337,6 +371,8 @@ de:
     s3_body: "Diese gesamte Website unterliegt dem belgischen und internationalen Urheber- und geistigen Eigentumsrecht. Alle Vervielfältigungsrechte sind vorbehalten. Die vollständige oder teilweise Vervielfältigung dieser Website ist ohne ausdrückliche Genehmigung strikt untersagt."
     s4_title: "4. Personenbezogene Daten"
     s4_body: "Die erhobenen Daten werden ausschließlich zur Beantwortung Ihrer Anfragen verwendet und niemals an Dritte weitergegeben. Gemäß den gesetzlichen Bestimmungen haben Sie das Recht auf Auskunft und Berichtigung Ihrer personenbezogenen Daten."
+    s5_title: "5. Cookies und Werbemessung"
+    s5_body: "Mit Ihrer vorherigen Einwilligung setzt diese Website Cookies über das Meta Pixel (Meta Platforms Ireland Ltd.), um die Wirksamkeit unserer Werbekampagnen zu messen und deren Ausrichtung zu verbessern. Ohne Ihre über unser Einwilligungsbanner eingeholte Zustimmung wird kein solches Cookie gesetzt. Sie können Ihre Wahl jederzeit über den Link « Cookies » im Seitenfuß akzeptieren, ablehnen oder ändern."
   product:
     sold: "Verkauft"
   lightbox:
