@@ -10,6 +10,11 @@
  *
  * The Pixel ID comes from window.AS_CONSENT.pixelId (set in _includes/cookie-consent.html
  * from _config.yml -> meta_pixel_id). While that is still the placeholder, we skip loading.
+ *
+ * Each tracked event is also mirrored server-side via the Conversions API (CAPI):
+ * the browser POSTs to the first-party /capi endpoint (functions/capi.js), which relays
+ * to Meta. Both copies share an event_id so Meta de-duplicates them. Because /capi is
+ * first-party, it still fires when ad blockers block the browser Pixel, recovering events.
  */
 (function () {
   "use strict";
@@ -44,6 +49,49 @@
     return /(^|\/)catalogue\/?$/.test(window.location.pathname);
   }
 
+  function genEventId() {
+    try {
+      return crypto.randomUUID();
+    } catch (e) {
+      return "e" + Date.now() + Math.random().toString(36).slice(2);
+    }
+  }
+
+  function getCookie(name) {
+    var m = document.cookie.match("(?:^|;)\\s*" + name + "\\s*=\\s*([^;]+)");
+    return m ? m[1] : "";
+  }
+
+  // Fire an event through both the browser Pixel and the server-side CAPI relay,
+  // sharing one event_id so Meta de-duplicates the pair.
+  function track(eventName, customData) {
+    var id = genEventId();
+
+    if (window.fbq) {
+      window.fbq("track", eventName, customData || {}, { eventID: id });
+    }
+
+    try {
+      fetch("/capi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event_name: eventName,
+          event_id: id,
+          event_source_url: window.location.href,
+          fbp: getCookie("_fbp") || undefined,
+          fbc: getCookie("_fbc") || undefined,
+          custom_data: customData && Object.keys(customData).length ? customData : undefined,
+        }),
+        keepalive: true, // let the request complete even if the page is unloading
+      }).catch(function () {
+        /* network/relay failure is non-fatal; the browser Pixel still covers it */
+      });
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
   function loadPixel() {
     if (pixelLoaded || !pixelConfigured()) return;
     pixelLoaded = true;
@@ -67,9 +115,9 @@
     })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
 
     window.fbq("init", pixelId);
-    window.fbq("track", "PageView");
+    track("PageView");
     if (onCataloguePage()) {
-      window.fbq("track", "ViewContent", { content_category: "catalogue" });
+      track("ViewContent", { content_category: "catalogue" });
     }
   }
 
