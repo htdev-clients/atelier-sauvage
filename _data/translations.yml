@@ -58,6 +58,12 @@ fr:
     subheading: "En ce moment à l'Atelier"
     filter_all: "Tout"
     empty: "Le catalogue est en cours de mise à jour..."
+    # Category filter labels. Keys = French category from the CSV (the
+    # source-of-truth key used for filtering); values = displayed label.
+    categories:
+      Meuble: "Meuble"
+      Décoration: "Décoration"
+      Luminaire: "Luminaire"
   events:
     page_title: "Événements – Atelier Sauvage"
     page_description: "Expositions, rencontres et ateliers à l'Atelier Sauvage à Heusy."
@@ -153,6 +159,10 @@ en:
     subheading: "Currently at the Studio"
     filter_all: "All"
     empty: "The catalogue is being updated..."
+    categories:
+      Meuble: "Furniture"
+      Décoration: "Decoration"
+      Luminaire: "Lighting"
   events:
     page_title: "Events – Atelier Sauvage"
     page_description: "Exhibitions, gatherings and workshops at Atelier Sauvage in Heusy."
@@ -248,6 +258,10 @@ nl:
     subheading: "Nu in het Atelier"
     filter_all: "Alles"
     empty: "De catalogus wordt bijgewerkt..."
+    categories:
+      Meuble: "Meubel"
+      Décoration: "Decoratie"
+      Luminaire: "Verlichting"
   events:
     page_title: "Evenementen – Atelier Sauvage"
     page_description: "Tentoonstellingen, ontmoetingen en workshops bij Atelier Sauvage in Heusy."
@@ -343,6 +357,10 @@ de:
     subheading: "Aktuell im Atelier"
     filter_all: "Alle"
     empty: "Der Katalog wird gerade aktualisiert..."
+    categories:
+      Meuble: "Möbel"
+      Décoration: "Dekoration"
+      Luminaire: "Beleuchtung"
   events:
     page_title: "Veranstaltungen – Atelier Sauvage"
     page_description: "Ausstellungen, Begegnungen und Workshops im Atelier Sauvage in Heusy."

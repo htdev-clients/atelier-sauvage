@@ -41,7 +41,7 @@ i18n_key: catalogue
         {{ cat.filter_all }}
       </button>
 
-      {% comment %} Generate Categories — labels stay in French (per single source of truth in CSV) {% endcomment %}
+      {% comment %} Generate Categories — French category is the filter key (matches data-category on cards); displayed label is translated via cat.categories, falling back to the French key. {% endcomment %}
       {% assign categories = site.data.catalog | map: 'category' | uniq | sort %}
 
       {% for category in categories %}
@@ -50,7 +50,7 @@ i18n_key: catalogue
       <button
         class="filter-btn text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest text-stone-400 font-normal transition-colors hover:text-stone-600"
         data-filter="{{ cat_clean | escape }}">
-        {{ cat_clean }}
+        {{ cat.categories[cat_clean] | default: cat_clean }}
       </button>
       {% endif %}
       {% endfor %}
