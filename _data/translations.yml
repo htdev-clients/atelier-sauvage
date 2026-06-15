@@ -58,6 +58,13 @@ fr:
     subheading: "En ce moment à l'Atelier"
     filter_all: "Tout"
     empty: "Le catalogue est en cours de mise à jour..."
+  # Client-facing labels for catalog categories. Keys MUST match the exact
+  # values in _database/catalog.csv (the single source of truth). Unmapped
+  # categories fall back to the raw French value in catalogue.html.
+  categories:
+    Décoration: "Décoration"
+    Luminaire: "Luminaire"
+    Meuble: "Meuble"
   events:
     page_title: "Événements – Atelier Sauvage"
     page_description: "Expositions, rencontres et ateliers à l'Atelier Sauvage à Heusy."
@@ -153,6 +160,10 @@ en:
     subheading: "Currently at the Studio"
     filter_all: "All"
     empty: "The catalogue is being updated..."
+  categories:
+    Décoration: "Decoration"
+    Luminaire: "Lighting"
+    Meuble: "Furniture"
   events:
     page_title: "Events – Atelier Sauvage"
     page_description: "Exhibitions, gatherings and workshops at Atelier Sauvage in Heusy."
@@ -248,6 +259,10 @@ nl:
     subheading: "Nu in het Atelier"
     filter_all: "Alles"
     empty: "De catalogus wordt bijgewerkt..."
+  categories:
+    Décoration: "Decoratie"
+    Luminaire: "Verlichting"
+    Meuble: "Meubels"
   events:
     page_title: "Evenementen – Atelier Sauvage"
     page_description: "Tentoonstellingen, ontmoetingen en workshops bij Atelier Sauvage in Heusy."
@@ -343,6 +358,10 @@ de:
     subheading: "Aktuell im Atelier"
     filter_all: "Alle"
     empty: "Der Katalog wird gerade aktualisiert..."
+  categories:
+    Décoration: "Dekoration"
+    Luminaire: "Beleuchtung"
+    Meuble: "Möbel"
   events:
     page_title: "Veranstaltungen – Atelier Sauvage"
     page_description: "Ausstellungen, Begegnungen und Workshops im Atelier Sauvage in Heusy."
