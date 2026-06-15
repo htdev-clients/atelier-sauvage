@@ -3,10 +3,8 @@
   "total_lots": 256,
   "new_lots": [],
   "removed_lots": [],
-  "photos_downloaded": 4,
-  "photos_added_to_existing": [
-    "224"
-  ],
+  "photos_downloaded": 0,
+  "photos_added_to_existing": [],
   "orphaned_images_deleted": 0,
-  "timestamp": "2026-06-12T15:36:50.646217+00:00"
+  "timestamp": "2026-06-15T08:18:19.897010+00:00"
 }
