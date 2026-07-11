@@ -43,6 +43,11 @@ fr:
       thursday: "Jeudi"
       friday: "Vendredi"
       saturday: "Samedi"
+    holiday:
+      label: "Horaires d'été"
+      title: "L'Atelier Sauvage passe à l'heure d'été !"
+      body: "Pendant les mois de juillet et août, nous serons ouverts les vendredis et samedis de 14h à 17h uniquement."
+      closed: "Nous serons fermés du 30 juillet au 22 août inclus."
     alts:
       facade: "Façade du magasin Atelier Sauvage"
       logo: "Logo Atelier Sauvage"
@@ -145,6 +150,11 @@ en:
       thursday: "Thursday"
       friday: "Friday"
       saturday: "Saturday"
+    holiday:
+      label: "Summer hours"
+      title: "Atelier Sauvage is switching to summer hours!"
+      body: "Throughout July and August, we are open on Fridays and Saturdays from 2pm to 5pm only."
+      closed: "We will be closed from 30 July to 22 August inclusive."
     alts:
       facade: "Façade of the Atelier Sauvage shop"
       logo: "Atelier Sauvage logo"
@@ -244,6 +254,11 @@ nl:
       thursday: "Donderdag"
       friday: "Vrijdag"
       saturday: "Zaterdag"
+    holiday:
+      label: "Zomeruren"
+      title: "Atelier Sauvage schakelt over op zomeruren!"
+      body: "In juli en augustus zijn we enkel op vrijdag en zaterdag open van 14u tot 17u."
+      closed: "We zijn gesloten van 30 juli tot en met 22 augustus."
     alts:
       facade: "Gevel van de winkel Atelier Sauvage"
       logo: "Logo Atelier Sauvage"
@@ -343,6 +358,11 @@ de:
       thursday: "Donnerstag"
       friday: "Freitag"
       saturday: "Samstag"
+    holiday:
+      label: "Sommeröffnungszeiten"
+      title: "Das Atelier Sauvage stellt auf Sommerzeit um!"
+      body: "Im Juli und August sind wir nur freitags und samstags von 14 bis 17 Uhr geöffnet."
+      closed: "Vom 30. Juli bis einschließlich 22. August sind wir geschlossen."
     alts:
       facade: "Fassade des Geschäfts Atelier Sauvage"
       logo: "Logo Atelier Sauvage"

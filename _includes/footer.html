@@ -30,9 +30,11 @@
                 4802 Heusy, Verviers
             </address>
             <dl class="flex flex-col gap-0.5 text-sm text-stone-400">
+                {% unless site.holiday_banner %}
                 <div class="flex gap-4">
                     <dt class="w-20">{{ idx.days.thursday }}</dt><dd>14h – 17h</dd>
                 </div>
+                {% endunless %}
                 <div class="flex gap-4">
                     <dt class="w-20">{{ idx.days.friday }}</dt><dd>14h – 17h</dd>
                 </div>

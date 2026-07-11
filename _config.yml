@@ -10,6 +10,11 @@ baseurl: ""
 # Meta (Facebook) Pixel — loaded only after cookie consent (assets/js/cookie-consent.js).
 meta_pixel_id: "1719009352576992"
 
+# Seasonal announcement banner on the homepage. When true, shows the holiday
+# banner (index.holiday translations) and hides Thursday from the opening hours.
+# Set to false to remove it after the summer schedule ends.
+holiday_banner: true
+
 plugins:
   - jekyll-polyglot
 
