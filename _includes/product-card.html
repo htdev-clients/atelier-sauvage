@@ -10,6 +10,7 @@
       " sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" loading="lazy" decoding="async"
       alt="{{ include.item.description | escape }}" data-item-number="{{ include.item.number }}"
       data-image-count="{{ include.item.images | default: 1 }}"
+      data-image-indices="{{ include.item.image_indices | join: ',' }}"
       class="gallery-item w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 cursor-zoom-in" />
 
     {% if include.item.images > 1 %}

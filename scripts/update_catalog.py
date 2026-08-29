@@ -13,6 +13,7 @@ import csv
 import io
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
@@ -206,6 +207,44 @@ def validate_coverage(sheet_items: list[str]) -> list[str]:
             missing.append(number)
     return missing
 
+
+def check_numbering(sheet_items: list[str]) -> list[dict]:
+    """
+    Report items whose extra images are not numbered contiguously from 1.
+
+    A gap (e.g. 354, 354-1, 354-3) means the client skipped a number when
+    uploading to Drive. The site renders such items correctly, so this is a
+    warning rather than a failure -- but the numbering should be tidied up in
+    Drive, otherwise it drifts further with every batch.
+    """
+    size_dir = CATALOG_DIR / "1400"
+    if not size_dir.exists():
+        return []
+
+    found: dict[str, list[int]] = {}
+    for webp in size_dir.glob("*.webp"):
+        m = re.fullmatch(r"(.+)-(\d+)-1400\.webp", webp.name)
+        if m:
+            found.setdefault(m.group(1), []).append(int(m.group(2)))
+
+    warnings = []
+    for number in sheet_items:
+        indices = sorted(found.get(number, []))
+        if not indices or indices == list(range(1, len(indices) + 1)):
+            continue
+        expected = list(range(1, len(indices) + 1))
+        warnings.append({
+            "item": number,
+            "found": indices,
+            "missing": [n for n in expected if n not in indices],
+            "renames": [
+                {"from": f"{number}-{old}.jpg", "to": f"{number}-{new}.jpg"}
+                for old, new in zip(indices, expected) if old != new
+            ],
+        })
+    return warnings
+
+
 # ── Cleanup ───────────────────────────────────────────────────────────────────
 
 def cleanup_orphans(sheet_items: list[str]) -> int:
@@ -296,6 +335,14 @@ def _run():
 
     print(f"  All {len(sheet_items)} lots have images.")
 
+    # 4b. Warn (do not fail) on non-contiguous image numbering
+    print("\nChecking image numbering...")
+    numbering_warnings = check_numbering(sheet_items)
+    for w in numbering_warnings:
+        print(f"  ⚠ Lot {w['item']}: indices {w['found']}, missing {w['missing']}")
+    if not numbering_warnings:
+        print("  Numbering is contiguous for all lots.")
+
     # 5. Delete images for items removed from the sheet
     print("\nCleaning up orphaned images...")
     deleted_files = cleanup_orphans(sheet_items)
@@ -305,6 +352,25 @@ def _run():
     print("\nUpdating CSV...")
     update_csv(sheets)
 
+    numbering_note = ""
+    if numbering_warnings:
+        lines = ["\n### ⚠️ Numérotation des photos à corriger\n"]
+        for w in numbering_warnings:
+            found   = ", ".join(str(n) for n in w["found"])
+            missing = ", ".join(str(n) for n in w["missing"])
+            lines.append(
+                f"\n**Lot {w['item']}** — photos trouvées : {found} "
+                f"(il manque : {missing}).\n\n"
+                "Renommez dans le Drive :\n"
+                + "\n".join(f"- `{r['from']}` → `{r['to']}`" for r in w["renames"])
+                + "\n"
+            )
+        lines.append(
+            "\nLes photos s'affichent correctement sur le site malgré tout — "
+            "ce renommage évite que la numérotation ne dérive davantage.\n"
+        )
+        numbering_note = "".join(lines)
+
     write_summary(
         "## Mise à jour du catalogue réussie\n\n"
         f"- **{len(sheet_items)}** lots au total\n"
@@ -312,6 +378,7 @@ def _run():
         + (f"- **{len(removed_lots)}** lot(s) supprimé(s) : {', '.join(removed_lots)}\n" if removed_lots else "")
         + (f"- **{len(updated_photo_lots)}** lot(s) existant(s) avec nouvelles photos : {', '.join(updated_photo_lots)}\n" if updated_photo_lots else "")
         + (f"- **{total_downloaded}** photo(s) traitée(s)\n" if total_downloaded else "")
+        + numbering_note
     )
     write_last_run({
         "status": "success",
@@ -321,6 +388,12 @@ def _run():
         "photos_downloaded": total_downloaded,
         "photos_added_to_existing": updated_photo_lots,
         "orphaned_images_deleted": deleted_files,
+        "numbering_warnings": numbering_warnings,
+        "numbering_message": "; ".join(
+            f"Lot {w['item']} : il manque la/les photo(s) "
+            + ", ".join(str(n) for n in w["missing"])
+            for w in numbering_warnings
+        ),
     })
 
     print("\n=== Done ===")

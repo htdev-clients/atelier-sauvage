@@ -91,6 +91,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemNumber = img.dataset.itemNumber;
     const count = parseInt(img.dataset.imageCount || 1);
 
+    // Indices of the extra images that actually exist on disk. The numbering may
+    // contain gaps (e.g. 1,3,4), so never assume a contiguous 1..count-1 range.
+    // Falls back to that range when the attribute is missing (stale cached HTML).
+    const indices = (img.dataset.imageIndices || '')
+      .split(',')
+      .map((s) => parseInt(s, 10))
+      .filter((n) => Number.isInteger(n) && n > 0);
+    const extraIndices = img.dataset.imageIndices !== undefined
+      ? indices
+      : Array.from({ length: Math.max(0, count - 1) }, (_, i) => i + 1);
+
     const makeSrcset = (suffix) =>
       [
         `/assets/img/catalog/480/${itemNumber}${suffix}-480.webp 480w`,
@@ -114,25 +125,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const slides = [firstSlide];
 
-    if (count > 1) {
+    if (extraIndices.length) {
       // Preload extra images at 480px to read their aspect ratios.
       // These are likely already cached since they appear as thumbnails on the page.
       const extraDims = await Promise.all(
-        Array.from({ length: count - 1 }, (_, i) =>
-          fetchDimensions(`/assets/img/catalog/480/${itemNumber}-${i + 1}-480.webp`)
+        extraIndices.map((n) =>
+          fetchDimensions(`/assets/img/catalog/480/${itemNumber}-${n}-480.webp`)
         )
       );
 
-      for (let i = 1; i < count; i++) {
-        const dim = extraDims[i - 1];
+      extraIndices.forEach((n, i) => {
+        const dim = extraDims[i];
         slides.push({
-          src: `/assets/img/catalog/1400/${itemNumber}-${i}-1400.webp`,
-          srcset: makeSrcset(`-${i}`),
+          src: `/assets/img/catalog/1400/${itemNumber}-${n}-1400.webp`,
+          srcset: makeSrcset(`-${n}`),
           alt: img.alt,
           description: img.alt,
           ...(dim ? dimsAt1400(dim.w, dim.h) : {}),
         });
-      }
+      });
     }
 
     openPswp(slides, 0, true, null, true);

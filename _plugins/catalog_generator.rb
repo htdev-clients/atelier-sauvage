@@ -14,6 +14,19 @@ module Jekyll
         csv_text = File.read(csv_path, encoding: 'bom|utf-8')
 
         begin
+          # Scan the image dir once and group each item's extra-image indices.
+          # Matches '{number}-{index}-1400.webp'; base images ('{number}-1400.webp')
+          # have no index segment and are correctly excluded.
+          extra_indices = {}
+          if Dir.exist?(img_dir)
+            Dir.children(img_dir).each do |fname|
+              m = fname.match(/\A(.+)-(\d+)-1400\.webp\z/)
+              next unless m
+              (extra_indices[m[1]] ||= []) << m[2].to_i
+            end
+            extra_indices.each_value(&:sort!)
+          end
+
           rows = CSV.parse(csv_text,
             headers: true,
             col_sep: ';',
@@ -34,24 +47,15 @@ module Jekyll
 
             row_hash['category'] = row_hash['category'].to_s.strip
 
-            # 1. Start with 1 (Main image always exists)
-            count = 1
+            # 1. Extra images are whatever is actually on disk. Gaps in the
+            #    numbering (e.g. -1, -3, -4 with -2 missing) are tolerated:
+            #    every present image is rendered, in ascending index order.
+            indices = extra_indices.fetch(number, [])
 
-            # 2. Check for extras: {number}-1, {number}-2...
-            loop do
-              # Strictly checking for .jpeg only
-              next_name = "#{number}-#{count}-1400.webp"
-              path = File.join(img_dir, next_name)
-
-              if File.exist?(path)
-                count += 1
-              else
-                break # Stop counting if file doesn't exist
-              end
-            end
-
-            # 3. Save to data
-            row_hash['images'] = count
+            # 2. Save to data. 'images' counts the main image plus the extras;
+            #    'image_indices' tells the lightbox which suffixes actually exist.
+            row_hash['images'] = 1 + indices.length
+            row_hash['image_indices'] = indices
             row_hash
             # ----------------------------------
           end.compact # .compact removes all the 'nil' values (the pending items)
