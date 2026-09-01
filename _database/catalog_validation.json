@@ -1,0 +1,748 @@
+{
+  "generated": "2026-09-01T17:19:54.235838+00:00",
+  "sellable": [
+    "10",
+    "100",
+    "102",
+    "104",
+    "106",
+    "108a",
+    "108b",
+    "108f",
+    "114",
+    "115",
+    "116",
+    "117",
+    "12",
+    "122",
+    "123",
+    "124",
+    "126",
+    "127",
+    "131",
+    "132",
+    "136",
+    "137",
+    "14",
+    "141",
+    "142",
+    "144",
+    "146b",
+    "147",
+    "150",
+    "153",
+    "154",
+    "155b",
+    "158",
+    "159",
+    "16",
+    "160",
+    "161",
+    "164",
+    "165",
+    "166",
+    "168",
+    "17",
+    "170a",
+    "170c",
+    "170e",
+    "173a",
+    "173c",
+    "174",
+    "177",
+    "178a",
+    "17b",
+    "182",
+    "183",
+    "188",
+    "189",
+    "190b",
+    "192",
+    "193",
+    "194",
+    "195",
+    "197",
+    "198",
+    "203",
+    "205",
+    "206",
+    "207",
+    "208",
+    "21",
+    "211",
+    "212",
+    "214",
+    "216a",
+    "216b",
+    "216d",
+    "216e",
+    "217",
+    "218",
+    "219a",
+    "219b",
+    "219c",
+    "219d",
+    "219e",
+    "219f",
+    "223a",
+    "223b",
+    "224",
+    "226",
+    "227",
+    "229",
+    "231",
+    "232",
+    "234",
+    "235",
+    "236",
+    "237",
+    "242",
+    "243b",
+    "245",
+    "246",
+    "248",
+    "249",
+    "24b",
+    "24d",
+    "24f",
+    "24g",
+    "24j",
+    "25",
+    "253",
+    "254",
+    "255",
+    "257b",
+    "257c",
+    "258",
+    "259",
+    "26",
+    "260",
+    "261",
+    "262",
+    "267",
+    "268",
+    "271",
+    "272",
+    "273",
+    "274",
+    "275",
+    "276",
+    "277",
+    "278",
+    "283",
+    "284",
+    "285",
+    "286",
+    "288",
+    "289",
+    "290",
+    "291",
+    "292",
+    "293",
+    "294",
+    "295",
+    "296",
+    "3",
+    "300",
+    "301",
+    "303",
+    "307",
+    "310",
+    "311",
+    "312",
+    "316",
+    "317",
+    "318",
+    "319",
+    "31a",
+    "31b",
+    "31c",
+    "320",
+    "321",
+    "322",
+    "323",
+    "325",
+    "326",
+    "333",
+    "334",
+    "335",
+    "338",
+    "339",
+    "340",
+    "341",
+    "344",
+    "352",
+    "353",
+    "355",
+    "356",
+    "358",
+    "38",
+    "40",
+    "41",
+    "46",
+    "52",
+    "53",
+    "55a",
+    "55b",
+    "56a",
+    "56b",
+    "56c",
+    "56d",
+    "56e",
+    "57",
+    "58",
+    "62",
+    "63",
+    "64",
+    "65",
+    "69b",
+    "7",
+    "70",
+    "72",
+    "75",
+    "76",
+    "8",
+    "81",
+    "82",
+    "83",
+    "87",
+    "88",
+    "89",
+    "92",
+    "93",
+    "94a",
+    "94b",
+    "94c",
+    "94d"
+  ],
+  "not_sellable": {},
+  "report": {
+    "normalised": [
+      {
+        "item": "3",
+        "field": "description",
+        "from": "Vase albarello ancien en majolique (faïence polychrome italienne) - G. Giotto - 19e siècle - Pièce unique - Signée - Ht 30,5 cm ",
+        "to": "Vase albarello ancien en majolique (faïence polychrome italienne) - G. Giotto - 19e siècle - Pièce unique - Signée - Ht 30,5 cm"
+      },
+      {
+        "item": "21",
+        "field": "description",
+        "from": "Fauteuil du designer Ingmar Relling pour Westnofa en cuir brun et piètement en bois incurvé, modèle \"Manta\" (Design Scandinave) – 1970s – Très confortable ",
+        "to": "Fauteuil du designer Ingmar Relling pour Westnofa en cuir brun et piètement en bois incurvé, modèle \"Manta\" (Design Scandinave) – 1970s – Très confortable"
+      },
+      {
+        "item": "31b",
+        "field": "description",
+        "from": "Porcelaine asiatique - Vase à décor asiatique ",
+        "to": "Porcelaine asiatique - Vase à décor asiatique"
+      },
+      {
+        "item": "31c",
+        "field": "description",
+        "from": "Porcelaine asiatique - Petit pot carré avec couvercle à décor asiatique ",
+        "to": "Porcelaine asiatique - Petit pot carré avec couvercle à décor asiatique"
+      },
+      {
+        "item": "32",
+        "field": "description",
+        "from": "Bureau Napoléon III, bois noirci - Un grand tiroir en ceinture - Quatre pieds fuselés  réunis par une entretoise - Ht 84 x 75 x 47 cm",
+        "to": "Bureau Napoléon III, bois noirci - Un grand tiroir en ceinture - Quatre pieds fuselés réunis par une entretoise - Ht 84 x 75 x 47 cm"
+      },
+      {
+        "item": "33",
+        "field": "description",
+        "from": "Meuble bar vintage en palissandre - Poignées en céramique ",
+        "to": "Meuble bar vintage en palissandre - Poignées en céramique"
+      },
+      {
+        "item": "40",
+        "field": "description",
+        "from": "Meuble Bar \"oriental\" probablement en noyer, nacre et bois tourné ",
+        "to": "Meuble Bar \"oriental\" probablement en noyer, nacre et bois tourné"
+      },
+      {
+        "item": "53",
+        "field": "description",
+        "from": "Applique en laiton doré et porcelaine à décor de fleurs, à quatre feux - Ht 60 cm ",
+        "to": "Applique en laiton doré et porcelaine à décor de fleurs, à quatre feux - Ht 60 cm"
+      },
+      {
+        "item": "56b",
+        "field": "description",
+        "from": "Petit vase céramique brun (anse) ",
+        "to": "Petit vase céramique brun (anse)"
+      },
+      {
+        "item": "56c",
+        "field": "description",
+        "from": "Petit vase rose et fleurs avec liserés dorés (2 anses) ",
+        "to": "Petit vase rose et fleurs avec liserés dorés (2 anses)"
+      },
+      {
+        "item": "94a",
+        "field": "description",
+        "from": "Lot de 2 tasses et sous tasses à fleur bleues - Bernardaud Limoges ",
+        "to": "Lot de 2 tasses et sous tasses à fleur bleues - Bernardaud Limoges"
+      },
+      {
+        "item": "94b",
+        "field": "description",
+        "from": "Lot de 2 tasses et sous tasses bleues - Raynaud Limoges ",
+        "to": "Lot de 2 tasses et sous tasses bleues - Raynaud Limoges"
+      },
+      {
+        "item": "94c",
+        "field": "description",
+        "from": "Lot de 3 tasses et sous tasses brunes/bleues - Raynaud Limoges ",
+        "to": "Lot de 3 tasses et sous tasses brunes/bleues - Raynaud Limoges"
+      },
+      {
+        "item": "94d",
+        "field": "description",
+        "from": "Lot de 6 tasses et sous tasses à liseré doré ",
+        "to": "Lot de 6 tasses et sous tasses à liseré doré"
+      },
+      {
+        "item": "108b",
+        "field": "description",
+        "from": "Vase vert/brun 2 anses (amphore) West Germany - Ht 22cm ",
+        "to": "Vase vert/brun 2 anses (amphore) West Germany - Ht 22cm"
+      },
+      {
+        "item": "113",
+        "field": "description",
+        "from": "Table basse en fer forgé et carreaux de céramique - Ht 56 x 99 x 69 cm ",
+        "to": "Table basse en fer forgé et carreaux de céramique - Ht 56 x 99 x 69 cm"
+      },
+      {
+        "item": "115",
+        "field": "description",
+        "from": "Linogravure Tons rouge et bleu Philippe Sadzot Fifi  - 50 x 35 cm",
+        "to": "Linogravure Tons rouge et bleu Philippe Sadzot Fifi - 50 x 35 cm"
+      },
+      {
+        "item": "123",
+        "field": "description",
+        "from": "Vase en cristal clair - Val St Lambert - Numéroté ",
+        "to": "Vase en cristal clair - Val St Lambert - Numéroté"
+      },
+      {
+        "item": "127",
+        "field": "description",
+        "from": "Table basse \"coffee table\" en noyer et carreaux céramique, à pieds chromés - Moderniste 1960s-1970s -  Ht 42 x 113 x 50 cm  ",
+        "to": "Table basse \"coffee table\" en noyer et carreaux céramique, à pieds chromés - Moderniste 1960s-1970s - Ht 42 x 113 x 50 cm"
+      },
+      {
+        "item": "141",
+        "field": "description",
+        "from": "Dessin mogol - Peinture sur soie école du Rajasthan - 21 x 28 cm ",
+        "to": "Dessin mogol - Peinture sur soie école du Rajasthan - 21 x 28 cm"
+      },
+      {
+        "item": "143",
+        "field": "description",
+        "from": "Miroir à parclose Louis XIII en ébène, cristal et laiton repoussé - Motifs de fleurs et de plantes - Ht 52 cm x 27 cm ",
+        "to": "Miroir à parclose Louis XIII en ébène, cristal et laiton repoussé - Motifs de fleurs et de plantes - Ht 52 cm x 27 cm"
+      },
+      {
+        "item": "144",
+        "field": "description",
+        "from": "Gourde faience ancienne, camaieu bleu - Allemagne - Ht 21 cm ",
+        "to": "Gourde faience ancienne, camaieu bleu - Allemagne - Ht 21 cm"
+      },
+      {
+        "item": "146b",
+        "field": "description",
+        "from": "Lot de 6 petites coupelles en porcelaine ",
+        "to": "Lot de 6 petites coupelles en porcelaine"
+      },
+      {
+        "item": "147",
+        "field": "description",
+        "from": "Gravure Pierre Paulus \"atelier de forgeron\" - 69 x 79,5 cm (avec cadre) ",
+        "to": "Gravure Pierre Paulus \"atelier de forgeron\" - 69 x 79,5 cm (avec cadre)"
+      },
+      {
+        "item": "158",
+        "field": "description",
+        "from": "Chaises vintage Meyer en cuir beige - Série de 6 ",
+        "to": "Chaises vintage Meyer en cuir beige - Série de 6"
+      },
+      {
+        "item": "164",
+        "field": "description",
+        "from": "Tableau/Panneau de céramique (12) \"Poisson aux fleurs\" - Daté 72 - Signé Lassois - Cadre bois - 61 x 46 cm ",
+        "to": "Tableau/Panneau de céramique (12) \"Poisson aux fleurs\" - Daté 72 - Signé Lassois - Cadre bois - 61 x 46 cm"
+      },
+      {
+        "item": "165",
+        "field": "description",
+        "from": "Suspension Lustre vintage en métal et verre fumé 6 lumières - Ht 65 cm ",
+        "to": "Suspension Lustre vintage en métal et verre fumé 6 lumières - Ht 65 cm"
+      },
+      {
+        "item": "168",
+        "field": "description",
+        "from": "Paire de suspensions/lustres vintage, en forme de boule et base chromée - Ht 50 cm ",
+        "to": "Paire de suspensions/lustres vintage, en forme de boule et base chromée - Ht 50 cm"
+      },
+      {
+        "item": "170a",
+        "field": "description",
+        "from": "Porcelaine asiatique, grande assiette Japon noire et couleurs ",
+        "to": "Porcelaine asiatique, grande assiette Japon noire et couleurs"
+      },
+      {
+        "item": "170d",
+        "field": "description",
+        "from": "Porcelaine asiatique, assiette fleurs roses ",
+        "to": "Porcelaine asiatique, assiette fleurs roses"
+      },
+      {
+        "item": "170e",
+        "field": "description",
+        "from": "Porcelaine asiatique, lot 3 petites assiettes ",
+        "to": "Porcelaine asiatique, lot 3 petites assiettes"
+      },
+      {
+        "item": "170h",
+        "field": "description",
+        "from": "Porcelaine asiatique, petit plat carré coqs - Chine ",
+        "to": "Porcelaine asiatique, petit plat carré coqs - Chine"
+      },
+      {
+        "item": "170i",
+        "field": "description",
+        "from": "Porcelaine asiatique, assiette Imari - Japon ",
+        "to": "Porcelaine asiatique, assiette Imari - Japon"
+      },
+      {
+        "item": "177",
+        "field": "description",
+        "from": "Huile sur toile \" Nature morte au lièvre\" signée en bas à droite Alexandre TIELENS (1868-1959) - 48 x 65 cm ",
+        "to": "Huile sur toile \" Nature morte au lièvre\" signée en bas à droite Alexandre TIELENS (1868-1959) - 48 x 65 cm"
+      },
+      {
+        "item": "188",
+        "field": "description",
+        "from": "Assiettes (6) petites, bleues en verre, en forme de fleur ",
+        "to": "Assiettes (6) petites, bleues en verre, en forme de fleur"
+      },
+      {
+        "item": "189",
+        "field": "description",
+        "from": "Verres (5) petits à liqueur avec petites fleurs gravées ",
+        "to": "Verres (5) petits à liqueur avec petites fleurs gravées"
+      },
+      {
+        "item": "216a",
+        "field": "description",
+        "from": "Petit pot en céramique, brun et bleuté, de type cache-pot - Ht 10,5 x diam 12 cm ",
+        "to": "Petit pot en céramique, brun et bleuté, de type cache-pot - Ht 10,5 x diam 12 cm"
+      },
+      {
+        "item": "216b",
+        "field": "description",
+        "from": "Petit vase en céramique, type pique fleurs, estampillé SASSI MILICI - Ht 12cm ",
+        "to": "Petit vase en céramique, type pique fleurs, estampillé SASSI MILICI - Ht 12cm"
+      },
+      {
+        "item": "216d",
+        "field": "description",
+        "from": "Petit vase brun orangé avec coulures blanches et noires, perforations sur le dessus (type pique fleurs) - Ht 13 cm ",
+        "to": "Petit vase brun orangé avec coulures blanches et noires, perforations sur le dessus (type pique fleurs) - Ht 13 cm"
+      },
+      {
+        "item": "219b",
+        "field": "description",
+        "from": "Plat peint à la main \"Assaud\" Gouda (NL) - Motifs tourbillonants et organiques caractéristiques du design 1920 - Art Déco ",
+        "to": "Plat peint à la main \"Assaud\" Gouda (NL) - Motifs tourbillonants et organiques caractéristiques du design 1920 - Art Déco"
+      },
+      {
+        "item": "219d",
+        "field": "description",
+        "from": "Vase Art Nouveau - Art Déco (Germany) peint par Carl Gebauer et E.Huber Roethe (1920s-1930s) ",
+        "to": "Vase Art Nouveau - Art Déco (Germany) peint par Carl Gebauer et E.Huber Roethe (1920s-1930s)"
+      },
+      {
+        "item": "219f",
+        "field": "description",
+        "from": "Vase vintage style 1920, décor floral et géométrique ",
+        "to": "Vase vintage style 1920, décor floral et géométrique"
+      },
+      {
+        "item": "223b",
+        "field": "description",
+        "from": "Vase en grès brun - Guerin - Ht 30 cm ",
+        "to": "Vase en grès brun - Guerin - Ht 30 cm"
+      },
+      {
+        "item": "235",
+        "field": "description",
+        "from": "Série de 3 cendriers ronds, bruns avec dessin vert et blanc - Vintage ",
+        "to": "Série de 3 cendriers ronds, bruns avec dessin vert et blanc - Vintage"
+      },
+      {
+        "item": "246",
+        "field": "description",
+        "from": "Vide-poche en céramique, attribué à François Caleca Vallauris - 1950s ",
+        "to": "Vide-poche en céramique, attribué à François Caleca Vallauris - 1950s"
+      },
+      {
+        "item": "248",
+        "field": "description",
+        "from": "Vase céramique émaillée bleu et blanc ",
+        "to": "Vase céramique émaillée bleu et blanc"
+      },
+      {
+        "item": "250",
+        "field": "description",
+        "from": "Service à café (5 tasses 3 sous-tasses) et 6 assiettes plates - Boch (La Louvière) - Collection \"In the Mood\" designed by Jean-Pierre Maury - 1970s ",
+        "to": "Service à café (5 tasses 3 sous-tasses) et 6 assiettes plates - Boch (La Louvière) - Collection \"In the Mood\" designed by Jean-Pierre Maury - 1970s"
+      },
+      {
+        "item": "257c",
+        "field": "description",
+        "from": "Vase sur pied à décor floral - Art Nouveau - Signé Carly ",
+        "to": "Vase sur pied à décor floral - Art Nouveau - Signé Carly"
+      },
+      {
+        "item": "281",
+        "field": "description",
+        "from": "Tableau, technique mixte sur papier - Nu de dame allongé - Signé et daté 74  - 40 x 66 cm (dimension cadre compris 60 x 90 cm)",
+        "to": "Tableau, technique mixte sur papier - Nu de dame allongé - Signé et daté 74 - 40 x 66 cm (dimension cadre compris 60 x 90 cm)"
+      },
+      {
+        "item": "6",
+        "field": "description",
+        "from": "Fauteuil tubulaire chromé Paul Schuitema/Fana ",
+        "to": "Fauteuil tubulaire chromé Paul Schuitema/Fana"
+      },
+      {
+        "item": "73",
+        "field": "description",
+        "from": "Plat à décor floral orangé - Petrus REGOUT Maastricht Flora ",
+        "to": "Plat à décor floral orangé - Petrus REGOUT Maastricht Flora"
+      },
+      {
+        "item": "75",
+        "field": "description",
+        "from": "Applique/plafonnier Maison Baguès, vers 1970, fleurs en verre taillé clair et de couleur ambre - 3 feux - Diam 40 cm ",
+        "to": "Applique/plafonnier Maison Baguès, vers 1970, fleurs en verre taillé clair et de couleur ambre - 3 feux - Diam 40 cm"
+      },
+      {
+        "item": "87",
+        "field": "description",
+        "from": "Vase en faïence émaillé de style Art déco ",
+        "to": "Vase en faïence émaillé de style Art déco"
+      },
+      {
+        "item": "93",
+        "field": "description",
+        "from": "Paire de rideaux  à dé́cor floral - Home fashion - 1970s - 202 x 167 cm et 208 x 167 cm",
+        "to": "Paire de rideaux à dé́cor floral - Home fashion - 1970s - 202 x 167 cm et 208 x 167 cm"
+      },
+      {
+        "item": "101b",
+        "field": "description",
+        "from": "Lampe à poser à buste à l'antique ",
+        "to": "Lampe à poser à buste à l'antique"
+      },
+      {
+        "item": "108a",
+        "field": "description",
+        "from": "Vases en grès et faïence ",
+        "to": "Vases en grès et faïence"
+      },
+      {
+        "item": "126",
+        "field": "description",
+        "from": "Suspension/lustre en laiton doré et métal peint, bobèches en verrre opalin, vers 1950 -  Ht 80 cm - Diam 60 cm ",
+        "to": "Suspension/lustre en laiton doré et métal peint, bobèches en verrre opalin, vers 1950 - Ht 80 cm - Diam 60 cm"
+      },
+      {
+        "item": "129",
+        "field": "description",
+        "from": "Applique lumineuse en laiton doré et métal peint, bobèches en verrre opalin, vers 1950 - Ht 30 cm ",
+        "to": "Applique lumineuse en laiton doré et métal peint, bobèches en verrre opalin, vers 1950 - Ht 30 cm"
+      },
+      {
+        "item": "130",
+        "field": "description",
+        "from": "Lampe de bureau en tôle - 1950s ",
+        "to": "Lampe de bureau en tôle - 1950s"
+      },
+      {
+        "item": "163",
+        "field": "description",
+        "from": "Meuble type highboard / sideboard vintage en bois peint, ouvrant à six tiroirs - La tablette en verre - L 180 cm ",
+        "to": "Meuble type highboard / sideboard vintage en bois peint, ouvrant à six tiroirs - La tablette en verre - L 180 cm"
+      },
+      {
+        "item": "178a",
+        "field": "description",
+        "from": "Vase coupe en Murano allongée rouge ",
+        "to": "Vase coupe en Murano allongée rouge"
+      },
+      {
+        "item": "200",
+        "field": "prix",
+        "from": "95 ",
+        "to": "95"
+      },
+      {
+        "item": "216e",
+        "field": "description",
+        "from": "Vase en céramique, à petit col, turquoise flammé de brun - Ht 18 cm ",
+        "to": "Vase en céramique, à petit col, turquoise flammé de brun - Ht 18 cm"
+      },
+      {
+        "item": "219a",
+        "field": "description",
+        "from": "Vase à décor d'oiseaux stylisés peints, dans le style Boch Keramis - 1930s - Ht 30 cm ",
+        "to": "Vase à décor d'oiseaux stylisés peints, dans le style Boch Keramis - 1930s - Ht 30 cm"
+      },
+      {
+        "item": "254",
+        "field": "description",
+        "from": "Vase en grès vernissé, orange et brun - 1970s - Fat Lava - Glaçage dégradé - Scheurich West Germany - Ht 38 cm ",
+        "to": "Vase en grès vernissé, orange et brun - 1970s - Fat Lava - Glaçage dégradé - Scheurich West Germany - Ht 38 cm"
+      },
+      {
+        "item": "257b",
+        "field": "description",
+        "from": "Vase en cristal à décor floral, gravé à l'acide - Signé Leonard - Ht 20 cm ",
+        "to": "Vase en cristal à décor floral, gravé à l'acide - Signé Leonard - Ht 20 cm"
+      },
+      {
+        "item": "173b",
+        "field": "description",
+        "from": "Cendrier VAL SAINT LAMBERT en cristal rectangulaire de couleur violette (8 x 12 x 4.5cm) - Signé sous la base ",
+        "to": "Cendrier VAL SAINT LAMBERT en cristal rectangulaire de couleur violette (8 x 12 x 4.5cm) - Signé sous la base"
+      },
+      {
+        "item": "286",
+        "field": "description",
+        "from": "Huile sur toile - Forêt ensoleillée - Signée Nizet ",
+        "to": "Huile sur toile - Forêt ensoleillée - Signée Nizet"
+      },
+      {
+        "item": "24g",
+        "field": "description",
+        "from": "Petit pot polychrome faïence Rouen, 2 anses et couvercle, type sucrier ",
+        "to": "Petit pot polychrome faïence Rouen, 2 anses et couvercle, type sucrier"
+      },
+      {
+        "item": "173a",
+        "field": "description",
+        "from": "Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert clair - Signé sous la base ",
+        "to": "Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert clair - Signé sous la base"
+      },
+      {
+        "item": "173c",
+        "field": "description",
+        "from": "Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert foncé - Signé sous la base ",
+        "to": "Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert foncé - Signé sous la base"
+      },
+      {
+        "item": "269",
+        "field": "description",
+        "from": "Lampe à poser dans le style Hollywood Regency ",
+        "to": "Lampe à poser dans le style Hollywood Regency"
+      },
+      {
+        "item": "229",
+        "field": "description",
+        "from": "Paire de fauteuils du designer norvégien Ingmar Relling pour Westnofa, en cuir cognac, structure en palissandre, modèle \"Siesta\" - Usure d'un des deux, au niveau d'un accoudoir ",
+        "to": "Paire de fauteuils du designer norvégien Ingmar Relling pour Westnofa, en cuir cognac, structure en palissandre, modèle \"Siesta\" - Usure d'un des deux, au niveau d'un accoudoir"
+      },
+      {
+        "item": "155c",
+        "field": "description",
+        "from": "Chaise en bois, assise paillée, de style \"rocaille\" ",
+        "to": "Chaise en bois, assise paillée, de style \"rocaille\""
+      },
+      {
+        "item": "277",
+        "field": "description",
+        "from": "Gravure brutaliste, signée Ghÿsens ",
+        "to": "Gravure brutaliste, signée Ghÿsens"
+      },
+      {
+        "item": "243b",
+        "field": "prix",
+        "from": "80 ",
+        "to": "80"
+      },
+      {
+        "item": "290",
+        "field": "description",
+        "from": "Huile sur toile - Ecole belge contemporaine du XXe - 64 X 54 cm ",
+        "to": "Huile sur toile - Ecole belge contemporaine du XXe - 64 X 54 cm"
+      },
+      {
+        "item": "70",
+        "field": "description",
+        "from": "Suspension lumineuse vintage ronde, blanche et base chrome - Extensible - Diam 45 cm ",
+        "to": "Suspension lumineuse vintage ronde, blanche et base chrome - Extensible - Diam 45 cm"
+      },
+      {
+        "item": "279",
+        "field": "description",
+        "from": "Lampe à pose en métal laqué noir, base et dessus en métal type laiton - Ht 28 cm ",
+        "to": "Lampe à pose en métal laqué noir, base et dessus en métal type laiton - Ht 28 cm"
+      },
+      {
+        "item": "104",
+        "field": "description",
+        "from": "Pichet en faïence italienne à décor figuratif (majolique) et anse torsadée - Fin XIXe ou début XXe siècle  Ht 30 cm",
+        "to": "Pichet en faïence italienne à décor figuratif (majolique) et anse torsadée - Fin XIXe ou début XXe siècle Ht 30 cm"
+      },
+      {
+        "item": "308",
+        "field": "description",
+        "from": "Vase ansé en céramique vernissée, Vallauris, \"fat lava glaze\" ",
+        "to": "Vase ansé en céramique vernissée, Vallauris, \"fat lava glaze\""
+      },
+      {
+        "item": "303",
+        "field": "description",
+        "from": "Vase orange \"space Age\" - Origine scandinave probable - Mid-20th century ",
+        "to": "Vase orange \"space Age\" - Origine scandinave probable - Mid-20th century"
+      },
+      {
+        "item": "300",
+        "field": "description",
+        "from": "Eau forte Jean Donnay \"Vieille à l'ombre portée\" - Signée et numérotée - 22 x 32 cm \n",
+        "to": "Eau forte Jean Donnay \"Vieille à l'ombre portée\" - Signée et numérotée - 22 x 32 cm"
+      },
+      {
+        "item": "322",
+        "field": "description",
+        "from": "Grande lampe à poser - Late 20th century - Pied bois et alu - Ht totale 81 cm ",
+        "to": "Grande lampe à poser - Late 20th century - Pied bois et alu - Ht totale 81 cm"
+      },
+      {
+        "item": "333",
+        "field": "description",
+        "from": "Lithographie \"Bouquet au vase vert\" - Pierre HENRY (1924-2015) - Signée en bas à droite dans la marge - Tirage 142/175 - 49,5 cm x 37,5 cm ",
+        "to": "Lithographie \"Bouquet au vase vert\" - Pierre HENRY (1924-2015) - Signée en bas à droite dans la marge - Tirage 142/175 - 49,5 cm x 37,5 cm"
+      },
+      {
+        "item": "338",
+        "field": "description",
+        "from": "Table de salon, ou d'appoint, en verre fumé et métal chromé - Ht 45 x 60 x 60 cm ",
+        "to": "Table de salon, ou d'appoint, en verre fumé et métal chromé - Ht 45 x 60 x 60 cm"
+      },
+      {
+        "item": "339",
+        "field": "description",
+        "from": "Paire de chevets vintage, pouvant servir de tables d'appoint, en chrome et verre fumé à effet miroir - Style post-moderniste (fin 1970- début 1980) - Présence de tiroirs. Ht 50 x 60 (Prof totale)  x 45 cm",
+        "to": "Paire de chevets vintage, pouvant servir de tables d'appoint, en chrome et verre fumé à effet miroir - Style post-moderniste (fin 1970- début 1980) - Présence de tiroirs. Ht 50 x 60 (Prof totale) x 45 cm"
+      }
+    ],
+    "dropped": [],
+    "not_sellable": [],
+    "warnings": []
+  }
+}

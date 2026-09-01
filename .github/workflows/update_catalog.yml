@@ -47,7 +47,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if [ "${{ job.status }}" = "success" ]; then
-            git add scripts/.last_run.json _database/catalog.csv assets/img/catalog/
+            git add scripts/.last_run.json _database/catalog.csv _database/catalog_validation.json assets/img/catalog/
             MSG="catalog update [automated]"
           else
             git add scripts/.last_run.json

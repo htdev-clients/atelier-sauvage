@@ -23,6 +23,8 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 from PIL import Image, ImageOps
 
+import validate as validation
+
 # ── Config ────────────────────────────────────────────────────────────────────
 
 SHEET_ID    = os.environ["SHEET_ID"]
@@ -39,6 +41,7 @@ WEBP_QUALITY = 85
 CATALOG_DIR   = Path("assets/img/catalog")
 CSV_PATH      = Path("_database/catalog.csv")
 LAST_RUN_PATH = Path("scripts/.last_run.json")
+VALIDATION_PATH = Path("_database/catalog_validation.json")
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 
@@ -66,17 +69,33 @@ def get_sheet_items(sheets) -> list[str]:
     return [row[0].strip() for row in values[1:] if row and row[0].strip()]
 
 
+def load_previous_rows() -> dict:
+    """
+    Return {number: {"prix", "statut"}} from the CSV currently on disk.
+
+    This is the state the incoming sheet is compared against, so the run can
+    flag a price that moved a long way or an item that stopped being sold.
+    """
+    if not CSV_PATH.exists():
+        return {}
+    with open(CSV_PATH, encoding="utf-8-sig", newline="") as f:
+        return {
+            row["number"].strip(): {
+                "prix": row.get("prix", ""),
+                "statut": row.get("statut", ""),
+            }
+            for row in csv.DictReader(f, delimiter=";")
+            if (row.get("number") or "").strip()
+        }
+
+
 def load_existing_items() -> set[str]:
     """Return item numbers currently in the CSV (before this run)."""
-    if not CSV_PATH.exists():
-        return set()
-    with open(CSV_PATH, encoding="utf-8-sig", newline="") as f:
-        reader = csv.reader(f, delimiter=";")
-        next(reader, None)  # skip header
-        return {row[0].strip() for row in reader if row and row[0].strip()}
+    return set(load_previous_rows())
 
 
-def update_csv(sheets):
+def update_csv(sheets, previous: dict):
+    """Read the sheet, normalise it, write the CSV. Returns the validation report."""
     result = (
         sheets.spreadsheets()
         .values()
@@ -87,18 +106,32 @@ def update_csv(sheets):
     if not values:
         raise ValueError("Sheet is empty")
 
-    headers = values[0]
-    rows    = values[1:]
+    headers  = values[0]
+    raw_rows = []
+    for row in values[1:]:
+        padded = list(row) + [""] * (len(headers) - len(row))
+        raw_rows.append(dict(zip(headers, padded)))
+
+    clean_rows, report = validation.validate(raw_rows, previous)
 
     with open(CSV_PATH, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f, delimiter=";")
         writer.writerow(headers)
-        for row in rows:
-            while len(row) < len(headers):
-                row.append("")
-            writer.writerow(row)
+        for row in clean_rows:
+            writer.writerow([row.get(h, "") for h in headers])
 
-    print(f"CSV: wrote {len(rows)} rows → {CSV_PATH}")
+    print(f"CSV: wrote {len(clean_rows)} rows → {CSV_PATH}")
+    if report["normalised"]:
+        print(f"  {len(report['normalised'])} field(s) normalised")
+    for entry in report["dropped"]:
+        print(f"  ⚠ dropped {entry['item']}: {entry['reason']}")
+    for entry in report["not_sellable"]:
+        print(f"  ⚠ not sellable {entry['item']}: {entry['reason']}")
+    for entry in report["warnings"]:
+        print(f"  ⚠ check {entry['item']}: {entry['detail']}")
+
+    write_validation(clean_rows, report)
+    return report
 
 # ── Images ────────────────────────────────────────────────────────────────────
 
@@ -272,6 +305,25 @@ def write_summary(content: str):
             f.write(content)
 
 
+def write_validation(clean_rows: list, report: dict):
+    """
+    Machine-readable twin of the run report.
+
+    Records which items are safe to sell online, so the site, the future order
+    ledger and Stripe all read sellability from one place rather than each
+    re-deriving it from the CSV.
+    """
+    payload = {
+        "generated": datetime.now(timezone.utc).isoformat(),
+        "sellable": sorted(r["number"] for r in clean_rows if r.get("_sellable")),
+        "not_sellable": {n["item"]: n["reason"] for n in report["not_sellable"]},
+        "report": report,
+    }
+    VALIDATION_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(VALIDATION_PATH, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+
 def write_last_run(payload: dict):
     payload["timestamp"] = datetime.now(timezone.utc).isoformat()
     LAST_RUN_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -299,7 +351,8 @@ def _run():
     sheets, drive = get_services()
 
     # 1. Load existing items before any changes
-    existing_items = load_existing_items()
+    previous_rows  = load_previous_rows()
+    existing_items = set(previous_rows)
     print(f"CSV: {len(existing_items)} existing lots")
 
     # 2. Get item list from sheet
@@ -350,7 +403,7 @@ def _run():
 
     # 6. Update CSV
     print("\nUpdating CSV...")
-    update_csv(sheets)
+    validation_report = update_csv(sheets, previous_rows)
 
     numbering_note = ""
     if numbering_warnings:
@@ -379,6 +432,7 @@ def _run():
         + (f"- **{len(updated_photo_lots)}** lot(s) existant(s) avec nouvelles photos : {', '.join(updated_photo_lots)}\n" if updated_photo_lots else "")
         + (f"- **{total_downloaded}** photo(s) traitée(s)\n" if total_downloaded else "")
         + numbering_note
+        + validation.summary_markdown(validation_report)
     )
     write_last_run({
         "status": "success",
@@ -388,6 +442,11 @@ def _run():
         "photos_downloaded": total_downloaded,
         "photos_added_to_existing": updated_photo_lots,
         "orphaned_images_deleted": deleted_files,
+        "fields_cleaned": len(validation_report["normalised"]),
+        "dropped_rows": validation_report["dropped"],
+        "not_sellable": validation_report["not_sellable"],
+        "data_warnings": validation_report["warnings"],
+        "data_message": validation.popup_message(validation_report),
         "numbering_warnings": numbering_warnings,
         "numbering_message": "; ".join(
             f"Lot {w['item']} : il manque la/les photo(s) "
