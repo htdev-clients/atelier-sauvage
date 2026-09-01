@@ -1,12 +1,21 @@
 {
   "status": "success",
-  "total_lots": 265,
-  "new_lots": [],
+  "total_lots": 271,
+  "new_lots": [
+    "190b",
+    "312",
+    "341",
+    "344",
+    "352",
+    "353"
+  ],
   "removed_lots": [],
-  "photos_downloaded": 0,
-  "photos_added_to_existing": [],
-  "orphaned_images_deleted": 0,
+  "photos_downloaded": 34,
+  "photos_added_to_existing": [
+    "335"
+  ],
+  "orphaned_images_deleted": 3,
   "numbering_warnings": [],
   "numbering_message": "",
-  "timestamp": "2026-08-31T14:59:40.882814+00:00"
+  "timestamp": "2026-09-01T10:05:44.737379+00:00"
 }
