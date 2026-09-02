@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS orders (
                         CHECK (status IN ('pending', 'paid', 'expired', 'released', 'failed')),
   expected_count        INTEGER NOT NULL,
   claimed_count         INTEGER NOT NULL,
-  CHECK (claimed_count = expected_count),
   lang                  TEXT NOT NULL DEFAULT 'fr',
   item_numbers          TEXT NOT NULL,   -- JSON array
   items_json            TEXT NOT NULL,   -- JSON snapshot: number, description, price_cents, transport
@@ -55,7 +54,8 @@ CREATE TABLE IF NOT EXISTS orders (
   paid_at               INTEGER,
   closed_at             INTEGER,
   emails_sent_at        INTEGER,
-  email_error           TEXT
+  email_error           TEXT,
+  CHECK (claimed_count = expected_count)
 );
 
 CREATE INDEX IF NOT EXISTS orders_status ON orders (status);

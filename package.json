@@ -1,6 +1,12 @@
 {
   "scripts": {
     "watch:css": "./tailwindcss -i assets/css/input.css -o assets/css/style.css --watch",
-    "build:css": "./tailwindcss -i assets/css/input.css -o assets/css/style.css --minify"
+    "build:css": "./tailwindcss -i assets/css/input.css -o assets/css/style.css --minify",
+    "test": "node --test --test-timeout=240000 tests/*.test.mjs",
+    "test:unit": "node --test tests/unit.test.mjs"
+  },
+  "private": true,
+  "devDependencies": {
+    "wrangler": "^4.80.0"
   }
 }
