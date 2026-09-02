@@ -36,3 +36,10 @@ exclude:
   - tailwind.config.js
   - input.css
   - README.md
+  # Automation source and internal notes. Jekyll copies unknown top-level
+  # directories into _site, which published scripts/*.py on the live site.
+  # functions/ is deliberately absent from this list: Cloudflare Pages needs it
+  # at the deploy root, and compiles it rather than serving the source.
+  - scripts
+  - workers
+  - TODO.md

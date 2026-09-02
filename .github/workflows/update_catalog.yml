@@ -60,3 +60,54 @@ jobs:
             git pull --rebase origin main
             git push
           fi
+
+  # Publish from CI. The Pages Git integration can disconnect without any
+  # signal, so a catalog commit reaching main is not proof the site updated.
+  deploy:
+    needs: update
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
+
+  # If publishing failed, the catalog is updated but the site is not. Say so in
+  # scripts/.last_run.json, which is what the Google Sheets popup reads —
+  # otherwise the client sees a green "Succès" for a site that never changed.
+  report-deploy-failure:
+    needs: [update, deploy]
+    if: always() && needs.deploy.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Record the failure
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          path = pathlib.Path("scripts/.last_run.json")
+          data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+          data["status"] = "failure"
+          data["message"] = (
+              "Le catalogue a bien été mis à jour, mais le site n'a pas pu être "
+              "publié. Les changements ne sont donc pas encore visibles en ligne. "
+              "Prévenez Harold."
+          )
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                          encoding="utf-8")
+          PY
+
+      - name: Commit the status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/.last_run.json
+          if git diff --staged --quiet; then
+            echo "Status already recorded, nothing to commit."
+          else
+            git commit -m "deploy failure status [automated] [skip ci]"
+            git pull --rebase origin main
+            git push
+          fi

@@ -1,0 +1,21 @@
+# Mirrors the atelier-refresher Worker as it is deployed. This file exists so
+# the Worker is versioned and visible; it is NOT deployed by CI. See README.md
+# in this directory before changing anything here.
+
+name = "atelier-refresher"
+main = "src/worker.js"
+
+# Matches the Worker's original deployment (2025-12-16) so bringing it into the
+# repo does not silently change its runtime semantics.
+compatibility_date = "2025-12-16"
+
+# Weekly, Mondays at 10:00 UTC. Instagram long-lived tokens last ~60 days, so a
+# weekly refresh tolerates several consecutive failures before anything breaks.
+[triggers]
+crons = ["0 10 * * 1"]
+
+# ATELIER_STORE is the binding name; the namespace is titled ATELIER_DATA in the
+# Cloudflare dashboard. functions/instagram.js reads INSTAGRAM_TOKEN from it.
+[[kv_namespaces]]
+binding = "ATELIER_STORE"
+id = "7a843bcb288c45e8b8c71d2d42b6eb7f"

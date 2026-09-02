@@ -1,0 +1,113 @@
+name: Deploy
+
+# Publishes the site from CI rather than relying on the Cloudflare Pages Git
+# integration.
+#
+# Why: in July 2026 that integration silently disconnected. No build ran for 23
+# days while the catalog Action, git and scripts/.last_run.json all stayed
+# green, and the site quietly served a stale build. Nothing surfaced it except a
+# human noticing the live site was wrong. Publishing here means a failed publish
+# is a failed workflow run — visible in Actions, emailed, and (for catalog runs)
+# reported back into the Google Sheets popup.
+
+on:
+  push:
+    branches: [main]
+  workflow_call:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Take the current tip of the branch, not the SHA that triggered the
+          # caller. update_catalog.yml commits the catalog *after* it starts, so
+          # its triggering SHA predates the change we need to publish.
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2.2"
+          bundler-cache: true
+
+      - name: Build
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build
+
+      # Tailwind is not run here: assets/css/style.css is committed prebuilt,
+      # because Cloudflare Pages does not run it either.
+      - name: Sanity-check the build
+        run: |
+          test -f _site/index.html
+          test -f _site/sitemap.xml
+          pages=$(find _site -name '*.html' | wc -l)
+          echo "built $pages html page(s)"
+          # Four pages in four languages. Fewer means the build lost something.
+          test "$pages" -ge 16
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            pages deploy _site
+            --project-name=${{ vars.CF_PAGES_PROJECT }}
+            --branch=${{ github.ref_name }}
+
+      # The step above succeeding only means Cloudflare accepted the upload.
+      # This confirms the public URL actually serves it, which is the failure
+      # the whole workflow exists to catch.
+      - name: Verify the live site serves this build
+        if: github.ref_name == 'main'
+        run: |
+          python3 - <<'PY'
+          import re, subprocess, sys, time
+          from datetime import datetime
+
+          SITEMAP = "https://ateliersauvageheusy.be/sitemap.xml"
+
+          def lastmod(xml):
+              return re.search(r"<lastmod>([^<]*)", xml).group(1)
+
+          built = lastmod(open("_site/sitemap.xml", encoding="utf-8").read())
+          built_at = datetime.fromisoformat(built)
+          print("this build:", built)
+
+          for attempt in range(1, 9):
+              try:
+                  xml = subprocess.run(
+                      ["curl", "-fsSL", "--max-time", "15", SITEMAP],
+                      capture_output=True, check=True, text=True).stdout
+                  live = lastmod(xml)
+              except Exception as err:
+                  print(f"attempt {attempt} - unreachable ({type(err).__name__})")
+              else:
+                  print(f"attempt {attempt} - live: {live}")
+                  # Compare instants, not strings. A CI build stamps +00:00 and a
+                  # local one +02:00, and if the Pages Git integration is still
+                  # connected it may publish its own slightly newer build of the
+                  # same commit - which is equally correct.
+                  if datetime.fromisoformat(live) >= built_at:
+                      print("Live site is serving this build or newer.")
+                      sys.exit(0)
+              time.sleep(20)
+
+          print("::error::Cloudflare accepted the deploy but the live site is "
+                "still serving an older build.")
+          sys.exit(1)
+          PY
