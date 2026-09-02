@@ -52,8 +52,20 @@
             <li><a href="{% if site.active_lang == site.default_lang %}/catalogue/{% else %}/{{ site.active_lang }}/catalogue/{% endif %}" class="hover:opacity-70 transition-opacity">{{ t.nav.catalogue }}</a></li>
             <li><a href="{% if site.active_lang == site.default_lang %}/evenements/{% else %}/{{ site.active_lang }}/evenements/{% endif %}" class="hover:opacity-70 transition-opacity">{{ t.nav.events }}</a></li>
             <li><a href="{% if site.active_lang == site.default_lang %}/#contact{% else %}/{{ site.active_lang }}/#contact{% endif %}" class="hover:opacity-70 transition-opacity">{{ t.nav.contact }}</a></li>
+            <li>
+              <a href="{% if site.active_lang == site.default_lang %}/panier/{% else %}/{{ site.active_lang }}/panier/{% endif %}"
+                 class="relative inline-flex items-center gap-2 hover:opacity-70 transition-opacity" data-cart-link aria-label="{{ t.shop.cart }}">
+                <span class="w-5 h-5 [&>svg]:w-full [&>svg]:h-full">{% include icons/bag.svg %}</span>
+                <span data-cart-count class="hidden min-w-[1.25rem] h-5 px-1 rounded-full bg-red-700 text-white text-[10px] font-bold leading-5 text-center">0</span>
+              </a>
+            </li>
         </ul>
 
+        <a href="{% if site.active_lang == site.default_lang %}/panier/{% else %}/{{ site.active_lang }}/panier/{% endif %}"
+           class="md:hidden relative ml-auto mr-3 p-1 text-current" aria-label="{{ t.shop.cart }}">
+            <span class="block w-6 h-6 [&>svg]:w-full [&>svg]:h-full">{% include icons/bag.svg %}</span>
+            <span data-cart-count class="hidden absolute -top-1 -right-1.5 min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-red-700 text-white text-[10px] font-bold leading-[1.1rem] text-center">0</span>
+        </a>
         <button id="mobile-menu-btn" class="md:hidden z-50 relative focus:outline-none text-current p-1"
             aria-label="{{ t.nav.open_menu }}">
             <div class="w-8 h-8">
@@ -101,6 +113,13 @@
             <a href="{% if site.active_lang == site.default_lang %}/#contact{% else %}/{{ site.active_lang }}/#contact{% endif %}"
                 class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors">
                 {{ t.nav.contact }}
+            </a>
+        </li>
+        <li>
+            <a href="{% if site.active_lang == site.default_lang %}/panier/{% else %}/{{ site.active_lang }}/panier/{% endif %}"
+                class="mobile-link text-2xl font-serif italic text-stone-900 hover:text-stone-600 transition-colors inline-flex items-center gap-3">
+                {{ t.shop.cart }}
+                <span data-cart-count class="hidden min-w-[1.5rem] h-6 px-1.5 rounded-full bg-stone-900 text-stone-50 text-xs font-sans not-italic font-bold leading-6 text-center">0</span>
             </a>
         </li>
     </ul>

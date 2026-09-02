@@ -1,0 +1,13 @@
+# Test-only Pages config: fixture site, local bindings, no environments.
+name = "atelier-sauvage-test"
+pages_build_output_dir = "fixtures/site"
+compatibility_date = "2026-03-01"
+
+[[kv_namespaces]]
+binding = "ATELIER_STORE"
+id = "test"
+
+[[d1_databases]]
+binding = "SHOP_DB"
+database_name = "shop-test"
+database_id = "shop-test"

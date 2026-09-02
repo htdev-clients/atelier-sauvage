@@ -68,7 +68,17 @@
 
     window.fbq("init", pixelId);
     window.fbq("track", "PageView");
-    if (onCataloguePage()) {
+    var product = window.AS_PRODUCT;
+    if (product && product.number) {
+      window.fbq("track", "ViewContent", {
+        content_type: "product",
+        content_ids: [String(product.number)],
+        content_name: product.description,
+        content_category: product.category,
+        value: Number(product.price) || 0,
+        currency: "EUR"
+      });
+    } else if (onCataloguePage()) {
       window.fbq("track", "ViewContent", { content_category: "catalogue" });
     }
   }

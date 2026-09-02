@@ -1,0 +1,57 @@
+# Cloudflare Pages configuration for the site and its Functions.
+#
+# wrangler pages deploy reads this file and applies the bindings below to the
+# deployment it creates. Once a deployment carries this file, the dashboard's
+# binding settings become read-only for that environment -- so EVERY binding
+# the Functions need must be listed here, including the pre-existing KV
+# namespace the Instagram feed reads its token from. Bindings are
+# non-inheritable: overriding one for an environment means re-declaring all
+# of them for that environment.
+#
+# Secrets (STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY,
+# RECONCILE_TOKEN) are not in this file. deploy.yml pushes them from GitHub
+# secrets through the Pages API; see docs/shop-runbook.md.
+
+name = "atelier-sauvage"
+pages_build_output_dir = "_site"
+compatibility_date = "2026-03-01"
+
+# Local development (wrangler pages dev): bindings resolve to local simulations.
+[[kv_namespaces]]
+binding = "ATELIER_STORE"
+id = "7a843bcb288c45e8b8c71d2d42b6eb7f"
+
+[[d1_databases]]
+binding = "SHOP_DB"
+database_name = "atelier-sauvage-shop-preview"
+database_id = "429dc080-23a0-461d-af1d-e9dfa8583dcd"
+
+[vars]
+SHOP_ENV = "local"
+
+# Preview deployments: every branch other than main. Separate ledger, Stripe
+# test keys.
+[[env.preview.kv_namespaces]]
+binding = "ATELIER_STORE"
+id = "7a843bcb288c45e8b8c71d2d42b6eb7f"
+
+[[env.preview.d1_databases]]
+binding = "SHOP_DB"
+database_name = "atelier-sauvage-shop-preview"
+database_id = "429dc080-23a0-461d-af1d-e9dfa8583dcd"
+
+[env.preview.vars]
+SHOP_ENV = "preview"
+
+# Production: main. The live ledger. Stripe live keys go in at launch only.
+[[env.production.kv_namespaces]]
+binding = "ATELIER_STORE"
+id = "7a843bcb288c45e8b8c71d2d42b6eb7f"
+
+[[env.production.d1_databases]]
+binding = "SHOP_DB"
+database_name = "atelier-sauvage-shop"
+database_id = "c706508f-1a0e-40ed-b3b2-1f8fa7c72cef"
+
+[env.production.vars]
+SHOP_ENV = "production"

@@ -146,7 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    openPswp(slides, 0, true, null, true);
+    // Product pages carry several images of the same item; open at the one clicked.
+    const start = parseInt(img.dataset.imageIndex || '0', 10);
+    openPswp(slides, Number.isInteger(start) && start > 0 && start < slides.length ? start : 0, true, null, true);
   };
 
   // --- PHOTOSWIPE ---

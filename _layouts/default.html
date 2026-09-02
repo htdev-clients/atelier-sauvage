@@ -3,6 +3,11 @@
   {% assign page_t = t[page.i18n_key] %}
   {% assign computed_title = page_t.page_title | default: t.meta.site_title %}
   {% assign computed_desc = page_t.page_description | default: t.meta.site_description %}
+  {% comment %} Generated product pages carry the item description as title. {% endcomment %}
+  {% if page.item %}
+    {% assign computed_title = page.item.description | append: ' – Atelier Sauvage' %}
+    {% assign computed_desc = page.item.description | append: '. ' | append: computed_desc %}
+  {% endif %}
 {% else %}
   {% assign computed_title = t.meta.site_title %}
   {% assign computed_desc = t.meta.site_description %}
@@ -23,10 +28,14 @@
   <meta name="robots" content="index, follow" />
 
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="{{ computed_title }}" />
-  <meta property="og:description" content="{{ computed_desc }}" />
+  <meta property="og:type" content="{% if page.item %}product{% else %}website{% endif %}" />
+  <meta property="og:title" content="{{ computed_title | escape }}" />
+  <meta property="og:description" content="{{ computed_desc | escape }}" />
+  {% if page.item %}
+  <meta property="og:image" content="https://ateliersauvageheusy.be/assets/img/catalog/1400/{{ page.item.number }}-1400.webp" />
+  {% else %}
   <meta property="og:image" content="https://ateliersauvageheusy.be/assets/img/general/2000/facade-2000.jpg" />
+  {% endif %}
   {% capture og_path %}{% if site.active_lang == site.default_lang %}{{ page.url }}{% else %}/{{ site.active_lang }}{{ page.url }}{% endif %}{% endcapture %}
   <meta property="og:url" content="https://ateliersauvageheusy.be{{ og_path | replace: '//', '/' }}" />
   <meta property="og:locale" content="{{ t.locale }}" />
@@ -145,10 +154,29 @@
 
   {% include cookie-consent.html %}
 
+  <script>
+    window.AS_SHOP = {
+      lang: {{ site.active_lang | jsonify }},
+      prefix: {% if site.active_lang == site.default_lang %}""{% else %}{{ '/' | append: site.active_lang | jsonify }}{% endif %},
+      t: {
+        reserved: {{ t.shop.reserved_badge | jsonify }},
+        sold: {{ t.shop.sold_badge | jsonify }},
+        remove: {{ t.shop.remove | jsonify }},
+        removedUnavailable: {{ t.shop.removed_unavailable | jsonify }},
+        errorGeneric: {{ t.shop.error_generic | jsonify }},
+        errorTerms: {{ t.shop.error_terms | jsonify }},
+        cancelled: {{ t.shop.cancelled | jsonify }},
+        processing: {{ t.shop.processing | jsonify }},
+        pickup: {{ t.shop.thanks_pickup | jsonify }},
+        delivery: {{ t.shop.thanks_delivery | jsonify }}
+      }
+    };
+  </script>
   <script type="module" src="/assets/js/lightbox.js"></script>
   <script src="/assets/js/navbar.js"></script>
   <script src="/assets/js/instagram-integration.js" defer></script>
   <script src="/assets/js/cookie-consent.js" defer></script>
+  <script src="/assets/js/shop.js" defer></script>
 </body>
 
 </html>

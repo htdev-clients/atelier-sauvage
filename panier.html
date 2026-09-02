@@ -1,0 +1,73 @@
+---
+layout: default
+permalink: /panier/
+i18n_key: shop
+sitemap: false
+---
+{% assign t = site.data.translations[site.active_lang] %}
+{% assign s = t.shop %}
+{% assign lang_prefix = '' %}
+{% if site.active_lang != site.default_lang %}{% assign lang_prefix = '/' | append: site.active_lang %}{% endif %}
+
+<main class="bg-stone-50 min-h-screen pt-28 pb-20" data-cart-page>
+  <div class="max-w-4xl mx-auto px-4 md:px-8">
+
+    <h1 class="font-serif text-3xl md:text-4xl text-stone-900">{{ s.cart_title }}</h1>
+
+    <div data-cart-notice class="hidden mt-6 rounded-md border border-amber-300 bg-amber-50 text-amber-900 text-sm px-4 py-3"></div>
+
+    <div data-cart-empty class="hidden mt-10 text-stone-600">
+      <p>{{ s.cart_empty }}</p>
+      <a href="{{ lang_prefix }}/catalogue/" class="inline-block mt-6 border border-stone-800 text-stone-800 px-8 py-3 hover:bg-stone-800 hover:text-stone-50 transition-colors uppercase text-xs tracking-widest font-bold">{{ s.browse }}</a>
+    </div>
+
+    <div data-cart-content class="hidden mt-8 grid grid-cols-1 md:grid-cols-5 gap-10">
+      <ul data-cart-items class="md:col-span-3 divide-y divide-stone-200 border-y border-stone-200"></ul>
+
+      <aside class="md:col-span-2">
+        <div class="bg-white border border-stone-200 rounded-sm p-6 space-y-4 text-sm text-stone-700">
+          <div class="flex justify-between items-baseline">
+            <span>{{ s.subtotal }}</span>
+            <span class="font-bold text-stone-900 text-base" data-subtotal></span>
+          </div>
+          <div class="flex justify-between items-baseline text-stone-500">
+            <span>{{ s.shipping_line }}</span>
+            <span class="italic">{{ s.shipping_calculated }}</span>
+          </div>
+          <p class="text-xs text-stone-500 leading-relaxed">{{ s.shipping_hint }}</p>
+          <p class="text-xs text-stone-500">{{ s.belgium_only }}</p>
+
+          <label class="flex items-start gap-3 pt-2 cursor-pointer">
+            <input type="checkbox" id="accept-terms" class="mt-1 h-4 w-4 accent-stone-800" />
+            <span class="text-xs leading-relaxed">
+              {{ s.accept_terms_before }}
+              <a href="{{ lang_prefix }}/cgv/" target="_blank" class="underline underline-offset-2 hover:text-stone-900">{{ s.accept_terms_link }}</a>
+              {{ s.accept_terms_after }}
+            </span>
+          </label>
+
+          <p data-cart-error class="hidden text-sm text-red-700"></p>
+
+          <button type="button" data-checkout
+                  class="w-full bg-stone-800 text-stone-50 px-8 py-4 uppercase text-xs tracking-widest font-bold hover:bg-stone-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            {{ s.pay }}
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <template id="cart-item-template">
+    <li class="py-4 flex gap-4 items-start" data-cart-row>
+      <a data-link href="#" class="shrink-0 w-20 h-24 bg-stone-200 rounded-sm overflow-hidden">
+        <img data-img src="" alt="" class="w-full h-full object-cover" loading="lazy" />
+      </a>
+      <div class="flex-1 min-w-0">
+        <a data-link data-title href="#" class="block font-medium text-stone-900 leading-snug hover:underline underline-offset-2"></a>
+        <p data-meta class="mt-1 text-xs text-stone-500"></p>
+        <button type="button" data-remove class="mt-2 text-xs uppercase tracking-widest text-stone-500 hover:text-red-700 underline underline-offset-4">{{ s.remove }}</button>
+      </div>
+      <span data-price class="font-bold text-stone-800 whitespace-nowrap"></span>
+    </li>
+  </template>
+</main>

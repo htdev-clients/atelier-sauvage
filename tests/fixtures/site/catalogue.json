@@ -1,0 +1,9 @@
+{"generated":"2026-09-02T00:00:00Z","items":{
+ "24b":{"description":"Vase pique-fleurs faïence Rouen","category":"Décoration","price_cents":4500,"transport":"S","poids":"1","sold":false,"sellable":true,"buyable":true},
+ "170c":{"description":"Lampe de table laiton","category":"Luminaire","price_cents":25000,"transport":"M","poids":"3","sold":false,"sellable":true,"buyable":true},
+ "7":{"description":"Suspension Sciolari","category":"Luminaire","price_cents":43000,"transport":"L","poids":"8","sold":false,"sellable":true,"buyable":true},
+ "10":{"description":"Huile sur toile Vue d'un village","category":"Décoration","price_cents":22000,"transport":"XL","poids":"12","sold":false,"sellable":true,"buyable":true},
+ "12":{"description":"Chaise bistrot","category":"Meuble","price_cents":9000,"transport":"M","poids":"5","sold":false,"sellable":true,"buyable":true},
+ "3":{"description":"Vase albarello","category":"Décoration","price_cents":27500,"transport":"","poids":"","sold":false,"sellable":true,"buyable":false},
+ "2":{"description":"Table en rotin","category":"Meuble","price_cents":7000,"transport":"L","poids":"","sold":true,"sellable":false,"buyable":false}
+}}

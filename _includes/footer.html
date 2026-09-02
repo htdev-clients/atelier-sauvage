@@ -69,6 +69,8 @@
         <div class="flex items-center gap-4">
             <a href="{% if site.active_lang == site.default_lang %}/mentions/{% else %}/{{ site.active_lang }}/mentions/{% endif %}"
                class="hover:text-white transition-colors">{{ t.footer.legal }}</a>
+            <a href="{% if site.active_lang == site.default_lang %}/cgv/{% else %}/{{ site.active_lang }}/cgv/{% endif %}"
+               class="hover:text-white transition-colors">{{ t.footer.terms }}</a>
             <button type="button" data-cookie-reopen
                 class="hover:text-white transition-colors">{{ t.footer.cookies }}</button>
         </div>

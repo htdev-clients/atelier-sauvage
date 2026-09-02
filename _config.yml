@@ -44,3 +44,10 @@ exclude:
   - workers
   - docs
   - TODO.md
+  # Shop: Functions config, shared Function code, ledger migrations and tests.
+  - wrangler.toml
+  - shop
+  - migrations
+  - tests
+  - .wrangler
+  - .dev.vars
