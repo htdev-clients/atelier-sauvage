@@ -60,6 +60,7 @@ jobs:
           test "$pages" -ge 16
 
       - name: Publish to Cloudflare Pages
+        id: publish
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -69,28 +70,35 @@ jobs:
             --project-name=${{ vars.CF_PAGES_PROJECT }}
             --branch=${{ github.ref_name }}
 
-      # The step above succeeding only means Cloudflare accepted the upload.
-      # This confirms the public URL actually serves it, which is the failure
-      # the whole workflow exists to catch.
-      - name: Verify the live site serves this build
+      # Publishing only means Cloudflare accepted the upload. This confirms the
+      # upload is also the deployment production actually serves.
+      #
+      # It deliberately does not fetch ateliersauvageheusy.be: Cloudflare's bot
+      # protection returns 403 to this runner's datacenter IP regardless of
+      # user-agent. So it checks the two things it still can -- that the
+      # artifact is correct, and that Cloudflare considers it the canonical
+      # production deployment -- which together cover the failure this workflow
+      # exists to catch. What it cannot see is the custom domain itself.
+      - name: Verify this deploy is live in production
         if: github.ref_name == 'main'
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_PROJECT: ${{ vars.CF_PAGES_PROJECT }}
+          DEPLOY_URL: ${{ steps.publish.outputs.deployment-url }}
         run: |
           python3 - <<'PY'
-          import re, subprocess, sys, time
-          from datetime import datetime
+          import json, os, re, subprocess, sys, time
+          from datetime import datetime, timezone
 
-          SITEMAP = "https://ateliersauvageheusy.be/sitemap.xml"
-          # A health check on our own site. Cloudflare's bot protection rejects
-          # obvious tool user-agents, so identify as an ordinary browser.
-          UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36")
+          deploy_url = (os.environ.get("DEPLOY_URL") or "").rstrip("/")
+          project    = os.environ["CF_PROJECT"]
+          account    = os.environ["CF_ACCOUNT_ID"]
+          token      = os.environ["CF_API_TOKEN"]
 
-          def fetch():
-              """(status, body). Cache-busted: the edge caches assets for a week,
-              so a bare request can answer from cache instead of the deployment."""
+          def curl(url, *args):
               proc = subprocess.run(
-                  ["curl", "-sS", "--max-time", "20", "-A", UA, "-w", "\n%{http_code}",
-                   f"{SITEMAP}?deploy-check={int(time.time())}"],
+                  ["curl", "-sS", "--max-time", "20", "-w", "\n%{http_code}", *args, url],
                   capture_output=True, text=True)
               if proc.returncode != 0:
                   return None, proc.stderr.strip()
@@ -101,31 +109,50 @@ jobs:
                             open("_site/sitemap.xml", encoding="utf-8").read()).group(1)
           built_at = datetime.fromisoformat(built)
           print("this build:", built)
+          print("deployment :", deploy_url or "<not reported by wrangler-action>")
 
-          reason = "no attempt completed"
-          for attempt in range(1, 9):
-              status, body = fetch()
-              if status is None:
-                  reason = f"curl failed: {body}"
-              elif status != "200":
-                  reason = f"HTTP {status}"
-              else:
-                  found = re.search(r"<lastmod>([^<]*)", body)
-                  if not found:
-                      reason = "200, but no <lastmod> in the response"
+          # 1. The uploaded artifact is the one we just built.
+          if deploy_url:
+              reason = "no attempt completed"
+              for attempt in range(1, 5):
+                  status, body = curl(f"{deploy_url}/sitemap.xml")
+                  if status != "200":
+                      reason = f"HTTP {status}" if status else f"curl failed: {body}"
                   else:
-                      live = found.group(1)
-                      print(f"attempt {attempt} - live: {live}")
-                      # Compare instants, not strings: a CI build stamps +00:00
-                      # and a local one +02:00.
-                      if datetime.fromisoformat(live) >= built_at:
-                          print("Live site is serving this build or newer.")
-                          sys.exit(0)
-                      reason = f"live site is serving an older build ({live})"
-              print(f"attempt {attempt} - {reason}")
-              time.sleep(20)
+                      found = re.search(r"<lastmod>([^<]*)", body)
+                      if not found:
+                          reason = "200, but no <lastmod> in the response"
+                      elif datetime.fromisoformat(found.group(1)) >= built_at:
+                          print(f"artifact OK - deployment serves {found.group(1)}")
+                          reason = None
+                          break
+                      else:
+                          reason = f"deployment serves an older build ({found.group(1)})"
+                  print(f"  attempt {attempt} - {reason}")
+                  time.sleep(10)
+              if reason:
+                  print(f"::error::The deployment does not serve this build: {reason}")
+                  sys.exit(1)
 
-          print("::error::Cloudflare accepted the deploy, but verifying "
-                f"https://ateliersauvageheusy.be/ failed: {reason}")
-          sys.exit(1)
+          # 2. Cloudflare serves that deployment as production.
+          status, body = curl(
+              f"https://api.cloudflare.com/client/v4/accounts/{account}/pages/projects/{project}",
+              "-H", f"Authorization: Bearer {token}")
+          if status != "200":
+              print(f"::error::Could not read the Pages project from the API: "
+                    f"{status or 'curl failed'} {body[:300]}")
+              sys.exit(1)
+
+          canonical = (json.loads(body).get("result") or {}).get("canonical_deployment") or {}
+          live_url  = (canonical.get("url") or "").rstrip("/")
+          created   = canonical.get("created_on", "?")
+          print(f"production : {live_url or '<none>'} (created {created})")
+
+          if deploy_url and live_url != deploy_url:
+              print("::error::Cloudflare accepted the upload, but production is still "
+                    f"serving {live_url or 'nothing'} rather than {deploy_url}. The deploy "
+                    "may have landed on a preview branch instead of production.")
+              sys.exit(1)
+
+          print("Live in production.")
           PY
