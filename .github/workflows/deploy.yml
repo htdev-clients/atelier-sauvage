@@ -80,34 +80,52 @@ jobs:
           from datetime import datetime
 
           SITEMAP = "https://ateliersauvageheusy.be/sitemap.xml"
+          # A health check on our own site. Cloudflare's bot protection rejects
+          # obvious tool user-agents, so identify as an ordinary browser.
+          UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36")
 
-          def lastmod(xml):
-              return re.search(r"<lastmod>([^<]*)", xml).group(1)
+          def fetch():
+              """(status, body). Cache-busted: the edge caches assets for a week,
+              so a bare request can answer from cache instead of the deployment."""
+              proc = subprocess.run(
+                  ["curl", "-sS", "--max-time", "20", "-A", UA, "-w", "\n%{http_code}",
+                   f"{SITEMAP}?deploy-check={int(time.time())}"],
+                  capture_output=True, text=True)
+              if proc.returncode != 0:
+                  return None, proc.stderr.strip()
+              body, _, status = proc.stdout.rpartition("\n")
+              return status.strip(), body
 
-          built = lastmod(open("_site/sitemap.xml", encoding="utf-8").read())
+          built = re.search(r"<lastmod>([^<]*)",
+                            open("_site/sitemap.xml", encoding="utf-8").read()).group(1)
           built_at = datetime.fromisoformat(built)
           print("this build:", built)
 
+          reason = "no attempt completed"
           for attempt in range(1, 9):
-              try:
-                  xml = subprocess.run(
-                      ["curl", "-fsSL", "--max-time", "15", SITEMAP],
-                      capture_output=True, check=True, text=True).stdout
-                  live = lastmod(xml)
-              except Exception as err:
-                  print(f"attempt {attempt} - unreachable ({type(err).__name__})")
+              status, body = fetch()
+              if status is None:
+                  reason = f"curl failed: {body}"
+              elif status != "200":
+                  reason = f"HTTP {status}"
               else:
-                  print(f"attempt {attempt} - live: {live}")
-                  # Compare instants, not strings. A CI build stamps +00:00 and a
-                  # local one +02:00, and if the Pages Git integration is still
-                  # connected it may publish its own slightly newer build of the
-                  # same commit - which is equally correct.
-                  if datetime.fromisoformat(live) >= built_at:
-                      print("Live site is serving this build or newer.")
-                      sys.exit(0)
+                  found = re.search(r"<lastmod>([^<]*)", body)
+                  if not found:
+                      reason = "200, but no <lastmod> in the response"
+                  else:
+                      live = found.group(1)
+                      print(f"attempt {attempt} - live: {live}")
+                      # Compare instants, not strings: a CI build stamps +00:00
+                      # and a local one +02:00.
+                      if datetime.fromisoformat(live) >= built_at:
+                          print("Live site is serving this build or newer.")
+                          sys.exit(0)
+                      reason = f"live site is serving an older build ({live})"
+              print(f"attempt {attempt} - {reason}")
               time.sleep(20)
 
-          print("::error::Cloudflare accepted the deploy but the live site is "
-                "still serving an older build.")
+          print("::error::Cloudflare accepted the deploy, but verifying "
+                f"https://ateliersauvageheusy.be/ failed: {reason}")
           sys.exit(1)
           PY
