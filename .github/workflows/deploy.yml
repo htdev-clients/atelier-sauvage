@@ -15,6 +15,13 @@ on:
     branches: [main]
   workflow_call:
   workflow_dispatch:
+    inputs:
+      test_fixtures:
+        description: >-
+          Preview only: give a dozen sellable items placeholder transport
+          bands so the shop can be exercised. Refused on main.
+        type: boolean
+        default: false
 
 concurrency:
   group: deploy-${{ github.ref_name }}
@@ -37,11 +44,32 @@ jobs:
           # its triggering SHA predates the change we need to publish.
           ref: ${{ github.ref_name }}
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install wrangler
+        run: npm ci
+
+      # The shop's Functions run against a local D1 here: the concurrency test
+      # races checkouts for the same item and proves exactly one wins. A red
+      # run means the ledger changed in a way that could sell an item twice.
+      - name: Test the shop Functions
+        run: npm test
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2.2"
           bundler-cache: true
+
+      # Never on main: these bands are placeholders, and on the live site they
+      # would make a dozen items buyable with made-up shipping.
+      - name: Add shop test fixtures (preview only)
+        if: github.ref_name != 'main' && inputs.test_fixtures == true
+        run: python3 scripts/apply_test_fixtures.py
 
       - name: Build
         env:
@@ -58,6 +86,34 @@ jobs:
           echo "built $pages html page(s)"
           # Four pages in four languages. Fewer means the build lost something.
           test "$pages" -ge 16
+
+      # Function secrets live on the Pages project, per environment. They are
+      # pushed from GitHub secrets so that there is one place to set them and
+      # the values never touch the dashboard, a laptop or this repo. Only the
+      # names present as GitHub secrets are written; the rest are untouched.
+      #
+      #   preview    <- PREVIEW_STRIPE_SECRET_KEY, PREVIEW_STRIPE_WEBHOOK_SECRET,
+      #                 PREVIEW_RESEND_API_KEY, PREVIEW_RECONCILE_TOKEN
+      #   production <- PROD_STRIPE_SECRET_KEY, PROD_STRIPE_WEBHOOK_SECRET,
+      #                 PROD_RESEND_API_KEY, PROD_RECONCILE_TOKEN
+      #
+      # Must run before the publish step: a deployment picks up the project's
+      # variables at creation time.
+      - name: Sync Function secrets to the Pages environment
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_PROJECT: ${{ vars.CF_PAGES_PROJECT }}
+          TARGET_ENV: ${{ github.ref_name == 'main' && 'production' || 'preview' }}
+          PREVIEW_STRIPE_SECRET_KEY: ${{ secrets.PREVIEW_STRIPE_SECRET_KEY }}
+          PREVIEW_STRIPE_WEBHOOK_SECRET: ${{ secrets.PREVIEW_STRIPE_WEBHOOK_SECRET }}
+          PREVIEW_RESEND_API_KEY: ${{ secrets.PREVIEW_RESEND_API_KEY }}
+          PREVIEW_RECONCILE_TOKEN: ${{ secrets.PREVIEW_RECONCILE_TOKEN }}
+          PROD_STRIPE_SECRET_KEY: ${{ secrets.PROD_STRIPE_SECRET_KEY }}
+          PROD_STRIPE_WEBHOOK_SECRET: ${{ secrets.PROD_STRIPE_WEBHOOK_SECRET }}
+          PROD_RESEND_API_KEY: ${{ secrets.PROD_RESEND_API_KEY }}
+          PROD_RECONCILE_TOKEN: ${{ secrets.PROD_RECONCILE_TOKEN }}
+        run: python3 scripts/sync_pages_secrets.py
 
       - name: Publish to Cloudflare Pages
         id: publish
