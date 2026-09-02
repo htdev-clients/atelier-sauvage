@@ -328,12 +328,16 @@ test("/api/order settles a paid session itself when the webhook is late", async 
 test("reconcile: bearer-authenticated, lists sales once", async () => {
   assert.equal((await fetch(`${h.base}/api/reconcile`)).status, 401);
   const headers = { authorization: `Bearer ${TEST_ENV.RECONCILE_TOKEN}`, "content-type": "application/json" };
+  // Which items are sold by now depends on which cart won the race (a
+  // two-item winner also sold 170c), so the expectation comes from the ledger.
+  const soldNow = h.sql("SELECT number FROM items WHERE status = 'sold' ORDER BY number").map((r) => r.number);
+  assert.ok(soldNow.includes("12") && soldNow.includes("24b"));
   let sales = (await (await fetch(`${h.base}/api/reconcile`, { headers })).json()).sales;
-  assert.deepEqual(sales.map((s) => s.number).sort(), ["12", "24b"]);
+  assert.deepEqual(sales.map((s) => s.number).sort(), soldNow);
   const marked = await (await fetch(`${h.base}/api/reconcile`, { method: "POST", headers, body: JSON.stringify({ numbers: ["24b"] }) })).json();
   assert.equal(marked.marked, 1);
   sales = (await (await fetch(`${h.base}/api/reconcile`, { headers })).json()).sales;
-  assert.deepEqual(sales.map((s) => s.number), ["12"]);
+  assert.deepEqual(sales.map((s) => s.number).sort(), soldNow.filter((n) => n !== "24b"));
 });
 
 // ── reviewer-requested scenarios ────────────────────────────────────────────
