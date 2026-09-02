@@ -100,6 +100,9 @@ fr:
     s4_title: "4. Données personnelles"
     s4_body: "Les informations recueillies sont uniquement utilisées pour répondre à vos demandes et ne sont jamais cédées à des tiers. Conformément à la loi, vous disposez d'un droit d'accès et de rectification aux données vous concernant."
     s5_title: "5. Cookies et mesure publicitaire"
+    s6_title: "6. Vente en ligne"
+    s6_body: "Les ventes conclues via le site sont régies par nos conditions générales de vente, qui détaillent notamment le droit de rétractation de 14 jours et les modalités de livraison et de retour."
+    s6_link: "Lire les conditions générales de vente"
     s5_body: "Avec votre consentement préalable, ce site dépose des cookies via le Meta Pixel (Meta Platforms Ireland Ltd.) afin de mesurer l'efficacité de nos campagnes publicitaires et d'en améliorer le ciblage. Aucun cookie de ce type n'est déposé sans votre accord, recueilli via notre bandeau de consentement. Vous pouvez accepter, refuser ou modifier votre choix à tout moment via le lien « Cookies » en bas de page."
   product:
     sold: "Vendu"
@@ -124,7 +127,11 @@ fr:
   shop:
     cart: "Panier"
     cart_title: "Votre panier"
+    page_title: "Panier – Atelier Sauvage"
     cart_empty: "Votre panier est vide."
+    cart_full: "Le panier est limité à 10 objets. Finalisez cette commande avant d'en ajouter d'autres."
+    reserved_in_cart: "Un objet de votre panier est réservé par un autre client pendant son paiement. Réessayez dans quelques minutes ou retirez-le."
+    thanks_timeout: "Nous n'avons pas encore reçu la confirmation du paiement. Rechargez cette page dans quelques minutes ; si le problème persiste, contactez-nous."
     browse: "Parcourir le catalogue"
     remove: "Retirer"
     subtotal: "Sous-total"
@@ -144,7 +151,6 @@ fr:
     sold_badge: "Vendu"
     cancelled: "Le paiement a été annulé. Vos objets sont de nouveau disponibles dans le panier."
     thanks_title: "Merci pour votre commande !"
-    thanks_description: "Confirmation de commande — Atelier Sauvage"
     thanks_body: "Un e-mail de confirmation vous a été envoyé. Nous préparons votre commande et vous recontactons pour organiser la livraison ou le retrait."
     thanks_ref: "Référence de commande"
     thanks_pending: "Votre paiement est en cours de traitement. Cette page se mettra à jour automatiquement."
@@ -160,6 +166,72 @@ fr:
     extra_item: "objet supplémentaire"
     pickup: "Retrait à l'atelier (Heusy)"
     delivery: "Livraison en Belgique"
+  cgv:
+    page_title: "Conditions générales de vente – Atelier Sauvage"
+    page_description: "Conditions générales de vente en ligne de l'Atelier Sauvage : commande, paiement, livraison, droit de rétractation."
+    heading: "Conditions générales de vente"
+    updated: "Version du 2 septembre 2026"
+    intro: "Les présentes conditions régissent toute vente conclue à distance via le site ateliersauvageheusy.be. En validant une commande, l'acheteur déclare les avoir lues et acceptées."
+    sections:
+      - title: "1. Vendeur"
+        paragraphs:
+          - "HAMAPA SRL, enseigne « Atelier Sauvage », Chaussée de Theux 59, 4802 Heusy (Verviers), Belgique — BCE/TVA BE 1000.380.596 — ateliersauvageheusy@gmail.com — +32 495 29 22 25."
+      - title: "2. Objet"
+        paragraphs:
+          - "Les présentes conditions s'appliquent à la vente en ligne d'objets d'occasion, de mobilier vintage et de pièces de décoration proposés sur le site, à des consommateurs résidant en Belgique."
+          - "Chaque objet est une pièce unique. Le stock est donc d'une unité par référence, et un objet ne peut être vendu qu'une seule fois."
+      - title: "3. Objets, descriptions et état"
+        paragraphs:
+          - "Les objets vendus sont des biens d'occasion. Ils présentent les traces d'usage, patines et irrégularités propres à leur âge et à leur histoire ; ces caractéristiques ne constituent pas un défaut."
+          - "Les descriptions, photographies, dimensions et indications d'état sont établies avec le plus grand soin, mais restent indicatives. Toute question peut être posée avant l'achat par e-mail, téléphone ou WhatsApp."
+      - title: "4. Prix"
+        paragraphs:
+          - "Les prix sont indiqués en euros, toutes taxes comprises. Les frais de livraison ne sont pas compris dans le prix des objets ; ils sont affichés et acceptés avant le paiement."
+          - "Le régime de TVA applicable (régime particulier de la marge pour biens d'occasion, le cas échéant) est mentionné sur la facture. Le vendeur se réserve le droit de modifier ses prix à tout moment ; les objets sont facturés au prix en vigueur au moment de la commande."
+      - title: "5. Commande et paiement"
+        paragraphs:
+          - "La commande se fait via le panier du site. Pendant la procédure de paiement, les objets du panier sont réservés à l'acheteur pour une durée d'environ 30 minutes ; passé ce délai sans paiement, ils redeviennent disponibles."
+          - "Le paiement est effectué en ligne, de manière sécurisée, via la plateforme Stripe (Bancontact, cartes de crédit et de débit). Le vendeur n'a jamais accès aux données bancaires de l'acheteur."
+          - "Le contrat est conclu à la réception du paiement. Une confirmation de commande est envoyée par e-mail. Si, malgré les vérifications, un objet s'avérait indisponible, l'acheteur en est informé et intégralement remboursé dans les 14 jours."
+      - title: "6. Livraison et retrait"
+        paragraphs:
+          - "La livraison est proposée en Belgique uniquement. Elle est confiée à un transporteur spécialisé dans le transport d'objets d'art et de mobilier. Les frais dépendent de l'encombrement des objets et sont calculés pour l'ensemble de la commande."
+          - "L'acheteur peut également retirer sa commande gratuitement à l'atelier, sur rendez-vous, aux heures d'ouverture."
+          - "Après le paiement, le vendeur contacte l'acheteur pour convenir des modalités et de la date de livraison ou de retrait. Le délai indicatif de livraison est de 5 à 15 jours ouvrables après cette prise de contact."
+          - "Le risque de perte ou d'endommagement passe à l'acheteur au moment où il, ou un tiers désigné par lui, prend physiquement possession de l'objet. L'acheteur vérifie l'objet à la réception et signale tout dommage de transport dans les 48 heures, photographies à l'appui."
+      - title: "7. Droit de rétractation"
+        paragraphs:
+          - "Conformément au Livre VI du Code de droit économique, l'acheteur consommateur dispose d'un délai de 14 jours calendrier à compter du jour où il, ou un tiers désigné par lui, prend physiquement possession de l'objet pour se rétracter, sans avoir à motiver sa décision."
+          - "Pour exercer ce droit, l'acheteur notifie sa décision au vendeur par une déclaration dénuée d'ambiguïté (e-mail à ateliersauvageheusy@gmail.com ou courrier), par exemple au moyen du formulaire ci-dessous."
+          - "L'acheteur renvoie ou rapporte l'objet au vendeur sans retard excessif et au plus tard 14 jours après la notification. Les frais directs de renvoi sont à la charge de l'acheteur. Pour les objets qui ne peuvent être renvoyés par la poste en raison de leur nature, ces frais correspondent au coût d'un transporteur spécialisé ; ils sont estimés au montant des frais de livraison de la commande."
+          - "Le vendeur rembourse tous les paiements reçus, y compris les frais de livraison initiaux (à l'exception des frais supplémentaires découlant d'un mode de livraison autre que le mode le moins coûteux proposé), au plus tard 14 jours après avoir été informé de la rétractation. Le remboursement peut être différé jusqu'à la récupération de l'objet ou la fourniture d'une preuve de son expédition."
+          - "L'acheteur est responsable de la dépréciation de l'objet résultant de manipulations autres que celles nécessaires pour en établir la nature, les caractéristiques et le bon fonctionnement."
+      - title: "8. Garantie légale"
+        paragraphs:
+          - "Les objets d'occasion bénéficient de la garantie légale de conformité prévue par le Code civil. Conformément à la loi, cette garantie est fixée à un an à compter de la livraison pour les biens d'occasion."
+          - "Ne sont pas couverts par la garantie les défauts et traces d'usage signalés dans la description ou visibles sur les photographies, ni l'usure normale, ni les dommages résultant d'une utilisation, d'un entretien ou d'un stockage inappropriés."
+      - title: "9. Responsabilité"
+        paragraphs:
+          - "Le vendeur ne peut être tenu responsable de l'inexécution ou du retard d'exécution de ses obligations en cas de force majeure, ni des dommages indirects. La responsabilité du vendeur est en tout état de cause limitée au montant de la commande."
+      - title: "10. Données personnelles"
+        paragraphs:
+          - "Les données collectées lors de la commande (identité, coordonnées, adresse de livraison) sont utilisées uniquement pour le traitement de la commande, la livraison et les obligations légales du vendeur. Elles sont transmises au prestataire de paiement (Stripe), au service d'envoi d'e-mails (Resend) et au transporteur, dans la mesure nécessaire. Voir également nos mentions légales."
+      - title: "11. Droit applicable et litiges"
+        paragraphs:
+          - "Les présentes conditions sont soumises au droit belge. En cas de litige, les parties recherchent d'abord une solution amiable. Le consommateur peut s'adresser au Service de Médiation pour le Consommateur (mediationconsommateur.be) ou à la plateforme européenne de règlement en ligne des litiges (ec.europa.eu/consumers/odr). À défaut, les tribunaux de l'arrondissement de Liège, division Verviers, sont compétents, sans préjudice des règles impératives de compétence."
+    form_title: "Modèle de formulaire de rétractation"
+    form_intro: "À compléter et renvoyer uniquement si vous souhaitez vous rétracter du contrat."
+    form_lines:
+      - "À l'attention de HAMAPA SRL (Atelier Sauvage), Chaussée de Theux 59, 4802 Heusy — ateliersauvageheusy@gmail.com :"
+      - "Je/Nous (*) vous notifie/notifions (*) par la présente ma/notre (*) rétractation du contrat portant sur la vente du bien (*) ci-dessous :"
+      - "Commande n° : ______________________"
+      - "Commandé le (*) / reçu le (*) : ______________________"
+      - "Nom du/des consommateur(s) : ______________________"
+      - "Adresse du/des consommateur(s) : ______________________"
+      - "Signature du/des consommateur(s) (uniquement en cas de notification sur papier) : ______________________"
+      - "Date : ______________________"
+      - "(*) Biffez la mention inutile."
+    review_note: ""
   lightbox:
     close: "Fermer"
     previous: "Précédent"
@@ -262,6 +334,9 @@ en:
     s4_title: "4. Personal data"
     s4_body: "Information collected is used solely to respond to your requests and is never passed on to third parties. In accordance with the law, you have the right to access and rectify your personal data."
     s5_title: "5. Cookies and advertising measurement"
+    s6_title: "6. Online sales"
+    s6_body: "Sales made through this site are governed by our terms and conditions of sale, which set out in particular the 14-day right of withdrawal and the delivery and return arrangements."
+    s6_link: "Read the terms and conditions of sale"
     s5_body: "With your prior consent, this site sets cookies via the Meta Pixel (Meta Platforms Ireland Ltd.) in order to measure the effectiveness of our advertising campaigns and improve their targeting. No such cookie is set without your agreement, obtained through our consent banner. You may accept, decline or change your choice at any time via the \"Cookies\" link in the footer."
   product:
     sold: "Sold"
@@ -286,7 +361,11 @@ en:
   shop:
     cart: "Cart"
     cart_title: "Your cart"
+    page_title: "Cart – Atelier Sauvage"
     cart_empty: "Your cart is empty."
+    cart_full: "The cart is limited to 10 pieces. Complete this order before adding more."
+    reserved_in_cart: "A piece in your cart is reserved by another customer while they pay. Try again in a few minutes or remove it."
+    thanks_timeout: "We have not received the payment confirmation yet. Reload this page in a few minutes; if the problem persists, contact us."
     browse: "Browse the catalogue"
     remove: "Remove"
     subtotal: "Subtotal"
@@ -306,7 +385,6 @@ en:
     sold_badge: "Sold"
     cancelled: "Payment was cancelled. Your pieces are available in the cart again."
     thanks_title: "Thank you for your order!"
-    thanks_description: "Order confirmation — Atelier Sauvage"
     thanks_body: "A confirmation e-mail is on its way. We are preparing your order and will contact you to arrange delivery or collection."
     thanks_ref: "Order reference"
     thanks_pending: "Your payment is being processed. This page will update automatically."
@@ -322,6 +400,72 @@ en:
     extra_item: "additional item"
     pickup: "Collect from the shop (Heusy)"
     delivery: "Delivery in Belgium"
+  cgv:
+    page_title: "Terms and conditions of sale – Atelier Sauvage"
+    page_description: "Atelier Sauvage online terms of sale: ordering, payment, delivery, right of withdrawal."
+    heading: "Terms and conditions of sale"
+    updated: "Version of 2 September 2026"
+    intro: "These terms govern every distance sale made through ateliersauvageheusy.be. By placing an order, the buyer confirms having read and accepted them. The French version prevails in case of discrepancy."
+    sections:
+      - title: "1. Seller"
+        paragraphs:
+          - "HAMAPA SRL, trading as “Atelier Sauvage”, Chaussée de Theux 59, 4802 Heusy (Verviers), Belgium — company/VAT no. BE 1000.380.596 — ateliersauvageheusy@gmail.com — +32 495 29 22 25."
+      - title: "2. Scope"
+        paragraphs:
+          - "These terms apply to the online sale of second-hand objects, vintage furniture and decorative pieces offered on the site to consumers residing in Belgium."
+          - "Every piece is one of a kind. Stock is therefore one unit per reference, and a piece can only be sold once."
+      - title: "3. Pieces, descriptions and condition"
+        paragraphs:
+          - "The pieces sold are second-hand goods. They show the marks of use, patina and irregularities that come with their age and history; these are not defects."
+          - "Descriptions, photographs, dimensions and condition notes are prepared with great care but remain indicative. Questions are welcome before purchase by e-mail, phone or WhatsApp."
+      - title: "4. Prices"
+        paragraphs:
+          - "Prices are in euros, all taxes included. Delivery costs are not included in the price of the pieces; they are shown and accepted before payment."
+          - "The applicable VAT regime (margin scheme for second-hand goods, where relevant) is stated on the invoice. The seller may change prices at any time; pieces are invoiced at the price in force when the order is placed."
+      - title: "5. Ordering and payment"
+        paragraphs:
+          - "Orders are placed through the site's cart. During the payment step, the pieces in the cart are reserved for the buyer for about 30 minutes; after that, without payment, they become available again."
+          - "Payment is made online, securely, through the Stripe platform (Bancontact, credit and debit cards). The seller never has access to the buyer's banking details."
+          - "The contract is concluded on receipt of payment. An order confirmation is sent by e-mail. If, despite our checks, a piece turns out to be unavailable, the buyer is informed and fully refunded within 14 days."
+      - title: "6. Delivery and collection"
+        paragraphs:
+          - "Delivery is offered within Belgium only, by a carrier specialising in art and furniture. Costs depend on the size of the pieces and are calculated for the order as a whole."
+          - "The buyer may also collect the order free of charge from the shop, by appointment, during opening hours."
+          - "After payment, the seller contacts the buyer to agree on the arrangements and date of delivery or collection. Indicative delivery time is 5 to 15 working days after that contact."
+          - "The risk of loss or damage passes to the buyer when the buyer, or a third party designated by the buyer, takes physical possession of the piece. The buyer checks the piece on receipt and reports any transport damage within 48 hours, with photographs."
+      - title: "7. Right of withdrawal"
+        paragraphs:
+          - "Under Book VI of the Belgian Code of Economic Law, a consumer has 14 calendar days from the day on which they, or a third party designated by them, take physical possession of the piece to withdraw from the contract without giving any reason."
+          - "To exercise this right, the buyer notifies the seller by an unequivocal statement (e-mail to ateliersauvageheusy@gmail.com or letter), for instance using the form below."
+          - "The buyer returns or brings back the piece without undue delay and at the latest 14 days after the notification. The direct cost of returning the piece is borne by the buyer. For pieces that cannot normally be returned by post because of their nature, this cost is that of a specialist carrier; it is estimated at the amount of the order's delivery charge."
+          - "The seller refunds all payments received, including the initial delivery costs (except any supplementary costs arising from a delivery option other than the least expensive one offered), no later than 14 days after being informed of the withdrawal. The refund may be withheld until the piece has been recovered or proof of its dispatch has been supplied."
+          - "The buyer is liable for any diminished value of the piece resulting from handling other than what is necessary to establish its nature, characteristics and functioning."
+      - title: "8. Legal guarantee"
+        paragraphs:
+          - "Second-hand pieces are covered by the legal guarantee of conformity under the Belgian Civil Code. As the law allows, this guarantee is set at one year from delivery for second-hand goods."
+          - "The guarantee does not cover defects and marks of use stated in the description or visible in the photographs, normal wear, or damage resulting from inappropriate use, care or storage."
+      - title: "9. Liability"
+        paragraphs:
+          - "The seller is not liable for non-performance or delay caused by force majeure, nor for indirect damage. The seller's liability is in any case limited to the amount of the order."
+      - title: "10. Personal data"
+        paragraphs:
+          - "Data collected when ordering (identity, contact details, delivery address) is used only to process the order, deliver it and meet the seller's legal obligations. It is passed to the payment provider (Stripe), the e-mail service (Resend) and the carrier, as far as necessary. See also our legal notice."
+      - title: "11. Governing law and disputes"
+        paragraphs:
+          - "These terms are governed by Belgian law. In the event of a dispute, the parties first seek an amicable solution. Consumers may contact the Belgian Consumer Mediation Service (consumerombudsman.be) or the European online dispute resolution platform (ec.europa.eu/consumers/odr). Failing that, the courts of the judicial district of Liège, Verviers division, have jurisdiction, without prejudice to mandatory rules of jurisdiction."
+    form_title: "Model withdrawal form"
+    form_intro: "Complete and return this form only if you wish to withdraw from the contract."
+    form_lines:
+      - "To HAMAPA SRL (Atelier Sauvage), Chaussée de Theux 59, 4802 Heusy, Belgium — ateliersauvageheusy@gmail.com:"
+      - "I/We (*) hereby give notice that I/We (*) withdraw from my/our (*) contract of sale of the following goods (*):"
+      - "Order no.: ______________________"
+      - "Ordered on (*) / received on (*): ______________________"
+      - "Name of consumer(s): ______________________"
+      - "Address of consumer(s): ______________________"
+      - "Signature of consumer(s) (only if this form is notified on paper): ______________________"
+      - "Date: ______________________"
+      - "(*) Delete as appropriate."
+    review_note: ""
   lightbox:
     close: "Close"
     previous: "Previous"
@@ -424,6 +568,9 @@ nl:
     s4_title: "4. Persoonsgegevens"
     s4_body: "De verzamelde gegevens worden uitsluitend gebruikt om op je vragen te antwoorden en worden nooit aan derden doorgegeven. Conform de wet heb je recht op inzage en correctie van je persoonsgegevens."
     s5_title: "5. Cookies en advertentiemeting"
+    s6_title: "6. Onlineverkoop"
+    s6_body: "Verkopen via deze site vallen onder onze algemene verkoopsvoorwaarden, die onder meer het herroepingsrecht van 14 dagen en de leverings- en retourmodaliteiten beschrijven."
+    s6_link: "Lees de algemene verkoopsvoorwaarden"
     s5_body: "Met je voorafgaande toestemming plaatst deze site cookies via de Meta Pixel (Meta Platforms Ireland Ltd.) om de doeltreffendheid van onze advertentiecampagnes te meten en de targeting te verbeteren. Zonder jouw akkoord, verkregen via onze toestemmingsbanner, wordt geen enkele dergelijke cookie geplaatst. Je kan je keuze op elk moment aanvaarden, weigeren of wijzigen via de link « Cookies » onderaan de pagina."
   product:
     sold: "Verkocht"
@@ -448,7 +595,11 @@ nl:
   shop:
     cart: "Winkelmandje"
     cart_title: "Je winkelmandje"
+    page_title: "Winkelmandje – Atelier Sauvage"
     cart_empty: "Je winkelmandje is leeg."
+    cart_full: "Het mandje is beperkt tot 10 objecten. Rond deze bestelling af voor je er meer toevoegt."
+    reserved_in_cart: "Een object in je mandje is gereserveerd door een andere klant tijdens de betaling. Probeer het over enkele minuten opnieuw of verwijder het."
+    thanks_timeout: "We hebben de betalingsbevestiging nog niet ontvangen. Herlaad deze pagina over enkele minuten; blijft het probleem, neem dan contact op."
     browse: "Catalogus bekijken"
     remove: "Verwijderen"
     subtotal: "Subtotaal"
@@ -468,11 +619,10 @@ nl:
     sold_badge: "Verkocht"
     cancelled: "De betaling werd geannuleerd. Je objecten staan opnieuw in je mandje."
     thanks_title: "Bedankt voor je bestelling!"
-    thanks_description: "Orderbevestiging — Atelier Sauvage"
     thanks_body: "Een bevestigingsmail is onderweg. We bereiden je bestelling voor en nemen contact op om de levering of het afhalen te regelen."
     thanks_ref: "Bestelreferentie"
     thanks_pending: "Je betaling wordt verwerkt. Deze pagina wordt automatisch bijgewerkt."
-    thanks_total: "Betaald totaal"
+    thanks_total: "Totaal betaald"
     thanks_delivery: "Levering"
     thanks_pickup: "Afhalen in het atelier"
     thanks_items: "Je objecten"
@@ -484,6 +634,72 @@ nl:
     extra_item: "extra object"
     pickup: "Afhalen in het atelier (Heusy)"
     delivery: "Levering in België"
+  cgv:
+    page_title: "Algemene verkoopsvoorwaarden – Atelier Sauvage"
+    page_description: "Algemene voorwaarden voor online verkoop bij Atelier Sauvage: bestelling, betaling, levering, herroepingsrecht."
+    heading: "Algemene verkoopsvoorwaarden"
+    updated: "Versie van 2 september 2026"
+    intro: "Deze voorwaarden gelden voor elke verkoop op afstand via ateliersauvageheusy.be. Door een bestelling te plaatsen verklaart de koper ze gelezen en aanvaard te hebben. Bij verschil geldt de Franse versie."
+    sections:
+      - title: "1. Verkoper"
+        paragraphs:
+          - "HAMAPA SRL, handelsnaam « Atelier Sauvage », Chaussée de Theux 59, 4802 Heusy (Verviers), België — KBO/btw BE 1000.380.596 — ateliersauvageheusy@gmail.com — +32 495 29 22 25."
+      - title: "2. Toepassingsgebied"
+        paragraphs:
+          - "Deze voorwaarden gelden voor de onlineverkoop van tweedehands objecten, vintage meubelen en decoratie die op de site worden aangeboden aan consumenten die in België wonen."
+          - "Elk object is uniek. De voorraad bedraagt dus één stuk per referentie en een object kan maar één keer verkocht worden."
+      - title: "3. Objecten, beschrijvingen en staat"
+        paragraphs:
+          - "De verkochte objecten zijn tweedehands. Ze vertonen gebruikssporen, patina en onregelmatigheden die bij hun leeftijd en geschiedenis horen; dat zijn geen gebreken."
+          - "Beschrijvingen, foto's, afmetingen en aanduidingen van de staat worden met de grootste zorg opgesteld, maar blijven indicatief. Vragen zijn welkom vóór de aankoop, per e-mail, telefoon of WhatsApp."
+      - title: "4. Prijzen"
+        paragraphs:
+          - "De prijzen zijn in euro, inclusief alle taksen. De leveringskosten zijn niet in de prijs van de objecten begrepen; ze worden vóór de betaling getoond en aanvaard."
+          - "Het toepasselijke btw-stelsel (margeregeling voor tweedehandsgoederen, indien van toepassing) wordt op de factuur vermeld. De verkoper mag zijn prijzen op elk moment wijzigen; objecten worden gefactureerd tegen de prijs die geldt op het moment van de bestelling."
+      - title: "5. Bestelling en betaling"
+        paragraphs:
+          - "Bestellen gebeurt via het winkelmandje van de site. Tijdens de betaalprocedure worden de objecten in het mandje ongeveer 30 minuten voor de koper gereserveerd; daarna worden ze zonder betaling opnieuw beschikbaar."
+          - "De betaling gebeurt online en beveiligd via het platform Stripe (Bancontact, krediet- en debetkaarten). De verkoper heeft nooit toegang tot de bankgegevens van de koper."
+          - "De overeenkomst komt tot stand bij ontvangst van de betaling. Een orderbevestiging wordt per e-mail verstuurd. Blijkt een object ondanks de controles toch niet beschikbaar, dan wordt de koper verwittigd en binnen 14 dagen volledig terugbetaald."
+      - title: "6. Levering en afhaling"
+        paragraphs:
+          - "Levering wordt enkel in België aangeboden, door een transporteur gespecialiseerd in kunst en meubelen. De kosten hangen af van de omvang van de objecten en worden voor de hele bestelling berekend."
+          - "De koper kan de bestelling ook gratis afhalen in het atelier, op afspraak, tijdens de openingsuren."
+          - "Na de betaling neemt de verkoper contact op met de koper om de modaliteiten en de datum van levering of afhaling af te spreken. De indicatieve leveringstermijn bedraagt 5 tot 15 werkdagen na dat contact."
+          - "Het risico van verlies of beschadiging gaat over op de koper op het moment dat hij, of een door hem aangewezen derde, het object fysiek in bezit neemt. De koper controleert het object bij ontvangst en meldt transportschade binnen 48 uur, met foto's."
+      - title: "7. Herroepingsrecht"
+        paragraphs:
+          - "Overeenkomstig Boek VI van het Wetboek van economisch recht beschikt de consument over een termijn van 14 kalenderdagen, te rekenen vanaf de dag waarop hij, of een door hem aangewezen derde, het object fysiek in bezit neemt, om de overeenkomst zonder opgave van redenen te herroepen."
+          - "Om dit recht uit te oefenen brengt de koper de verkoper op de hoogte via een ondubbelzinnige verklaring (e-mail naar ateliersauvageheusy@gmail.com of brief), bijvoorbeeld met het onderstaande formulier."
+          - "De koper stuurt of brengt het object zonder onnodige vertraging en uiterlijk 14 dagen na de kennisgeving terug. De directe kosten van het terugzenden zijn voor rekening van de koper. Voor objecten die door hun aard niet per post kunnen worden teruggezonden, zijn dat de kosten van een gespecialiseerde transporteur; ze worden geraamd op het bedrag van de leveringskosten van de bestelling."
+          - "De verkoper betaalt alle ontvangen betalingen terug, inclusief de oorspronkelijke leveringskosten (met uitzondering van extra kosten door een andere leveringswijze dan de goedkoopste aangeboden), uiterlijk 14 dagen nadat hij van de herroeping op de hoogte is gebracht. De terugbetaling kan worden uitgesteld tot het object is terugontvangen of een bewijs van verzending is geleverd."
+          - "De koper is aansprakelijk voor de waardevermindering van het object die het gevolg is van een behandeling die verder gaat dan nodig om de aard, de kenmerken en de werking ervan vast te stellen."
+      - title: "8. Wettelijke garantie"
+        paragraphs:
+          - "Tweedehands objecten vallen onder de wettelijke garantie van conformiteit uit het Burgerlijk Wetboek. Zoals de wet toelaat, bedraagt deze garantie voor tweedehandsgoederen één jaar vanaf de levering."
+          - "Niet gedekt zijn de gebreken en gebruikssporen die in de beschrijving vermeld of op de foto's zichtbaar zijn, normale slijtage, en schade door onaangepast gebruik, onderhoud of bewaring."
+      - title: "9. Aansprakelijkheid"
+        paragraphs:
+          - "De verkoper is niet aansprakelijk voor de niet- of laattijdige uitvoering van zijn verplichtingen in geval van overmacht, noch voor onrechtstreekse schade. De aansprakelijkheid van de verkoper is in elk geval beperkt tot het bedrag van de bestelling."
+      - title: "10. Persoonsgegevens"
+        paragraphs:
+          - "De gegevens die bij de bestelling worden verzameld (identiteit, contactgegevens, leveringsadres) worden uitsluitend gebruikt voor de verwerking van de bestelling, de levering en de wettelijke verplichtingen van de verkoper. Ze worden, voor zover nodig, doorgegeven aan de betaaldienst (Stripe), de e-maildienst (Resend) en de transporteur. Zie ook onze wettelijke vermeldingen."
+      - title: "11. Toepasselijk recht en geschillen"
+        paragraphs:
+          - "Op deze voorwaarden is het Belgische recht van toepassing. Bij een geschil zoeken de partijen eerst een minnelijke oplossing. De consument kan zich wenden tot de Consumentenombudsdienst (consumentenombudsdienst.be) of tot het Europese platform voor onlinegeschillenbeslechting (ec.europa.eu/consumers/odr). Zo niet zijn de rechtbanken van het arrondissement Luik, afdeling Verviers, bevoegd, onverminderd de dwingende bevoegdheidsregels."
+    form_title: "Modelformulier voor herroeping"
+    form_intro: "Dit formulier alleen invullen en terugzenden als u de overeenkomst wilt herroepen."
+    form_lines:
+      - "Aan HAMAPA SRL (Atelier Sauvage), Chaussée de Theux 59, 4802 Heusy — ateliersauvageheusy@gmail.com:"
+      - "Ik/Wij (*) deel/delen (*) u hierbij mede dat ik/wij (*) onze overeenkomst betreffende de verkoop van de volgende goederen (*) herroep/herroepen (*):"
+      - "Bestelnummer: ______________________"
+      - "Besteld op (*) / ontvangen op (*): ______________________"
+      - "Naam consument(en): ______________________"
+      - "Adres consument(en): ______________________"
+      - "Handtekening consument(en) (alleen wanneer dit formulier op papier wordt ingediend): ______________________"
+      - "Datum: ______________________"
+      - "(*) Doorhalen wat niet van toepassing is."
+    review_note: ""
   lightbox:
     close: "Sluiten"
     previous: "Vorige"
@@ -586,6 +802,9 @@ de:
     s4_title: "4. Personenbezogene Daten"
     s4_body: "Die erhobenen Daten werden ausschließlich zur Beantwortung Ihrer Anfragen verwendet und niemals an Dritte weitergegeben. Gemäß den gesetzlichen Bestimmungen haben Sie das Recht auf Auskunft und Berichtigung Ihrer personenbezogenen Daten."
     s5_title: "5. Cookies und Werbemessung"
+    s6_title: "6. Online-Verkauf"
+    s6_body: "Verkäufe über diese Website unterliegen unseren allgemeinen Geschäftsbedingungen, die insbesondere das 14-tägige Widerrufsrecht sowie die Liefer- und Rückgabemodalitäten regeln."
+    s6_link: "Allgemeine Geschäftsbedingungen lesen"
     s5_body: "Mit Ihrer vorherigen Einwilligung setzt diese Website Cookies über das Meta Pixel (Meta Platforms Ireland Ltd.), um die Wirksamkeit unserer Werbekampagnen zu messen und deren Ausrichtung zu verbessern. Ohne Ihre über unser Einwilligungsbanner eingeholte Zustimmung wird kein solches Cookie gesetzt. Sie können Ihre Wahl jederzeit über den Link « Cookies » im Seitenfuß akzeptieren, ablehnen oder ändern."
   product:
     sold: "Verkauft"
@@ -610,7 +829,11 @@ de:
   shop:
     cart: "Warenkorb"
     cart_title: "Ihr Warenkorb"
+    page_title: "Warenkorb – Atelier Sauvage"
     cart_empty: "Ihr Warenkorb ist leer."
+    cart_full: "Der Warenkorb ist auf 10 Objekte begrenzt. Schließen Sie diese Bestellung ab, bevor Sie weitere hinzufügen."
+    reserved_in_cart: "Ein Objekt in Ihrem Warenkorb ist während der Zahlung eines anderen Kunden reserviert. Versuchen Sie es in einigen Minuten erneut oder entfernen Sie es."
+    thanks_timeout: "Wir haben die Zahlungsbestätigung noch nicht erhalten. Laden Sie diese Seite in einigen Minuten neu; falls das Problem bestehen bleibt, kontaktieren Sie uns."
     browse: "Katalog ansehen"
     remove: "Entfernen"
     subtotal: "Zwischensumme"
@@ -630,7 +853,6 @@ de:
     sold_badge: "Verkauft"
     cancelled: "Die Zahlung wurde abgebrochen. Ihre Objekte sind wieder im Warenkorb verfügbar."
     thanks_title: "Vielen Dank für Ihre Bestellung!"
-    thanks_description: "Bestellbestätigung — Atelier Sauvage"
     thanks_body: "Eine Bestätigungs-E-Mail ist unterwegs. Wir bereiten Ihre Bestellung vor und melden uns, um Lieferung oder Abholung zu vereinbaren."
     thanks_ref: "Bestellnummer"
     thanks_pending: "Ihre Zahlung wird verarbeitet. Diese Seite aktualisiert sich automatisch."
@@ -646,6 +868,72 @@ de:
     extra_item: "weiteres Objekt"
     pickup: "Abholung im Atelier (Heusy)"
     delivery: "Lieferung in Belgien"
+  cgv:
+    page_title: "Allgemeine Geschäftsbedingungen – Atelier Sauvage"
+    page_description: "Allgemeine Geschäftsbedingungen für den Online-Verkauf bei Atelier Sauvage: Bestellung, Zahlung, Lieferung, Widerrufsrecht."
+    heading: "Allgemeine Geschäftsbedingungen"
+    updated: "Fassung vom 2. September 2026"
+    intro: "Diese Bedingungen gelten für jeden Fernabsatzvertrag, der über ateliersauvageheusy.be geschlossen wird. Mit der Bestellung bestätigt der Käufer, sie gelesen und akzeptiert zu haben. Bei Abweichungen gilt die französische Fassung."
+    sections:
+      - title: "1. Verkäufer"
+        paragraphs:
+          - "HAMAPA SRL, Handelsname „Atelier Sauvage“, Chaussée de Theux 59, 4802 Heusy (Verviers), Belgien — Unternehmens-/MwSt.-Nr. BE 1000.380.596 — ateliersauvageheusy@gmail.com — +32 495 29 22 25."
+      - title: "2. Geltungsbereich"
+        paragraphs:
+          - "Diese Bedingungen gelten für den Online-Verkauf von gebrauchten Objekten, Vintage-Möbeln und Dekorationsstücken, die auf der Website Verbrauchern mit Wohnsitz in Belgien angeboten werden."
+          - "Jedes Objekt ist ein Unikat. Der Bestand beträgt daher ein Stück je Referenz, und ein Objekt kann nur einmal verkauft werden."
+      - title: "3. Objekte, Beschreibungen und Zustand"
+        paragraphs:
+          - "Die verkauften Objekte sind Gebrauchtwaren. Sie weisen Gebrauchsspuren, Patina und Unregelmäßigkeiten auf, die zu ihrem Alter und ihrer Geschichte gehören; diese stellen keinen Mangel dar."
+          - "Beschreibungen, Fotos, Maße und Zustandsangaben werden mit größter Sorgfalt erstellt, bleiben aber unverbindlich. Fragen sind vor dem Kauf per E-Mail, Telefon oder WhatsApp willkommen."
+      - title: "4. Preise"
+        paragraphs:
+          - "Die Preise verstehen sich in Euro inklusive aller Steuern. Die Lieferkosten sind im Preis der Objekte nicht enthalten; sie werden vor der Zahlung angezeigt und akzeptiert."
+          - "Die anwendbare Mehrwertsteuerregelung (gegebenenfalls Differenzbesteuerung für Gebrauchtwaren) wird auf der Rechnung angegeben. Der Verkäufer kann seine Preise jederzeit ändern; Objekte werden zum bei der Bestellung geltenden Preis in Rechnung gestellt."
+      - title: "5. Bestellung und Zahlung"
+        paragraphs:
+          - "Die Bestellung erfolgt über den Warenkorb der Website. Während des Bezahlvorgangs werden die Objekte im Warenkorb für etwa 30 Minuten für den Käufer reserviert; danach werden sie ohne Zahlung wieder verfügbar."
+          - "Die Zahlung erfolgt online und gesichert über die Plattform Stripe (Bancontact, Kredit- und Debitkarten). Der Verkäufer hat zu keinem Zeitpunkt Zugriff auf die Bankdaten des Käufers."
+          - "Der Vertrag kommt mit Eingang der Zahlung zustande. Eine Bestellbestätigung wird per E-Mail versandt. Sollte sich ein Objekt trotz der Prüfungen als nicht verfügbar erweisen, wird der Käufer informiert und innerhalb von 14 Tagen vollständig erstattet."
+      - title: "6. Lieferung und Abholung"
+        paragraphs:
+          - "Die Lieferung wird nur innerhalb Belgiens angeboten, durch eine auf Kunst und Möbel spezialisierte Spedition. Die Kosten hängen vom Umfang der Objekte ab und werden für die gesamte Bestellung berechnet."
+          - "Der Käufer kann seine Bestellung auch kostenlos im Atelier abholen, nach Vereinbarung, während der Öffnungszeiten."
+          - "Nach der Zahlung setzt sich der Verkäufer mit dem Käufer in Verbindung, um Modalitäten und Termin der Lieferung oder Abholung zu vereinbaren. Die voraussichtliche Lieferzeit beträgt 5 bis 15 Werktage nach dieser Kontaktaufnahme."
+          - "Das Risiko des Verlusts oder der Beschädigung geht auf den Käufer über, sobald er oder ein von ihm benannter Dritter das Objekt physisch in Besitz nimmt. Der Käufer prüft das Objekt bei Erhalt und meldet Transportschäden innerhalb von 48 Stunden mit Fotos."
+      - title: "7. Widerrufsrecht"
+        paragraphs:
+          - "Gemäß Buch VI des belgischen Wirtschaftsgesetzbuchs hat der Verbraucher das Recht, den Vertrag innerhalb von 14 Kalendertagen ab dem Tag, an dem er oder ein von ihm benannter Dritter das Objekt physisch in Besitz nimmt, ohne Angabe von Gründen zu widerrufen."
+          - "Zur Ausübung dieses Rechts teilt der Käufer dem Verkäufer seinen Entschluss durch eine eindeutige Erklärung mit (E-Mail an ateliersauvageheusy@gmail.com oder Brief), zum Beispiel mit dem untenstehenden Formular."
+          - "Der Käufer sendet das Objekt unverzüglich, spätestens 14 Tage nach der Mitteilung, zurück oder bringt es zurück. Die unmittelbaren Kosten der Rücksendung trägt der Käufer. Bei Objekten, die aufgrund ihrer Beschaffenheit nicht per Post zurückgesandt werden können, sind dies die Kosten einer Spezialspedition; sie werden auf die Höhe der Lieferkosten der Bestellung geschätzt."
+          - "Der Verkäufer erstattet alle erhaltenen Zahlungen einschließlich der ursprünglichen Lieferkosten (mit Ausnahme zusätzlicher Kosten, die sich aus der Wahl einer anderen als der günstigsten angebotenen Lieferart ergeben) spätestens 14 Tage nach Eingang der Widerrufserklärung. Die Erstattung kann verweigert werden, bis das Objekt zurückerhalten oder ein Versandnachweis erbracht wurde."
+          - "Der Käufer haftet für einen Wertverlust des Objekts, der auf einen Umgang zurückzuführen ist, der zur Prüfung von Beschaffenheit, Eigenschaften und Funktionsweise nicht notwendig war."
+      - title: "8. Gesetzliche Gewährleistung"
+        paragraphs:
+          - "Gebrauchte Objekte unterliegen der gesetzlichen Gewährleistung für Vertragsmäßigkeit nach dem belgischen Zivilgesetzbuch. Wie gesetzlich zulässig, beträgt diese Gewährleistung für Gebrauchtwaren ein Jahr ab Lieferung."
+          - "Nicht abgedeckt sind Mängel und Gebrauchsspuren, die in der Beschreibung genannt oder auf den Fotos sichtbar sind, normale Abnutzung sowie Schäden durch unsachgemäße Nutzung, Pflege oder Lagerung."
+      - title: "9. Haftung"
+        paragraphs:
+          - "Der Verkäufer haftet nicht für die Nichterfüllung oder verspätete Erfüllung seiner Pflichten bei höherer Gewalt und nicht für mittelbare Schäden. Die Haftung des Verkäufers ist in jedem Fall auf den Bestellwert begrenzt."
+      - title: "10. Personenbezogene Daten"
+        paragraphs:
+          - "Die bei der Bestellung erhobenen Daten (Identität, Kontaktdaten, Lieferadresse) werden ausschließlich zur Abwicklung der Bestellung, zur Lieferung und zur Erfüllung der gesetzlichen Pflichten des Verkäufers verwendet. Sie werden, soweit erforderlich, an den Zahlungsdienstleister (Stripe), den E-Mail-Dienst (Resend) und die Spedition weitergegeben. Siehe auch unser Impressum."
+      - title: "11. Anwendbares Recht und Streitigkeiten"
+        paragraphs:
+          - "Diese Bedingungen unterliegen belgischem Recht. Im Streitfall suchen die Parteien zunächst eine gütliche Lösung. Verbraucher können sich an den belgischen Verbraucherombudsdienst (verbraucherombudsdienst.be) oder an die europäische Plattform zur Online-Streitbeilegung (ec.europa.eu/consumers/odr) wenden. Andernfalls sind die Gerichte des Bezirks Lüttich, Abteilung Verviers, zuständig, unbeschadet zwingender Zuständigkeitsregeln."
+    form_title: "Muster-Widerrufsformular"
+    form_intro: "Wenn Sie den Vertrag widerrufen wollen, füllen Sie bitte dieses Formular aus und senden Sie es zurück."
+    form_lines:
+      - "An HAMAPA SRL (Atelier Sauvage), Chaussée de Theux 59, 4802 Heusy, Belgien — ateliersauvageheusy@gmail.com:"
+      - "Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden Waren (*):"
+      - "Bestellnummer: ______________________"
+      - "Bestellt am (*) / erhalten am (*): ______________________"
+      - "Name des/der Verbraucher(s): ______________________"
+      - "Anschrift des/der Verbraucher(s): ______________________"
+      - "Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier): ______________________"
+      - "Datum: ______________________"
+      - "(*) Unzutreffendes streichen."
+    review_note: ""
   lightbox:
     close: "Schließen"
     previous: "Zurück"

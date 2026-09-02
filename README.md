@@ -54,6 +54,7 @@ Fully responsive layout built with Tailwind CSS. The navbar collapses to a burge
 
 - [docs/decisions.md](docs/decisions.md) — why the project is shaped the way it is, and the traps that cost time to find. **Worth reading before changing the build, the deploy pipeline or the catalogue automation.**
 - [docs/ecommerce-brief.md](docs/ecommerce-brief.md) — the brief for turning the catalogue into a shop.
+- [docs/shop-runbook.md](docs/shop-runbook.md) — how the shop is wired, its secrets, the launch checklist, and what to do when it misbehaves.
 - [workers/atelier-refresher/README.md](workers/atelier-refresher/README.md) — the Instagram token refresher.
 
 New decisions and hard-won findings go in `docs/decisions.md`, newest first.
@@ -63,7 +64,9 @@ New decisions and hard-won findings go in `docs/decisions.md`, newest first.
 ```bash
 bundle exec jekyll build                                   # build to _site/
 npm run build:css                                          # after adding Tailwind classes
-python3 -m unittest discover -s scripts -p 'test_*.py'     # catalogue validation tests
+python3 -m unittest discover -s scripts -p 'test_*.py'     # catalogue validation + reconcile tests
+npm ci && npm test                                         # shop Functions on a local D1 (races checkouts)
+npx wrangler pages dev _site                               # the built site + Functions locally
 ```
 
 Anything added as a new top-level directory must go in the `exclude` list in `_config.yml`, or Jekyll will publish it on the live site.

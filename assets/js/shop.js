@@ -127,7 +127,10 @@
           window.location.href = cfg.prefix + "/panier/";
           return;
         }
-        if (cart.length >= MAX_ITEMS) return;
+        if (cart.length >= MAX_ITEMS) {
+          window.alert(T.cartFull || "Cart full");
+          return;
+        }
         cart.push({
           number: number,
           description: product.description || "",
@@ -194,15 +197,18 @@
       cart.forEach(function (item) {
         subtotal += Number(item.price) || 0;
         var node = template.content.cloneNode(true);
+        node.querySelector("[data-cart-row]").setAttribute("data-number", item.number);
         node.querySelectorAll("[data-link]").forEach(function (a) { a.href = productUrl(item.number); });
         var img = node.querySelector("[data-img]");
         img.src = imgUrl(item.number, 480);
         img.alt = item.description || item.number;
         node.querySelector("[data-title]").textContent = item.description || item.number;
-        node.querySelector("[data-meta]").textContent = "Réf. " + item.number;
+        node.querySelector("[data-meta]").textContent = (T.ref || "Réf.") + " " + item.number;
         node.querySelector("[data-price]").textContent = fmtPrice(Number(item.price) || 0);
         node.querySelector("[data-remove]").addEventListener("click", function () {
           setCart(getCart().filter(function (i) { return i.number !== item.number; }));
+          payBtn.disabled = false;
+          notice("");
           render();
         });
         itemsEl.appendChild(node);
@@ -305,8 +311,12 @@
 
     var params = new URLSearchParams(window.location.search);
     var cancelled = params.get("cancelled") === "1";
+    // Coming back from Stripe by any route (cancel link, browser back, a
+    // closed tab) leaves the buyer's own hold in place; free it so they can
+    // check out again. /api/release refuses anything that is not pending.
+    var hadPending = !!readJSON(PENDING_KEY, null);
     render();
-    (cancelled ? releasePending() : Promise.resolve())
+    (hadPending ? releasePending() : Promise.resolve())
       .then(function () {
         if (cancelled) {
           notice(T.cancelled);
@@ -315,12 +325,22 @@
         return refreshFromBuild();
       })
       .then(function () {
-        // Anything held by someone else cannot be bought right now; say so early
-        // rather than at the claim.
+        // Sold: drop now. Held by someone else: say so and hold the pay button;
+        // it may be free again in half an hour.
         return fetchAvailability().then(function (av) {
-          var blocked = getCart().map(function (i) { return i.number; })
-            .filter(function (n) { return (av.sold || []).indexOf(n) !== -1; });
-          if (blocked.length) dropUnavailable(blocked);
+          var numbers = getCart().map(function (i) { return i.number; });
+          var sold = numbers.filter(function (n) { return (av.sold || []).indexOf(n) !== -1; });
+          if (sold.length) dropUnavailable(sold);
+          var reserved = getCart().map(function (i) { return i.number; })
+            .filter(function (n) { return (av.held || []).indexOf(n) !== -1; });
+          if (reserved.length) {
+            notice(T.reservedInCart, reserved);
+            payBtn.disabled = true;
+            itemsEl.querySelectorAll("[data-cart-row]").forEach(function (row) {
+              var n = row.getAttribute("data-number");
+              if (reserved.indexOf(n) !== -1) row.querySelector("[data-meta]").textContent += " — " + (T.reserved || "Réservé");
+            });
+          }
         });
       });
   }
@@ -338,17 +358,27 @@
     if (!sessionId) { show("notfound"); return; }
 
     var attempts = 0;
+    var MAX_ATTEMPTS = 20;
+    function later() {
+      if (attempts < MAX_ATTEMPTS) { show("pending"); setTimeout(poll, 3000); return; }
+      states.pending.textContent = T.thanksTimeout || states.pending.textContent;
+      show("pending");
+    }
     function poll() {
       attempts += 1;
       fetch("/api/order?session_id=" + encodeURIComponent(sessionId), { headers: { Accept: "application/json" } })
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (order) {
-          if (!order) { show("notfound"); return; }
-          if (order.status === "paid") { renderPaid(order); return; }
-          show("pending");
-          if (attempts < 20) setTimeout(poll, 3000);
+        .then(function (r) {
+          if (r.status === 404) return { notfound: true };
+          if (!r.ok) return null; // 5xx/429: transient, keep polling
+          return r.json();
         })
-        .catch(function () { show(attempts < 20 ? "pending" : "notfound"); if (attempts < 20) setTimeout(poll, 3000); });
+        .then(function (order) {
+          if (!order) { later(); return; }
+          if (order.notfound) { show("notfound"); return; }
+          if (order.status === "paid") { renderPaid(order); return; }
+          later();
+        })
+        .catch(later);
     }
 
     function renderPaid(order) {
@@ -362,7 +392,7 @@
         var li = document.createElement("li");
         li.className = "py-3 flex justify-between gap-4";
         var left = document.createElement("span");
-        left.textContent = item.description + " (réf. " + item.number + ")";
+        left.textContent = item.description + " (" + (T.ref || "Réf.") + " " + item.number + ")";
         var right = document.createElement("span");
         right.className = "font-bold whitespace-nowrap";
         right.textContent = fmtCents(item.price_cents || 0);

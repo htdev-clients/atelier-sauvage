@@ -20,6 +20,9 @@ test("encodeForm flattens nested params the way Stripe expects", () => {
   assert.equal(out.get("metadata[order_id]"), "AS-1");
   assert.equal(out.get("expand[0]"), "shipping_cost.shipping_rate");
   assert.equal(encodeForm({ a: null, b: undefined, c: 0 }).toString(), "c=0");
+  // Stripe substitutes this placeholder itself; it must survive encoding.
+  const url = "https://x.test/merci/?session_id={CHECKOUT_SESSION_ID}";
+  assert.equal(new URLSearchParams(encodeForm({ success_url: url }).toString()).get("success_url"), url);
 });
 
 test("webhook signature: valid, tampered, stale, malformed", async () => {

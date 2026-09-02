@@ -1,0 +1,76 @@
+name: Reconcile online sales
+
+# Writes items sold online back into the Google Sheet as "Vendu", then runs
+# the catalogue update so the site shows them as sold. The Sheet stays the
+# source of truth; the ledger only tells it what happened.
+#
+# Two gates before this can work, both or it fails with a confusing 403:
+#   1. the service account in GOOGLE_CREDENTIALS_JSON is shared on the Sheet
+#      as Editor (update_catalog.py only ever needed Viewer);
+#   2. PROD_RECONCILE_TOKEN is set as a GitHub secret AND pushed to the Pages
+#      production environment by deploy.yml.
+#
+# GitHub pauses scheduled workflows after 60 days without repository
+# activity; a catalogue run counts as activity, so this is unlikely to bite,
+# but if sales stop appearing on the site, check Actions first.
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Site to reconcile against (default: the production pages.dev alias)"
+        type: string
+        default: "https://atelier-sauvage.pages.dev"
+      preview:
+        description: "Use the PREVIEW reconcile token (for testing against a preview deployment)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: catalog-update
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      written: ${{ steps.run.outputs.written }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Write back sales
+        id: run
+        env:
+          # CI cannot fetch ateliersauvageheusy.be (Cloudflare 403s datacenter
+          # IPs); the pages.dev alias serves the same production deployment.
+          SHOP_API_BASE: ${{ inputs.base_url || 'https://atelier-sauvage.pages.dev' }}
+          RECONCILE_TOKEN: ${{ inputs.preview == true && secrets.PREVIEW_RECONCILE_TOKEN || secrets.PROD_RECONCILE_TOKEN }}
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+          SHEET_ID: ${{ vars.SHEET_ID }}
+        run: python scripts/reconcile.py
+
+  # Only when something was written: the catalogue run reads the Sheet, marks
+  # the items Vendu in the CSV, and publishes. Reusing the workflow means the
+  # client's popup also sees the result.
+  update-catalog:
+    needs: reconcile
+    if: needs.reconcile.outputs.written == 'true' && inputs.preview != true
+    permissions:
+      contents: write
+    uses: ./.github/workflows/update_catalog.yml
+    secrets: inherit

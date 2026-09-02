@@ -8,11 +8,14 @@ import { fileURLToPath } from "node:url";
 import { startMockServices } from "./mock-services.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+// The local wrangler binary directly (not npx): npx puts a shell between us
+// and the dev server, and killing the shell on Linux leaves workerd running,
+// which keeps the test process alive until the runner times out.
+const WRANGLER = process.env.WRANGLER_BIN || path.join(ROOT, "node_modules", ".bin", "wrangler");
+const WRANGLER_ARGS = [];
 // Pages does not accept --config, so the root wrangler.toml is used as-is:
 // its bindings are simulated locally and --persist-to isolates each run.
 const DB_NAME = "atelier-sauvage-shop-preview";
-const WRANGLER = process.env.WRANGLER_BIN || "npx";
-const WRANGLER_ARGS = process.env.WRANGLER_BIN ? [] : ["--no-install", "wrangler"];
 
 export const TEST_ENV = {
   STRIPE_SECRET_KEY: "sk_test_mock",
@@ -38,7 +41,8 @@ export async function startHarness({ port = 8790 + Math.floor(Math.random() * 10
     .flatMap(([k, v]) => ["--binding", `${k}=${v}`]);
   const args = [...WRANGLER_ARGS, "pages", "dev", "tests/fixtures/site", "--persist-to", persist,
     "--port", String(port), "--ip", "127.0.0.1", "--log-level", "warn", ...bindings];
-  const proc = spawn(WRANGLER, args, { cwd: ROOT, stdio: ["ignore", "pipe", "pipe"] });
+  // Own process group, so stop() can kill wrangler and every child it spawned.
+  const proc = spawn(WRANGLER, args, { cwd: ROOT, stdio: ["ignore", "pipe", "pipe"], detached: true });
   let log = "";
   proc.stdout.on("data", (d) => { log += d; });
   proc.stderr.on("data", (d) => { log += d; });
@@ -62,8 +66,11 @@ export async function startHarness({ port = 8790 + Math.floor(Math.random() * 10
   };
 
   const stop = async () => {
-    proc.kill("SIGTERM");
-    await new Promise((r) => proc.once("exit", r));
+    const exited = new Promise((r) => proc.once("exit", r));
+    try { process.kill(-proc.pid, "SIGTERM"); } catch { proc.kill("SIGTERM"); }
+    const timer = setTimeout(() => { try { process.kill(-proc.pid, "SIGKILL"); } catch { /* gone */ } }, 5000);
+    await exited;
+    clearTimeout(timer);
     await mock.close();
     rmSync(persist, { recursive: true, force: true });
   };

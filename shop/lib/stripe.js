@@ -45,7 +45,7 @@ export async function stripeRequest(env, method, path, params, { idempotencyKey 
   } else {
     body = encoded;
   }
-  const res = await fetch(url, { method, headers, body });
+  const res = await fetch(url, { method, headers, body, signal: AbortSignal.timeout(20000) });
   const text = await res.text();
   let parsed = null;
   try { parsed = text ? JSON.parse(text) : null; } catch { parsed = { raw: text }; }

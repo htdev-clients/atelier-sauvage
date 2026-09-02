@@ -2,6 +2,8 @@ name: Update Catalog
 
 on:
   workflow_dispatch:
+  # Called by reconcile.yml after online sales are written to the Sheet.
+  workflow_call:
 
 concurrency:
   group: catalog-update

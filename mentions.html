@@ -98,5 +98,15 @@ i18n_key: mentions
       </p>
     </div>
 
+    <div class="mb-12">
+      <h2 class="font-serif text-2xl text-stone-900 mb-4 pb-2 border-b border-stone-200">
+        {{ m.s6_title }}
+      </h2>
+      <p>{{ m.s6_body }}</p>
+      <p class="mt-3">
+        <a href="{% if site.active_lang == site.default_lang %}/cgv/{% else %}/{{ site.active_lang }}/cgv/{% endif %}" class="text-stone-800 underline underline-offset-2 hover:text-stone-900">{{ m.s6_link }}</a>
+      </p>
+    </div>
+
   </section>
 </main>

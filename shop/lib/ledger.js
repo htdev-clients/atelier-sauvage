@@ -54,14 +54,15 @@ export async function claimItems(db, { items, order, now }) {
   statements.push(
     db.prepare(
       `INSERT INTO orders (id, status, expected_count, claimed_count, lang, item_numbers, items_json,
-                           amount_items, shipping_band, cancel_token, created_at, hold_expires_at)
+                           amount_items, shipping_band, cancel_token, created_at, hold_expires_at, ip_hash)
        VALUES (?, 'pending', ?,
                (SELECT COUNT(*) FROM items WHERE order_id = ? AND status = 'held' AND number IN (${ph})),
-               ?, ?, ?, ?, ?, ?, ?, ?)`
+               ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     ).bind(
       order.id, n, order.id, ...numbers,
       order.lang, JSON.stringify(numbers), JSON.stringify(items),
-      order.amount_items, order.shipping_band, order.cancel_token, now, order.hold_expires_at
+      order.amount_items, order.shipping_band, order.cancel_token, now, order.hold_expires_at,
+      order.ip_hash ?? null
     )
   );
 
@@ -70,9 +71,25 @@ export async function claimItems(db, { items, order, now }) {
     return { ok: true };
   } catch (err) {
     const message = String(err?.message || err);
-    if (!/CHECK constraint failed|constraint failed/i.test(message)) throw err;
-    return { ok: false, unavailable: await unavailableAmong(db, numbers, now) };
+    // Only the all-or-nothing guard is an expected failure; anything else
+    // (a NOT NULL, a colliding id) is a bug and must surface as a 500.
+    if (!/CHECK constraint failed: claimed_count = expected_count/i.test(message)) throw err;
+    const unavailable = await unavailableAmong(db, numbers, now);
+    // The competing hold may have been released between the two queries;
+    // an empty answer would read as "everything is fine", which it was not.
+    return { ok: false, unavailable: unavailable.length ? unavailable : numbers };
   }
+}
+
+// Abuse guard: pending orders opened recently, overall and from one address.
+export async function pendingLoad(db, ipHash, since) {
+  const row = await db
+    .prepare(`SELECT COUNT(*) AS total,
+                     SUM(CASE WHEN ip_hash = ? THEN 1 ELSE 0 END) AS mine
+                FROM orders WHERE status = 'pending' AND created_at >= ?`)
+    .bind(ipHash, since)
+    .first();
+  return { total: row?.total ?? 0, mine: row?.mine ?? 0 };
 }
 
 export async function unavailableAmong(db, numbers, now) {
@@ -119,11 +136,16 @@ export async function markPaid(db, order, details, now) {
   const numbers = JSON.parse(order.item_numbers);
   const ph = placeholders(numbers.length);
   const res = await db.batch([
+    // Live holds by other orders that this payment is about to take over.
+    db.prepare(
+      `SELECT DISTINCT order_id FROM items
+        WHERE number IN (${ph}) AND status = 'held' AND order_id IS NOT NULL AND order_id <> ?`
+    ).bind(...numbers, order.id),
     db.prepare(
       `UPDATE items SET status = 'sold', sold_at = ?, order_id = ?, hold_expires_at = NULL, updated_at = ?
-        WHERE number IN (${ph}) AND NOT (status = 'sold' AND order_id <> ?)`
+        WHERE number IN (${ph}) AND NOT (status = 'sold' AND COALESCE(order_id, '') <> ?)`
     ).bind(now, order.id, now, ...numbers, order.id),
-    db.prepare(`SELECT number FROM items WHERE number IN (${ph}) AND order_id <> ?`).bind(...numbers, order.id),
+    db.prepare(`SELECT number FROM items WHERE number IN (${ph}) AND COALESCE(order_id, '') <> ?`).bind(...numbers, order.id),
     db.prepare(
       `UPDATE orders
           SET status = 'paid', paid_at = ?, closed_at = ?, amount_shipping = ?, amount_total = ?,
@@ -138,11 +160,30 @@ export async function markPaid(db, order, details, now) {
       details.session_id ?? null, order.id
     ),
   ]);
-  const conflicts = res[1].results.map((r) => r.number);
+  const displaced = res[0].results.map((r) => r.order_id);
+  const conflicts = res[2].results.map((r) => r.number);
   if (conflicts.length) {
     await db.prepare("UPDATE orders SET conflict_items = ? WHERE id = ?").bind(JSON.stringify(conflicts), order.id).run();
   }
-  return { changed: res[2].meta.changes > 0, conflicts };
+  return { changed: res[3].meta.changes > 0, conflicts, displaced };
+}
+
+// Paid orders whose e-mails failed, for the reconcile job to retry.
+export async function ordersWithFailedEmails(db, since, limit = 5) {
+  const { results } = await db
+    .prepare(`SELECT * FROM orders WHERE status = 'paid' AND emails_sent_at IS NULL AND email_error IS NOT NULL
+               AND paid_at >= ? ORDER BY paid_at LIMIT ?`)
+    .bind(since, limit)
+    .all();
+  return results;
+}
+
+export async function pruneWebhookEvents(db, before) {
+  await db.prepare("DELETE FROM webhook_events WHERE received_at < ?").bind(before).run();
+}
+
+export async function forgetWebhookEvent(db, id) {
+  await db.prepare("DELETE FROM webhook_events WHERE id = ?").bind(id).run();
 }
 
 export async function recordEmails(db, orderId, now, error = null) {

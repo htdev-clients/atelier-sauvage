@@ -1,0 +1,58 @@
+---
+layout: default
+permalink: /cgv/
+i18n_key: cgv
+---
+{% assign t = site.data.translations[site.active_lang] %}
+{% assign c = t.cgv %}
+{% assign lang_prefix = '' %}
+{% if site.active_lang != site.default_lang %}{% assign lang_prefix = '/' | append: site.active_lang %}{% endif %}
+
+<header class="relative h-[40svh] min-h-[300px] w-full flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="/assets/img/general/2000/facade-2000.jpg"
+         srcset="/assets/img/general/480/facade-480.jpg 480w,
+                 /assets/img/general/800/facade-800.jpg 800w,
+                 /assets/img/general/2000/facade-2000.jpg 2000w"
+         sizes="100vw" alt="{{ t.index.alts.facade }}" class="w-full h-full object-cover"
+         fetchpriority="high" decoding="async" />
+    <div class="absolute inset-0 bg-black/50 mix-blend-multiply"></div>
+  </div>
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white space-y-4">
+    <h1 class="font-serif text-4xl sm:text-5xl font-light tracking-wide drop-shadow-lg">{{ c.heading }}</h1>
+    <div class="w-16 h-px bg-white/80 mx-auto"></div>
+    <p class="text-sm md:text-base font-light tracking-widest uppercase text-white/90">{{ c.updated }}</p>
+  </div>
+</header>
+
+<main class="bg-stone-50 min-h-[60vh]">
+  <section class="max-w-3xl mx-auto py-16 px-6 text-stone-600 leading-relaxed text-sm md:text-base">
+
+    <p class="mb-12 text-stone-700">{{ c.intro }}</p>
+
+    {% for section in c.sections %}
+    <div class="mb-10">
+      <h2 class="font-serif text-2xl text-stone-900 mb-4 pb-2 border-b border-stone-200">{{ section.title }}</h2>
+      <div class="space-y-3">
+        {% for paragraph in section.paragraphs %}
+        <p>{{ paragraph }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="mb-12 bg-white border border-stone-200 rounded-sm p-6 md:p-8">
+      <h2 class="font-serif text-2xl text-stone-900 mb-2">{{ c.form_title }}</h2>
+      <p class="text-stone-500 text-sm mb-6">{{ c.form_intro }}</p>
+      <div class="space-y-3 font-mono text-xs md:text-sm text-stone-700">
+        {% for line in c.form_lines %}
+        <p>{{ line }}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <p class="text-xs text-stone-500">
+      <a href="{{ lang_prefix }}/mentions/" class="underline underline-offset-2 hover:text-stone-900">{{ t.footer.legal }}</a>
+    </p>
+  </section>
+</main>

@@ -12,12 +12,27 @@ import { json, fail, readJson, nowSec, pickLang, langPrefix, parseNumbers } from
 import { loadCatalog, selectBuyable } from "../../shop/lib/catalog.js";
 import { shippingOptions, consignment, ALLOWED_COUNTRIES } from "../../shop/lib/shipping.js";
 import { strings } from "../../shop/lib/i18n.js";
-import { claimItems, releaseOrder, attachSession, newOrderId, newToken, HOLD_GRACE_SEC } from "../../shop/lib/ledger.js";
+import { claimItems, releaseOrder, attachSession, newOrderId, newToken, pendingLoad, HOLD_GRACE_SEC } from "../../shop/lib/ledger.js";
 import { createCheckoutSession } from "../../shop/lib/stripe.js";
 import { invalidateAvailability } from "../../shop/lib/cache.js";
 
 // Stripe requires expires_at at least 30 minutes out; 31 leaves room for clock skew.
 const SESSION_MINUTES = 31;
+
+// Holds are free to open, so cap them: per address, and overall as a circuit
+// breaker. A real buyer never opens more than a couple of checkouts in ten
+// minutes; a script trying to reserve the whole catalogue does. (A Turnstile
+// challenge or a Cloudflare rate-limiting rule on /api/checkout is the
+// stronger fix; see docs/shop-runbook.md.)
+const LOAD_WINDOW_SEC = 10 * 60;
+const MAX_PENDING_PER_IP = 3;
+const MAX_PENDING_TOTAL = 40;
+
+async function ipHash(request) {
+  const ip = request.headers.get("cf-connecting-ip") || "0.0.0.0";
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`as-shop|${ip}`));
+  return Array.from(new Uint8Array(digest)).slice(0, 12).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
 
 export async function onRequestPost({ request, env }) {
   if (!env.SHOP_DB) return fail(503, "ledger_unavailable");
@@ -40,6 +55,12 @@ export async function onRequestPost({ request, env }) {
   if (!options) return fail(409, "unavailable", { unavailable: numbers });
 
   const now = nowSec();
+  const hash = await ipHash(request);
+  const load = await pendingLoad(env.SHOP_DB, hash, now - LOAD_WINDOW_SEC);
+  if (load.mine >= MAX_PENDING_PER_IP || load.total >= MAX_PENDING_TOTAL) {
+    return fail(429, "too_many_checkouts", { retry_after: LOAD_WINDOW_SEC });
+  }
+
   const expiresAt = now + SESSION_MINUTES * 60;
   const order = {
     id: newOrderId(),
@@ -48,6 +69,7 @@ export async function onRequestPost({ request, env }) {
     amount_items: items.reduce((sum, i) => sum + i.price_cents, 0),
     shipping_band: consignment(bands).band,
     cancel_token: newToken(),
+    ip_hash: hash,
   };
 
   const claim = await claimItems(env.SHOP_DB, { items, order, now });

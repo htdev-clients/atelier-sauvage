@@ -8,6 +8,126 @@ same traps.
 
 ---
 
+## 2026-09-02 — the shop build
+
+Built on the branch `ecommerce`, tested on preview deployments only. What is
+recorded here is what the brief left open or what the build changed its mind
+about; the operating detail is in [`shop-runbook.md`](shop-runbook.md).
+
+### The all-or-nothing claim is a CHECK constraint, not a rollback path
+
+**Context.** The brief's claim is an UPDATE … WHERE available, followed by
+"assert rows-affected equals the cart size, otherwise roll back". A manual
+rollback is a second write that can itself fail or race.
+
+**Decision.** The claim batch ends by inserting the order row with
+`claimed_count = (SELECT COUNT(*) … held by this order)` and the table
+carries `CHECK (claimed_count = expected_count)`. A partial claim fails the
+INSERT, and D1 rolls the whole batch back — D1 batches are single
+transactions. There is nothing to undo by hand.
+
+**Consequences.** `tests/checkout.test.mjs` races 2 and then 25 concurrent
+checkouts for one item and overlapping carts, against the real Functions on a
+local D1, and runs in CI before every publish. It has never produced a
+partial hold. The one case not covered by the constraint is a Function dying
+between the batch and Stripe; that hold lapses on its own after 36 minutes.
+
+### The ledger is not seeded
+
+**Context.** The brief says "seed from catalog.csv; the reconcile step keeps
+new items appearing". That is a sync job with its own failure modes, and CI
+cannot write to D1 anyway (the token is Pages-only).
+
+**Decision.** The claim batch starts with `INSERT OR IGNORE` for each item, so
+a row exists from the first time anyone tries to buy it. Whether an item is
+*buyable* comes from the build (`/catalogue.json`, read through the ASSETS
+binding), never from the ledger. The ledger only knows held and sold.
+
+**Consequences.** Nothing to seed, nothing to drift. An in-shop sale marked
+`Vendu` in the Sheet while an online hold is live is still a window the
+system cannot see; it lasts until the next catalogue run.
+
+### Functions call Stripe and Resend over fetch, without SDKs
+
+**Decision.** `shop/lib/stripe.js` form-encodes requests and verifies webhook
+signatures itself (HMAC-SHA256 over `t.body`, constant-time compare, 300 s
+tolerance). CI does not run `npm install` for the site, and keeping the
+Functions bundle dependency-free keeps it that way. The brief's warning about
+`constructEventAsync` is the SDK's problem; the raw body is read with
+`request.text()` before anything parses it.
+
+### Prices come from the deployment, not the request
+
+`_plugins/catalog_generator.rb` emits `/catalogue.json` on the
+default-language pass; `functions/api/checkout.js` reads it via
+`env.ASSETS.fetch` so the price charged is the price on the page of the same
+deployment. Sellability is read from `_database/catalog_validation.json` as
+the brief asked; an item is buyable only when sellable, unsold, with a
+transport band and an integer price.
+
+### Function secrets: GitHub secrets → Pages API, per environment
+
+**Context.** `wrangler pages secret put` cannot target the preview
+environment, and the local machine has no Cloudflare token at all.
+
+**Decision.** `scripts/sync_pages_secrets.py` runs in `deploy.yml` before
+publishing and PATCHes `deployment_configs.<env>.env_vars` with the
+`PREVIEW_*` or `PROD_*` GitHub secrets that are set, using the existing
+Pages:Edit token. Missing names are left alone, so a missing key means a 503
+from that feature, never a failed deploy.
+
+### Write-back goes through a bearer-authenticated Function
+
+Rather than giving the reconcile Action a D1-scoped Cloudflare token,
+`/api/reconcile` exposes unwritten sales and a mark step behind
+`RECONCILE_TOKEN`. The Action needs only what it already has plus that token,
+and `atelier-sauvage.pages.dev` is reachable from CI where the apex is not.
+
+### Shipping is priced as one consignment; rates are placeholders
+
+`shop/lib/shipping.js`: the largest band sets the base, each extra item adds
+€10, Belgium only, plus free pickup. S/M/L/XL at €15/35/75/140 are
+placeholders until the carrier's rate card arrives. Stripe Checkout offers
+the two options; the buyer's choice is read back from the rate's metadata.
+
+### Preview fixtures instead of test data in the CSV
+
+The Sheet has no `transport` column yet, so nothing is buyable and a preview
+cannot exercise checkout. `deploy.yml`'s `test_fixtures` input gives a dozen
+items placeholder bands in the CI checkout only, and refuses on `main`.
+Nothing test-shaped is committed to `_database/`.
+
+### Production D1 exists but carries no schema
+
+`atelier-sauvage-shop` was created alongside `-preview`, but applying the
+schema to it is a launch step (runbook checklist), consistent with nothing
+touching production before the whole flow has been exercised in test mode.
+
+### Reviewed by fresh agents, twice
+
+Two independent reviews after phases 01–03 found: the webhook recorded an
+event before handling it (a retry would have been dropped as a duplicate),
+the availability cache key was shared by preview and production, a paid
+order that displaced a lapsed hold left the other buyer's session payable,
+the meta description was unescaped, and a browser-back from Stripe left the
+buyer blocked by their own hold. All fixed, each with a test.
+
+### Still open, and who owns it
+
+- **Stripe account for Atelier Sauvage.** No key on this machine belongs to
+  this client; the CLI is logged into another project's account and was not
+  reused. Test keys must be created in the client's own Stripe account.
+- **Resend.** The available account is another project's, with no
+  `ateliersauvageheusy.be` domain. The client needs their own, with the
+  domain verified.
+- **VAT margin scheme** (accountant), **carrier rate card**, **legal review**
+  of the CGV: the build assumes TTC prices, Stripe Tax off, placeholder rates,
+  a one-year guarantee on second-hand goods.
+- **Sheet:** `transport`, `poids`, `dimensions`, `etat` columns; service
+  account as Editor for the write-back.
+
+---
+
 ## 2026-09-02
 
 ### Publish from CI, not Cloudflare's Git integration
@@ -169,6 +289,42 @@ run. The Sheet is the source of truth; write back there, which will need the
 OAuth scope widened from `spreadsheets.readonly` to `spreadsheets` *and* the
 service account given Editor access on the Sheet itself. Both gates, or it fails
 confusingly.
+
+**Pages `wrangler.toml` replaces the dashboard's bindings.** The moment a
+deployment carries a Wrangler file, only the bindings in that file exist for
+that environment. The KV binding `ATELIER_STORE` was configured in the
+dashboard; it is now declared in `wrangler.toml` for both environments, or the
+Instagram feed would have stopped. Bindings are non-inheritable: override one
+for `[env.preview]` and you must redeclare all of them there.
+
+**`wrangler pages dev` ignores `--config`, and `--persist-to` is the only
+isolation.** Tests run the root `wrangler.toml` with the fixture directory as
+the positional argument. `migrations_dir` resolves relative to the config
+file, not the cwd. On Linux CI, spawning wrangler through `npx` left `workerd`
+alive after the tests, and the runner hung until the timeout: spawn the
+binary in `node_modules/.bin` directly, in its own process group, and kill the
+group.
+
+**`wrangler pages secret put` has no environment flag.** It writes to
+production. Preview secrets go through the Pages API (`deployment_configs.preview.env_vars`).
+
+**KV is shared between preview and production.** Anything cached in
+`ATELIER_STORE` must carry the environment in its key, or a preview hold
+greys out an item on the live site.
+
+**SQLite wants table-level CHECKs after the last column.** A `CHECK (a = b)`
+between column definitions is a syntax error at offset N with no better hint.
+
+**A webhook event must not be marked handled before it is handled.** Record
+the id, handle, and on failure delete the id again; otherwise the provider's
+retry is answered "duplicate" and the order is never settled.
+
+**Stripe's `checkout.session.completed` payload carries the shipping rate as
+an id.** Read the session back with `expand[]=shipping_cost.shipping_rate` to
+know which option the buyer chose; do not infer it from the amount.
+
+**`node --test tests/`** does not run a directory on Node 22; use a glob.
+**macOS has no `timeout`** command; a script that depends on it silently tests nothing.
 
 **Cloudflare blocks CI from fetching the site.** See the deploy verification
 decision above. Any future health check that runs in Actions has the same

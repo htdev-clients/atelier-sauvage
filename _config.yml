@@ -25,6 +25,10 @@ parallel_localization: true
 disable_disk_cache: true
 lang_from_path: true
 
+# Jekyll skips underscore-prefixed files; Cloudflare Pages reads this one.
+include:
+  - _headers
+
 # Tell Jekyll to exclude these from the final build
 exclude:
   - Gemfile

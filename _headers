@@ -1,0 +1,5 @@
+# Cloudflare Pages headers for static files (Functions set their own).
+# The build data the cart refreshes prices from must not sit in the edge cache
+# for a week like the images do.
+/catalogue.json
+  Cache-Control: public, max-age=60, must-revalidate

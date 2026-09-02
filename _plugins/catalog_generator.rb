@@ -155,7 +155,8 @@ module Jekyll
         'generated' => site.time.utc.iso8601,
         'items'     => items
       })
-      self.data = { 'layout' => nil, 'sitemap' => false }
+      # Never Liquid-render the JSON: a description containing {{ would break it.
+      self.data = { 'layout' => nil, 'sitemap' => false, 'render_with_liquid' => false }
     end
   end
 end

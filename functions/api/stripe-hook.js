@@ -6,7 +6,8 @@
 
 import { json, fail, nowSec } from "../../shop/lib/http.js";
 import { verifyWebhook } from "../../shop/lib/stripe.js";
-import { recordWebhookEvent, getOrder, releaseOrder, extendHold } from "../../shop/lib/ledger.js";
+import { recordWebhookEvent, forgetWebhookEvent, pruneWebhookEvents, getOrder, releaseOrder, extendHold } from "../../shop/lib/ledger.js";
+import { retrieveCheckoutSession } from "../../shop/lib/stripe.js";
 import { settleOrder } from "../../shop/lib/settle.js";
 import { invalidateAvailability } from "../../shop/lib/cache.js";
 
@@ -27,7 +28,19 @@ export async function onRequestPost({ request, env }) {
   const first = await recordWebhookEvent(env.SHOP_DB, event.id, event.type, now);
   if (!first) return json({ received: true, duplicate: true });
 
-  const session = event.data?.object || {};
+  try {
+    return await handle(event, env, request, now);
+  } catch (err) {
+    // The event was recorded before it was handled. Forget it again so that
+    // Stripe's retry is not answered "duplicate" and silently dropped.
+    console.error(`webhook ${event.id}: ${err.message}`);
+    await forgetWebhookEvent(env.SHOP_DB, event.id);
+    return fail(500, "handler_failed");
+  }
+}
+
+async function handle(event, env, request, now) {
+  let session = event.data?.object || {};
   const orderId = session.client_reference_id || session.metadata?.order_id;
   if (!orderId || !event.type.startsWith("checkout.session.")) return json({ received: true, ignored: true });
 
@@ -41,7 +54,16 @@ export async function onRequestPost({ request, env }) {
     case "checkout.session.completed":
     case "checkout.session.async_payment_succeeded": {
       if (session.payment_status === "paid") {
+        // Re-read the session from Stripe with the chosen shipping rate
+        // expanded; the payload only carries its id. Fall back to the payload.
+        try {
+          const fresh = await retrieveCheckoutSession(env, session.id, ["shipping_cost.shipping_rate"]);
+          session = { ...session, ...fresh };
+        } catch (err) {
+          console.warn(`webhook ${event.id}: retrieve failed, using payload: ${err.message}`);
+        }
         const result = await settleOrder(env, order, session, { now, siteUrl: siteUrl(request, env) });
+        if (Math.random() < 0.02) await pruneWebhookEvents(env.SHOP_DB, now - 30 * 86400);
         return json({ received: true, ...result });
       }
       // Payment method still settling (async). Keep the hold well past the session.

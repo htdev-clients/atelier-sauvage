@@ -20,7 +20,7 @@ export async function onRequestGet({ request, env }) {
 
   if (order.status === "pending" && env.STRIPE_SECRET_KEY) {
     try {
-      const session = await retrieveCheckoutSession(env, sessionId);
+      const session = await retrieveCheckoutSession(env, sessionId, ["shipping_cost.shipping_rate"]);
       if (session.payment_status === "paid") {
         await settleOrder(env, order, session, { now: nowSec(), siteUrl: env.SHOP_SITE_URL || new URL(request.url).origin });
         order = await getOrderBySession(env.SHOP_DB, sessionId);

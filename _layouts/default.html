@@ -5,7 +5,7 @@
   {% assign computed_desc = page_t.page_description | default: t.meta.site_description %}
   {% comment %} Generated product pages carry the item description as title. {% endcomment %}
   {% if page.item %}
-    {% assign computed_title = page.item.description | append: ' – Atelier Sauvage' %}
+    {% assign computed_title = page.item.description | truncate: 70 | append: ' – Atelier Sauvage' %}
     {% assign computed_desc = page.item.description | append: '. ' | append: computed_desc %}
   {% endif %}
 {% else %}
@@ -19,8 +19,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <title>{{ computed_title }}</title>
-  <meta name="description" content="{{ computed_desc }}" />
+  <title>{{ computed_title | escape }}</title>
+  <meta name="description" content="{{ computed_desc | escape }}" />
 
   <meta name="keywords"
     content="Atelier Sauvage, Heusy, Verviers, objets vintage, mobilier design, galerie d'art, décoration, brocante, Liège, boutique, design intérieur" />
@@ -167,6 +167,10 @@
         errorTerms: {{ t.shop.error_terms | jsonify }},
         cancelled: {{ t.shop.cancelled | jsonify }},
         processing: {{ t.shop.processing | jsonify }},
+        ref: {{ t.product.item_number | jsonify }},
+        cartFull: {{ t.shop.cart_full | jsonify }},
+        reservedInCart: {{ t.shop.reserved_in_cart | jsonify }},
+        thanksTimeout: {{ t.shop.thanks_timeout | jsonify }},
         pickup: {{ t.shop.thanks_pickup | jsonify }},
         delivery: {{ t.shop.thanks_delivery | jsonify }}
       }
