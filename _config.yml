@@ -42,4 +42,5 @@ exclude:
   # at the deploy root, and compiles it rather than serving the source.
   - scripts
   - workers
+  - docs
   - TODO.md

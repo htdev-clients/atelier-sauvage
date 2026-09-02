@@ -17,7 +17,9 @@ Website for [Atelier Sauvage](https://ateliersauvageheusy.be/), a vintage furnit
 ## Features
 
 ### Product catalog
-The catalog is driven by a CSV file (`_database/catalog.csv`) generated from a Google Sheet. A custom Jekyll plugin (`_plugins/catalog_generator.rb`) reads the CSV at build time and generates one page per item, automatically detecting how many photos each item has by checking for indexed image files on disk.
+The catalog is driven by a CSV file (`_database/catalog.csv`) generated from a Google Sheet. A custom Jekyll plugin (`_plugins/catalog_generator.rb`) reads the CSV at build time and renders the catalogue grid, automatically detecting how many photos each item has by checking for indexed image files on disk.
+
+Item numbers are **text, not integers** — around a quarter of them carry letter suffixes (`24b`, `170c`) from a historical grouping convention that is still in use.
 
 Product images are served with `srcset` at three sizes (480, 800, 1400px) in WebP format for optimal performance.
 
@@ -31,12 +33,37 @@ The owner manages the catalog entirely from Google Sheets and Google Drive — n
 3. Resizes and converts them to WebP at all three sizes using Pillow
 4. Validates that every item has at least one image
 5. Cleans up images for items removed from the sheet
-6. Commits the updated CSV and images directly to the repo, triggering a new Cloudflare Pages deploy
+6. Commits the updated CSV and images directly to the repo, then publishes the site
+
+Before writing the CSV, `scripts/validate.py` normalises the sheet data and reports on it: cosmetic problems (stray whitespace, currency symbols, accent and case variations) are cleaned silently, genuinely ambiguous rows are quarantined without failing the run, and suspicious-but-legal changes are flagged. Prices are never guessed at. Findings are written in French into `scripts/.last_run.json`, which the client reads from a Google Sheets popup.
 
 The result of each run is written to `scripts/.last_run.json` and committed, so the shop owner can check the status of the last update from a second Apps Script button without leaving Google Sheets.
+
+### Deployment
+The site is built and published by GitHub Actions (`.github/workflows/deploy.yml`), which runs `jekyll build` and then `wrangler pages deploy`. Cloudflare's own Git integration is deliberately disconnected, so CI is the sole publisher and a failed publish is a visibly failed workflow run rather than a silently stale site. See [docs/decisions.md](docs/decisions.md) for why.
 
 ### Instagram integration
 The homepage displays the shop's latest Instagram post, fetched at request time via a Cloudflare Pages Function (`functions/instagram.js`). The function reads the access token from Cloudflare KV storage and proxies the Instagram Graph API, keeping the token server-side. Responses are cached at the edge for 15 minutes.
 
+That token is kept alive by a scheduled Cloudflare Worker, recorded in [`workers/atelier-refresher/`](workers/atelier-refresher/). It is deployed by hand, not by CI — see that directory's README before touching it.
+
 ### Responsive design
 Fully responsive layout built with Tailwind CSS. The navbar collapses to a burger menu on mobile. The catalog grid adapts from 1 to 3 columns depending on screen size.
+
+## Documentation
+
+- [docs/decisions.md](docs/decisions.md) — why the project is shaped the way it is, and the traps that cost time to find. **Worth reading before changing the build, the deploy pipeline or the catalogue automation.**
+- [docs/ecommerce-brief.md](docs/ecommerce-brief.md) — the brief for turning the catalogue into a shop.
+- [workers/atelier-refresher/README.md](workers/atelier-refresher/README.md) — the Instagram token refresher.
+
+New decisions and hard-won findings go in `docs/decisions.md`, newest first.
+
+## Working on this repo
+
+```bash
+bundle exec jekyll build                                   # build to _site/
+npm run build:css                                          # after adding Tailwind classes
+python3 -m unittest discover -s scripts -p 'test_*.py'     # catalogue validation tests
+```
+
+Anything added as a new top-level directory must go in the `exclude` list in `_config.yml`, or Jekyll will publish it on the live site.
