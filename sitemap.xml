@@ -1,7 +1,33 @@
+---
+layout: null
+permalink: /sitemap.xml
+sitemap: false
+---
+{%- comment -%}
+Generated sitemap. Polyglot builds this once, during the default-language pass
+(sitemap.xml is listed in exclude_from_localization), so every language URL is
+constructed here rather than relying on one file per language.
+
+Each page gets one <url> per language, and each of those carries the full set
+of hreflang alternates plus x-default pointing at the default language. New
+pages are picked up automatically -- including the per-item catalogue pages,
+once those exist.
+{%- endcomment -%}
+{%- assign base = site.url | append: site.baseurl -%}
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- assign indexed = site.html_pages | where_exp: "candidate", "candidate.sitemap != false" | sort: "url" -%}
+{%- for p in indexed -%}
+{%- for lang in site.languages %}
   <url>
-    <loc>https://ateliersauvageheusy.be/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <loc>{{ base }}{% unless lang == site.default_lang %}/{{ lang }}{% endunless %}{{ p.url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+{%- for alt in site.languages %}
+    <xhtml:link rel="alternate" hreflang="{{ alt }}" href="{{ base }}{% unless alt == site.default_lang %}/{{ alt }}{% endunless %}{{ p.url }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ base }}{{ p.url }}"/>
   </url>
+{%- endfor -%}
+{%- endfor %}
 </urlset>

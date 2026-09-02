@@ -14,6 +14,10 @@ Jekyll::Hooks.register :site, :post_render, priority: :low do |site|
 
   fix_x_default = lambda do |doc|
     next if doc.output.nil?
+    # HTML only. site.pages also carries sitemap.xml, whose x-default entries
+    # describe *other* pages -- rewriting those to the sitemap's own url would
+    # point every entry at /sitemap.xml.
+    next unless doc.respond_to?(:output_ext) && doc.output_ext == '.html'
     next unless doc.output.include?('x-default')
 
     # doc.url carries no language prefix (polyglot prefixes the destination
