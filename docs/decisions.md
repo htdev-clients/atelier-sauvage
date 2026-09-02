@@ -323,6 +323,13 @@ retry is answered "duplicate" and the order is never settled.
 an id.** Read the session back with `expand[]=shipping_cost.shipping_rate` to
 know which option the buyer chose; do not infer it from the amount.
 
+**The race has no deterministic winner.** A test that asserts on which cart
+won (and therefore which items are sold afterwards) passes on one machine
+and fails on another; derive the expectation from the ledger. This, and the
+`npx`/`workerd` hang above, are the two red "Run failed: Deploy - ecommerce"
+runs of 2 September 2026; both were test-harness problems, not shop
+problems, and the third run was green.
+
 **`node --test tests/`** does not run a directory on Node 22; use a glob.
 **macOS has no `timeout`** command; a script that depends on it silently tests nothing.
 

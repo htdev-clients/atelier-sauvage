@@ -6,6 +6,15 @@ This is the working brief for whoever builds it. The approach is settled; what
 follows is the reasoning, the constraints, and the traps. Read
 [`decisions.md`](decisions.md) alongside it.
 
+> **Status, 2 September 2026.** Phases 01–06 are built on the branch
+> `ecommerce` (not merged) and verified on a preview deployment. What runs
+> where, the secrets, the launch checklist and the troubleshooting notes are
+> in [`shop-runbook.md`](shop-runbook.md); the decisions taken during the
+> build and the traps met are in the 2026-09-02 section of `decisions.md`.
+> Still gated on the client: Stripe and Resend accounts of their own, the
+> accountant's VAT answer, the carrier rate card, legal review of the CGV,
+> and the new Sheet columns. Phase 07 is untouched.
+
 ---
 
 ## Hard constraints
