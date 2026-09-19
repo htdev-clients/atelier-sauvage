@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-14T12:01:59.507297+00:00",
+  "generated": "2026-09-19T12:39:56.036800+00:00",
   "sellable": [
     "10",
     "100",
@@ -176,6 +176,8 @@
     "355",
     "356",
     "358",
+    "361",
+    "362",
     "38",
     "40",
     "41",
@@ -739,6 +741,12 @@
         "field": "description",
         "from": "Paire de chevets vintage, pouvant servir de tables d'appoint, en chrome et verre fumé à effet miroir - Style post-moderniste (fin 1970- début 1980) - Présence de tiroirs. Ht 50 x 60 (Prof totale)  x 45 cm",
         "to": "Paire de chevets vintage, pouvant servir de tables d'appoint, en chrome et verre fumé à effet miroir - Style post-moderniste (fin 1970- début 1980) - Présence de tiroirs. Ht 50 x 60 (Prof totale) x 45 cm"
+      },
+      {
+        "item": "362",
+        "field": "description",
+        "from": "Horloge murale carrée en céramique à décor floral  de Junghans Quartz - West Germany - 1970 -  22,5 cm x 22,5 cm",
+        "to": "Horloge murale carrée en céramique à décor floral de Junghans Quartz - West Germany - 1970 - 22,5 cm x 22,5 cm"
       }
     ],
     "dropped": [],
