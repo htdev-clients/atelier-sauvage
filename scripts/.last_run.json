@@ -1,12 +1,11 @@
 {
   "status": "success",
-  "total_lots": 273,
+  "total_lots": 274,
   "new_lots": [
-    "361",
-    "362"
+    "225"
   ],
   "removed_lots": [],
-  "photos_downloaded": 9,
+  "photos_downloaded": 10,
   "photos_added_to_existing": [],
   "orphaned_images_deleted": 0,
   "fields_cleaned": 88,
@@ -16,5 +15,5 @@
   "data_message": "88 champ(s) nettoyé(s) automatiquement.",
   "numbering_warnings": [],
   "numbering_message": "",
-  "timestamp": "2026-09-19T12:39:56.037902+00:00"
+  "timestamp": "2026-09-21T12:01:11.084267+00:00"
 }
