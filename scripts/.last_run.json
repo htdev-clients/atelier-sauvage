@@ -1,19 +1,36 @@
 {
   "status": "success",
   "total_lots": 275,
-  "new_lots": [
-    "112"
-  ],
+  "new_lots": [],
   "removed_lots": [],
-  "photos_downloaded": 9,
-  "photos_added_to_existing": [],
+  "photos_downloaded": 3,
+  "photos_added_to_existing": [
+    "218"
+  ],
   "orphaned_images_deleted": 0,
   "fields_cleaned": 88,
   "dropped_rows": [],
   "not_sellable": [],
   "data_warnings": [],
   "data_message": "88 champ(s) nettoyé(s) automatiquement.",
-  "numbering_warnings": [],
-  "numbering_message": "",
-  "timestamp": "2026-09-24T15:24:52.370320+00:00"
+  "numbering_warnings": [
+    {
+      "item": "218",
+      "found": [
+        1,
+        3
+      ],
+      "missing": [
+        2
+      ],
+      "renames": [
+        {
+          "from": "218-3.jpg",
+          "to": "218-2.jpg"
+        }
+      ]
+    }
+  ],
+  "numbering_message": "Lot 218 : il manque la/les photo(s) 2",
+  "timestamp": "2026-09-24T15:35:04.111096+00:00"
 }
