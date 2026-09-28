@@ -22,7 +22,7 @@
 40;Meuble;"Meuble Bar ""oriental"" probablement en noyer, nacre et bois tourné";250;
 41;Meuble;Table basse de salon, vintage, en teck et pavés de céramique vernissée - Probablement origine scandinave - 1970's - 92 x 52 cm;375;
 45;Décoration;Plat Coupe rose opaline sur pied blanc - 1960's - Origine italienne probable (Empoli);35;Vendu
-46;Décoration;Vase céramique dessus assymétrique flammé tons rouges et blancs - Origine allemande Bay Keramik - Mid-century;15;
+46;Décoration;Vase céramique dessus assymétrique flammé tons rouges et blancs - Origine allemande Bay Keramik - Mid-century - Ht 18 x Diam 10 cm;15;
 53;Luminaire;Applique en laiton doré et porcelaine à décor de fleurs, à quatre feux - Ht 60 cm;210;
 54;Luminaire;Lampe Girandole en verre moulé à 3 bras - Ht 49 cm;180;Vendu
 55a;Décoration;Pot en céramique texturisée et striée, de forme bulbeuse, avec couvercle - Brutaliste;80;
@@ -33,7 +33,7 @@
 56d;Décoration;Petit vase vert rose et jaune - Origine allemande - 1950's;15;
 56e;Décoration;Céramique petite amphore vintage - Glaçure coulante multicolore et base terracotta;20;
 58;Luminaire;Suspension en verre fumé et métal chromé - Fontana Arte - Ht 80cm;275;
-62;Décoration;Vase céramique Accolay signé;90;
+62;Décoration;Vase céramique Accolay signé - Ht 14,5 x Diam 10 cm;90;
 63;Décoration;Cendrier cristal Sèvres carré;80;
 65;Luminaire;Lampadaire/liseuse - Le vide-poche et le cendrier, en céramique vernissée - Vers 1955 - Plateau métal noir perforé dans le style de Mathieu Matégot;300;
 71;Décoration;Plat ajouré fleurs Portugal;60;Vendu
@@ -62,7 +62,7 @@
 114;Décoration;Linogravure Tons oranges Philippe Sadzot Fifi - 50 x 35 cm;90;
 115;Décoration;Linogravure Tons rouge et bleu Philippe Sadzot Fifi - 50 x 35 cm;90;
 116;Décoration;Sérigraphie Philippe Sadzot (Fifi 2003) Signée Numérotée 1/5 - 50 x 35 cm;95;
-117;Décoration;Vase Boch Keramis art nouveau vers 1900 à décor floral peint - Ht 25 cm;110;
+117;Décoration;Vase Boch Keramis art nouveau vers 1900 à décor floral peint - Ht 25 cm x diam 12 cm;110;
 122;Décoration;Service à café/thé vintage Seltmann Weiden Bavaria- 11 tasses et sous-tasses;35;
 123;Décoration;Vase en cristal clair - Val St Lambert - Numéroté;110;
 127;Meuble;"Table basse ""coffee table"" en noyer et carreaux céramique, à pieds chromés - Moderniste 1960s-1970s - Ht 42 x 113 x 50 cm";300;
@@ -89,8 +89,8 @@
 165;Luminaire;Suspension Lustre vintage en métal et verre fumé 6 lumières - Ht 65 cm;390;
 166;Luminaire;Suspension Lustre vintage en métal et bobèches en verre de Murano dans le gout de Gino Mazzega (1927-1994), 3 lumières - Ht 93 cm;570;
 168;Luminaire;Paire de suspensions/lustres vintage, en forme de boule et base chromée - Ht 50 cm;300;
-170a;Décoration;Porcelaine asiatique, grande assiette Japon noire et couleurs;30;
-170c;Décoration;Porcelaine asiatique, plat rose et vert;35;
+170a;Décoration;Porcelaine asiatique, grande assiette Japon noire et couleurs - Diam 28 cm x Ht 3 cm;30;
+170c;Décoration;Porcelaine asiatique, plat rose et vert - Diam 25 x Ht 8 cm;35;
 170d;Décoration;Porcelaine asiatique, assiette fleurs roses;18;Vendu
 170e;Décoration;Porcelaine asiatique, lot 3 petites assiettes;40;
 170g;Décoration;Plat Japon Imari;20;Vendu
@@ -121,25 +121,25 @@
 217;Meuble;Petite table d'appoint de type guéridon, à monture en fer forgé et plateau rond en marbre de Rance - Ht 49 x diam 43 cm;180;
 219b;Décoration;"Plat peint à la main ""Assaud"" Gouda (NL) - Motifs tourbillonants et organiques caractéristiques du design 1920 - Art Déco";110;
 219c;Décoration;Céramique - Pot à biscuit Taos (New Mexico studio) - Vintage 1970 - Formant hibou;125;
-219d;Décoration;Vase Art Nouveau - Art Déco (Germany) peint par Carl Gebauer et E.Huber Roethe (1920s-1930s);75;
+219d;Décoration;Vase Art Nouveau - Art Déco (Germany) peint par Carl Gebauer et E.Huber Roethe (1920s-1930s) - Ht 16 x Diam 12 cm;75;
 219e;Décoration;Petit pot en céramique texturisé, de style brutaliste - Pieter Groeneveldt (NL) - 1960s;75;
-219f;Décoration;Vase vintage style 1920, décor floral et géométrique;40;
+219f;Décoration;Vase vintage style 1920, décor floral et géométrique - Ht 18 x diam 15 cm;40;
 220;Décoration;Vase ovoïde en céramique vernissée, à décor de colombes - Deux anses - Numéroté - Made in Belgium - Ht 29 cm;160;Vendu
 223a;Décoration;Vase en céramique à fond bleu pastel - Vallauris Maunier - Ht 25 cm;120;
-223b;Décoration;Vase en grès brun - Guerin - Ht 30 cm;95;
-224;Décoration;Vide-poches en verre de Murano (Italie) avec inclusion de bulles d’air et superposition de verre de différentes couleurs - Années 60 - Diam 17 cm;85;
+223b;Décoration;Vase en grès brun - Guerin - Ht 30 cm x Diam 16 cm;95;
+224;Décoration;Vide-poches en verre de Murano (Italie) avec inclusion de bulles d’air et superposition de verre de différentes couleurs - Années 60 - Diam 17 cm x Ht 6 cm;85;
 226;Décoration;Presse-papier en forme d'oeuf mid-20th century ambre et inclusions noires;60;
 231;Décoration;Vide poche rose style Val St Lambert - Forme triangulaire;50;
-232;Décoration;Cendrier bleuté type Val Saint Lambert;75;
+232;Décoration;Cendrier bleuté type Val Saint Lambert - 18 x 16 x Ht 7 cm;75;
 234;Décoration;Plat en forme de panier, style Vallauris, chamarré brun et jaune avec anse - percé au fond (peut servir de cache pot);65;
 235;Décoration;Série de 3 cendriers ronds, bruns avec dessin vert et blanc - Vintage;80;
 236;Décoration;Petit vase en grès brun et beige (forme d'un petit flacon);25;
-237;Décoration;Vase West Germany, blanc et dessins jaune/vert/rouge - Ht 26 cm;75;
-245;Décoration;Petit vase, à anse, type cruchon, Jasba, West Germany - Brun et vert/blanc - Probablement 1960s;80;
-246;Décoration;Vide-poche en céramique, attribué à François Caleca Vallauris - 1950s;80;
+237;Décoration;Vase West Germany, blanc et dessins jaune/vert/rouge - Ht 26 cm x Diam 17 cm;75;
+245;Décoration;Petit vase, à anse, type cruchon, Jasba, West Germany - Brun et vert/blanc - Probablement 1960s - Ht 15 cm x Diam 10 cm;80;
+246;Décoration;Vide-poche en céramique, attribué à François Caleca Vallauris - 1950s - 15 x 15 x Ht 5 cm;80;
 247;Décoration;Plat en céramique, à motifs fruits et fleurs oranges, type Herbolzeimer (German pottery) - 1970s;50;Vendu
 248;Décoration;Vase céramique émaillée bleu et blanc;70;
-249;Décoration;Plat asymétrique en céramique émaillée - West Germany - 1960s-1970s;70;
+249;Décoration;Plat asymétrique en céramique émaillée - West Germany - 1960s-1970s - 28 x 21 x Ht 5 cm;70;
 250;Décoration;"Service à café (5 tasses 3 sous-tasses) et 6 assiettes plates - Boch (La Louvière) - Collection ""In the Mood"" designed by Jean-Pierre Maury - 1970s";60;Vendu
 253;Décoration;Grand plat en céramique vernissée - 1960s-1970s - Ø 36 cm;130;
 255;Décoration;Plat milieu de table à double compartiment, vert - Val Saint Lambert - 1960s - 17 x 63 x 15 cm;90;
@@ -150,11 +150,11 @@
 281;Décoration;Tableau, technique mixte sur papier - Nu de dame allongé - Signé et daté 74 - 40 x 66 cm (dimension cadre compris 60 x 90 cm);220;Vendu
 283;Décoration;Tapis Couloir d’Orient iranien Malayer - Une restauration - 318 x 103 cm;300;
 284;Décoration;Porte journaux osier brun foncé;95;
-285;Décoration;Plat/large coupe évasée en verre jaune - Vintage;60;
+285;Décoration;Plat/large coupe évasée en verre jaune - Vintage - Ht 25,5 x Diam 36 cm;60;
 6;Meuble;Fauteuil tubulaire chromé Paul Schuitema/Fana;125;Vendu
 12;Décoration;Vase Val St Lambert en cristal clair - Ht 30 cm;130;
 24c;Décoration;Bougeoir à décor de dragon polychrome faïence Rouen;45;Vendu
-38;Décoration;Vase en verre Venise, teinté et bullé, travaillé à chaud, à décor appliqué et poudré or rouge - Ht 32 cm;250;
+38;Décoration;Vase en verre Venise (Murano), teinté et bullé, travaillé à chaud, à décor appliqué et poudré or rouge - Ht 32 cm x Diam 20 cm;250;
 52;Décoration;Vase en faïence de Desvres à décor japonisant, couvert, en porcelaine polychrome - Ht 23 cm;90;
 57;Luminaire;Suspension épis en métal doré - Maison Boulanger Belgique - Diam 65 cm;210;
 64;Meuble;Petite table d'appoint ronde de type desserte, roulante, chromée avec 2 plateaux verre;140;
@@ -164,7 +164,7 @@
 87;Décoration;Vase en faïence émaillé de style Art déco;80;
 93;Décoration;Paire de rideaux à dé́cor floral - Home fashion - 1970s - 202 x 167 cm et 208 x 167 cm;180;
 101b;Luminaire;Lampe à poser à buste à l'antique;170;Vendu
-102;Décoration;Vase en cristal du Val Saint Lambert rouge - Ht 17cm;200;
+102;Décoration;Vase en cristal du Val Saint Lambert rouge - Ht 17cm x Diam 16 cm;200;
 108a;Décoration;Vases en grès et faïence;40;
 118;Luminaire;Lampe design en albâtre aux grappes de raisin - (tâches sur l'abat-jour) - Ht 74 cm;170;Vendu
 124;Décoration;Huile sur toile Béguinage de Liers, daté 1929, signé;110;
@@ -185,11 +185,11 @@
 219a;Décoration;Vase à décor d'oiseaux stylisés peints, dans le style Boch Keramis - 1930s - Ht 30 cm;70;
 227;Meuble;Table bout de canapé vers 1970 - 2 plateaux en verre fumé brun chantourné, 4 pieds en laiton doré - 59 x 47 x 34 cm;190;
 242;Décoration;Porte journaux en osier à fond rouge;75;
-254;Décoration;Vase en grès vernissé, orange et brun - 1970s - Fat Lava - Glaçage dégradé - Scheurich West Germany - Ht 38 cm;195;
+254;Décoration;Vase en grès vernissé, orange et brun - 1970s - Fat Lava - Glaçage dégradé - Scheurich West Germany - Ht 38 cm x Diam 20 cm;195;
 257a;Décoration;Vase en verre Murano à motifs mouchetés et gradient de couleur - rose, bleu - Ht 35 cm;165;Vendu
 257b;Décoration;Vase en cristal à décor floral, gravé à l'acide - Signé Leonard - Ht 20 cm;130;
 258;Décoration;Tableau DESMET JEAN-LEON Composition - Technique mixte sur board - Signé et daté 1986 au dos.;400;
-259;Décoration;Tableau BOERI F.J. Jeune femme et homme à la flûte - Lithographie en couleurs - Signé et numéroté 5/10;400;
+259;Décoration;Tableau BOERI F.J. Jeune femme et homme à la flûte - Lithographie en couleurs - Signé et numéroté 5/10 - Ht 44 cm x L 52 cm;400;
 173b;Décoration;Cendrier VAL SAINT LAMBERT en cristal rectangulaire de couleur violette (8 x 12 x 4.5cm) - Signé sous la base;45;Vendu
 261;Décoration;"Huile sur papier ""Paysage de campagne"", signée Pierre FIEVET - 62 x 85 cm";530;Vendu
 264a;Meuble;Table de salon piètement en chrome et 2 plateaux en verre fumé - 110 x 58 x 37 cm;400;Vendu
@@ -198,12 +198,12 @@
 286;Décoration;Huile sur toile - Forêt ensoleillée - Signée Nizet;300;
 24g;Décoration;Petit pot polychrome faïence Rouen, 2 anses et couvercle, type sucrier;50;
 173a;Décoration;Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert clair - Signé sous la base;45;
-278;Décoration;Plat en céramique vintage, à motifs rouge vert jaune et bleu avec petite poignée - Napco Ceramic (Japan) National Potteries Company - 1950s;60;
-173c;Décoration;Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert foncé - Signé sous la base;45;
+278;Décoration;Plat en céramique vintage, à motifs rouge vert jaune et bleu avec petite poignée - Napco Ceramic (Japan) National Potteries Company - 1950s - 17 x 17 x Ht 4 cm;60;
+173c;Décoration;Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert foncé - Signé sous la base - 11,5 x 11,5 x Ht 7 cm;45;
 14;Décoration;Miroir en bois sculpté - 90 x 58cm;260;
 269;Luminaire;Lampe à poser dans le style Hollywood Regency;125;Vendu
 274;Décoration;"Pot vert couvert ""bonbonnière"" allemande S&G Scheurich & Greulich - West Germany";45;
-275;Décoration;Plat jaune en verre de style Art Deco;70;
+275;Décoration;Plat jaune en verre de style Art Deco - Diam 20 x Ht 8 cm;70;
 229;Meuble;"Paire de fauteuils du designer norvégien Ingmar Relling pour Westnofa, en cuir cognac, structure en palissandre, modèle ""Siesta"" - Usure d'un des deux, au niveau d'un accoudoir";900;
 270;Décoration;Cache pot à motif bleu fleurs - Céramique italienne;40;Vendu
 291;Décoration;Huile sur toile - Ecole belge contemporaine du XXe - 60 x 50 cm;280;
@@ -235,7 +235,7 @@
 308;Décoration;"Vase ansé en céramique vernissée, Vallauris, ""fat lava glaze""";115;Vendu
 303;Décoration;"Vase orange ""space Age"" - Origine scandinave probable - Mid-20th century";80;
 304;Luminaire;"Lampe de table ""mushroom"" vintage en verre orange d'Empoli, Italie - 1960-1970s";325;Vendu
-307;Décoration;Grand vase en céramique verte à motif quadrillé blanc- Bay Keramik West Germany - Circa 1960s;150;
+307;Décoration;Grand vase en céramique verte à motif quadrillé blanc- Bay Keramik West Germany - Circa 1960s - Ht 32 cm x Diam 25 cm;150;
 309;Décoration;"Coupe en céramique vernissée, Vallauris, ""lava glaze"", circa 1970s";115;Vendu
 301;Décoration;"Eau-forte Jos Delfosse ""Place St Denis en hiver - Signée et numérotée - 32 x 48 cm";135;
 300;Décoration;"Eau forte Jean Donnay ""Vieille à l'ombre portée"" - Signée et numérotée - 22 x 32 cm";110;

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-26T12:35:37.477728+00:00",
+  "generated": "2026-09-28T14:03:56.075666+00:00",
   "sellable": [
     "10",
     "100",
@@ -390,12 +390,6 @@
         "to": "Paire de suspensions/lustres vintage, en forme de boule et base chromée - Ht 50 cm"
       },
       {
-        "item": "170a",
-        "field": "description",
-        "from": "Porcelaine asiatique, grande assiette Japon noire et couleurs ",
-        "to": "Porcelaine asiatique, grande assiette Japon noire et couleurs"
-      },
-      {
         "item": "170d",
         "field": "description",
         "from": "Porcelaine asiatique, assiette fleurs roses ",
@@ -462,34 +456,10 @@
         "to": "Plat peint à la main \"Assaud\" Gouda (NL) - Motifs tourbillonants et organiques caractéristiques du design 1920 - Art Déco"
       },
       {
-        "item": "219d",
-        "field": "description",
-        "from": "Vase Art Nouveau - Art Déco (Germany) peint par Carl Gebauer et E.Huber Roethe (1920s-1930s) ",
-        "to": "Vase Art Nouveau - Art Déco (Germany) peint par Carl Gebauer et E.Huber Roethe (1920s-1930s)"
-      },
-      {
-        "item": "219f",
-        "field": "description",
-        "from": "Vase vintage style 1920, décor floral et géométrique ",
-        "to": "Vase vintage style 1920, décor floral et géométrique"
-      },
-      {
-        "item": "223b",
-        "field": "description",
-        "from": "Vase en grès brun - Guerin - Ht 30 cm ",
-        "to": "Vase en grès brun - Guerin - Ht 30 cm"
-      },
-      {
         "item": "235",
         "field": "description",
         "from": "Série de 3 cendriers ronds, bruns avec dessin vert et blanc - Vintage ",
         "to": "Série de 3 cendriers ronds, bruns avec dessin vert et blanc - Vintage"
-      },
-      {
-        "item": "246",
-        "field": "description",
-        "from": "Vide-poche en céramique, attribué à François Caleca Vallauris - 1950s ",
-        "to": "Vide-poche en céramique, attribué à François Caleca Vallauris - 1950s"
       },
       {
         "item": "248",
@@ -606,12 +576,6 @@
         "to": "Vase à décor d'oiseaux stylisés peints, dans le style Boch Keramis - 1930s - Ht 30 cm"
       },
       {
-        "item": "254",
-        "field": "description",
-        "from": "Vase en grès vernissé, orange et brun - 1970s - Fat Lava - Glaçage dégradé - Scheurich West Germany - Ht 38 cm ",
-        "to": "Vase en grès vernissé, orange et brun - 1970s - Fat Lava - Glaçage dégradé - Scheurich West Germany - Ht 38 cm"
-      },
-      {
         "item": "257b",
         "field": "description",
         "from": "Vase en cristal à décor floral, gravé à l'acide - Signé Leonard - Ht 20 cm ",
@@ -640,12 +604,6 @@
         "field": "description",
         "from": "Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert clair - Signé sous la base ",
         "to": "Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert clair - Signé sous la base"
-      },
-      {
-        "item": "173c",
-        "field": "description",
-        "from": "Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert foncé - Signé sous la base ",
-        "to": "Cendrier VAL SAINT LAMBERT en cristal, torsadé de couleur vert foncé - Signé sous la base"
       },
       {
         "item": "269",
