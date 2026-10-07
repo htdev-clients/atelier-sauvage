@@ -7,3 +7,7 @@ _site/
 .jekyll-cache/
 TODO.md
 __pycache__/
+.wrangler/
+.dev.vars*
+.env*
+node_modules/
