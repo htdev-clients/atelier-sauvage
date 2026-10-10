@@ -2,7 +2,7 @@
   Featured event: text + cover photo, with optional smaller photos below it.
   Used for upcoming/current events on /evenements/ and on the homepage.
   Params: event (an _events doc), home (true on the homepage: shows only the
-  first paragraph of the text, plus a link to the events page).
+  short teaser text, plus a link to the events page).
   Language-specific fields live under event.i18n.<lang>, falling back to French.
 {% endcomment %}
 {% assign event = include.event %}
@@ -20,17 +20,24 @@
     {% endif %}
 
     {% if e.highlight_title and event.highlight_active %}
-    <div class="border-l-2 border-rose-400 pl-5 mb-10">
-      <p class="font-serif text-xl text-stone-900 mb-2">{{ e.highlight_title }}</p>
-      <p class="text-stone-600 font-light leading-relaxed">{{ e.highlight_text }}</p>
+    <div class="flex items-stretch bg-white border border-stone-200 rounded-sm shadow-sm overflow-hidden mb-10">
+      {% if event.highlight_day %}
+      <div class="flex flex-col items-center justify-center bg-stone-900 text-white px-5 py-4 min-w-[5.5rem] text-center">
+        <span class="text-[0.65rem] uppercase tracking-[0.25em] text-white/70">{{ e.highlight_weekday }}</span>
+        <span class="font-serif text-4xl leading-none my-1">{{ event.highlight_day }}</span>
+        <span class="text-[0.65rem] uppercase tracking-[0.25em] text-white/70">{{ e.highlight_month }}</span>
+      </div>
+      {% endif %}
+      <div class="px-5 py-4 md:px-6 md:py-5">
+        <p class="font-serif text-xl text-stone-900 mb-1 leading-snug">{{ e.highlight_title }}</p>
+        <p class="text-stone-600 font-light leading-relaxed">{{ e.highlight_text }}</p>
+      </div>
     </div>
     {% endif %}
 
     <div class="text-stone-600 text-lg font-light leading-relaxed space-y-5">
       {% if include.home %}
-      {{ e.body | split: "
-
-" | first | markdownify }}
+      {{ e.teaser | default: e.body | markdownify }}
       {% else %}
       {{ e.body | markdownify }}
       {% endif %}
@@ -56,14 +63,15 @@
     </div>
 
     {% if event.photos.size > 0 and include.home != true %}
-    <div class="grid {% if event.photos.size > 1 %}grid-cols-2{% else %}grid-cols-1{% endif %} gap-3 mt-3">
+    <div class="grid grid-cols-2 gap-3 mt-3">
       {% for photo in event.photos %}
-      <div class="overflow-hidden rounded-sm {% if event.photos.size > 1 %}aspect-square{% else %}aspect-[4/3]{% endif %}">
+      {% comment %}wide: true spans both columns, for landscape photos.{% endcomment %}
+      <div class="overflow-hidden rounded-sm {% if photo.wide or event.photos.size == 1 %}col-span-2 aspect-[16/9]{% else %}aspect-[2/3]{% endif %}">
         <img src="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp"
              srcset="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp 480w,
                      /assets/img/events/{{ event.slug }}/800/{{ photo.name }}-800.webp 800w,
                      /assets/img/events/{{ event.slug }}/1400/{{ photo.name }}-1400.webp 1400w"
-             sizes="(min-width: 768px) 25vw, 50vw"
+             sizes="(min-width: 768px) {% if photo.wide %}50vw{% else %}25vw{% endif %}, {% if photo.wide %}100vw{% else %}50vw{% endif %}"
              alt="{{ e.photos_alt | default: event.title }}"
              class="w-full h-full object-cover cursor-zoom-in hover:scale-105 transition-transform duration-500 ease-in-out"
              loading="lazy" decoding="async">
