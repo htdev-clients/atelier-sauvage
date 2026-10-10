@@ -5,7 +5,7 @@
 # scheduled rebuild in .github/workflows/deploy.yml runs at 23:30 UTC, which is
 # already the next day in Belgium in both winter (00:30) and summer (01:30).
 #
-# `highlight_until:` hides the event's highlight box (e.g. the opening night)
+# `highlight_until:` hides the event's highlight box (e.g. the first day of an exhibition)
 # once that date has passed, while the event itself stays current.
 #
 # An explicit `status:` in an event's front matter still wins, as an override.

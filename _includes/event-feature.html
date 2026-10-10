@@ -63,15 +63,19 @@
     </div>
 
     {% if event.photos.size > 0 and include.home != true %}
-    <div class="grid grid-cols-2 gap-3 mt-3">
+    {% comment %}
+      One row, uncropped. Each photo's ratio (width / height) is its flex-grow,
+      so portrait and landscape photos end up the same height.
+    {% endcomment %}
+    <div class="flex gap-3 mt-3">
       {% for photo in event.photos %}
-      {% comment %}wide: true spans both columns, for landscape photos.{% endcomment %}
-      <div class="overflow-hidden rounded-sm {% if photo.wide or event.photos.size == 1 %}col-span-2 aspect-[16/9]{% else %}aspect-[2/3]{% endif %}">
+      {% assign ratio = photo.ratio | default: 1 %}
+      <div class="overflow-hidden rounded-sm min-w-0" style="flex: {{ ratio }} 1 0%; aspect-ratio: {{ ratio }};">
         <img src="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp"
              srcset="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp 480w,
                      /assets/img/events/{{ event.slug }}/800/{{ photo.name }}-800.webp 800w,
                      /assets/img/events/{{ event.slug }}/1400/{{ photo.name }}-1400.webp 1400w"
-             sizes="(min-width: 768px) {% if photo.wide %}50vw{% else %}25vw{% endif %}, {% if photo.wide %}100vw{% else %}50vw{% endif %}"
+             sizes="(min-width: 768px) 30vw, 60vw"
              alt="{{ e.photos_alt | default: event.title }}"
              class="w-full h-full object-cover cursor-zoom-in hover:scale-105 transition-transform duration-500 ease-in-out"
              loading="lazy" decoding="async">
