@@ -7,7 +7,7 @@
 {% endcomment %}
 {% assign event = include.event %}
 {% assign e = event.i18n[site.active_lang] | default: event.i18n[site.default_lang] %}
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
   <div>
     {% if include.home %}
     <p class="text-xs uppercase tracking-[0.3em] text-rose-500 mb-6">— {{ e.label }}</p>
