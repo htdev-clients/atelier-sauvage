@@ -1,7 +1,8 @@
 {% comment %}
-  Featured event: text + cover photo. Used for upcoming events on /evenements/
-  and for the current event on the homepage.
-  Params: event (an _events doc), home (true on the homepage).
+  Featured event: text + cover photo, with optional smaller photos below it.
+  Used for upcoming/current events on /evenements/ and on the homepage.
+  Params: event (an _events doc), home (true on the homepage: shows only the
+  first paragraph of the text, plus a link to the events page).
   Language-specific fields live under event.i18n.<lang>, falling back to French.
 {% endcomment %}
 {% assign event = include.event %}
@@ -26,19 +27,50 @@
     {% endif %}
 
     <div class="text-stone-600 text-lg font-light leading-relaxed space-y-5">
+      {% if include.home %}
+      {{ e.body | split: "
+
+" | first | markdownify }}
+      {% else %}
       {{ e.body | markdownify }}
+      {% endif %}
     </div>
+
+    {% if include.home %}
+    {% assign t = site.data.translations[site.active_lang] %}
+    <a href="{% if site.active_lang == site.default_lang %}/evenements/{% else %}/{{ site.active_lang }}/evenements/{% endif %}"
+       class="inline-block mt-8 text-sm uppercase tracking-widest text-stone-900 border-b border-stone-900 pb-1 hover:opacity-70 transition-opacity">{{ t.events.read_more }} →</a>
+    {% endif %}
   </div>
 
   {% if event.cover %}
-  <div class="relative overflow-hidden rounded-sm shadow-2xl aspect-[4/5] md:sticky md:top-28">
-    <img src="/assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp"
-         srcset="/assets/img/events/{{ event.slug }}/480/{{ event.cover.name }}-480.webp 480w,
-                 /assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp 800w,
-                 /assets/img/events/{{ event.slug }}/1400/{{ event.cover.name }}-1400.webp 1400w"
-         sizes="(min-width: 768px) 50vw, 100vw"
-         alt="{{ e.cover_alt }}"
-         class="w-full h-full object-cover" loading="lazy" decoding="async">
+  <div class="gallery">
+    <div class="relative overflow-hidden rounded-sm shadow-2xl aspect-[4/5]">
+      <img src="/assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp"
+           srcset="/assets/img/events/{{ event.slug }}/480/{{ event.cover.name }}-480.webp 480w,
+                   /assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp 800w,
+                   /assets/img/events/{{ event.slug }}/1400/{{ event.cover.name }}-1400.webp 1400w"
+           sizes="(min-width: 768px) 50vw, 100vw"
+           alt="{{ e.cover_alt }}"
+           class="w-full h-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+    </div>
+
+    {% if event.photos.size > 0 and include.home != true %}
+    <div class="grid {% if event.photos.size > 1 %}grid-cols-2{% else %}grid-cols-1{% endif %} gap-3 mt-3">
+      {% for photo in event.photos %}
+      <div class="overflow-hidden rounded-sm {% if event.photos.size > 1 %}aspect-square{% else %}aspect-[4/3]{% endif %}">
+        <img src="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp"
+             srcset="/assets/img/events/{{ event.slug }}/480/{{ photo.name }}-480.webp 480w,
+                     /assets/img/events/{{ event.slug }}/800/{{ photo.name }}-800.webp 800w,
+                     /assets/img/events/{{ event.slug }}/1400/{{ photo.name }}-1400.webp 1400w"
+             sizes="(min-width: 768px) 25vw, 50vw"
+             alt="{{ e.photos_alt | default: event.title }}"
+             class="w-full h-full object-cover cursor-zoom-in hover:scale-105 transition-transform duration-500 ease-in-out"
+             loading="lazy" decoding="async">
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
   {% endif %}
 </div>

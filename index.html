@@ -56,7 +56,11 @@ layout: default
   </section>
   {% endif %}
 
+  {% comment %}The running event, or else the next one, as for La Choza Studio.{% endcomment %}
   {% assign current_event = site.events | where: "status", "current" | first %}
+  {% unless current_event %}
+    {% assign current_event = site.events | where: "status", "upcoming" | sort: "start_date" | first %}
+  {% endunless %}
   {% if current_event %}
   <section id="exposition" class="section py-16 md:py-24">
     <div class="max-w-6xl mx-auto px-6">

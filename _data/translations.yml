@@ -79,6 +79,7 @@ fr:
     past: "Événements passés"
     none_upcoming: "Aucun événement prévu pour le moment."
     none_at_all: "Aucun événement pour le moment."
+    read_more: "En savoir plus"
   mentions:
     page_title: "Mentions Légales – Atelier Sauvage"
     page_description: "Informations légales, éditeur et hébergement du site Atelier Sauvage."
@@ -183,6 +184,7 @@ en:
     past: "Past events"
     none_upcoming: "No events scheduled at the moment."
     none_at_all: "No events at the moment."
+    read_more: "Read more"
   mentions:
     page_title: "Legal Notice – Atelier Sauvage"
     page_description: "Legal information, publisher and hosting details for the Atelier Sauvage website."
@@ -287,6 +289,7 @@ nl:
     past: "Voorbije evenementen"
     none_upcoming: "Momenteel geen geplande evenementen."
     none_at_all: "Geen evenementen op dit moment."
+    read_more: "Lees meer"
   mentions:
     page_title: "Wettelijke vermeldingen – Atelier Sauvage"
     page_description: "Wettelijke informatie, uitgever en hosting van de website Atelier Sauvage."
@@ -391,6 +394,7 @@ de:
     past: "Vergangene Veranstaltungen"
     none_upcoming: "Derzeit sind keine Veranstaltungen geplant."
     none_at_all: "Derzeit keine Veranstaltungen."
+    read_more: "Mehr erfahren"
   mentions:
     page_title: "Impressum – Atelier Sauvage"
     page_description: "Rechtliche Hinweise, Herausgeber und Hosting der Website Atelier Sauvage."
