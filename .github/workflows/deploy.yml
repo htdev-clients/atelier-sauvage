@@ -15,6 +15,10 @@ on:
     branches: [main]
   workflow_call:
   workflow_dispatch:
+  # Daily rebuild so events move between upcoming / current / past on their
+  # dates (_plugins/event_status.rb). 23:30 UTC is just after midnight in Belgium.
+  schedule:
+    - cron: "30 23 * * *"
 
 concurrency:
   group: deploy-${{ github.ref_name }}

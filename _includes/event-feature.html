@@ -1,0 +1,44 @@
+{% comment %}
+  Featured event: text + cover photo. Used for upcoming events on /evenements/
+  and for the current event on the homepage.
+  Params: event (an _events doc), home (true on the homepage).
+  Language-specific fields live under event.i18n.<lang>, falling back to French.
+{% endcomment %}
+{% assign event = include.event %}
+{% assign e = event.i18n[site.active_lang] | default: event.i18n[site.default_lang] %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+  <div>
+    {% if include.home %}
+    <p class="text-xs uppercase tracking-[0.3em] text-rose-500 mb-6">— {{ e.label }}</p>
+    <h2 class="font-serif text-4xl md:text-5xl text-stone-900 mb-4 leading-tight">{{ event.title }}</h2>
+    <p class="text-stone-500 text-sm uppercase tracking-widest mb-10">{{ e.date_label }}</p>
+    {% else %}
+    <p class="text-xs uppercase tracking-[0.3em] text-stone-400 mb-4">{{ e.label }}</p>
+    <h2 class="font-serif text-3xl md:text-4xl text-stone-900 mb-3 leading-tight">{{ event.title }}</h2>
+    <p class="text-stone-500 text-sm uppercase tracking-widest mb-8">{{ e.date_label }}</p>
+    {% endif %}
+
+    {% if e.highlight_title and event.highlight_active %}
+    <div class="border-l-2 border-rose-400 pl-5 mb-10">
+      <p class="font-serif text-xl text-stone-900 mb-2">{{ e.highlight_title }}</p>
+      <p class="text-stone-600 font-light leading-relaxed">{{ e.highlight_text }}</p>
+    </div>
+    {% endif %}
+
+    <div class="text-stone-600 text-lg font-light leading-relaxed space-y-5">
+      {{ e.body | markdownify }}
+    </div>
+  </div>
+
+  {% if event.cover %}
+  <div class="relative overflow-hidden rounded-sm shadow-2xl aspect-[4/5] md:sticky md:top-28">
+    <img src="/assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp"
+         srcset="/assets/img/events/{{ event.slug }}/480/{{ event.cover.name }}-480.webp 480w,
+                 /assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp 800w,
+                 /assets/img/events/{{ event.slug }}/1400/{{ event.cover.name }}-1400.webp 1400w"
+         sizes="(min-width: 768px) 50vw, 100vw"
+         alt="{{ e.cover_alt }}"
+         class="w-full h-full object-cover" loading="lazy" decoding="async">
+  </div>
+  {% endif %}
+</div>
