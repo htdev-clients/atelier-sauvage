@@ -22,10 +22,10 @@
     {% if e.highlight_title and event.highlight_active %}
     <div class="flex items-stretch bg-white border border-stone-200 rounded-sm shadow-sm overflow-hidden mb-10">
       {% if event.highlight_day %}
-      <div class="flex flex-col items-center justify-center bg-stone-900 text-white px-5 py-4 min-w-[5.5rem] text-center">
-        <span class="text-[0.65rem] uppercase tracking-[0.25em] text-white/70">{{ e.highlight_weekday }}</span>
+      <div class="flex flex-col items-center justify-center bg-brand-orange text-white px-5 py-4 min-w-[5.5rem] text-center">
+        <span class="text-[0.65rem] uppercase tracking-[0.25em] text-white">{{ e.highlight_weekday }}</span>
         <span class="font-serif text-4xl leading-none my-1">{{ event.highlight_day }}</span>
-        <span class="text-[0.65rem] uppercase tracking-[0.25em] text-white/70">{{ e.highlight_month }}</span>
+        <span class="text-[0.65rem] uppercase tracking-[0.25em] text-white">{{ e.highlight_month }}</span>
       </div>
       {% endif %}
       <div class="px-5 py-4 md:px-6 md:py-5">

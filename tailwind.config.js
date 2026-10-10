@@ -26,7 +26,11 @@ module.exports = {
           50: '#faf9f6',
           800: '#2e2e2e',
           900: '#1c1c1c',
-        }
+        },
+        // The shop's orange, from the business card (misc/Carte/atelier_sauvage_carte_f37c2a.svg).
+        brand: {
+          orange: '#f37c2a',
+        },
       }
     }
   },
