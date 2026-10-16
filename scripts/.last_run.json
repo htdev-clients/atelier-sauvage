@@ -1,19 +1,22 @@
 {
   "status": "success",
-  "total_lots": 277,
-  "new_lots": [],
-  "removed_lots": [],
-  "photos_downloaded": 4,
-  "photos_added_to_existing": [
-    "364"
+  "total_lots": 281,
+  "new_lots": [
+    "366",
+    "367",
+    "374",
+    "376"
   ],
+  "removed_lots": [],
+  "photos_downloaded": 24,
+  "photos_added_to_existing": [],
   "orphaned_images_deleted": 0,
-  "fields_cleaned": 81,
+  "fields_cleaned": 84,
   "dropped_rows": [],
   "not_sellable": [],
   "data_warnings": [],
-  "data_message": "81 champ(s) nettoyé(s) automatiquement.",
+  "data_message": "84 champ(s) nettoyé(s) automatiquement.",
   "numbering_warnings": [],
   "numbering_message": "",
-  "timestamp": "2026-10-10T08:10:35.735812+00:00"
+  "timestamp": "2026-10-16T13:37:11.646696+00:00"
 }

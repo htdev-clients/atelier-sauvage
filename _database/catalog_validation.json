@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-10T08:10:35.735124+00:00",
+  "generated": "2026-10-16T13:37:11.645505+00:00",
   "sellable": [
     "10",
     "100",
@@ -179,6 +179,10 @@
     "361",
     "362",
     "364",
+    "366",
+    "367",
+    "374",
+    "376",
     "38",
     "40",
     "41",
@@ -705,6 +709,24 @@
         "field": "description",
         "from": "Horloge murale carrée en céramique à décor floral  de Junghans Quartz - West Germany - 1970 -  22,5 cm x 22,5 cm",
         "to": "Horloge murale carrée en céramique à décor floral de Junghans Quartz - West Germany - 1970 - 22,5 cm x 22,5 cm"
+      },
+      {
+        "item": "367",
+        "field": "description",
+        "from": "Petite table d'appoint - Table à ouvrage (ou travailleuse) en acajou de style / époque XIXᵉ siècle (Louis-Philippe / Napoléon III), piètement torsadé, entretoise travaillée et roulettes d'origine - Le plateau supérieur s'ouvre pour révéler un miroir rectangulaire ainsi que des compartiments de rangement - Équipée d'un tiroir en façade avec entrées de serrure en laiton et d'un panier à ouvrage / sac textile suspendu, pouvant tout à fait être retiré - Ht 73 x L 50 x Prof 40 cm.  ",
+        "to": "Petite table d'appoint - Table à ouvrage (ou travailleuse) en acajou de style / époque XIXᵉ siècle (Louis-Philippe / Napoléon III), piètement torsadé, entretoise travaillée et roulettes d'origine - Le plateau supérieur s'ouvre pour révéler un miroir rectangulaire ainsi que des compartiments de rangement - Équipée d'un tiroir en façade avec entrées de serrure en laiton et d'un panier à ouvrage / sac textile suspendu, pouvant tout à fait être retiré - Ht 73 x L 50 x Prof 40 cm."
+      },
+      {
+        "item": "366",
+        "field": "description",
+        "from": "\"Composition\" 1980  - Technique mixte sur papier, signée du peintre contemporain Paolo Rissone (né en 1925 à Reggio Calabria, actif en Italie et au Brésil), célèbre notamment pour sa participation aux Biennales de Venise et de São Paulo, et pour ses compositions abstraites texturées très graphiques - Intitulée \"Composition\" (1980), cette œuvre en technique mixte sur papier est présentée sous verre avec un grand passe-partout et un cadre en métal doré/laitonné. Elle s'inscrit parfaitement dans la tendance actuelle du design abstrait des années 70-80 - Dimensions : Ht 50 x  60 cm",
+        "to": "\"Composition\" 1980 - Technique mixte sur papier, signée du peintre contemporain Paolo Rissone (né en 1925 à Reggio Calabria, actif en Italie et au Brésil), célèbre notamment pour sa participation aux Biennales de Venise et de São Paulo, et pour ses compositions abstraites texturées très graphiques - Intitulée \"Composition\" (1980), cette œuvre en technique mixte sur papier est présentée sous verre avec un grand passe-partout et un cadre en métal doré/laitonné. Elle s'inscrit parfaitement dans la tendance actuelle du design abstrait des années 70-80 - Dimensions : Ht 50 x 60 cm"
+      },
+      {
+        "item": "374",
+        "field": "description",
+        "from": "Meuble bas / commode asymétrique de style Mid-Century (années 1960 - 1970) en plaquage de bois (noyer ou teck) - Pieds fuselés métalliques/embouts noirs et poignées sculptées en bois massif - Peut servir de petit buffet bas d'entrée - Ht 69 x L 130 x P 37 cm ",
+        "to": "Meuble bas / commode asymétrique de style Mid-Century (années 1960 - 1970) en plaquage de bois (noyer ou teck) - Pieds fuselés métalliques/embouts noirs et poignées sculptées en bois massif - Peut servir de petit buffet bas d'entrée - Ht 69 x L 130 x P 37 cm"
       }
     ],
     "dropped": [],
