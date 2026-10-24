@@ -52,7 +52,8 @@
 
   {% if event.cover %}
   <div class="gallery">
-    <div class="relative overflow-hidden rounded-sm shadow-2xl aspect-[4/5]">
+    {% comment %} cover.ratio (width / height) overrides the default 4:5 crop. {% endcomment %}
+    <div class="relative overflow-hidden rounded-sm shadow-2xl{% unless event.cover.ratio %} aspect-[4/5]{% endunless %}"{% if event.cover.ratio %} style="aspect-ratio: {{ event.cover.ratio }};"{% endif %}>
       <img src="/assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp"
            srcset="/assets/img/events/{{ event.slug }}/480/{{ event.cover.name }}-480.webp 480w,
                    /assets/img/events/{{ event.slug }}/800/{{ event.cover.name }}-800.webp 800w,

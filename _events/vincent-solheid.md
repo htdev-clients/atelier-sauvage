@@ -6,6 +6,7 @@ highlight_until: 2026-11-14
 highlight_day: 14
 cover:
   name: cover
+  ratio: 1
 photos:
   - name: photo-1
     ratio: 0.671
@@ -15,7 +16,7 @@ i18n:
   fr:
     label: Exposition
     date_label: 14 novembre – 12 décembre 2026
-    cover_alt: Vincent Solheid et l'une de ses sculptures
+    cover_alt: Portrait de Vincent Solheid
     photos_alt: Œuvre de Vincent Solheid
     highlight_month: "nov."
     highlight_weekday: "sam."
@@ -36,7 +37,7 @@ i18n:
   en:
     label: Exhibition
     date_label: 14 November – 12 December 2026
-    cover_alt: Vincent Solheid with one of his sculptures
+    cover_alt: Portrait of Vincent Solheid
     photos_alt: Artwork by Vincent Solheid
     highlight_month: "Nov"
     highlight_weekday: "Sat"
@@ -57,7 +58,7 @@ i18n:
   nl:
     label: Tentoonstelling
     date_label: 14 november – 12 december 2026
-    cover_alt: Vincent Solheid met een van zijn sculpturen
+    cover_alt: Portret van Vincent Solheid
     photos_alt: Werk van Vincent Solheid
     highlight_month: "nov."
     highlight_weekday: "za."
@@ -78,7 +79,7 @@ i18n:
   de:
     label: Ausstellung
     date_label: 14. November – 12. Dezember 2026
-    cover_alt: Vincent Solheid mit einer seiner Skulpturen
+    cover_alt: Porträt von Vincent Solheid
     photos_alt: Werk von Vincent Solheid
     highlight_month: "Nov."
     highlight_weekday: "Sa."
