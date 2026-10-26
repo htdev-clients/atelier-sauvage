@@ -17,8 +17,13 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      # Start from the latest main, not the commit the run was dispatched on.
+      # A second click queues behind the first (concurrency above); without
+      # this it would rebuild on the stale commit and conflict when pushing.
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
