@@ -1,22 +1,8 @@
 {
-  "status": "success",
-  "total_lots": 281,
-  "new_lots": [],
-  "removed_lots": [],
-  "photos_downloaded": 24,
-  "photos_added_to_existing": [
-    "366",
-    "367",
-    "374",
-    "376"
+  "status": "failure",
+  "message": "1 lot(s) sans image dans le Drive.",
+  "missing_lots": [
+    "392"
   ],
-  "orphaned_images_deleted": 0,
-  "fields_cleaned": 84,
-  "dropped_rows": [],
-  "not_sellable": [],
-  "data_warnings": [],
-  "data_message": "84 champ(s) nettoyé(s) automatiquement.",
-  "numbering_warnings": [],
-  "numbering_message": "",
-  "timestamp": "2026-10-22T16:20:21.028571+00:00"
+  "timestamp": "2026-10-26T14:12:13.234181+00:00"
 }
