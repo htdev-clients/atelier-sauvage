@@ -1,7 +1,10 @@
 {
   "status": "success",
   "total_lots": 295,
-  "new_lots": [
+  "new_lots": [],
+  "removed_lots": [],
+  "photos_downloaded": 67,
+  "photos_added_to_existing": [
     "370",
     "375",
     "377",
@@ -17,9 +20,6 @@
     "391",
     "392"
   ],
-  "removed_lots": [],
-  "photos_downloaded": 67,
-  "photos_added_to_existing": [],
   "orphaned_images_deleted": 9,
   "fields_cleaned": 87,
   "dropped_rows": [],
@@ -28,5 +28,5 @@
   "data_message": "87 champ(s) nettoyé(s) automatiquement.",
   "numbering_warnings": [],
   "numbering_message": "",
-  "timestamp": "2026-10-26T14:25:30.615452+00:00"
+  "timestamp": "2026-10-26T14:43:50.330022+00:00"
 }

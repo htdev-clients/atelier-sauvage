@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26T14:25:30.614227+00:00",
+  "generated": "2026-10-26T14:43:50.328956+00:00",
   "sellable": [
     "10",
     "100",
@@ -743,16 +743,16 @@
         "to": "Vase piriforme / ovoïde élancé à ouverture biseautée - Céramique fine / faïence des années 1950-1960 (style Mid-Century Modern) - Ht 15 cm x 8 cm"
       },
       {
-        "item": "387",
-        "field": "description",
-        "from": "Vase Scheurich Keramik (W Germany) - Décor iconique \"Lora\" (années 1960-1970) - Il se caractérise par des bandes de motifs ovales rouge/orange flamboyant serties d'émail Fat Lava noir moussant, séparées par un émail dégradé beige/crème et des nuances brunes - Le vase possède encore son étiquette d'origine dorée \"Scheurich\" - Ht 20 cm   ",
-        "to": "Vase Scheurich Keramik (W Germany) - Décor iconique \"Lora\" (années 1960-1970) - Il se caractérise par des bandes de motifs ovales rouge/orange flamboyant serties d'émail Fat Lava noir moussant, séparées par un émail dégradé beige/crème et des nuances brunes - Le vase possède encore son étiquette d'origine dorée \"Scheurich\" - Ht 20 cm"
-      },
-      {
         "item": "391",
         "field": "description",
         "from": "Grand vase avec anse Fat Lava rouge et noir Scheurich Keramik (ou Roth Keramik / Carstens), édité dans les années 1960-1970 - Il associe un émail moussant noir et blanc écume très reliefé à de puissantes coulures verticales émaillées rouge vif / écarlate - Ht 37,5 x diam 20 cm ",
         "to": "Grand vase avec anse Fat Lava rouge et noir Scheurich Keramik (ou Roth Keramik / Carstens), édité dans les années 1960-1970 - Il associe un émail moussant noir et blanc écume très reliefé à de puissantes coulures verticales émaillées rouge vif / écarlate - Ht 37,5 x diam 20 cm"
+      },
+      {
+        "item": "387",
+        "field": "description",
+        "from": "Vase Scheurich Keramik (W Germany) - Décor iconique \"Lora\" (années 1960-1970) - Il se caractérise par des bandes de motifs ovales rouge/orange flamboyant serties d'émail Fat Lava noir moussant, séparées par un émail dégradé beige/crème et des nuances brunes - Le vase possède encore son étiquette d'origine dorée \"Scheurich\" - Ht 20 cm   ",
+        "to": "Vase Scheurich Keramik (W Germany) - Décor iconique \"Lora\" (années 1960-1970) - Il se caractérise par des bandes de motifs ovales rouge/orange flamboyant serties d'émail Fat Lava noir moussant, séparées par un émail dégradé beige/crème et des nuances brunes - Le vase possède encore son étiquette d'origine dorée \"Scheurich\" - Ht 20 cm"
       }
     ],
     "dropped": [],
