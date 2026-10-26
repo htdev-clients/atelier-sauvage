@@ -8,6 +8,30 @@ same traps.
 
 ---
 
+## 2026-10-26
+
+### Catalog update: a missing photo fails the whole run
+
+**Finding.** Lot 392 was added to the Sheet before its photo reached Drive. The
+image-coverage check in `update_catalog.py` stops the run, so none of the other
+lots' edits went live until the photo was uploaded and the update re-run. The
+failed lot is named in `scripts/.last_run.json` (`missing_lots`), which is what
+the Sheets popup shows. Quarantining just that lot (unlike the data rules above)
+was considered and not done; revisit if it keeps happening.
+
+### Catalog update: check out latest main
+
+**Context.** A double click queued a second run behind the first (concurrency
+group). It checked out the commit it was dispatched on, so after the first run
+pushed it rebuilt on a stale tree and hit a rebase conflict on
+`.last_run.json` and `catalog_validation.json`. Nothing was lost, but the
+failure emailed a red "Run failed".
+
+**Decision.** The update job checks out `ref: main`, so a queued run starts from
+what the previous run pushed and normally finds nothing to commit.
+
+---
+
 ## 2026-09-02
 
 ### Publish from CI, not Cloudflare's Git integration
