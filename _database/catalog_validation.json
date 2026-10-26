@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-22T16:20:21.027388+00:00",
+  "generated": "2026-10-26T14:25:30.614227+00:00",
   "sellable": [
     "10",
     "100",
@@ -177,8 +177,22 @@
     "364",
     "366",
     "367",
+    "370",
+    "375",
     "376",
+    "377",
+    "379",
     "38",
+    "383",
+    "384",
+    "385",
+    "386",
+    "387",
+    "388",
+    "389",
+    "390",
+    "391",
+    "392",
     "40",
     "41",
     "52",
@@ -701,8 +715,8 @@
       {
         "item": "362",
         "field": "description",
-        "from": "Horloge murale carrée en céramique à décor floral  de Junghans Quartz - West Germany - 1970 -  22,5 cm x 22,5 cm",
-        "to": "Horloge murale carrée en céramique à décor floral de Junghans Quartz - West Germany - 1970 - 22,5 cm x 22,5 cm"
+        "from": "Horloge murale carrée en céramique à décor floral  de Junghans Quartz - West Germany (1970) -  22,5 x 22,5 cm",
+        "to": "Horloge murale carrée en céramique à décor floral de Junghans Quartz - West Germany (1970) - 22,5 x 22,5 cm"
       },
       {
         "item": "367",
@@ -721,6 +735,24 @@
         "field": "description",
         "from": "Meuble bas / commode asymétrique de style Mid-Century (années 1960 - 1970) en plaquage de bois (noyer ou teck) - Pieds fuselés métalliques/embouts noirs et poignées sculptées en bois massif - Peut servir de petit buffet bas d'entrée - Ht 69 x L 130 x P 37 cm ",
         "to": "Meuble bas / commode asymétrique de style Mid-Century (années 1960 - 1970) en plaquage de bois (noyer ou teck) - Pieds fuselés métalliques/embouts noirs et poignées sculptées en bois massif - Peut servir de petit buffet bas d'entrée - Ht 69 x L 130 x P 37 cm"
+      },
+      {
+        "item": "390",
+        "field": "description",
+        "from": "Vase piriforme / ovoïde élancé à ouverture biseautée - Céramique fine / faïence des années 1950-1960 (style Mid-Century Modern) - Ht 15 cm x 8 cm ",
+        "to": "Vase piriforme / ovoïde élancé à ouverture biseautée - Céramique fine / faïence des années 1950-1960 (style Mid-Century Modern) - Ht 15 cm x 8 cm"
+      },
+      {
+        "item": "387",
+        "field": "description",
+        "from": "Vase Scheurich Keramik (W Germany) - Décor iconique \"Lora\" (années 1960-1970) - Il se caractérise par des bandes de motifs ovales rouge/orange flamboyant serties d'émail Fat Lava noir moussant, séparées par un émail dégradé beige/crème et des nuances brunes - Le vase possède encore son étiquette d'origine dorée \"Scheurich\" - Ht 20 cm   ",
+        "to": "Vase Scheurich Keramik (W Germany) - Décor iconique \"Lora\" (années 1960-1970) - Il se caractérise par des bandes de motifs ovales rouge/orange flamboyant serties d'émail Fat Lava noir moussant, séparées par un émail dégradé beige/crème et des nuances brunes - Le vase possède encore son étiquette d'origine dorée \"Scheurich\" - Ht 20 cm"
+      },
+      {
+        "item": "391",
+        "field": "description",
+        "from": "Grand vase avec anse Fat Lava rouge et noir Scheurich Keramik (ou Roth Keramik / Carstens), édité dans les années 1960-1970 - Il associe un émail moussant noir et blanc écume très reliefé à de puissantes coulures verticales émaillées rouge vif / écarlate - Ht 37,5 x diam 20 cm ",
+        "to": "Grand vase avec anse Fat Lava rouge et noir Scheurich Keramik (ou Roth Keramik / Carstens), édité dans les années 1960-1970 - Il associe un émail moussant noir et blanc écume très reliefé à de puissantes coulures verticales émaillées rouge vif / écarlate - Ht 37,5 x diam 20 cm"
       }
     ],
     "dropped": [],
