@@ -32,6 +32,32 @@ what the previous run pushed and normally finds nothing to commit.
 
 ---
 
+## 2026-10-19
+
+### Meta assets and the Ads MCP
+
+Business portfolio "Atelier Sauvage Heusy" `717742644715095` owns the ad account
+"Atelier Sauvage Ads" `1682492246265215` (EUR), the Pixel/dataset
+`1719009352576992` and the Page "Atelier Sauvage" `1046438385209103`. Grant
+people or agencies access from that portfolio only (procedure in
+`HTDev/business/SOPs/Meta access SOP.md`, outside this repo).
+
+Meta's official Ads MCP (`https://mcp.facebook.com/ads`, OAuth, no token) is
+configured locally for this repo. Its OAuth grant reaches every portfolio on
+Harold's Facebook login and the consent screen cannot narrow it, so the scope is
+enforced locally (all of it under the gitignored `.claude/`):
+
+- `settings.local.json` denies every write tool.
+- `hooks/meta_ads_guard.py` (PreToolUse) allows only listed read tools, blocks
+  the cross-portfolio listings, and requires every ID in a call to be one of the
+  root IDs above or one returned by an earlier allowed call. Fails closed.
+- The same script (PostToolUse) appends returned IDs to
+  `hooks/meta-ads-seen-ids.txt`. Delete that file to reset what was learned.
+
+New tools Meta adds are blocked until added to `READ_TOOLS` in the script.
+
+---
+
 ## 2026-09-02
 
 ### Publish from CI, not Cloudflare's Git integration
