@@ -8,12 +8,12 @@
     "370"
   ],
   "orphaned_images_deleted": 3,
-  "fields_cleaned": 87,
+  "fields_cleaned": 88,
   "dropped_rows": [],
   "not_sellable": [],
   "data_warnings": [],
-  "data_message": "87 champ(s) nettoyé(s) automatiquement.",
+  "data_message": "88 champ(s) nettoyé(s) automatiquement.",
   "numbering_warnings": [],
   "numbering_message": "",
-  "timestamp": "2026-10-30T15:22:38.808047+00:00"
+  "timestamp": "2026-10-30T15:29:55.785082+00:00"
 }

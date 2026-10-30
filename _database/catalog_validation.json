@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-30T15:22:38.806869+00:00",
+  "generated": "2026-10-30T15:29:55.784244+00:00",
   "sellable": [
     "10",
     "100",
@@ -757,6 +757,12 @@
         "field": "description",
         "from": "Vase Scheurich Keramik (W Germany) - Décor iconique \"Lora\" (années 1960-1970) - Il se caractérise par des bandes de motifs ovales rouge/orange flamboyant serties d'émail Fat Lava noir moussant, séparées par un émail dégradé beige/crème et des nuances brunes - Le vase possède encore son étiquette d'origine dorée \"Scheurich\" - Ht 20 cm   ",
         "to": "Vase Scheurich Keramik (W Germany) - Décor iconique \"Lora\" (années 1960-1970) - Il se caractérise par des bandes de motifs ovales rouge/orange flamboyant serties d'émail Fat Lava noir moussant, séparées par un émail dégradé beige/crème et des nuances brunes - Le vase possède encore son étiquette d'origine dorée \"Scheurich\" - Ht 20 cm"
+      },
+      {
+        "item": "394",
+        "field": "description",
+        "from": "Bout de canapé carré en acier chromé et verre fumé – Années 70 (Mid-Century) - 58 x 50 x 35 cm ",
+        "to": "Bout de canapé carré en acier chromé et verre fumé – Années 70 (Mid-Century) - 58 x 50 x 35 cm"
       }
     ],
     "dropped": [],
