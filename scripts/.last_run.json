@@ -1,26 +1,20 @@
 {
   "status": "success",
-  "total_lots": 295,
-  "new_lots": [],
-  "removed_lots": [],
-  "photos_downloaded": 67,
+  "total_lots": 298,
+  "new_lots": [
+    "368",
+    "373",
+    "393",
+    "394"
+  ],
+  "removed_lots": [
+    "193"
+  ],
+  "photos_downloaded": 32,
   "photos_added_to_existing": [
-    "370",
-    "375",
-    "377",
-    "379",
-    "383",
-    "384",
-    "385",
-    "386",
-    "387",
-    "388",
-    "389",
-    "390",
-    "391",
     "392"
   ],
-  "orphaned_images_deleted": 9,
+  "orphaned_images_deleted": 27,
   "fields_cleaned": 87,
   "dropped_rows": [],
   "not_sellable": [],
@@ -28,5 +22,5 @@
   "data_message": "87 champ(s) nettoyé(s) automatiquement.",
   "numbering_warnings": [],
   "numbering_message": "",
-  "timestamp": "2026-10-26T14:43:50.330022+00:00"
+  "timestamp": "2026-10-30T15:05:17.940413+00:00"
 }
