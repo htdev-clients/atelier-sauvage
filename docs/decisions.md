@@ -19,7 +19,8 @@ returned the homepage with a 200 (no `404.html`, so Pages fell back to
 the page said 14h-17h; hours were typed in three places.
 
 **Decisions.**
-- robots.txt blocks AI *training* crawlers only. Search and user-triggered
+- robots.txt blocks AI *training* crawlers only (current names added the same
+  day: ClaudeBot, meta-externalagent, Applebot-Extended, Bytespider). Search and user-triggered
   fetchers (OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User,
   Claude-SearchBot, Claude-User) stay allowed. Separately, the Cloudflare zone
   returns 403 to GPTBot and ClaudeBot user agents (a zone-level AI bot block,
@@ -225,6 +226,11 @@ publicly downloadable from the live site for months as a result. `docs/`,
 any new top-level directory there unless it is meant to be served.
 `functions/` is the deliberate exception: Cloudflare Pages needs it at the
 deploy root and compiles it rather than serving the source.
+
+**Every page needs a dark photo header.** The navbar is white text on a
+transparent bar until the visitor scrolls, so a page without the `<header>` hero
+(see `mentions.html`) has an invisible menu. The first 404 page shipped that way
+(2026-11-10). Copy the hero block when adding a page.
 
 **Cloudflare's edge cache outlives the file.** Assets are served with
 `s-maxage=604800`. A file removed from a deployment can keep being served for
