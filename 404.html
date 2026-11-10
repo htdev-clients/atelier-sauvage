@@ -18,11 +18,27 @@ sitemap: false
 {% assign prefix = '' %}
 {% if site.active_lang != site.default_lang %}{% assign prefix = '/' | append: site.active_lang %}{% endif %}
 
-<main class="bg-stone-50 min-h-[70vh] flex items-center">
-  <section class="max-w-2xl mx-auto px-6 py-24 md:py-32 text-center">
-    <p class="text-xs uppercase tracking-[0.3em] text-stone-400 mb-6">404</p>
-    <h1 class="font-serif text-4xl md:text-5xl font-light text-stone-900 mb-6">{{ nf.heading }}</h1>
-    <div class="w-16 h-px bg-stone-400 mx-auto mb-8"></div>
+{% comment %}Same photo header as the other pages: the navbar is white text on a
+transparent bar and needs a dark background behind it.{% endcomment %}
+<header class="relative h-[40svh] min-h-[300px] w-full flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="/assets/img/general/2000/interior-1-2000.jpeg" srcset="
+            /assets/img/general/480/interior-1-480.jpeg   480w,
+            /assets/img/general/800/interior-1-800.jpeg   800w,
+            /assets/img/general/2000/interior-1-2000.jpeg 2000w
+          " sizes="100vw" alt="{{ t.index.alts.interior_1 }}" class="w-full h-full object-cover" style="object-position: 33% 67%"
+      fetchpriority="high" decoding="async" />
+    <div class="absolute inset-0 bg-black/50 mix-blend-multiply"></div>
+  </div>
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white space-y-4">
+    <h1 class="font-serif text-4xl sm:text-5xl font-light tracking-wide drop-shadow-lg">{{ nf.heading }}</h1>
+    <div class="w-16 h-px bg-white/80 mx-auto"></div>
+    <p class="text-sm md:text-base font-light tracking-widest uppercase text-white/90">404</p>
+  </div>
+</header>
+
+<main class="bg-stone-50 min-h-[40vh]">
+  <section class="max-w-2xl mx-auto px-6 py-16 md:py-24 text-center">
     <p class="text-stone-600 text-lg font-light leading-relaxed mb-12">{{ nf.text }}</p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
       <a href="{{ prefix }}/"
