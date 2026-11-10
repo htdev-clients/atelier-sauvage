@@ -26,5 +26,20 @@ Disallow: /
 User-agent: FacebookBot
 Disallow: /
 
+# Current names of training crawlers. anthropic-ai and Claude-Web above are
+# Anthropic's retired names (now ClaudeBot); FacebookBot was replaced by
+# meta-externalagent. Kept the old entries, they cost nothing.
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
 # Sitemap
 Sitemap: https://ateliersauvageheusy.be/sitemap.xml
