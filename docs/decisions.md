@@ -8,6 +8,42 @@ same traps.
 
 ---
 
+## 2026-11-10
+
+### GEO pass: AI search access, real 404s, one source for hours
+
+**Findings.** robots.txt blocked `ChatGPT-User`, the fetcher ChatGPT uses when
+a user asks about a page, so ChatGPT could not open the site. Unknown URLs
+returned the homepage with a 200 (no `404.html`, so Pages fell back to
+`index.html`). The Store JSON-LD said Thu/Fri 13:30-17:30 and Sat 10-17 while
+the page said 14h-17h; hours were typed in three places.
+
+**Decisions.**
+- robots.txt blocks AI *training* crawlers only. Search and user-triggered
+  fetchers (OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User,
+  Claude-SearchBot, Claude-User) stay allowed. Separately, the Cloudflare zone
+  returns 403 to GPTBot and ClaudeBot user agents (a zone-level AI bot block,
+  dashboard-side, not in this repo); spoofed search-bot user agents get 200.
+- `404.html` exists, built per language by polyglot; Pages serves the nearest
+  one with a real 404. Its front matter `noindex: true` makes the layout emit
+  `noindex` and skip canonical/hreflang; `sitemap: false` keeps it out of the
+  sitemap.
+- Opening hours live in `_data/shop.yml`, read by the footer, the homepage and
+  the Store JSON-LD (which honours `holiday_banner`).
+- Store JSON-LD is `["Store", "ArtGallery"]` with `@id`
+  `https://ateliersauvageheusy.be/#store`, a description, and `sameAs` for
+  Instagram, Facebook and the Google Business Profile. The GBP share link
+  (`share.google/h6HDnjaBVTLN6UkZ0`) resolves to Knowledge Graph id
+  `/g/11zjx0w4md`, recorded as `https://www.google.com/search?kgmid=/g/11zjx0w4md`.
+- `/evenements/` carries `ExhibitionEvent` JSON-LD per event, built from the
+  event front matter (`_includes/event-schema.html`).
+
+**Not done (dashboard or client side).** Cloudflare Email Address Obfuscation
+replaces the footer email with `[email protected]` for clients without
+JavaScript, i.e. most AI crawlers. Turning it off is a Scrape Shield setting.
+
+---
+
 ## 2026-10-26
 
 ### Catalog update: a missing photo fails the whole run
@@ -195,9 +231,10 @@ deploy root and compiles it rather than serving the source.
 seven days. Check with a cache-buster query string before concluding something
 is still deployed, and purge from Caching → Configuration → Purge Custom URLs.
 
-**HTTP 200 is not proof a file exists.** Pages serves `index.html` as a fallback
-for unmatched paths, with a 200. Check the content type or the body, never the
-status code.
+**HTTP 200 is not proof a file exists.** Before `404.html` was added
+(2026-11-10), Pages served `index.html` with a 200 for unmatched paths. It now
+returns a 404, but deleting `404.html` would silently bring the fallback back.
+Check the content type or the body, not just the status code.
 
 **`workflow_dispatch` resolves workflows from the default branch.** A workflow
 that exists only on a feature branch cannot be dispatched at all, even when

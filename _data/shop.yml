@@ -1,0 +1,27 @@
+# Opening hours: the one source for the footer, the homepage "Nous rendre visite"
+# block and the Store JSON-LD in _layouts/default.html. They used to be typed in
+# three places and drifted (the JSON-LD said 13:30-17:30 while the page said
+# 14h-17h), which is what search engines and AI assistants then quoted.
+#
+# day:      key into translations.<lang>.index.days (display name)
+# schema:   schema.org day name, used in the JSON-LD
+# opens / closes: 24h "HH:MM", used in the JSON-LD
+# label:    what the page shows
+# seasonal: true hides the day while site.holiday_banner is on (summer hours)
+hours:
+  - day: thursday
+    schema: Thursday
+    opens: "14:00"
+    closes: "17:00"
+    label: "14h – 17h"
+    seasonal: true
+  - day: friday
+    schema: Friday
+    opens: "14:00"
+    closes: "17:00"
+    label: "14h – 17h"
+  - day: saturday
+    schema: Saturday
+    opens: "14:00"
+    closes: "17:00"
+    label: "14h – 17h"

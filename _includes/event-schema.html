@@ -1,0 +1,50 @@
+{% comment %}
+  ExhibitionEvent JSON-LD for one _events doc, so search engines and AI
+  assistants can read an exhibition's name, dates and place. Built only from the
+  event's front matter; the shop is referenced by the @id declared in
+  _layouts/default.html. Params: event.
+{% endcomment %}
+{%- assign event = include.event -%}
+{%- assign e = event.i18n[site.active_lang] | default: event.i18n[site.default_lang] -%}
+{%- assign fr = event.i18n[site.default_lang] -%}
+{%- assign text = e.teaser | default: e.body | default: fr.teaser | default: fr.body | markdownify | strip_html | normalize_whitespace | strip -%}
+{%- if event.cover -%}
+  {%- assign img = event.cover.name -%}
+{%- elsif event.photos and event.photos.size > 0 -%}
+  {%- assign img = event.photos[0].name -%}
+{%- elsif event.gallery and event.gallery.size > 0 -%}
+  {%- assign img = event.gallery[0].name -%}
+{%- else -%}
+  {%- assign img = nil -%}
+{%- endif -%}
+{%- capture events_url -%}{{ site.url }}{% unless site.active_lang == site.default_lang %}/{{ site.active_lang }}{% endunless %}/evenements/{%- endcapture -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ExhibitionEvent",
+  "name": {{ e.label | default: fr.label | append: " " | append: event.title | jsonify }},
+  "startDate": "{{ event.start_date | date: '%Y-%m-%d' }}",
+  "endDate": "{{ event.end_date | default: event.start_date | date: '%Y-%m-%d' }}",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "url": "{{ events_url }}",
+  {%- if text != "" %}
+  "description": {{ text | jsonify }},
+  {%- endif %}
+  {%- if img %}
+  "image": "{{ site.url }}/assets/img/events/{{ event.slug }}/1400/{{ img }}-1400.webp",
+  {%- endif %}
+  "location": {
+    "@type": "Place",
+    "name": "Atelier Sauvage",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Chaussée de Theux 59, Heusy",
+      "addressLocality": "Verviers",
+      "postalCode": "4802",
+      "addressCountry": "BE"
+    }
+  },
+  "organizer": { "@id": "{{ site.url }}/#store" }
+}
+</script>

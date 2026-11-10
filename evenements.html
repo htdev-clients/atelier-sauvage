@@ -95,3 +95,6 @@ i18n_key: events
 
   </div>
 </main>
+
+{% for event in upcoming_events %}{% include event-schema.html event=event %}{% endfor %}
+{% for event in past_events %}{% include event-schema.html event=event %}{% endfor %}

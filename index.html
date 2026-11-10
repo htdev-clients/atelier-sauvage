@@ -236,17 +236,11 @@ layout: default
             <span>⏰</span> {{ idx.visit_hours }}
           </div>
           <ul class="space-y-3 pl-4 border-l-2 border-stone-200">
-            {% unless site.holiday_banner %}
+            {% for h in site.data.shop.hours %}{% unless h.seasonal and site.holiday_banner %}
             <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
-              <span>{{ idx.days.thursday }}</span> <span>14h - 17h</span>
+              <span>{{ idx.days[h.day] }}</span> <span>{{ h.label }}</span>
             </li>
-            {% endunless %}
-            <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
-              <span>{{ idx.days.friday }}</span> <span>14h - 17h</span>
-            </li>
-            <li class="flex justify-between max-w-[200px] text-stone-600 border-b border-stone-100 pb-1">
-              <span>{{ idx.days.saturday }}</span> <span>14h - 17h</span>
-            </li>
+            {% endunless %}{% endfor %}
           </ul>
         </div>
 

@@ -30,17 +30,11 @@
                 4802 Heusy, Verviers
             </address>
             <dl class="flex flex-col gap-0.5 text-sm text-stone-400">
-                {% unless site.holiday_banner %}
+                {% for h in site.data.shop.hours %}{% unless h.seasonal and site.holiday_banner %}
                 <div class="flex gap-4">
-                    <dt class="w-20">{{ idx.days.thursday }}</dt><dd>14h – 17h</dd>
+                    <dt class="w-20">{{ idx.days[h.day] }}</dt><dd>{{ h.label }}</dd>
                 </div>
-                {% endunless %}
-                <div class="flex gap-4">
-                    <dt class="w-20">{{ idx.days.friday }}</dt><dd>14h – 17h</dd>
-                </div>
-                <div class="flex gap-4">
-                    <dt class="w-20">{{ idx.days.saturday }}</dt><dd>14h – 17h</dd>
-                </div>
+                {% endunless %}{% endfor %}
             </dl>
         </div>
 
@@ -51,6 +45,11 @@
                    class="flex items-center gap-2 text-stone-400 hover:text-white transition-colors">
                     <div class="w-[18px] h-[18px]">{% include icons/instagram.svg %}</div>
                     <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/p/Atelier-Sauvage-61588358632591/" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-stone-400 hover:text-white transition-colors">
+                    <div class="w-[18px] h-[18px]">{% include icons/facebook.svg %}</div>
+                    <span>Facebook</span>
                 </a>
                 <a href="https://wa.me/32495292225" target="_blank" rel="noopener noreferrer"
                    class="flex items-center gap-2 text-stone-400 hover:text-white transition-colors">

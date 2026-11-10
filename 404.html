@@ -1,0 +1,34 @@
+---
+layout: default
+permalink: /404.html
+i18n_key: notfound
+noindex: true
+sitemap: false
+---
+{% comment %}
+  Without a 404.html, Cloudflare Pages answers every unknown URL with the
+  homepage and a 200 (a "soft 404"), so crawlers index junk URLs as copies of
+  the homepage. Polyglot builds this page per language (/404.html, /en/404.html,
+  ...) and Pages serves the nearest one up the path with a real 404 status.
+  noindex: true makes the layout emit noindex and skip canonical/hreflang;
+  sitemap: false keeps it out of sitemap.xml.
+{% endcomment %}
+{% assign t = site.data.translations[site.active_lang] %}
+{% assign nf = t.notfound %}
+{% assign prefix = '' %}
+{% if site.active_lang != site.default_lang %}{% assign prefix = '/' | append: site.active_lang %}{% endif %}
+
+<main class="bg-stone-50 min-h-[70vh] flex items-center">
+  <section class="max-w-2xl mx-auto px-6 py-24 md:py-32 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-stone-400 mb-6">404</p>
+    <h1 class="font-serif text-4xl md:text-5xl font-light text-stone-900 mb-6">{{ nf.heading }}</h1>
+    <div class="w-16 h-px bg-stone-400 mx-auto mb-8"></div>
+    <p class="text-stone-600 text-lg font-light leading-relaxed mb-12">{{ nf.text }}</p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+      <a href="{{ prefix }}/"
+         class="inline-block text-sm uppercase tracking-widest text-stone-900 border-b border-stone-900 pb-1 hover:opacity-70 transition-opacity">{{ nf.home }}</a>
+      <a href="{{ prefix }}/catalogue/"
+         class="inline-block text-sm uppercase tracking-widest text-stone-900 border-b border-stone-900 pb-1 hover:opacity-70 transition-opacity">{{ nf.catalogue }}</a>
+    </div>
+  </section>
+</main>

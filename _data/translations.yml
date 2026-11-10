@@ -101,6 +101,13 @@ fr:
     s4_body: "Les informations recueillies sont uniquement utilisées pour répondre à vos demandes et ne sont jamais cédées à des tiers. Conformément à la loi, vous disposez d'un droit d'accès et de rectification aux données vous concernant."
     s5_title: "5. Cookies et mesure publicitaire"
     s5_body: "Avec votre consentement préalable, ce site dépose des cookies via le Meta Pixel (Meta Platforms Ireland Ltd.) afin de mesurer l'efficacité de nos campagnes publicitaires et d'en améliorer le ciblage. Aucun cookie de ce type n'est déposé sans votre accord, recueilli via notre bandeau de consentement. Vous pouvez accepter, refuser ou modifier votre choix à tout moment via le lien « Cookies » en bas de page."
+  notfound:
+    page_title: "Page introuvable – Atelier Sauvage"
+    page_description: "Cette page n'existe pas ou n'existe plus."
+    heading: "Page introuvable"
+    text: "Cette page n'existe pas, ou plus. Comme nos objets, elle a peut-être trouvé preneur ! Revenez à l'accueil ou jetez un œil au catalogue."
+    home: "Retour à l'accueil"
+    catalogue: "Voir le catalogue"
   product:
     sold: "Vendu"
   lightbox:
@@ -113,7 +120,7 @@ en:
   language_name: "English"
   meta:
     site_title: "Atelier Sauvage – Vintage objects, design and gallery in Verviers"
-    site_description: "Atelier Sauvage is a unique place in Heusy — somewhere between a shop, a gallery and a studio. Vintage objects, design furniture and artists’ works."
+    site_description: "Atelier Sauvage is a unique place in Heusy, somewhere between a shop, a gallery and a studio. Vintage objects, design furniture and artists’ works."
     og_description: "Discover Atelier Sauvage in Heusy: a unique space between shop, gallery and studio, dedicated to vintage objects and design."
   nav:
     home: "Home"
@@ -206,6 +213,13 @@ en:
     s4_body: "Information collected is used solely to respond to your requests and is never passed on to third parties. In accordance with the law, you have the right to access and rectify your personal data."
     s5_title: "5. Cookies and advertising measurement"
     s5_body: "With your prior consent, this site sets cookies via the Meta Pixel (Meta Platforms Ireland Ltd.) in order to measure the effectiveness of our advertising campaigns and improve their targeting. No such cookie is set without your agreement, obtained through our consent banner. You may accept, decline or change your choice at any time via the \"Cookies\" link in the footer."
+  notfound:
+    page_title: "Page not found – Atelier Sauvage"
+    page_description: "This page doesn't exist, or no longer does."
+    heading: "Page not found"
+    text: "This page doesn't exist, or no longer does. Like our pieces, it may have found a new home! Head back to the homepage or take a look at the catalogue."
+    home: "Back to the homepage"
+    catalogue: "See the catalogue"
   product:
     sold: "Sold"
   lightbox:
@@ -218,7 +232,7 @@ nl:
   language_name: "Nederlands"
   meta:
     site_title: "Atelier Sauvage – Vintage objecten, design en galerie in Verviers"
-    site_description: "Atelier Sauvage is een unieke plek in Heusy — tussen winkel, galerie en atelier in. Je vindt er vintage objecten, designmeubilair en werk van kunstenaars."
+    site_description: "Atelier Sauvage is een unieke plek in Heusy, tussen winkel, galerie en atelier in. Je vindt er vintage objecten, designmeubilair en werk van kunstenaars."
     og_description: "Ontdek Atelier Sauvage in Heusy: een unieke plek tussen winkel, galerie en atelier, gewijd aan vintage objecten en design."
   nav:
     home: "Home"
@@ -311,6 +325,13 @@ nl:
     s4_body: "De verzamelde gegevens worden uitsluitend gebruikt om op je vragen te antwoorden en worden nooit aan derden doorgegeven. Conform de wet heb je recht op inzage en correctie van je persoonsgegevens."
     s5_title: "5. Cookies en advertentiemeting"
     s5_body: "Met je voorafgaande toestemming plaatst deze site cookies via de Meta Pixel (Meta Platforms Ireland Ltd.) om de doeltreffendheid van onze advertentiecampagnes te meten en de targeting te verbeteren. Zonder jouw akkoord, verkregen via onze toestemmingsbanner, wordt geen enkele dergelijke cookie geplaatst. Je kan je keuze op elk moment aanvaarden, weigeren of wijzigen via de link « Cookies » onderaan de pagina."
+  notfound:
+    page_title: "Pagina niet gevonden – Atelier Sauvage"
+    page_description: "Deze pagina bestaat niet, of niet meer."
+    heading: "Pagina niet gevonden"
+    text: "Deze pagina bestaat niet, of niet meer. Net als onze stukken heeft ze misschien een nieuwe thuis gevonden! Ga terug naar de homepage of neem een kijkje in de catalogus."
+    home: "Terug naar de homepage"
+    catalogue: "Bekijk de catalogus"
   product:
     sold: "Verkocht"
   lightbox:
@@ -323,7 +344,7 @@ de:
   language_name: "Deutsch"
   meta:
     site_title: "Atelier Sauvage – Vintage-Objekte, Design und Galerie in Verviers"
-    site_description: "Atelier Sauvage ist ein einzigartiger Ort in Heusy — zwischen Boutique, Galerie und Atelier. Vintage-Objekte, Designmöbel und Werke von Künstlern."
+    site_description: "Atelier Sauvage ist ein einzigartiger Ort in Heusy, zwischen Boutique, Galerie und Atelier. Vintage-Objekte, Designmöbel und Werke von Künstlern."
     og_description: "Entdecken Sie Atelier Sauvage in Heusy: ein einzigartiger Ort zwischen Boutique, Galerie und Atelier, gewidmet Vintage-Objekten und Design."
   nav:
     home: "Startseite"
@@ -416,6 +437,13 @@ de:
     s4_body: "Die erhobenen Daten werden ausschließlich zur Beantwortung Ihrer Anfragen verwendet und niemals an Dritte weitergegeben. Gemäß den gesetzlichen Bestimmungen haben Sie das Recht auf Auskunft und Berichtigung Ihrer personenbezogenen Daten."
     s5_title: "5. Cookies und Werbemessung"
     s5_body: "Mit Ihrer vorherigen Einwilligung setzt diese Website Cookies über das Meta Pixel (Meta Platforms Ireland Ltd.), um die Wirksamkeit unserer Werbekampagnen zu messen und deren Ausrichtung zu verbessern. Ohne Ihre über unser Einwilligungsbanner eingeholte Zustimmung wird kein solches Cookie gesetzt. Sie können Ihre Wahl jederzeit über den Link « Cookies » im Seitenfuß akzeptieren, ablehnen oder ändern."
+  notfound:
+    page_title: "Seite nicht gefunden – Atelier Sauvage"
+    page_description: "Diese Seite gibt es nicht, oder nicht mehr."
+    heading: "Seite nicht gefunden"
+    text: "Diese Seite gibt es nicht, oder nicht mehr. Wie unsere Stücke hat sie vielleicht ein neues Zuhause gefunden! Zurück zur Startseite, oder werfen Sie einen Blick in den Katalog."
+    home: "Zurück zur Startseite"
+    catalogue: "Zum Katalog"
   product:
     sold: "Verkauft"
   lightbox:

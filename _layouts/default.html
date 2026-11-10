@@ -20,7 +20,9 @@
   <meta name="keywords"
     content="Atelier Sauvage, Heusy, Verviers, objets vintage, mobilier design, galerie d'art, décoration, brocante, Liège, boutique, design intérieur" />
   <meta name="author" content="Atelier Sauvage" />
-  <meta name="robots" content="index, follow" />
+  {% comment %}page.noindex (the 404 page): not indexed, and no canonical or
+  hreflang, since it stands in for URLs that do not exist.{% endcomment %}
+  <meta name="robots" content="{% if page.noindex %}noindex, follow{% else %}index, follow{% endif %}" />
 
 
   <meta property="og:type" content="website" />
@@ -35,7 +37,7 @@
   <link rel="icon" type="image/x-icon" href="/assets/favicon/atelier-favicon.ico" media="(prefers-color-scheme: light)" />
   <link rel="icon" type="image/x-icon" href="/assets/favicon/atelier-favicon-white.ico" media="(prefers-color-scheme: dark)" />
   <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png" />
-  {% I18n_Headers %}
+  {% unless page.noindex %}{% I18n_Headers %}{% endunless %}
 
   <link href="/assets/css/photoswipe.css" rel="stylesheet">
   <link href="/assets/css/style.css" rel="stylesheet">
@@ -104,11 +106,20 @@
     }
   </style>
 
+  {% comment %}
+    Store markup for search engines and AI assistants. Hours come from
+    _data/shop.yml, the same list the footer and homepage show. The @id lets the
+    ExhibitionEvent markup on /evenements/ name the shop as organizer.
+    sameAs: Instagram, Facebook, and the Google Business Profile's Knowledge
+    Graph entity (the share.google link resolves to kgmid /g/11zjx0w4md).
+  {% endcomment %}
   <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Store",
+        "@type": ["Store", "ArtGallery"],
+        "@id": "https://ateliersauvageheusy.be/#store",
         "name": "Atelier Sauvage",
+        "description": {{ t.meta.site_description | jsonify }},
         "image": "https://ateliersauvageheusy.be/assets/img/general/2000/facade-2000.jpg",
         "address": {
           "@type": "PostalAddress",
@@ -125,12 +136,24 @@
         "telephone": "+32495292225",
         "email": "ateliersauvageheusy@gmail.com",
         "url": "https://ateliersauvageheusy.be/",
-        "openingHours": [
-          "Thu 13:30-17:30",
-          "Fri 13:30-17:30",
-          "Sat 10:00-17:00"
+        "openingHoursSpecification": [
+          {%- assign first = true -%}
+          {%- for h in site.data.shop.hours -%}{%- unless h.seasonal and site.holiday_banner -%}
+          {% unless first %},{% endunless %}
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "https://schema.org/{{ h.schema }}",
+            "opens": "{{ h.opens }}",
+            "closes": "{{ h.closes }}"
+          }
+          {%- assign first = false -%}
+          {%- endunless -%}{%- endfor %}
         ],
-        "sameAs": ["https://www.instagram.com/ateliersauvage_heusy/"]
+        "sameAs": [
+          "https://www.instagram.com/ateliersauvage_heusy/",
+          "https://www.facebook.com/p/Atelier-Sauvage-61588358632591/",
+          "https://www.google.com/search?kgmid=/g/11zjx0w4md"
+        ]
       }
     </script>
 </head>

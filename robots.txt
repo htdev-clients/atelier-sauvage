@@ -1,11 +1,11 @@
 User-agent: *
 Disallow: /cdn-cgi/
 
-# Block AI Scrapers (Manual List)
+# Block AI training crawlers (manual list).
+# AI *search* and user-triggered fetchers (OAI-SearchBot, ChatGPT-User,
+# PerplexityBot, Perplexity-User, Claude-SearchBot, Claude-User) must stay
+# allowed, or AI assistants cannot open the site to answer questions about it.
 User-agent: GPTBot
-Disallow: /
-
-User-agent: ChatGPT-User
 Disallow: /
 
 User-agent: Google-Extended
