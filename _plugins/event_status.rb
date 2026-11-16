@@ -1,5 +1,6 @@
 # Derives each event's status (upcoming / current / past) from its dates, so an
-# event moves from "à venir" to the homepage to "passés" without a commit.
+# event moves from "à venir" to "en ce moment" (and the homepage) to "passés"
+# without a commit.
 #
 # The date is taken in Belgian time. A UTC+1 offset is close enough: the
 # scheduled rebuild in .github/workflows/deploy.yml runs at 23:30 UTC, which is

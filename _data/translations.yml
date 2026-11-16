@@ -75,9 +75,9 @@ fr:
     page_description: "Expositions, rencontres et ateliers à l'Atelier Sauvage à Heusy."
     heading: "Événements"
     subheading: "Expositions, rencontres & ateliers"
+    current: "En ce moment"
     upcoming: "Événements à venir"
     past: "Événements passés"
-    none_upcoming: "Aucun événement prévu pour le moment."
     none_at_all: "Aucun événement pour le moment."
     read_more: "En savoir plus"
   mentions:
@@ -187,9 +187,9 @@ en:
     page_description: "Exhibitions, gatherings and workshops at Atelier Sauvage in Heusy."
     heading: "Events"
     subheading: "Exhibitions, gatherings & workshops"
+    current: "Now on"
     upcoming: "Upcoming events"
     past: "Past events"
-    none_upcoming: "No events scheduled at the moment."
     none_at_all: "No events at the moment."
     read_more: "Read more"
   mentions:
@@ -299,9 +299,9 @@ nl:
     page_description: "Tentoonstellingen, ontmoetingen en workshops bij Atelier Sauvage in Heusy."
     heading: "Evenementen"
     subheading: "Tentoonstellingen, ontmoetingen & workshops"
+    current: "Nu te zien"
     upcoming: "Komende evenementen"
     past: "Voorbije evenementen"
-    none_upcoming: "Momenteel geen geplande evenementen."
     none_at_all: "Geen evenementen op dit moment."
     read_more: "Lees meer"
   mentions:
@@ -411,9 +411,9 @@ de:
     page_description: "Ausstellungen, Begegnungen und Workshops im Atelier Sauvage in Heusy."
     heading: "Veranstaltungen"
     subheading: "Ausstellungen, Begegnungen & Workshops"
+    current: "Aktuell"
     upcoming: "Kommende Veranstaltungen"
     past: "Vergangene Veranstaltungen"
-    none_upcoming: "Derzeit sind keine Veranstaltungen geplant."
     none_at_all: "Derzeit keine Veranstaltungen."
     read_more: "Mehr erfahren"
   mentions:
