@@ -42,6 +42,8 @@ The result of each run is written to `scripts/.last_run.json` and committed, so 
 ### Deployment
 The site is built and published by GitHub Actions (`.github/workflows/deploy.yml`), which runs `jekyll build` and then `wrangler pages deploy`. Cloudflare's own Git integration is deliberately disconnected, so CI is the sole publisher and a failed publish is a visibly failed workflow run rather than a silently stale site. See [docs/decisions.md](docs/decisions.md) for why.
 
+When a branch is deleted, `.github/workflows/delete-branch-previews.yml` deletes its Cloudflare preview deployments (never production, `main` protected), so old copies of the site do not stay online at `<branch>.atelier-sauvage.pages.dev`.
+
 ### Instagram integration
 The homepage displays the shop's latest Instagram post, fetched at request time via a Cloudflare Pages Function (`functions/instagram.js`). The function reads the access token from Cloudflare KV storage and proxies the Instagram Graph API, keeping the token server-side. Responses are cached at the edge for 15 minutes.
 
