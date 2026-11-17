@@ -1,0 +1,164 @@
+# Deletes a branch's Cloudflare Pages preview deployments when the branch is deleted.
+#
+# HTDev template: tools/pages-previews/delete-branch-previews.yml; procedure in
+# business/SOPs/Pages previews SOP.md. Copy it to .github/workflows/ and set the two values
+# marked "set per repo" below.
+#
+# Why: every push to a branch uploads a preview, and <branch>.<project>.pages.dev keeps serving
+# the branch's last copy after the branch is gone (Cloudflare never hears about it). Each copy is
+# a working old version of the site, its Functions bound to production's KV, R2 and queues.
+#
+# It deletes only *preview* deployments of the deleted branch: older copies first, the one
+# holding the alias last. It never touches production deployments or the production branch,
+# skips PROTECTED_BRANCHES and a branch that exists again, and succeeds quietly when there is
+# nothing to delete. For a branch deleted earlier: Actions > this workflow > Run workflow
+# (dry run by default).
+#
+# Needs the repo secrets CLOUDFLARE_API_TOKEN (Cloudflare Pages Edit on the account is enough)
+# and CLOUDFLARE_ACCOUNT_ID. GitHub runs it only from the copy on the default branch, and not
+# for branches deleted by another workflow's GITHUB_TOKEN.
+
+name: Delete previews of deleted branches
+
+on:
+  delete:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Deleted branch whose preview deployments to remove
+        required: true
+        type: string
+      dry_run:
+        description: Only list what would be deleted
+        type: boolean
+        default: true
+
+permissions:
+  contents: read # to check that the branch is really gone
+
+concurrency:
+  group: delete-previews-${{ inputs.branch || github.event.ref }}
+
+env:
+  # ---- set per repo ----------------------------------------------------------------
+  PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT }} # Cloudflare Pages project name
+  PROTECTED_BRANCHES: main # space-separated; their previews are never deleted
+  # -----------------------------------------------------------------------------------
+
+jobs:
+  delete-previews:
+    if: github.event_name == 'workflow_dispatch' || github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Delete the branch's preview deployments
+        env:
+          BRANCH: ${{ github.event_name == 'workflow_dispatch' && inputs.branch || github.event.ref }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json, os, sys, time, urllib.error, urllib.parse, urllib.request
+
+          branch = os.environ.get("BRANCH", "").strip().removeprefix("refs/heads/")
+          project = os.environ.get("PAGES_PROJECT", "").strip()
+          account = os.environ.get("CLOUDFLARE_ACCOUNT_ID", "").strip()
+          token = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
+          protected = set(os.environ.get("PROTECTED_BRANCHES", "").split())
+          dry_run = os.environ.get("DRY_RUN") == "true"
+
+          def finish(message, error=False):
+              print(("::error::" if error else "") + message)
+              if os.environ.get("GITHUB_STEP_SUMMARY"):
+                  with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+                      f.write(message + "\n")
+              sys.exit(1 if error else 0)
+
+          def request(url, bearer, method="GET"):
+              for attempt in range(3):  # the APIs sometimes stall: retry timeouts and 5xx
+                  req = urllib.request.Request(url, method=method, headers={
+                      "Authorization": "Bearer " + bearer, "User-Agent": "delete-branch-previews"})
+                  try:
+                      with urllib.request.urlopen(req, timeout=60) as r:
+                          return r.status, json.load(r)
+                  except urllib.error.HTTPError as e:
+                      if e.code >= 500 and attempt < 2:
+                          time.sleep(5 * (attempt + 1))
+                          continue
+                      raw = e.read().decode(errors="replace")
+                      try:
+                          return e.code, json.loads(raw)
+                      except ValueError:
+                          return e.code, {"errors": [raw[:300]]}
+                  except (TimeoutError, urllib.error.URLError, ConnectionError) as e:
+                      if attempt == 2:
+                          return 0, {"errors": [f"no answer after 3 tries: {e}"]}
+                      time.sleep(5 * (attempt + 1))
+
+          if not branch:
+              finish("No branch name in the event.", error=True)
+          if branch in protected:
+              finish(f"`{branch}` is in PROTECTED_BRANCHES: nothing deleted.")
+          if project in ("", "CHANGE-ME") or not account or not token:
+              finish("Set PAGES_PROJECT in this workflow, and the repo secrets "
+                     "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.", error=True)
+
+          # The branch must really be gone: it may have been restored, or a manual run may name a live one.
+          # GitHub answers an old name of a renamed branch (master -> main) with the new branch: compare names.
+          status, found = request(f"{os.environ['GITHUB_API_URL']}/repos/{os.environ['GITHUB_REPOSITORY']}"
+                                  f"/branches/{urllib.parse.quote(branch, safe='')}", os.environ["GITHUB_TOKEN"])
+          if status == 200 and found.get("name") == branch:
+              finish(f"Branch `{branch}` exists in this repository: nothing deleted.")
+          if status not in (200, 404):
+              finish(f"Could not check whether branch `{branch}` exists (GitHub HTTP {status}).", error=True)
+
+          base = (f"https://api.cloudflare.com/client/v4/accounts/{account}"
+                  f"/pages/projects/{urllib.parse.quote(project)}")
+          status, body = request(base, token)
+          if status != 200:
+              finish(f"Cannot read Pages project `{project}`: HTTP {status} {body.get('errors')}", error=True)
+          if branch == body["result"].get("production_branch"):
+              finish(f"`{branch}` is the production branch of `{project}`: nothing deleted.")
+          canonical = (body["result"].get("canonical_deployment") or {}).get("id")
+
+          def branch_previews():
+              found, page = [], 1
+              while True:
+                  status, body = request(f"{base}/deployments?env=preview&per_page=25&page={page}", token)
+                  if status != 200:
+                      finish(f"Cannot list deployments: HTTP {status} {body.get('errors')}", error=True)
+                  result = body.get("result") or []
+                  found += [d for d in result
+                            if d.get("environment") == "preview" and d.get("id") != canonical
+                            and ((d.get("deployment_trigger") or {}).get("metadata") or {}).get("branch") == branch]
+                  if not result or page >= ((body.get("result_info") or {}).get("total_pages") or 1):
+                      return found
+                  page += 1
+
+          targets = sorted(branch_previews(), key=lambda d: (bool(d.get("aliases")), d["created_on"]))
+          if not targets:
+              finish(f"No preview deployments of `{branch}` in `{project}`: nothing to delete.")
+
+          failed = 0
+          for d in targets:
+              label = f"{d['short_id']} ({d['created_on'][:10]}{', holds the alias' if d.get('aliases') else ''})"
+              if dry_run:
+                  print("would delete", label)
+                  continue
+              status, body = request(f"{base}/deployments/{d['id']}?force=true", token, method="DELETE")
+              if status in (200, 404):
+                  print("deleted" if status == 200 else "already gone", label)
+              else:
+                  failed += 1
+                  print(f"::error::Could not delete {label}: HTTP {status} {body.get('errors')}")
+
+          if dry_run:
+              finish(f"Dry run: would delete {len(targets)} preview deployment(s) of `{branch}` from `{project}`.")
+          left = branch_previews()
+          if failed or left:
+              finish(f"{len(left)} preview deployment(s) of `{branch}` left in `{project}` ({failed} failed). "
+                     "A deploy may have finished after the branch was deleted: re-run this job.", error=True)
+          finish(f"Deleted {len(targets)} preview deployment(s) of `{branch}` from `{project}`.")
+          PY
