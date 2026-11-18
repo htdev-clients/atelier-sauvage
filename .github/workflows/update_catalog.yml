@@ -13,7 +13,8 @@ permissions:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    # Same runner image as deploy.yml (see the note there).
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
 
     steps:
@@ -79,7 +80,7 @@ jobs:
   report-deploy-failure:
     needs: [update, deploy]
     if: always() && needs.deploy.result == 'failure'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
