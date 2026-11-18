@@ -49,6 +49,9 @@ The homepage displays the shop's latest Instagram post, fetched at request time 
 
 That token is kept alive by a scheduled Cloudflare Worker, recorded in [`workers/atelier-refresher/`](workers/atelier-refresher/). It is deployed by hand, not by CI — see that directory's README before touching it.
 
+### Review short link (`/avis`)
+`https://ateliersauvageheusy.be/avis` redirects (302) to the shop's Google review form. It is the link inside the QR code (and NFC sticker) of the review poster in the shop, so the target can change without reprinting. It is a Pages Function (`functions/avis.js`), not a page, so it never goes through Jekyll or the language plugin.
+
 ### Responsive design
 Fully responsive layout built with Tailwind CSS. The navbar collapses to a burger menu on mobile. The catalog grid adapts from 1 to 3 columns depending on screen size.
 
