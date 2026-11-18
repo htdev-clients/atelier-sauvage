@@ -157,6 +157,14 @@ jobs:
           if dry_run:
               finish(f"Dry run: would delete {len(targets)} preview deployment(s) of `{branch}` from `{project}`.")
           left = branch_previews()
+          # Cloudflare's list can still show a copy for a few seconds after its delete succeeded
+          # (seen 2026-11-18): wait while only just-deleted copies show. A new copy fails at once.
+          deleted_ids = {d["id"] for d in targets}
+          for _ in range(3):
+              if failed or not left or not {d["id"] for d in left} <= deleted_ids:
+                  break
+              time.sleep(10)
+              left = branch_previews()
           if failed or left:
               finish(f"{len(left)} preview deployment(s) of `{branch}` left in `{project}` ({failed} failed). "
                      "A deploy may have finished after the branch was deleted: re-run this job.", error=True)

@@ -30,11 +30,16 @@ what actually runs.
 Cloudflare token carries only `Cloudflare Pages: Edit`, so it cannot touch
 Workers even by accident.
 
-Deploying this Worker needs a token with `Workers Scripts: Edit` and
-`Workers KV Storage: Edit`. Mint one for the occasion and revoke it afterwards
-rather than keeping a standing Workers-scoped credential around:
+Deploying this Worker needs `Workers Scripts` and `Workers KV Storage` write
+access. Since 2026-11-18 it is deployed from the Mac with the token "Harold's
+account - Harold's Mac (wrangler)", which the client folder's `.envrc`
+(`clients/atelier-sauvage/.envrc`, outside this repo) loads from the Keychain.
+wrangler has no login of its own any more, so go through direnv:
 
-    npx wrangler deploy        # from this directory
+    direnv exec . npx wrangler deploy        # from this directory
+
+"Not authenticated" means the command skipped direnv (or the Keychain item is
+missing: see HTDev's Access SOP §7). `wrangler login` is never the fix.
 
 Check `wrangler.toml` first: `compatibility_date` is pinned to the Worker's
 original deployment date so that bringing it into the repo did not change its

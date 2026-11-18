@@ -201,6 +201,11 @@ deliberately **not** wired into CI: the deploy token carries only
 **Consequences.** Redeploying it needs a temporary Workers-scoped token, minted
 for the occasion and revoked afterwards. See that directory's README.
 
+*Changed 2026-11-18:* the Mac's account-scoped wrangler token (loaded by the
+client folder's `.envrc`) now covers Workers and KV, so no token is minted for
+the occasion: `direnv exec . npx wrangler deploy` from the Worker's directory.
+CI's token is unchanged (Pages only).
+
 ### E-commerce direction (decided, not built)
 
 Stripe Checkout on the existing static site, with a cart, shipping by a

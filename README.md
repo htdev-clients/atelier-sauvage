@@ -72,3 +72,5 @@ python3 -m unittest discover -s scripts -p 'test_*.py'     # catalogue validatio
 ```
 
 Anything added as a new top-level directory must go in the `exclude` list in `_config.yml`, or Jekyll will publish it on the live site.
+
+wrangler from the Mac (the Worker, KV, a branch deploy) has no login of its own: it gets its Cloudflare token from the client folder's `.envrc` (outside this repo), so run it as `direnv exec . npx wrangler …`. "Not authenticated" means the command skipped direnv; `wrangler login` is never the fix.
