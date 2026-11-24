@@ -25,3 +25,15 @@ hours:
     opens: "14:00"
     closes: "17:00"
     label: "14h – 17h"
+
+# Temporary hours (_plugins/shop_hours.rb). From `from` to `until` inclusive,
+# every day above closes at `closes` and shows `label`; the homepage notice
+# (translations index.hours_notice, which spells out the dates) shows from the
+# deploy until `until`. Both end on their own with the nightly rebuild.
+# Delete the block afterwards, or set new dates and notice texts.
+# 2026: one hour later for the end of the year (GBP and Instagram updated by Harold).
+temporary:
+  from: 2026-11-26
+  until: 2026-12-31
+  closes: "18:00"
+  label: "14h – 18h"

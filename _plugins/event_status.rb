@@ -10,21 +10,35 @@
 # once that date has passed, while the event itself stays current.
 #
 # An explicit `status:` in an event's front matter still wins, as an override.
-# EVENTS_TODAY=YYYY-MM-DD fakes the date for local testing of the other states.
+# EVENTS_TODAY=YYYY-MM-DD fakes the date for local testing of the other states
+# (it also drives the temporary opening hours, _plugins/shop_hours.rb).
 module Jekyll
   class EventStatus < Generator
     safe true
     priority :high
 
+    # Today's date in Belgium, shared with ShopHours.
+    def self.today
+      if ENV['EVENTS_TODAY']
+        Date.parse(ENV['EVENTS_TODAY'])
+      else
+        (Time.now.utc + 3600).to_date
+      end
+    end
+
+    def self.to_date(value)
+      case value
+      when Date then value
+      when Time then value.to_date
+      when String then Date.parse(value)
+      end
+    end
+
     def generate(site)
       events = site.collections['events']
       return unless events
 
-      today = if ENV['EVENTS_TODAY']
-                Date.parse(ENV['EVENTS_TODAY'])
-              else
-                (Time.now.utc + 3600).to_date
-              end
+      today = self.class.today
 
       events.docs.each do |doc|
         until_date = to_date(doc.data['highlight_until'])
@@ -47,11 +61,7 @@ module Jekyll
     private
 
     def to_date(value)
-      case value
-      when Date then value
-      when Time then value.to_date
-      when String then Date.parse(value)
-      end
+      self.class.to_date(value)
     end
   end
 end

@@ -35,6 +35,17 @@ layout: default
 
 <main>
 
+  {% comment %}Temporary hours notice: on until temporary.until in _data/shop.yml (_plugins/shop_hours.rb).{% endcomment %}
+  {% if site.data.shop.notice_active %}
+  {% assign note = idx.hours_notice %}
+  <section class="section hours-notice px-6 pt-10 md:pt-14">
+    <div class="max-w-2xl mx-auto bg-stone-100 border border-stone-200 rounded-sm px-6 py-5 text-center">
+      <p class="text-xs uppercase tracking-[0.3em] text-rose-500 mb-2">{{ note.label }}</p>
+      <p class="text-stone-700 leading-relaxed text-balance">{{ note.text }}</p>
+    </div>
+  </section>
+  {% endif %}
+
   {% if site.holiday_banner %}
   {% assign hol = idx.holiday %}
   <section class="section holiday-news py-16 md:py-24">

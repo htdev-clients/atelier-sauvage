@@ -8,6 +8,27 @@ same traps.
 
 ---
 
+## 2026-11-24
+
+### Temporary opening hours switch on their own dates
+
+**Context.** The shop closes at 18h instead of 17h from 26 November to
+31 December 2026, and the homepage needed a notice. The summer
+`holiday_banner` did not fit: a large card, switched by hand, and it hides
+Thursday.
+
+**Decision.** `_data/shop.yml` takes an optional `temporary:` block (`from`,
+`until`, `closes`, `label`). `_plugins/shop_hours.rb` applies it on the days it
+is in force, so the footer, the homepage hours and the Store JSON-LD follow, and
+sets `notice_active` until `until`, which shows a small notice under the hero
+(`index.hours_notice` in the translations, which spells the dates out). The
+nightly rebuild switches both on and off; nobody has to remember. It uses the
+same Belgian "today" as the events (`EventStatus.today`, faked with
+`EVENTS_TODAY`). After it ends, delete the block or reuse it with new dates and
+new notice texts.
+
+---
+
 ## 2026-11-10
 
 ### GEO pass: AI search access, real 404s, one source for hours

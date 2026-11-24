@@ -48,6 +48,9 @@ fr:
       title: "L'Atelier Sauvage passe à l'heure d'été !"
       body: "Pendant les mois de juillet et août, nous serons ouverts les vendredis et samedis de 14h à 17h uniquement."
       closed: "Nous serons fermés du 30 juillet au 22 août inclus."
+    hours_notice:
+      label: "Horaires de fin d'année"
+      text: "Du 26 novembre au 31 décembre, nous restons ouverts une heure de plus : jeudi, vendredi et samedi, de 14h à 18h."
     alts:
       facade: "Façade du magasin Atelier Sauvage"
       logo: "Logo Atelier Sauvage"
@@ -163,6 +166,9 @@ en:
       title: "Atelier Sauvage is switching to summer hours!"
       body: "Throughout July and August, we are open on Fridays and Saturdays from 2pm to 5pm only."
       closed: "We will be closed from 30 July to 22 August inclusive."
+    hours_notice:
+      label: "End-of-year hours"
+      text: "From 26 November to 31 December, we stay open an hour longer: Thursday, Friday and Saturday, 2pm to 6pm."
     alts:
       facade: "Façade of the Atelier Sauvage shop"
       logo: "Atelier Sauvage logo"
@@ -275,6 +281,9 @@ nl:
       title: "Atelier Sauvage schakelt over op zomeruren!"
       body: "In juli en augustus zijn we enkel op vrijdag en zaterdag open van 14u tot 17u."
       closed: "We zijn gesloten van 30 juli tot en met 22 augustus."
+    hours_notice:
+      label: "Openingsuren eindejaar"
+      text: "Van 26 november tot en met 31 december blijven we een uur langer open: donderdag, vrijdag en zaterdag van 14u tot 18u."
     alts:
       facade: "Gevel van de winkel Atelier Sauvage"
       logo: "Logo Atelier Sauvage"
@@ -387,6 +396,9 @@ de:
       title: "Das Atelier Sauvage stellt auf Sommerzeit um!"
       body: "Im Juli und August sind wir nur freitags und samstags von 14 bis 17 Uhr geöffnet."
       closed: "Vom 30. Juli bis einschließlich 22. August sind wir geschlossen."
+    hours_notice:
+      label: "Öffnungszeiten zum Jahresende"
+      text: "Vom 26.&nbsp;November bis zum 31.&nbsp;Dezember haben wir eine Stunde länger für Sie geöffnet: donnerstags, freitags und samstags von 14 bis 18 Uhr."
     alts:
       facade: "Fassade des Geschäfts Atelier Sauvage"
       logo: "Logo Atelier Sauvage"
